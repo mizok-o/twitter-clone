@@ -1,5 +1,6 @@
 # twitter-clone
 
+https://abridge-co.jp/wp/wp-content/uploads/2021/11/laravel_logo_icon_170314.png
 Hajimari 内定者用の twitter-clone テンプレート
 
 ## 目的
