@@ -28,9 +28,6 @@ Docker のインストールは、以下のリンクから行なってくださ�
 - ローマ字の使用を避け、英単語を使用すること。
 - クラス名の頭文字は大文字で記述すること。
 
-<br/>
-<br/>
-
 #### Bad Case
 
 ```php
@@ -65,15 +62,15 @@ public function followUser()
 - クラスやメソッドがどんな機能なのかが一目で分かる命名を心がける。
 - 変数名を読んで、何が格納されているのかが一目で分かる命名を心がける。
 
-<br/>
-<br/>
-
 #### Bad Case
 
 ```php
 //dataって何の？
 $data = $user->id;
 ```
+
+<br/>
+<br/>
 
 #### Good Case
 
@@ -130,13 +127,20 @@ public function getTweetEditing()
 
 ### マジックナンバーは避け、定数として設定する（Consts ファイルを作成して呼び出しても良い）。また、定数の場合は全て大文字で命名しても良い。
 
-```
+#### Bad Case
+
+```php
 if($follower == 0){
   echo 'フォロワーはいません。';
 }
 ```
 
-```
+<br/>
+<br/>
+
+#### Good Case
+
+```php
 public const NONE = 0;
 
 if($follower == NONE){
