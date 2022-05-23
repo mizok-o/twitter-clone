@@ -1,5 +1,7 @@
 # twitter-clone
 
+![Laravel](https://www.unagino-nedoko.com/wp-content/uploads/2021/10/logo_Laravel.png)
+
 Hajimari 内定者用の twitter-clone テンプレート
 <br/>
 <br/>
@@ -15,7 +17,7 @@ Hajimari 内定者用の twitter-clone テンプレート
 ### 環境構築に関しては、Docker にて行う。
 
 Docker のインストールは、以下のリンクから行なってください。<br/>
-→[Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
+→ [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
 <br/>
 <br/>
 
@@ -29,10 +31,13 @@ Docker のインストールは、以下のリンクから行なってくださ�
 <br/>
 <br/>
 
-<span style="color: red;">Bad Case</span>
+#### Bad Case
 
-```
-//これはスネークケース。
+```php
+/*
+ * これはスネークケース。
+ * Twitter Cloneでは避けるように（他の案件では採用される場合もある）。
+ */
 public function follow_user()
 {
   //処理
@@ -42,9 +47,9 @@ public function follow_user()
 <br/>
 <br/>
 
-<span style="color: green;">Good Case</span>
+#### Good Case
 
-```
+```php
 //こっちのキャメルケース推奨！
 public function followUser()
 {
@@ -52,37 +57,74 @@ public function followUser()
 }
 ```
 
-### そのクラスやメソッドがどんな処理をしているか分かる名前にすること。また、その変数が何を格納しているか分かる名前にすること。
+<br/>
+<br/>
 
-```
+### 名前を読んで内容が分かるようにすること。
+
+- クラスやメソッドがどんな機能なのかが一目で分かる命名を心がける。
+- 変数名を読んで、何が格納されているのかが一目で分かる命名を心がける。
+
+<br/>
+<br/>
+
+#### Bad Case
+
+```php
 //dataって何の？
 $data = $user->id;
 ```
 
-```
+#### Good Case
+
+```php
 //この変数にはユーザーのIDが入ってる！
 $userId = $user->id;
 ```
 
+<br/>
+<br/>
+
 ### 命名は、基本的に英語の文法に則って記述すること。
 
-```
+```php
 //日本語の文法（目的語→動詞）
 public function userDataGet()
 {
   //処理
 }
+
+//get と edit と動詞が連続している。
+public function getEditTweet()
+{
+    //処理
+}
 ```
 
-```
+```php
 //英語の文法（動詞→目的語）
 public function getUserData()
 {
   //処理
 }
+
+/*
+ * 動詞 edit を Editing にして名詞化する。
+ * または他の命名が出来ないか再考してみる。
+ */
+public function getTweetEditing()
+{
+    //処理
+}
 ```
 
+<br/>
+<br/>
+
 ### その他、他の人が読みやすい命名を心がけること。
+
+<br/>
+<br/>
 
 ## コーディングスタイル
 
