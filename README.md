@@ -1,18 +1,23 @@
 # twitter-clone
 
 Hajimari 内定者用の twitter-clone テンプレート
+<br/>
+<br/>
 
 ## 目的
 
 この文書は Twitter Clone を作るにあたり、コーディングについて留意すべき事項をまとめたものである。
+<br/>
 <br/>
 
 ## 環境
 
 ### 環境構築に関しては、Docker にて行う。
 
-Docker のインストールは、以下のリンクから行なってください。
+Docker のインストールは、以下のリンクから行なってください。<br/>
 [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
+<br/>
+<br/>
 
 ## 命名規則
 
