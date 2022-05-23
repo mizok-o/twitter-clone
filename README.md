@@ -15,13 +15,20 @@ Hajimari 内定者用の twitter-clone テンプレート
 ### 環境構築に関しては、Docker にて行う。
 
 Docker のインストールは、以下のリンクから行なってください。<br/>
-[Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
+→[Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
 <br/>
 <br/>
 
 ## 命名規則
 
-### 原則、クラス・メソッド・変数はキャメルケースで記述し、英単語（ローマ字ではなく）を使用すること。
+### 原則、クラス・メソッド・変数はキャメルケースで記述すること。
+
+- ローマ字の使用を避け、英単語を使用すること。
+- クラス名の頭文字は大文字で記述すること。
+  <br/>
+  <br/>
+
+#### <span style="color: red;">Bad Case</span>
 
 ```
 //これはスネークケース。
@@ -30,6 +37,11 @@ public function follow_user()
   //処理
 }
 ```
+
+<br/>
+<br/>
+
+#### <span style="color: green;">Good Case</span>
 
 ```
 //こっちのキャメルケース推奨！
