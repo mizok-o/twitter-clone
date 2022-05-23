@@ -28,7 +28,7 @@ Docker のインストールは、以下のリンクから行なってくださ�
   <br/>
   <br/>
 
-#### <span style="color: red;">Bad Case</span>
+<bold><span style="color: red;">Bad Case</span></bold>
 
 ```
 //これはスネークケース。
@@ -41,7 +41,7 @@ public function follow_user()
 <br/>
 <br/>
 
-#### <span style="color: green;">Good Case</span>
+<bold><span style="color: green;">Good Case</span></bold>
 
 ```
 //こっちのキャメルケース推奨！
