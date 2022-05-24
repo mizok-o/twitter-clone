@@ -10,6 +10,8 @@ Hajimari 内定者用の twitter-clone テンプレート
 
 ## 環境
 
+![Docker](https://prtimes.jp/i/87890/2/resize/d87890-2-d4d26778877735a3722d-0.png)
+
 ### 環境構築に関しては、Docker にて行う。
 
 Docker のインストールは、以下のリンクから行なってください。
