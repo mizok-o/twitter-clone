@@ -134,6 +134,8 @@ Git コマンドに関しては以下の記事を参考にしてください。
 
 基本的に Gitflow を利用してください。
 
+![Gitflow](https://image.itmedia.co.jp/ait/articles/1708/01/at-it-git-15-001.jpg)
+
 → [Gitflow ワークフロー](https://www.atlassian.com/ja/git/tutorials/comparing-workflows/gitflow-workflow)
 
 ### プルリクエストについて
