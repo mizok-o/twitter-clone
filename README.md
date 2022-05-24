@@ -115,6 +115,8 @@ PHP のコーディングルールは、原則以下の記事を参考にして�
 
 ## Github
 
+![Github](https://assets.st-note.com/production/uploads/images/24127642/rectangle_large_type_2_802007386bb75d9db15a6dd2880e2584.jpg)
+
 Github というバージョン管理ツールを使用して、開発を行なってください。
 
 ### Git コマンドについて
@@ -130,13 +132,13 @@ Git コマンドに関しては以下の記事を参考にしてください。
 
 基本的に Gitflow を利用してください。
 
-- main
-- develop
-- feature
-
 → [Gitflow ワークフロー](https://www.atlassian.com/ja/git/tutorials/comparing-workflows/gitflow-workflow)
 
 ### プルリクエストについて
+
+Github に push したコードをレビューして貰い、問題がないようであれば merge します。
+このコードをレビューしてもらうために出すのがプルリクエストです。
+（プルリク、PR とも呼ばれます）
 
 ## コーディングスタイル
 
