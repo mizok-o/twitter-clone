@@ -139,7 +139,7 @@ Gitflow とは、以下の図解のように
 
 - main（本番環境）
 - develop（テスト環境）
-- feature（開発環境）
+- feature, hotfix, release（開発環境）
 
 3 種類のブランチを使い分ける方法です。
 
