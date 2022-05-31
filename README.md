@@ -103,7 +103,7 @@ public function getUserData()
  * 動詞 edit を Editing にして名詞化する。
  * または他の命名が出来ないか再考してみる。
  */
-public function getTweetEditing()
+public function getEdittingTweet()
 {
     //処理
 }
@@ -117,11 +117,11 @@ PHP のコーディングは、原則以下の記事を参考にしてくださ�
 
 ---
 
-## Github
+## GitHub
 
-![Github](https://assets.st-note.com/production/uploads/images/24127642/rectangle_large_type_2_802007386bb75d9db15a6dd2880e2584.jpg)
+![GitHub](https://assets.st-note.com/production/uploads/images/24127642/rectangle_large_type_2_802007386bb75d9db15a6dd2880e2584.jpg)
 
-**Github** というバージョン管理ツールを使用して、開発を行なってください。
+**GitHub** というバージョン管理ツールを使用して、開発を行なってください。
 
 ### Git コマンドについて
 
@@ -153,7 +153,7 @@ Twitter Clone では、 **main, develop, feature** のブランチを利用し�
 
 ### プルリクエストについて
 
-Github に push したコードをレビューして貰い、問題がないようであれば merge します。
+GitHub に push したコードをレビューして貰い、問題がないようであれば merge します。
 
 このコードをレビューしてもらうために出すのがプルリクエストです。
 
