@@ -114,8 +114,6 @@ PHP のコーディングは、原則以下の記事を参考にしてくださ�
 
 → [PSR-2 コーディングガイド（日本語）](https://www.infiniteloop.co.jp/docs/psr/psr-2-coding-style-guide.php)
 
----
-
 ## GitHub
 
 ![GitHub](https://assets.st-note.com/production/uploads/images/24127642/rectangle_large_type_2_802007386bb75d9db15a6dd2880e2584.jpg)
