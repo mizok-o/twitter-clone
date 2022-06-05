@@ -132,3 +132,34 @@ if($follower == NONE){
 ```
 
 ### バリデーションは Form Request を使用すること。
+
+バリデーションはForm Requestを使用して行いましょう。
+
+Form Requestを使用すると、Controllerに行く前にバリデーションを実施できます。
+
+#### Bad Case
+```php
+public function store(Request $request, Tweet $tweet)
+{
+    $data = $request->all();
+    $validator = Validator::make($data, [
+        'text' => ['required', 'string', 'max:140']
+    ]);
+    $validator->validate();
+}
+```
+
+#### Good Case
+```php
+public function authorize()
+{
+    return true;
+}
+
+public function rules()
+{
+    return [
+        'text'      => ['required', 'string', 'max:140'],
+    ];
+}
+```
