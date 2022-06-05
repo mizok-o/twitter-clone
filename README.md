@@ -163,3 +163,7 @@ public function rules()
     ];
 }
 ```
+
+Form Requestに関しては、以下の記事を参考にしてください。
+
+→ [FormRequestによるバリデーション](https://qiita.com/gone0021/items/249e99338ff414fc5737)
