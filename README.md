@@ -103,13 +103,71 @@ public function getUserData()
  * 動詞 edit を Editing にして名詞化する。
  * または他の命名が出来ないか再考してみる。
  */
-public function getTweetEditing()
+public function getEdittingTweet()
 {
     //処理
 }
 ```
 
 ### その他、他の人が読みやすい命名を心がけること。
+PHP のコーディングは、原則以下の記事を参考にしてください。
+
+→ [PSR-2 コーディングガイド（日本語）](https://www.infiniteloop.co.jp/docs/psr/psr-2-coding-style-guide.php)
+
+---
+
+## GitHub
+
+![GitHub](https://assets.st-note.com/production/uploads/images/24127642/rectangle_large_type_2_802007386bb75d9db15a6dd2880e2584.jpg)
+
+**GitHub** というバージョン管理ツールを使用して、開発を行なってください。
+
+### Git コマンドについて
+
+Git の操作はターミナルで行います。
+
+Git コマンドに関しては以下の記事を参考にしてください。
+
+→ [Git コマンド早見表](https://qiita.com/kohga/items/dccf135b0af395f69144)
+
+### ブランチについて
+
+基本的に **Gitflow** を利用してください。
+
+Gitflow とは、以下の図解のように
+
+- main（本番環境）
+- develop（テスト環境）
+- feature, hotfix, release（開発環境）
+
+3 種類のブランチを使い分ける方法です。
+
+![Gitflow](https://image.itmedia.co.jp/ait/articles/1708/01/at-it-git-15-001.jpg)
+
+Twitter Clone では、 **main, develop, feature** のブランチを利用してください。
+
+また、Gitflow については以下の記事を参考にしてください。
+
+→ [Gitflow ワークフロー](https://www.atlassian.com/ja/git/tutorials/comparing-workflows/gitflow-workflow)
+
+### プルリクエストについて
+
+GitHub に push したコードをレビューして貰い、問題がないようであれば merge します。
+
+このコードをレビューしてもらうために出すのがプルリクエストです。
+
+（プルリク、PR とも呼ばれます）
+
+#### プルリクエストを出すタイミング
+
+- 各章が完了したタイミング
+- 新機能を追加したタイミング
+- その他、修正が完了したなどキリの良いタイミング
+
+一度に多くの変更があると、レビュワーに多くの負担がかかってしまいます。
+
+それを避けるため、 **こまめにキリのいいタイミング** でプルリクエストを出しましょう。
+
 PHP のコーディングは、原則以下の記事を参考にしてください。
 
 → [PSR-2 コーディングガイド（日本語）](https://www.infiniteloop.co.jp/docs/psr/psr-2-coding-style-guide.php)
