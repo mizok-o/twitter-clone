@@ -276,7 +276,7 @@ public function authorize()
 public function rules()
 {
     return [
-        'text'      => ['required', 'string', 'max:140'],
+        'text' => ['required', 'string', 'max:140'],
     ];
 }
 ```
