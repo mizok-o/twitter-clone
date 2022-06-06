@@ -110,12 +110,9 @@ public function getEdittingTweet()
 ```
 
 ### その他、他の人が読みやすい命名を心がけること。
-
 PHP のコーディングは、原則以下の記事を参考にしてください。
 
 → [PSR-2 コーディングガイド（日本語）](https://www.infiniteloop.co.jp/docs/psr/psr-2-coding-style-guide.php)
-
----
 
 ## GitHub
 
@@ -192,3 +189,38 @@ if($follower == NONE){
 ```
 
 ### バリデーションは Form Request を使用すること。
+
+バリデーションはForm Requestを使用して行いましょう。
+
+Form Requestを使用すると、Controllerに行く前にバリデーションを実施できます。
+
+#### Bad Case
+```php
+public function store(Request $request, Tweet $tweet)
+{
+    $data = $request->all();
+    $validator = Validator::make($data, [
+        'text' => ['required', 'string', 'max:140']
+    ]);
+    $validator->validate();
+}
+```
+
+#### Good Case
+```php
+public function authorize()
+{
+    return true;
+}
+
+public function rules()
+{
+    return [
+        'text' => ['required', 'string', 'max:140'],
+    ];
+}
+```
+
+Form Requestに関しては、以下の記事を参考にしてください。
+
+→ [FormRequestによるバリデーション](https://qiita.com/gone0021/items/249e99338ff414fc5737)
