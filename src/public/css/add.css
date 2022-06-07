@@ -1,0 +1,7 @@
+.navbar-brand {
+    display: block;
+}
+
+.collapse:not(.show) {
+    display: flex;
+}
