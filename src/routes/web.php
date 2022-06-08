@@ -21,8 +21,4 @@ Route::get('/home', function(){
     return view('home');
 });
 
-// Route::get('/test', function(){
-//     return view('App');
-// });
-
 Auth::routes();
