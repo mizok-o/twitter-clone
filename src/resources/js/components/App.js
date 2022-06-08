@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
     return(
-        <p>表示されてる？</p>
+        <p>テスト用</p>
     )
 }
 
