@@ -5290,6 +5290,58 @@ __webpack_require__(/*! ./components/App */ "./resources/js/components/App.tsx")
 "use strict";
 
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -5301,7 +5353,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.App = void 0;
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 
@@ -5314,12 +5366,21 @@ var UserList_1 = __webpack_require__(/*! ./UserList */ "./resources/js/component
 __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 
 var App = function App() {
+  var _ref = (0, react_1.useState)(),
+      _ref2 = _slicedToArray(_ref, 2),
+      userData = _ref2[0],
+      setUserData = _ref2[1];
+
   return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/userList",
-    element: react_1["default"].createElement(UserList_1.UserList, null)
+    element: react_1["default"].createElement(UserList_1.UserList, {
+      setUserData: setUserData
+    })
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/userDetail",
-    element: react_1["default"].createElement(UserDetail_1.UserDetail, null)
+    element: react_1["default"].createElement(UserDetail_1.UserDetail, {
+      userData: userData
+    })
   })));
 };
 
@@ -5353,8 +5414,34 @@ exports.UserDetail = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserDetail = function UserDetail() {
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h1", null, "\u30E6\u30FC\u30B6\u8A73\u7D30"));
+var UserDetail = function UserDetail(props) {
+  localStorage.setItem('userData', JSON.stringify(props.userData));
+  var userDataJSON = localStorage.getItem('userData');
+  var userData = JSON.parse(userDataJSON);
+  return react_1["default"].createElement("div", {
+    className: 'container-lg'
+  }, react_1["default"].createElement("div", {
+    className: 'border'
+  }, react_1["default"].createElement("div", {
+    className: 'd-flex'
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    className: 'btn'
+  }, react_1["default"].createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    fill: "#111111",
+    className: "bi bi-arrow-left",
+    viewBox: "0 0 16 16"
+  }, react_1["default"].createElement("path", {
+    d: "M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+  })))), react_1["default"].createElement("div", {
+    className: 'me-3'
+  }, react_1["default"].createElement("h2", null, userData.name))), react_1["default"].createElement("div", {
+    className: ''
+  }, react_1["default"].createElement("div", {
+    className: 'w-100 bg-primary'
+  })), react_1["default"].createElement("div", null, "\u753B\u50CF\u3068\u30D5\u30A9\u30ED\u30FC\u30DC\u30BF"), react_1["default"].createElement("div", null, react_1["default"].createElement("div", null, "\u540D\u524D\u3068ID"), react_1["default"].createElement("div", null, "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB")), react_1["default"].createElement("div", null, "\u30D5\u30A9\u30ED\u30FC\u30FB\u30D5\u30A9\u30ED\u30EF\u30FC")), react_1["default"].createElement("div", null, "\u30C4\u30A4\u30FC\u30C8"));
 };
 
 exports.UserDetail = UserDetail;
@@ -5391,31 +5478,39 @@ var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/com
 
 __webpack_require__(/*! ../../../../../css/userlist.css */ "./public/css/userlist.css");
 
-var UserList = function UserList() {
+var UserList = function UserList(props) {
   var userData = [{
-    id: '＠testtest',
-    name: 'Mizoguchi',
+    name: 'Mizoguchi1',
+    id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
     image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
     imageDesc: 'ユーザアイコン'
   }, {
-    name: 'Mizoguchi',
-    id: '＠testtest',
+    name: 'Mizoguchi2',
+    id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
     image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
     imageDesc: 'ユーザアイコン'
   }, {
-    id: '＠testtest',
-    name: 'Mizoguchi',
+    name: 'Mizoguchi3',
+    id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
     image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
     imageDesc: 'ユーザアイコン'
   }];
+
+  var getUserInfo = function getUserInfo(item) {
+    props.setUserData(item);
+  };
+
   var userItem = userData.map(function (item, i) {
     return react_1["default"].createElement("li", {
       key: i
     }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: '/userDetail'
+      to: '/userDetail',
+      onClick: function onClick() {
+        return getUserInfo(item);
+      }
     }, react_1["default"].createElement("div", {
       className: 'd-flex px-2 py-3 userlist__item'
     }, react_1["default"].createElement(UserIcon_1.UserIcon, {
@@ -5431,7 +5526,7 @@ var UserList = function UserList() {
       className: 'lh-sm'
     }, item.name), react_1["default"].createElement("span", {
       className: 'userlist__profile__id'
-    }, item.id)), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
+    }, "\uFF20", item.id)), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
       className: 'mt-1'
     }, react_1["default"].createElement("p", null, item.profile))))));
   });

@@ -6,43 +6,55 @@ import { UserIcon } from './parts/UserIcon';
 
 import '/css/userlist.css'
 
-export const UserList = () => {
+export const UserList = props => {
 
-    const userData = [
+    interface userArray {
+        id: string,
+        name: string,
+        profile: string,
+        image: string,
+        imageDesc: string
+    }
+
+    const userData: userArray[] = [
         {
-            id: '＠testtest',
-            name: 'Mizoguchi',
+            name: 'Mizoguchi1',
+            id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
             image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
             imageDesc: 'ユーザアイコン',
         },
         {
-            name: 'Mizoguchi',
-            id: '＠testtest',
+            name: 'Mizoguchi2',
+            id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
             image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
             imageDesc: 'ユーザアイコン',
         },
         {
-            id: '＠testtest',
-            name: 'Mizoguchi',
+            name: 'Mizoguchi3',
+            id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
             image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
             imageDesc: 'ユーザアイコン',
         },
     ]
 
+    const getUserInfo = item => {
+        props.setUserData(item)
+    }
+
     const userItem = userData.map((item, i) => {
         return (
             <li key={i}>
-                <Link to='/userDetail'>
+                <Link to='/userDetail' onClick={() => getUserInfo(item)}>
                     <div className='d-flex px-2 py-3 userlist__item'>
                         <UserIcon data={{ image: item.image, desc: item.imageDesc }} />
                         <div className='ms-2'>
                             <div className='d-flex justify-content-between'>
                                 <div>
                                     <p className='lh-sm'>{item.name}</p>
-                                    <span className='userlist__profile__id'>{item.id}</span>
+                                    <span className='userlist__profile__id'>＠{item.id}</span>
                                 </div>
                                 <div>
                                     <FollowButton />
