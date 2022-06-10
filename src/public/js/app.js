@@ -5327,18 +5327,7 @@ exports.App = App;
 
 if (document.getElementById('example')) {
   react_dom_1["default"].render(react_1["default"].createElement(exports.App, null), document.getElementById('example'));
-} // import React from 'react';
-// import ReactDOM from 'react-dom';
-// export const Example = () => {
-//     return (
-//         <div>
-//             <h1>React 表示</h1>
-//         </div>
-//     );
-// }
-// if (document.getElementById('example')) {
-//     ReactDOM.render(<Example />, document.getElementById('example'));
-// }
+}
 
 /***/ }),
 
@@ -5403,53 +5392,54 @@ var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/com
 __webpack_require__(/*! ../../../../../css/userlist.css */ "./public/css/userlist.css");
 
 var UserList = function UserList() {
+  var userData = [{
+    id: '＠testtest',
+    name: 'Mizoguchi',
+    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
+    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    imageDesc: 'ユーザアイコン'
+  }, {
+    name: 'Mizoguchi',
+    id: '＠testtest',
+    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
+    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    imageDesc: 'ユーザアイコン'
+  }, {
+    id: '＠testtest',
+    name: 'Mizoguchi',
+    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
+    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    imageDesc: 'ユーザアイコン'
+  }];
+  var userItem = userData.map(function (item, i) {
+    return react_1["default"].createElement("li", {
+      key: i
+    }, react_1["default"].createElement(react_router_dom_1.Link, {
+      to: '/userDetail'
+    }, react_1["default"].createElement("div", {
+      className: 'd-flex px-2 py-3 userlist__item'
+    }, react_1["default"].createElement(UserIcon_1.UserIcon, {
+      data: {
+        image: item.image,
+        desc: item.imageDesc
+      }
+    }), react_1["default"].createElement("div", {
+      className: 'ms-2'
+    }, react_1["default"].createElement("div", {
+      className: 'd-flex justify-content-between'
+    }, react_1["default"].createElement("div", null, react_1["default"].createElement("p", {
+      className: 'lh-sm'
+    }, item.name), react_1["default"].createElement("span", {
+      className: 'userlist__profile__id'
+    }, item.id)), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
+      className: 'mt-1'
+    }, react_1["default"].createElement("p", null, item.profile))))));
+  });
   return react_1["default"].createElement("div", {
     className: 'container-lg'
   }, react_1["default"].createElement("h1", null, "\u30E6\u30FC\u30B6\u4E00\u89A7"), react_1["default"].createElement("div", {
     className: 'border'
-  }, react_1["default"].createElement("ul", null, react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '#'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex px-2 py-3 userlist__item'
-  }, react_1["default"].createElement(UserIcon_1.UserIcon, null), react_1["default"].createElement("div", {
-    className: 'ms-2'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex justify-content-between'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("p", {
-    className: 'lh-sm'
-  }, "Mizo(\u30C6\u30B9\u30C8\u30E6\u30FC\u30B6)"), react_1["default"].createElement("span", {
-    className: 'userlist__profile__id'
-  }, "\uFF20testtest")), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
-    className: 'mt-1'
-  }, react_1["default"].createElement("p", null, "\u79C1\u306F\u591A\u6570\u3042\u305F\u304B\u3082\u305D\u306E\u5B66\u7FD2\u3088\u3046\u3068\u3044\u3046\u306F\u305A\u306E\u305F\u3081\u306B\u3057\u3067\u3059\u305F\u3002\u3064\u3044\u306B\u5C06\u6765\u306B\u5FE0\u544A\u3089\u306F\u3072\u3087\u308D\u3072\u3087\u308D\u305D\u306E\u53C2\u8003\u3067\u3059\u305F\u306A\u3069\u3092\u3042\u308B\u3051\u308C\u3069\u3082\u3044\u3067\u3068\u3082\u5EFA\u8A2D\u306A\u3063\u305F\u3067\u3059\u304B\u3089\u3001\u305D\u3046\u306B\u3082\u8FC2\u3056\u308B\u306A\u304B\u3063\u305F\u306A\u304B\u3063\u3002\u3064\u307E\u308A\u3067\u52E7\u3081\u3067\u306E\u306F\u3044\u3088\u3044\u3088\u4ECA\u306B\u4F55\u3067\u3082\u304B\u3067\u3082\u3060\u308D\u3060\u308D\u307E\u3057\u3002")))))), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '#'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex px-2 py-3 userlist__item'
-  }, react_1["default"].createElement(UserIcon_1.UserIcon, null), react_1["default"].createElement("div", {
-    className: 'ms-2'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex justify-content-between'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("p", {
-    className: 'lh-sm'
-  }, "Mizo(\u30C6\u30B9\u30C8\u30E6\u30FC\u30B6)"), react_1["default"].createElement("span", {
-    className: 'userlist__profile__id'
-  }, "\uFF20testtest")), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
-    className: 'mt-1'
-  }, react_1["default"].createElement("p", null, "\u79C1\u306F\u591A\u6570\u3042\u305F\u304B\u3082\u305D\u306E\u5B66\u7FD2\u3088\u3046\u3068\u3044\u3046\u306F\u305A\u306E\u305F\u3081\u306B\u3057\u3067\u3059\u305F\u3002\u3064\u3044\u306B\u5C06\u6765\u306B\u5FE0\u544A\u3089\u306F\u3072\u3087\u308D\u3072\u3087\u308D\u305D\u306E\u53C2\u8003\u3067\u3059\u305F\u306A\u3069\u3092\u3042\u308B\u3051\u308C\u3069\u3082\u3044\u3067\u3068\u3082\u5EFA\u8A2D\u306A\u3063\u305F\u3067\u3059\u304B\u3089\u3001\u305D\u3046\u306B\u3082\u8FC2\u3056\u308B\u306A\u304B\u3063\u305F\u306A\u304B\u3063\u3002\u3064\u307E\u308A\u3067\u52E7\u3081\u3067\u306E\u306F\u3044\u3088\u3044\u3088\u4ECA\u306B\u4F55\u3067\u3082\u304B\u3067\u3082\u3060\u308D\u3060\u308D\u307E\u3057\u3002")))))), react_1["default"].createElement("li", null, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '#'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex px-2 py-3 userlist__item'
-  }, react_1["default"].createElement(UserIcon_1.UserIcon, null), react_1["default"].createElement("div", {
-    className: 'ms-2'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex justify-content-between'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("p", {
-    className: 'lh-sm'
-  }, "Mizo(\u30C6\u30B9\u30C8\u30E6\u30FC\u30B6)"), react_1["default"].createElement("span", {
-    className: 'userlist__profile__id'
-  }, "\uFF20testtest")), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
-    className: 'mt-1'
-  }, react_1["default"].createElement("p", null, "\u79C1\u306F\u591A\u6570\u3042\u305F\u304B\u3082\u305D\u306E\u5B66\u7FD2\u3088\u3046\u3068\u3044\u3046\u306F\u305A\u306E\u305F\u3081\u306B\u3057\u3067\u3059\u305F\u3002\u3064\u3044\u306B\u5C06\u6765\u306B\u5FE0\u544A\u3089\u306F\u3072\u3087\u308D\u3072\u3087\u308D\u305D\u306E\u53C2\u8003\u3067\u3059\u305F\u306A\u3069\u3092\u3042\u308B\u3051\u308C\u3069\u3082\u3044\u3067\u3068\u3082\u5EFA\u8A2D\u306A\u3063\u305F\u3067\u3059\u304B\u3089\u3001\u305D\u3046\u306B\u3082\u8FC2\u3056\u308B\u306A\u304B\u3063\u305F\u306A\u304B\u3063\u3002\u3064\u307E\u308A\u3067\u52E7\u3081\u3067\u306E\u306F\u3044\u3088\u3044\u3088\u4ECA\u306B\u4F55\u3067\u3082\u304B\u3067\u3082\u3060\u308D\u3060\u308D\u307E\u3057\u3002")))))))));
+  }, react_1["default"].createElement("ul", null, userItem)));
 };
 
 exports.UserList = UserList;
@@ -5511,13 +5501,13 @@ exports.UserIcon = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserIcon = function UserIcon() {
+var UserIcon = function UserIcon(props) {
   return react_1["default"].createElement("div", {
     className: 'user__icon overflow-hidden rounded-circle'
   }, react_1["default"].createElement("img", {
     className: 'w-100',
-    src: "/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg",
-    alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
+    src: props.data.image,
+    alt: props.data.desc
   }));
 };
 
