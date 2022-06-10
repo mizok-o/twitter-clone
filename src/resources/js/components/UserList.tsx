@@ -42,6 +42,8 @@ export const UserList = props => {
 
     const getUserInfo = item => {
         props.setUserData(item)
+        localStorage.setItem('userData', JSON.stringify(item))
+        console.log(localStorage.getItem('userData'));
     }
 
     const userItem = userData.map((item, i) => {

@@ -2,7 +2,6 @@ import React from 'react';
 
 export const UserDetail = props => {
 
-    localStorage.setItem('userData', JSON.stringify(props.userData))
     const userDataJSON = localStorage.getItem('userData')
     const userData = JSON.parse(userDataJSON)
 

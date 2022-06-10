@@ -5415,7 +5415,6 @@ exports.UserDetail = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var UserDetail = function UserDetail(props) {
-  localStorage.setItem('userData', JSON.stringify(props.userData));
   var userDataJSON = localStorage.getItem('userData');
   var userData = JSON.parse(userDataJSON);
   return react_1["default"].createElement("div", {
@@ -5501,6 +5500,8 @@ var UserList = function UserList(props) {
 
   var getUserInfo = function getUserInfo(item) {
     props.setUserData(item);
+    localStorage.setItem('userData', JSON.stringify(item));
+    console.log(localStorage.getItem('userData'));
   };
 
   var userItem = userData.map(function (item, i) {
