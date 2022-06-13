@@ -15,9 +15,22 @@ services:
     working_dir: /data
 
   db:
-    build: ./infra/mysql
+    platform: linux/amd64
+    image: mysql:8.0
+    container_name: twitter-clone
+    environment:
+      MYSQL_ROOT_PASSWORD: mizoguchi
+      MYSQL_DATABASE: twitter-clone
+      MYSQL_USER: mizo
+      MYSQL_PASSWORD: mizomizo1
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - db-store:/var/lib/mysql
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3336:3306
 
 volumes:
   db-store:
