@@ -5366,18 +5366,21 @@ var UserList_1 = __webpack_require__(/*! ./UserList */ "./resources/js/component
 __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 
 var App = function App() {
-  var _ref = (0, react_1.useState)(),
+  var _ref = (0, react_1.useState)({}),
       _ref2 = _slicedToArray(_ref, 2),
       userData = _ref2[0],
-      setUserData = _ref2[1];
+      setUserData = _ref2[1]; // const userlink = userData.name
 
+
+  var userDataJSON = localStorage.getItem('userData');
+  var userJson = JSON.parse(userDataJSON);
   return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/userList",
     element: react_1["default"].createElement(UserList_1.UserList, {
       setUserData: setUserData
     })
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/userDetail",
+    path: "/".concat(userJson.name),
     element: react_1["default"].createElement(UserDetail_1.UserDetail, {
       userData: userData
     })
@@ -5424,7 +5427,8 @@ var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/com
 
 var UserDetail = function UserDetail(props) {
   var userDataJSON = localStorage.getItem('userData');
-  var userData = JSON.parse(userDataJSON);
+  var userData = JSON.parse(userDataJSON); // const userData = props.userData
+
   return react_1["default"].createElement("div", {
     className: 'container-lg'
   }, react_1["default"].createElement("div", {
@@ -5474,24 +5478,26 @@ var UserDetail = function UserDetail(props) {
   }), react_1["default"].createElement("div", {
     className: 'mt-1'
   }, react_1["default"].createElement("p", null, userData.profile))), react_1["default"].createElement("div", {
-    className: 'mt-2'
+    className: 'mt-1'
   }, react_1["default"].createElement("div", {
     className: 'd-flex'
   }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
-    className: 'd-flex btn',
+    className: 'd-flex',
     type: 'button'
   }, react_1["default"].createElement("span", {
     className: 'fw-bold'
   }, "100"), react_1["default"].createElement("p", {
     className: 'ms-1'
   }, "\u30D5\u30A9\u30ED\u30FC"))), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
-    className: 'd-flex btn',
+    className: 'd-flex ms-3',
     type: 'button'
   }, react_1["default"].createElement("span", {
     className: 'fw-bold'
   }, "110"), react_1["default"].createElement("p", {
     className: 'ms-1'
-  }, "\u30D5\u30A9\u30ED\u30EF\u30FC"))))))), react_1["default"].createElement("div", null, "\u30C4\u30A4\u30FC\u30C8"));
+  }, "\u30D5\u30A9\u30ED\u30EF\u30FC"))))))), react_1["default"].createElement("div", {
+    className: 'border'
+  }, react_1["default"].createElement("p", null, "\u30C4\u30A4\u30FC\u30C8\u4E00\u89A7")));
 };
 
 exports.UserDetail = UserDetail;
@@ -5552,15 +5558,15 @@ var UserList = function UserList(props) {
   }];
 
   var getUserInfo = function getUserInfo(item) {
-    // props.setUserData(item)
     localStorage.setItem('userData', JSON.stringify(item));
+    props.setUserData(item);
   };
 
   var userItem = userData.map(function (item, i) {
     return react_1["default"].createElement("li", {
       key: i
     }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: '/userDetail',
+      to: "/".concat(item.name),
       onClick: function onClick() {
         return getUserInfo(item);
       }
@@ -5654,7 +5660,9 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var UserIcon = function UserIcon(props) {
   var userListSize = {
-    minWidth: 48
+    minWidth: 48,
+    width: 48,
+    height: 48
   };
   var userDetailSize = {
     width: 80,
@@ -10817,7 +10825,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -47,3 +47,7 @@ p {
   font-size: 14px;
   margin: 0;
 }
+button {
+  border: none;
+  background-color: var(--bs-gray-100);
+}

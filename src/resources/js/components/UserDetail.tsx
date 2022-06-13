@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { FollowButton } from './parts/FollowButton';
 import { UserIcon } from './parts/UserIcon';
 import { UserName } from './parts/UserName';
+import { TweetItem } from './tweet/tweetItem';
 
 export const UserDetail = props => {
 
     const userDataJSON = localStorage.getItem('userData')
     const userData = JSON.parse(userDataJSON)
+    // const userData = props.userData
 
     return (
         <div className='container-lg'>
@@ -43,16 +45,16 @@ export const UserDetail = props => {
                             <p>{userData.profile}</p>
                         </div>
                     </div>
-                    <div className='mt-2'>
+                    <div className='mt-1'>
                         <div className='d-flex'>
                             <div>
-                                <button className='d-flex btn' type='button'>
+                                <button className='d-flex' type='button'>
                                     <span className='fw-bold'>100</span>
                                     <p className='ms-1'>フォロー</p>
                                 </button>
                             </div>
                             <div>
-                                <button className='d-flex btn' type='button'>
+                                <button className='d-flex ms-3' type='button'>
                                     <span className='fw-bold'>110</span>
                                     <p className='ms-1'>フォロワー</p>
                                 </button>
@@ -61,7 +63,9 @@ export const UserDetail = props => {
                     </div>
                 </div>
             </div>
-            <div>ツイート</div>
+            <div className='border'>
+                <p>ツイート一覧</p>
+            </div>
         </div>
     );
 }

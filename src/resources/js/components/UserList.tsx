@@ -8,7 +8,6 @@ import { UserName } from './parts/UserName';
 import '/css/userlist.css'
 
 export const UserList = props => {
-
     interface userArray {
         id: string,
         name: string,
@@ -42,14 +41,14 @@ export const UserList = props => {
     ]
 
     const getUserInfo = item => {
-        // props.setUserData(item)
         localStorage.setItem('userData', JSON.stringify(item))
+        props.setUserData(item)
     }
 
     const userItem = userData.map((item, i) => {
         return (
             <li key={i}>
-                <Link to='/userDetail' onClick={() => getUserInfo(item)}>
+                <Link to={`/${item.name}`} onClick={() => getUserInfo(item)}>
                     <div className='d-flex px-2 py-3 userlist__item'>
                         <UserIcon userList={true} iconData={{ icon: item.icon, desc: item.iconDesc }} />
                         <div className='ms-2'>
