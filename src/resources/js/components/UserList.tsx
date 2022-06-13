@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { FollowButton } from './parts/FollowButton';
 import { UserIcon } from './parts/UserIcon';
+import { UserName } from './parts/UserName';
 
 import '/css/userlist.css'
 
@@ -12,8 +13,8 @@ export const UserList = props => {
         id: string,
         name: string,
         profile: string,
-        image: string,
-        imageDesc: string
+        icon: string,
+        iconDesc: string
     }
 
     const userData: userArray[] = [
@@ -21,29 +22,28 @@ export const UserList = props => {
             name: 'Mizoguchi1',
             id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-            image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-            imageDesc: 'ユーザアイコン',
+            icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+            iconDesc: 'ユーザアイコン',
         },
         {
             name: 'Mizoguchi2',
             id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-            image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-            imageDesc: 'ユーザアイコン',
+            icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+            iconDesc: 'ユーザアイコン',
         },
         {
             name: 'Mizoguchi3',
             id: 'testtest',
             profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-            image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-            imageDesc: 'ユーザアイコン',
+            icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+            iconDesc: 'ユーザアイコン',
         },
     ]
 
     const getUserInfo = item => {
-        props.setUserData(item)
+        // props.setUserData(item)
         localStorage.setItem('userData', JSON.stringify(item))
-        console.log(localStorage.getItem('userData'));
     }
 
     const userItem = userData.map((item, i) => {
@@ -51,16 +51,11 @@ export const UserList = props => {
             <li key={i}>
                 <Link to='/userDetail' onClick={() => getUserInfo(item)}>
                     <div className='d-flex px-2 py-3 userlist__item'>
-                        <UserIcon data={{ image: item.image, desc: item.imageDesc }} />
+                        <UserIcon userList={true} iconData={{ icon: item.icon, desc: item.iconDesc }} />
                         <div className='ms-2'>
                             <div className='d-flex justify-content-between'>
-                                <div>
-                                    <p className='lh-sm'>{item.name}</p>
-                                    <span className='userlist__profile__id'>＠{item.id}</span>
-                                </div>
-                                <div>
-                                    <FollowButton />
-                                </div>
+                                <UserName userList={true}  nameData={{ name: item.name, id: item.id }} />
+                                <FollowButton />
                             </div>
                             <div className='mt-1'>
                                 <p>{item.profile}</p>

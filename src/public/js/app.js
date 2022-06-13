@@ -5414,6 +5414,14 @@ exports.UserDetail = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+
+var FollowButton_1 = __webpack_require__(/*! ./parts/FollowButton */ "./resources/js/components/parts/FollowButton.tsx");
+
+var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
+
+var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx");
+
 var UserDetail = function UserDetail(props) {
   var userDataJSON = localStorage.getItem('userData');
   var userData = JSON.parse(userDataJSON);
@@ -5421,9 +5429,11 @@ var UserDetail = function UserDetail(props) {
     className: 'container-lg'
   }, react_1["default"].createElement("div", {
     className: 'border'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: 'd-flex p-1'
+  }, react_1["default"].createElement(react_router_dom_1.Link, {
+    to: '/userlist'
+  }, react_1["default"].createElement("button", {
     className: 'btn'
   }, react_1["default"].createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -5436,11 +5446,52 @@ var UserDetail = function UserDetail(props) {
     d: "M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
   })))), react_1["default"].createElement("div", {
     className: 'me-3'
-  }, react_1["default"].createElement("h2", null, userData.name))), react_1["default"].createElement("div", {
-    className: ''
+  }, react_1["default"].createElement("h2", null, userData.name))), react_1["default"].createElement("div", null, react_1["default"].createElement("img", {
+    className: 'w-100 bg-primary',
+    style: {
+      height: '160px'
+    },
+    src: "/images/twitter-cover-example.png",
+    alt: ""
+  }))), react_1["default"].createElement("div", {
+    className: 'p-3'
   }, react_1["default"].createElement("div", {
-    className: 'w-100 bg-primary'
-  })), react_1["default"].createElement("div", null, "\u753B\u50CF\u3068\u30D5\u30A9\u30ED\u30FC\u30DC\u30BF"), react_1["default"].createElement("div", null, react_1["default"].createElement("div", null, "\u540D\u524D\u3068ID"), react_1["default"].createElement("div", null, "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB")), react_1["default"].createElement("div", null, "\u30D5\u30A9\u30ED\u30FC\u30FB\u30D5\u30A9\u30ED\u30EF\u30FC")), react_1["default"].createElement("div", null, "\u30C4\u30A4\u30FC\u30C8"));
+    className: 'position-relative'
+  }, react_1["default"].createElement("div", {
+    className: 'w-100 d-flex justify-content-end'
+  }, react_1["default"].createElement(FollowButton_1.FollowButton, null)), react_1["default"].createElement(UserIcon_1.UserIcon, {
+    userList: false,
+    iconData: {
+      icon: userData.icon,
+      desc: userData.iconDesc
+    }
+  })), react_1["default"].createElement("div", null, react_1["default"].createElement(UserName_1.UserName, {
+    userList: false,
+    nameData: {
+      name: userData.name,
+      id: userData.id
+    }
+  }), react_1["default"].createElement("div", {
+    className: 'mt-1'
+  }, react_1["default"].createElement("p", null, userData.profile))), react_1["default"].createElement("div", {
+    className: 'mt-2'
+  }, react_1["default"].createElement("div", {
+    className: 'd-flex'
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    className: 'd-flex btn',
+    type: 'button'
+  }, react_1["default"].createElement("span", {
+    className: 'fw-bold'
+  }, "100"), react_1["default"].createElement("p", {
+    className: 'ms-1'
+  }, "\u30D5\u30A9\u30ED\u30FC"))), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
+    className: 'd-flex btn',
+    type: 'button'
+  }, react_1["default"].createElement("span", {
+    className: 'fw-bold'
+  }, "110"), react_1["default"].createElement("p", {
+    className: 'ms-1'
+  }, "\u30D5\u30A9\u30ED\u30EF\u30FC"))))))), react_1["default"].createElement("div", null, "\u30C4\u30A4\u30FC\u30C8"));
 };
 
 exports.UserDetail = UserDetail;
@@ -5475,6 +5526,8 @@ var FollowButton_1 = __webpack_require__(/*! ./parts/FollowButton */ "./resource
 
 var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
 
+var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx");
+
 __webpack_require__(/*! ../../../../../css/userlist.css */ "./public/css/userlist.css");
 
 var UserList = function UserList(props) {
@@ -5482,26 +5535,25 @@ var UserList = function UserList(props) {
     name: 'Mizoguchi1',
     id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    imageDesc: 'ユーザアイコン'
+    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    iconDesc: 'ユーザアイコン'
   }, {
     name: 'Mizoguchi2',
     id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    imageDesc: 'ユーザアイコン'
+    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    iconDesc: 'ユーザアイコン'
   }, {
     name: 'Mizoguchi3',
     id: 'testtest',
     profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    image: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    imageDesc: 'ユーザアイコン'
+    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
+    iconDesc: 'ユーザアイコン'
   }];
 
   var getUserInfo = function getUserInfo(item) {
-    props.setUserData(item);
+    // props.setUserData(item)
     localStorage.setItem('userData', JSON.stringify(item));
-    console.log(localStorage.getItem('userData'));
   };
 
   var userItem = userData.map(function (item, i) {
@@ -5515,19 +5567,22 @@ var UserList = function UserList(props) {
     }, react_1["default"].createElement("div", {
       className: 'd-flex px-2 py-3 userlist__item'
     }, react_1["default"].createElement(UserIcon_1.UserIcon, {
-      data: {
-        image: item.image,
-        desc: item.imageDesc
+      userList: true,
+      iconData: {
+        icon: item.icon,
+        desc: item.iconDesc
       }
     }), react_1["default"].createElement("div", {
       className: 'ms-2'
     }, react_1["default"].createElement("div", {
       className: 'd-flex justify-content-between'
-    }, react_1["default"].createElement("div", null, react_1["default"].createElement("p", {
-      className: 'lh-sm'
-    }, item.name), react_1["default"].createElement("span", {
-      className: 'userlist__profile__id'
-    }, "\uFF20", item.id)), react_1["default"].createElement("div", null, react_1["default"].createElement(FollowButton_1.FollowButton, null))), react_1["default"].createElement("div", {
+    }, react_1["default"].createElement(UserName_1.UserName, {
+      userList: true,
+      nameData: {
+        name: item.name,
+        id: item.id
+      }
+    }), react_1["default"].createElement(FollowButton_1.FollowButton, null)), react_1["default"].createElement("div", {
       className: 'mt-1'
     }, react_1["default"].createElement("p", null, item.profile))))));
   });
@@ -5598,16 +5653,63 @@ exports.UserIcon = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var UserIcon = function UserIcon(props) {
+  var userListSize = {
+    minWidth: 48
+  };
+  var userDetailSize = {
+    width: 80,
+    height: 80,
+    top: -42
+  };
   return react_1["default"].createElement("div", {
-    className: 'user__icon overflow-hidden rounded-circle'
+    className: "".concat(props.userList ? "" : "position-absolute start-16"),
+    style: props.userList ? userListSize : userDetailSize
+  }, react_1["default"].createElement("div", {
+    className: 'w-100 overflow-hidden rounded-circle'
   }, react_1["default"].createElement("img", {
     className: 'w-100',
-    src: props.data.image,
-    alt: props.data.desc
-  }));
+    src: props.iconData.icon,
+    alt: props.iconData.desc
+  })));
 };
 
 exports.UserIcon = UserIcon;
+
+/***/ }),
+
+/***/ "./resources/js/components/parts/UserName.tsx":
+/*!****************************************************!*\
+  !*** ./resources/js/components/parts/UserName.tsx ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UserName = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserName = function UserName(props) {
+  return react_1["default"].createElement("div", {
+    className: "".concat(props.userList ? "" : "mt-2")
+  }, react_1["default"].createElement("p", {
+    className: "lh-sm fw-bold ".concat(props.userList ? "" : "fs-4")
+  }, props.nameData.name), react_1["default"].createElement("span", {
+    className: 'opacity-50'
+  }, "\uFF20", props.nameData.id));
+};
+
+exports.UserName = UserName;
 
 /***/ }),
 
@@ -10691,7 +10793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".navbar-brand {\n    display: block;\n}\n\n.collapse:not(.show) {\n    display: flex;\n}\n\n.userlist__item:hover {\n    background-color: #efefef;\n}\n\n.user__icon {\n    min-width: 56px;\n    width: 56px;\n    height: 56px;\n}\n\n.userlist__profile__id {\n    opacity: .5;\n}\n\n.user__btn__follow {\n    width: 88px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".navbar-brand {\n    display: block;\n}\n\n.collapse:not(.show) {\n    display: flex;\n}\n\n.userlist__item:hover {\n    background-color: #efefef;\n}\n\n.userlist__profile__id {\n    opacity: .5;\n}\n\n.user__btn__follow {\n    width: 88px;\n    height: 36px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10715,7 +10817,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
