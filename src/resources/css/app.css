@@ -51,3 +51,20 @@ button {
   border: none;
   background-color: var(--bs-gray-100);
 }
+
+textarea {
+  resize: none;
+  width: 320px;
+  height: 200px;
+}
+
+/* tweet */
+.tweet-form-file {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  /* color: #111; */
+  background-image: url('/images/upload-icon.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

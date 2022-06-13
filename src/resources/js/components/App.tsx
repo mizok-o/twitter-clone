@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import {UserDetail} from './UserDetail';
-import {UserList} from './UserList';
+import { UserDetail } from './UserDetail';
+import { UserList } from './UserList';
+import { Tweet } from './Tweet';
 
 import '../../css/app.css'
 
@@ -17,6 +18,7 @@ export const App = () => {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/tweet" element={<Tweet />} />
                 <Route path="/userList" element={<UserList setUserData={setUserData} />} />
                 <Route
                     path={`/${userJson.name}`}

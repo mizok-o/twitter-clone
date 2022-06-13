@@ -5363,6 +5363,8 @@ var UserDetail_1 = __webpack_require__(/*! ./UserDetail */ "./resources/js/compo
 
 var UserList_1 = __webpack_require__(/*! ./UserList */ "./resources/js/components/UserList.tsx");
 
+var Tweet_1 = __webpack_require__(/*! ./Tweet */ "./resources/js/components/Tweet.tsx");
+
 __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 
 var App = function App() {
@@ -5375,6 +5377,9 @@ var App = function App() {
   var userDataJSON = localStorage.getItem('userData');
   var userJson = JSON.parse(userDataJSON);
   return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/tweet",
+    element: react_1["default"].createElement(Tweet_1.Tweet, null)
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/userList",
     element: react_1["default"].createElement(UserList_1.UserList, {
       setUserData: setUserData
@@ -5392,6 +5397,75 @@ exports.App = App;
 if (document.getElementById('example')) {
   react_dom_1["default"].render(react_1["default"].createElement(exports.App, null), document.getElementById('example'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/Tweet.tsx":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Tweet.tsx ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Tweet = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
+
+var Tweet = function Tweet() {
+  var userDataJSON = localStorage.getItem('userData');
+  var userJson = JSON.parse(userDataJSON);
+  return react_1["default"].createElement("div", {
+    className: 'container-lg'
+  }, react_1["default"].createElement("div", {
+    className: ''
+  }, react_1["default"].createElement("div", {
+    className: 'w-50 p-4 bg-light shadow rounded mx-auto my-2'
+  }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
+    className: 'd-flex'
+  }, react_1["default"].createElement(UserIcon_1.UserIcon, {
+    userList: true,
+    iconData: {
+      icon: userJson.icon,
+      desc: userJson.iconDesc
+    }
+  }), react_1["default"].createElement("form", {
+    action: "post",
+    className: 'ms-2'
+  }, react_1["default"].createElement("textarea", {
+    name: "",
+    id: "",
+    cols: "30",
+    rows: "5",
+    placeholder: "\u4ECA\u65E5\u3092\u545F\u3053\u3046"
+  }), react_1["default"].createElement("div", {
+    className: 'mt-1 d-flex justify-content-between align-items-center'
+  }, react_1["default"].createElement("label", null, react_1["default"].createElement("div", {
+    className: 'tweet-form-file'
+  }), react_1["default"].createElement("input", {
+    className: 'd-none',
+    type: "file",
+    name: 'example',
+    accept: '.png, .jpeg, .jpg'
+  })), react_1["default"].createElement("button", {
+    className: 'btn btn-primary mt-1',
+    type: 'button'
+  }, "\u30C4\u30A4\u30FC\u30C8\u3059\u308B"))))))));
+};
+
+exports.Tweet = Tweet;
 
 /***/ }),
 
@@ -10826,7 +10900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n/* tweet */\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  /* color: #111; */\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
