@@ -1,0 +1,20 @@
+.navbar-brand {
+    display: block;
+}
+
+.collapse:not(.show) {
+    display: flex;
+}
+
+.userlist__item:hover {
+    background-color: #efefef;
+}
+
+.userlist__profile__id {
+    opacity: .5;
+}
+
+.user__btn__follow {
+    width: 88px;
+    height: 36px;
+}

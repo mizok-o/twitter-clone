@@ -5382,7 +5382,7 @@ var App = function App() {
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/".concat(userJson.name),
     element: react_1["default"].createElement(UserDetail_1.UserDetail, {
-      userData: userData
+      userData: userJson
     })
   })));
 };
@@ -5423,7 +5423,8 @@ var FollowButton_1 = __webpack_require__(/*! ./parts/FollowButton */ "./resource
 
 var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
 
-var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx");
+var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx"); // import { TweetItem } from './tweet/tweetItem';
+
 
 var UserDetail = function UserDetail(props) {
   var userDataJSON = localStorage.getItem('userData');
