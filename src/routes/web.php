@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::apiResource('user', UserController::class);
 
 Auth::routes();
 
-Route::get('/{any}', function(){
+Route::get('/{any}', function () {
     return view('home');
 })->where('any', '.*');
