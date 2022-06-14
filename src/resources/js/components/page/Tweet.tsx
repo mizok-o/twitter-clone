@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserIcon } from './parts/UserIcon';
+import { UserIcon } from '../parts/UserIcon';
 
 export const Tweet = () => {
 

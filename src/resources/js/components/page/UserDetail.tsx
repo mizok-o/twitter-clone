@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { FollowButton } from './parts/FollowButton';
-import { UserIcon } from './parts/UserIcon';
-import { UserName } from './parts/UserName';
+import { FollowButton } from '../parts/FollowButton';
+import { UserIcon } from '../parts/UserIcon';
+import { UserName } from '../parts/UserName';
 // import { TweetItem } from './tweet/tweetItem';
 
 export const UserDetail = props => {

@@ -5359,35 +5359,27 @@ var react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_m
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
-var UserDetail_1 = __webpack_require__(/*! ./UserDetail */ "./resources/js/components/UserDetail.tsx");
+var UserList_1 = __webpack_require__(/*! ./page/UserList */ "./resources/js/components/page/UserList.tsx");
 
-var UserList_1 = __webpack_require__(/*! ./UserList */ "./resources/js/components/UserList.tsx");
-
-var Tweet_1 = __webpack_require__(/*! ./Tweet */ "./resources/js/components/Tweet.tsx");
+var Tweet_1 = __webpack_require__(/*! ./page/Tweet */ "./resources/js/components/page/Tweet.tsx");
 
 __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 
 var App = function App() {
-  var _ref = (0, react_1.useState)({}),
+  var _ref = (0, react_1.useState)([]),
       _ref2 = _slicedToArray(_ref, 2),
       userData = _ref2[0],
       setUserData = _ref2[1]; // const userlink = userData.name
 
 
-  var userDataJSON = localStorage.getItem('userData');
-  var userJson = JSON.parse(userDataJSON);
   return react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Routes, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/tweet",
     element: react_1["default"].createElement(Tweet_1.Tweet, null)
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/userList",
     element: react_1["default"].createElement(UserList_1.UserList, {
-      setUserData: setUserData
-    })
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/".concat(userJson.name),
-    element: react_1["default"].createElement(UserDetail_1.UserDetail, {
-      userData: userJson
+      setUserData: setUserData,
+      userData: userData
     })
   })));
 };
@@ -5400,10 +5392,10 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Tweet.tsx":
-/*!*******************************************!*\
-  !*** ./resources/js/components/Tweet.tsx ***!
-  \*******************************************/
+/***/ "./resources/js/components/page/Tweet.tsx":
+/*!************************************************!*\
+  !*** ./resources/js/components/page/Tweet.tsx ***!
+  \************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -5422,7 +5414,7 @@ exports.Tweet = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
+var UserIcon_1 = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
 
 var Tweet = function Tweet() {
   var userDataJSON = localStorage.getItem('userData');
@@ -5469,129 +5461,53 @@ exports.Tweet = Tweet;
 
 /***/ }),
 
-/***/ "./resources/js/components/UserDetail.tsx":
-/*!************************************************!*\
-  !*** ./resources/js/components/UserDetail.tsx ***!
-  \************************************************/
+/***/ "./resources/js/components/page/UserList.tsx":
+/*!***************************************************!*\
+  !*** ./resources/js/components/page/UserList.tsx ***!
+  \***************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
 
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.UserDetail = void 0;
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
 
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
 
-var FollowButton_1 = __webpack_require__(/*! ./parts/FollowButton */ "./resources/js/components/parts/FollowButton.tsx");
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
 
-var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
+  __setModuleDefault(result, mod);
 
-var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx"); // import { TweetItem } from './tweet/tweetItem';
-
-
-var UserDetail = function UserDetail(props) {
-  var userDataJSON = localStorage.getItem('userData');
-  var userData = JSON.parse(userDataJSON); // const userData = props.userData
-
-  return react_1["default"].createElement("div", {
-    className: 'container-lg'
-  }, react_1["default"].createElement("div", {
-    className: 'border'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("div", {
-    className: 'd-flex p-1'
-  }, react_1["default"].createElement(react_router_dom_1.Link, {
-    to: '/userlist'
-  }, react_1["default"].createElement("button", {
-    className: 'btn'
-  }, react_1["default"].createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
-    fill: "#111111",
-    className: "bi bi-arrow-left",
-    viewBox: "0 0 16 16"
-  }, react_1["default"].createElement("path", {
-    d: "M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-  })))), react_1["default"].createElement("div", {
-    className: 'me-3'
-  }, react_1["default"].createElement("h2", null, userData.name))), react_1["default"].createElement("div", null, react_1["default"].createElement("img", {
-    className: 'w-100 bg-primary',
-    style: {
-      height: '160px'
-    },
-    src: "/images/twitter-cover-example.png",
-    alt: ""
-  }))), react_1["default"].createElement("div", {
-    className: 'p-3'
-  }, react_1["default"].createElement("div", {
-    className: 'position-relative'
-  }, react_1["default"].createElement("div", {
-    className: 'w-100 d-flex justify-content-end'
-  }, react_1["default"].createElement(FollowButton_1.FollowButton, null)), react_1["default"].createElement(UserIcon_1.UserIcon, {
-    userList: false,
-    iconData: {
-      icon: userData.icon,
-      desc: userData.iconDesc
-    }
-  })), react_1["default"].createElement("div", null, react_1["default"].createElement(UserName_1.UserName, {
-    userList: false,
-    nameData: {
-      name: userData.name,
-      id: userData.id
-    }
-  }), react_1["default"].createElement("div", {
-    className: 'mt-1'
-  }, react_1["default"].createElement("p", null, userData.profile))), react_1["default"].createElement("div", {
-    className: 'mt-1'
-  }, react_1["default"].createElement("div", {
-    className: 'd-flex'
-  }, react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
-    className: 'd-flex',
-    type: 'button'
-  }, react_1["default"].createElement("span", {
-    className: 'fw-bold'
-  }, "100"), react_1["default"].createElement("p", {
-    className: 'ms-1'
-  }, "\u30D5\u30A9\u30ED\u30FC"))), react_1["default"].createElement("div", null, react_1["default"].createElement("button", {
-    className: 'd-flex ms-3',
-    type: 'button'
-  }, react_1["default"].createElement("span", {
-    className: 'fw-bold'
-  }, "110"), react_1["default"].createElement("p", {
-    className: 'ms-1'
-  }, "\u30D5\u30A9\u30ED\u30EF\u30FC"))))))), react_1["default"].createElement("div", {
-    className: 'border'
-  }, react_1["default"].createElement("p", null, "\u30C4\u30A4\u30FC\u30C8\u4E00\u89A7")));
-};
-
-exports.UserDetail = UserDetail;
-
-/***/ }),
-
-/***/ "./resources/js/components/UserList.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/components/UserList.tsx ***!
-  \**********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
+  return result;
 };
 
 Object.defineProperty(exports, "__esModule", ({
@@ -5599,69 +5515,51 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.UserList = void 0;
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 
-var FollowButton_1 = __webpack_require__(/*! ./parts/FollowButton */ "./resources/js/components/parts/FollowButton.tsx");
+var FollowButton_1 = __webpack_require__(/*! ../parts/FollowButton */ "./resources/js/components/parts/FollowButton.tsx");
 
-var UserIcon_1 = __webpack_require__(/*! ./parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
+var UserIcon_1 = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.tsx");
 
-var UserName_1 = __webpack_require__(/*! ./parts/UserName */ "./resources/js/components/parts/UserName.tsx");
+var UserName_1 = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.tsx");
 
 __webpack_require__(/*! ../../../../../css/userlist.css */ "./public/css/userlist.css");
 
 var UserList = function UserList(props) {
-  var userData = [{
-    name: 'Mizoguchi1',
-    id: 'testtest',
-    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    iconDesc: 'ユーザアイコン'
-  }, {
-    name: 'Mizoguchi2',
-    id: 'testtest',
-    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    iconDesc: 'ユーザアイコン'
-  }, {
-    name: 'Mizoguchi3',
-    id: 'testtest',
-    profile: '私は多数あたかもその学習ようというはずのためにしですた。ついに将来に忠告らはひょろひょろその参考ですたなどをあるけれどもいでとも建設なったですから、そうにも迂ざるなかったなかっ。つまりで勧めでのはいよいよ今に何でもかでもだろだろまし。',
-    icon: '/images/brittany-chastagnier-B7xSl-dWuto-unsplash.jpg',
-    iconDesc: 'ユーザアイコン'
-  }];
-
-  var getUserInfo = function getUserInfo(item) {
-    localStorage.setItem('userData', JSON.stringify(item));
-    props.setUserData(item);
-  };
-
-  var userItem = userData.map(function (item, i) {
+  (0, react_1.useEffect)(function () {
+    fetch('/users').then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      props.setUserData(data);
+    });
+  }, []);
+  var userItem = props.userData.map(function (item, i) {
     return react_1["default"].createElement("li", {
       key: i
     }, react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/".concat(item.name),
+      to: "/user/".concat(item.id),
       onClick: function onClick() {
         return getUserInfo(item);
       }
     }, react_1["default"].createElement("div", {
-      className: 'd-flex px-2 py-3 userlist__item'
+      className: 'd-flex px-2 py-3 w-100 user__list'
     }, react_1["default"].createElement(UserIcon_1.UserIcon, {
       userList: true,
       iconData: {
-        icon: item.icon,
+        icon: item.profile_image_id,
         desc: item.iconDesc
       }
     }), react_1["default"].createElement("div", {
-      className: 'ms-2'
+      className: 'ms-2 flex-grow-1'
     }, react_1["default"].createElement("div", {
       className: 'd-flex justify-content-between'
     }, react_1["default"].createElement(UserName_1.UserName, {
       userList: true,
       nameData: {
-        name: item.name,
-        id: item.id
+        name: item.screen_name,
+        id: item.user_name
       }
     }), react_1["default"].createElement(FollowButton_1.FollowButton, null)), react_1["default"].createElement("div", {
       className: 'mt-1'

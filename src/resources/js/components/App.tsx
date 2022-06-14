@@ -2,28 +2,26 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { UserDetail } from './UserDetail';
-import { UserList } from './UserList';
-import { Tweet } from './Tweet';
+import { UserDetail } from './page/UserDetail';
+import { UserList } from './page/UserList';
+import { Tweet } from './page/Tweet';
 
 import '../../css/app.css'
 
 export const App = () => {
 
-    const [userData, setUserData] = useState<object>({})
+    const [userData, setUserData] = useState([])
     // const userlink = userData.name
-    const userDataJSON = localStorage.getItem('userData')
-    const userJson = JSON.parse(userDataJSON)
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/tweet" element={<Tweet />} />
-                <Route path="/userList" element={<UserList setUserData={setUserData} />} />
-                <Route
+                <Route path="/userList" element={<UserList setUserData={setUserData} userData={userData} />} />
+                {/* <Route
                     path={`/${userJson.name}`}
                     element={<UserDetail userData={userJson} />}
-                />
+                /> */}
             </Routes>
         </BrowserRouter>
     );
