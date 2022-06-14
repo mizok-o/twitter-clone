@@ -13,13 +13,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // usersテーブル一覧を取得
     public function index()
     {
         $users = User::all();
 
-        // 取得した値をビュー「user/index」に渡す
-        // print_r($users->toArray());
-        // dd($users->toArray());
         return $users;
     }
 
@@ -40,10 +38,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // usersテーブルからidが同じレコードを取得
     public function show($id)
     {
         $users = User::find($id);
-
         return $users;
     }
 

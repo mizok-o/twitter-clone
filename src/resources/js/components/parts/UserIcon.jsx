@@ -1,7 +1,8 @@
 import React from "react";
 
 export const UserIcon = (props) => {
-    const userListSize = {
+    // ユーザ詳細ページではスタイルを切り替える
+    const general = {
         minWidth: 48,
         width: 48,
         height: 48,
@@ -14,14 +15,16 @@ export const UserIcon = (props) => {
 
     return (
         <div
-            className={`${props.userList ? "" : "position-absolute start-16"}`}
-            style={props.userList ? userListSize : userDetailSize}
+            className={`${
+                props.isUserDetail ? "position-absolute start-16" : ""
+            }`}
+            style={props.isUserDetail ? userDetailSize : general}
         >
             <div className="w-100 h-100 overflow-hidden rounded-circle border">
                 <img
                     className="w-100 h-100"
                     src={`/images/${props.iconData.icon}`}
-                    alt={props.iconData.desc}
+                    alt="ユーザアイコン"
                 />
             </div>
         </div>

@@ -5351,6 +5351,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var App = function App() {
+  //　ユーザ一覧データを入れる
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       userData = _useState2[0],
@@ -5387,6 +5388,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "UserList": () => (/* binding */ UserList)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/FollowButton */ "./resources/js/components/parts/FollowButton.jsx");
 /* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
 /* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
@@ -5397,8 +5399,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var UserList = function UserList(props) {
-  // ユーザ一覧を配列として取得して格納
+  // ユーザ一覧をprops.userDataに入れる
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetch("/users").then(function (res) {
       return res.json();
@@ -5406,32 +5409,21 @@ var UserList = function UserList(props) {
       props.setUserData(data);
     });
   }, []);
-
-  var userItemClicked = function userItemClicked() {
-    console.log("clicked");
-  };
-
-  var userItem = props.userData.map(function (item, i) {
+  var userItem = props.userData.map(function (item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "user__item",
-        onClick: function onClick() {
-          return userItemClicked();
-        },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        to: "/users/".concat(item.id),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "d-flex px-2 py-3 w-100",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__.UserIcon, {
-            userList: true,
             iconData: {
-              icon: item.profile_image_id,
-              desc: item.iconDesc
+              icon: item.profile_image_id
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "ms-2 flex-grow-1",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "d-flex justify-content-between",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_3__.UserName, {
-                userList: true,
                 nameData: {
                   name: item.screen_name,
                   id: item.user_name
@@ -5446,7 +5438,7 @@ var UserList = function UserList(props) {
           })]
         })
       })
-    }, i);
+    }, item.id);
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "container-lg",
@@ -5479,15 +5471,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FollowButton = function FollowButton() {
-  var followBtnClicked = function followBtnClicked() {
+  var userFollowed = function userFollowed(e) {
+    e.preventDefault();
     console.log("follow clicked!");
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
     type: "button",
-    className: "btn btn-outline-dark user__btn__follow",
-    onClick: function onClick() {
-      return followBtnClicked();
+    className: "btn btn-outline-dark",
+    onClick: function onClick(e) {
+      return userFollowed(e);
     },
     children: "\u30D5\u30A9\u30ED\u30FC"
   });
@@ -5511,7 +5504,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UserIcon = function UserIcon(props) {
-  var userListSize = {
+  // ユーザ詳細ページではスタイルを切り替える
+  var general = {
     minWidth: 48,
     width: 48,
     height: 48
@@ -5522,14 +5516,14 @@ var UserIcon = function UserIcon(props) {
     top: -42
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "".concat(props.userList ? "" : "position-absolute start-16"),
-    style: props.userList ? userListSize : userDetailSize,
+    className: "".concat(props.isUserDetail ? "position-absolute start-16" : ""),
+    style: props.isUserDetail ? userDetailSize : general,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "w-100 h-100 overflow-hidden rounded-circle border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         className: "w-100 h-100",
         src: "/images/".concat(props.iconData.icon),
-        alt: props.iconData.desc
+        alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
       })
     })
   });
@@ -5555,9 +5549,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var UserName = function UserName(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "".concat(props.userList ? "" : "mt-2"),
+    className: "".concat(props.isUserDetail ? "mt-2" : ""),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-      className: "lh-sm fw-bold ".concat(props.userList ? "" : "fs-4"),
+      className: "lh-sm fw-bold ".concat(props.isUserDetail ? "fs-4" : ""),
       children: props.nameData.name
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
       className: "opacity-50",

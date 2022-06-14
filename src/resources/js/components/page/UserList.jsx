@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { FollowButton } from "../parts/FollowButton";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 
 export const UserList = (props) => {
-    // ユーザ一覧を配列として取得して格納
+    // ユーザ一覧をprops.userDataに入れる
     useEffect(() => {
         fetch("/users")
             .then((res) => res.json())
@@ -14,26 +15,19 @@ export const UserList = (props) => {
             });
     }, []);
 
-    const userItemClicked = () => {
-        console.log("clicked");
-    };
-
-    const userItem = props.userData.map((item, i) => {
+    const userItem = props.userData.map((item) => {
         return (
-            <li key={i}>
-                <div className="user__item" onClick={() => userItemClicked()}>
+            <li key={item.id}>
+                <Link to={`/users/${item.id}`}>
                     <div className="d-flex px-2 py-3 w-100">
                         <UserIcon
-                            userList={true}
                             iconData={{
                                 icon: item.profile_image_id,
-                                desc: item.iconDesc,
                             }}
                         />
                         <div className="ms-2 flex-grow-1">
                             <div className="d-flex justify-content-between">
                                 <UserName
-                                    userList={true}
                                     nameData={{
                                         name: item.screen_name,
                                         id: item.user_name,
@@ -46,7 +40,7 @@ export const UserList = (props) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </li>
         );
     });

@@ -7,6 +7,7 @@ import { UserList } from "./page/UserList";
 import "../../css/app.css";
 
 export const App = () => {
+    //　ユーザ一覧データを入れる
     const [userData, setUserData] = useState([]);
 
     return (
