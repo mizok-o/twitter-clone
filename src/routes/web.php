@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::apiResource('users', UserController::class);
-
 Auth::routes();
+
+Route::apiResource('users', UserController::class);
 
 Route::get('/{any}', function () {
     return view('home');
