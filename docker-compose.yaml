@@ -31,6 +31,3 @@ services:
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3336:3306
-
-volumes:
-  db-store:
