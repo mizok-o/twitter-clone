@@ -58,6 +58,14 @@ textarea {
   height: 200px;
 }
 
+.user__item-container {
+  transition: .2s;
+}
+
+.user__item-container:hover {
+  background-color: #E9EBED;
+}
+
 /* tweet */
 .tweet-form-file {
   width: 24px;
