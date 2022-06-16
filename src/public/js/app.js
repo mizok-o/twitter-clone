@@ -5348,7 +5348,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // import { Pagenation } from "./parts/Pagenation";
 
 
 var App = function App() {
@@ -5391,9 +5390,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/FollowButton */ "./resources/js/components/parts/FollowButton.jsx");
-/* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
-/* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
-/* harmony import */ var _parts_Pagenation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parts/Pagenation */ "./resources/js/components/parts/Pagenation.jsx");
+/* harmony import */ var _parts_Pagenation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/Pagenation */ "./resources/js/components/parts/Pagenation.jsx");
+/* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
+/* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -5419,7 +5418,7 @@ var UserList = function UserList(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       countUserItem = _useState2[0],
-      setCountUserItem = _useState2[1]; // ユーザ一覧をprops.userDataに入れる
+      setCountUserItem = _useState2[1]; // 初期状態で表示するデータを呼び出す
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -5430,7 +5429,18 @@ var UserList = function UserList(props) {
       var showPages = data.slice(0, 2);
       props.setUserData(showPages);
     });
-  }, []);
+  }, []); // ページネーションで表示する分のデータだけ呼び出す
+
+  var handlePaginate = function handlePaginate(page) {
+    fetch("/users").then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      var startPage = (page - 1) * 2;
+      var showPages = data.slice(startPage, startPage + 2);
+      props.setUserData(showPages);
+    });
+  };
+
   var userItem = props.userData.map(function (item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -5438,8 +5448,8 @@ var UserList = function UserList(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
           to: "/users/".concat(item.id),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-            className: "d-flex px-2 py-3 w-100",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__.UserIcon, {
+            className: "d-flex px-2 py-4 w-100",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
               iconData: {
                 icon: item.profile_image_id
               }
@@ -5447,7 +5457,7 @@ var UserList = function UserList(props) {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 className: "d-flex justify-content-between",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_3__.UserName, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_4__.UserName, {
                   nameData: {
                     name: item.screen_name,
                     id: item.user_name
@@ -5465,17 +5475,6 @@ var UserList = function UserList(props) {
       })
     }, item.id);
   });
-
-  var handlePaginate = function handlePaginate(page) {
-    fetch("/users").then(function (res) {
-      return res.json();
-    }).then(function (data) {
-      var startPage = (page - 1) * 2;
-      var showPages = data.slice(startPage, startPage + 2);
-      props.setUserData(showPages);
-    });
-  };
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "container-lg",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
@@ -5485,7 +5484,7 @@ var UserList = function UserList(props) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         children: userItem
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_4__.Pagenation, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_2__.Pagenation, {
       sum: countUserItem,
       per: 2,
       onChange: function onChange(e) {
@@ -5542,7 +5541,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Pagenation": () => (/* binding */ Pagenation)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _css_pagenation_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../css/pagenation.css */ "./public/css/pagenation.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5566,26 +5566,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Pagenation = function Pagenation(props) {
-  var isFirstRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+var Pagenation = function Pagenation(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       currentPage = _useState2[0],
       setPage = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    console.log(currentPage);
     props.onChange({
       page: currentPage
     });
-  }, [currentPage]);
-  var totalPage = Math.ceil(props.sum / props.per);
+  }, [currentPage]); // ページネーションの総数
+
+  var totalPage = Math.ceil(props.sum / props.per); // ボタンで１ページ戻る時
 
   var handleBack = function handleBack() {
     if (currentPage === 1) {
@@ -5593,7 +5587,7 @@ var Pagenation = function Pagenation(props) {
     }
 
     setPage(currentPage - 1);
-  }; // 「>」がクリックされたときの処理
+  }; // ボタンで１ページ進む時
 
 
   var handleForward = function handleForward() {
@@ -5609,34 +5603,29 @@ var Pagenation = function Pagenation(props) {
     setPage(page);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: totalPage !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("nav", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "mt-4",
+    children: totalPage !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
       className: "Page navigation example",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
         className: "pagination",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-          className: "page-item pagenation__item",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+          className: "page-item pagenation__arrow py-2 ".concat(currentPage === 0 || currentPage === 1 ? "pagenation__arrow--disabled" : ""),
           onClick: function onClick() {
             return handleBack();
           },
           children: "\uFF1C"
         }), _toConsumableArray(Array(totalPage).keys()).map(function (page) {
           page++;
-          return page === currentPage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-            className: "page-item pagenation__item",
-            onClick: function onClick() {
-              return handleMove(page);
-            },
-            children: [page, " active"]
-          }, page) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-            className: "page-item pagenation__item",
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            className: "page-item pagenation__item py-2 ".concat(page === currentPage || currentPage === 0 && page === 1 ? "pagenation__item--active" : ""),
             onClick: function onClick() {
               return handleMove(page);
             },
             children: page
           }, page);
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-          className: "page-item pagenation__item",
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+          className: "page-item pagenation__arrow py-2\n                            ".concat(currentPage === totalPage ? "pagenation__arrow--disabled" : "", "\n                            "),
           onClick: function onClick() {
             return handleForward();
           },
@@ -10746,6 +10735,30 @@ defineJQueryPlugin(Toast);
 
 
 //# sourceMappingURL=bootstrap.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./public/css/pagenation.css":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./public/css/pagenation.css ***!
+  \*********************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".page-item {\n  padding: 0 12px;\n  transition: .2s;\n  cursor: pointer;\n  border-radius: 4px;\n}\n\n.pagenation__item--active {\n  pointer-events: none;\n  color: #f8fafc;\n  background-color: #111;\n}\n\n.pagenation__arrow--disabled {\n  pointer-events: none;\n  opacity: .4;\n}\n\n.page-item:hover {\n  color: #f8fafc;\n  background-color: #111;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -61560,6 +61573,36 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./public/css/pagenation.css":
+/*!***********************************!*\
+  !*** ./public/css/pagenation.css ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_pagenation_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./pagenation.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./public/css/pagenation.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_pagenation_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_pagenation_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
