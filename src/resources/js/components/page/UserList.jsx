@@ -7,31 +7,32 @@ import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 
 export const UserList = (props) => {
-    const [countUserItem, setCountUserItem] = useState([]);
+    const [numUsers, setNumUsers] = useState(0);
 
     // 初期状態で表示するデータを呼び出す
     useEffect(() => {
-        fetch("/users")
+        fetch("/users?page=1")
             .then((res) => res.json())
             .then((data) => {
-                setCountUserItem(data.length);
-                const showPages = data.slice(0, 2);
-                props.setUserData(showPages);
+                const usersData = data[0].data;
+                const numUsersData = data[1];
+
+                setNumUsers(numUsersData);
+                props.setUsers(usersData);
             });
     }, []);
 
-    // ページネーションで表示する分のデータだけ呼び出す
+    // ページネーションで表示する追加分を呼び出し
     const handlePaginate = (page) => {
-        fetch("/users")
+        fetch(`/users?page=${page}`)
             .then((res) => res.json())
             .then((data) => {
-                const startPage = (page - 1) * 2;
-                const showPages = data.slice(startPage, startPage + 2);
-                props.setUserData(showPages);
+                const usersData = data[0].data;
+                props.setUsers(usersData);
             });
     };
 
-    const userItem = props.userData.map((item) => {
+    const userItem = props.users.map((item) => {
         return (
             <li key={item.id}>
                 <div className="user__item-container">
@@ -70,7 +71,7 @@ export const UserList = (props) => {
                 <ul>{userItem}</ul>
             </div>
             <Pagenation
-                sum={countUserItem}
+                sum={numUsers}
                 per={2}
                 onChange={(e) => handlePaginate(e.page)}
             />

@@ -16,9 +16,13 @@ class UserController extends Controller
     // usersテーブル一覧を取得
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(2);
+        $numUsers = User::get()->count();
 
-        return $users;
+        return [
+            $users,
+            $numUsers
+        ];
     }
 
     /**

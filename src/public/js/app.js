@@ -5351,19 +5351,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var App = function App() {
-  //　ユーザ一覧データを入れる
+  //　一覧表示するユーザデータを入れる
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      userData = _useState2[0],
-      setUserData = _useState2[1];
+      users = _useState2[0],
+      setUsers = _useState2[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/userList",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_page_UserList__WEBPACK_IMPORTED_MODULE_2__.UserList, {
-          setUserData: setUserData,
-          userData: userData
+          setUsers: setUsers,
+          users: users
         })
       })
     })
@@ -5415,33 +5415,33 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UserList = function UserList(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
-      countUserItem = _useState2[0],
-      setCountUserItem = _useState2[1]; // 初期状態で表示するデータを呼び出す
+      numUsers = _useState2[0],
+      setNumUsers = _useState2[1]; // 初期状態で表示するデータを呼び出す
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fetch("/users").then(function (res) {
+    fetch("/users?page=1").then(function (res) {
       return res.json();
     }).then(function (data) {
-      setCountUserItem(data.length);
-      var showPages = data.slice(0, 2);
-      props.setUserData(showPages);
+      var usersData = data[0].data;
+      var numUsersData = data[1];
+      setNumUsers(numUsersData);
+      props.setUsers(usersData);
     });
-  }, []); // ページネーションで表示する分のデータだけ呼び出す
+  }, []); // ページネーションで表示する追加分を呼び出し
 
   var handlePaginate = function handlePaginate(page) {
-    fetch("/users").then(function (res) {
+    fetch("/users?page=".concat(page)).then(function (res) {
       return res.json();
     }).then(function (data) {
-      var startPage = (page - 1) * 2;
-      var showPages = data.slice(startPage, startPage + 2);
-      props.setUserData(showPages);
+      var usersData = data[0].data;
+      props.setUsers(usersData);
     });
   };
 
-  var userItem = props.userData.map(function (item) {
+  var userItem = props.users.map(function (item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "user__item-container",
@@ -5485,7 +5485,7 @@ var UserList = function UserList(props) {
         children: userItem
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_2__.Pagenation, {
-      sum: countUserItem,
+      sum: numUsers,
       per: 2,
       onChange: function onChange(e) {
         return handlePaginate(e.page);

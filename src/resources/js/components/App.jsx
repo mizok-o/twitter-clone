@@ -7,20 +7,15 @@ import { UserList } from "./page/UserList";
 import "../../css/app.css";
 
 export const App = () => {
-    //　ユーザ一覧データを入れる
-    const [userData, setUserData] = useState([]);
+    //　一覧表示するユーザデータを入れる
+    const [users, setUsers] = useState([]);
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route
                     path="/userList"
-                    element={
-                        <UserList
-                            setUserData={setUserData}
-                            userData={userData}
-                        />
-                    }
+                    element={<UserList setUsers={setUsers} users={users} />}
                 />
             </Routes>
         </BrowserRouter>
