@@ -146,6 +146,7 @@ return [
     */
 
     'attributes' => [
+
         'user_name' => 'ユーザーID',
         'screen_name' => '表示名',
         'email' => 'メールアドレス',
