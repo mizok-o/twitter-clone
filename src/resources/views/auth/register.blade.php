@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">{{ __('form.register') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
@@ -13,7 +13,7 @@
 
                             <div class="row mb-3">
                                 <label for="user_name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('ユーザ名') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.user_name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="user_name" type="text"
@@ -29,15 +29,15 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="scree_name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('表示名') }}</label>
+                                <label for="screen_name"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.screen_name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="scree_name" type="text"
-                                        class="form-control @error('scree_name') is-invalid @enderror" name="scree_name"
-                                        value="{{ old('scree_name') }}" required autocomplete="scree_name" autofocus>
+                                    <input id="screen_name" type="text"
+                                        class="form-control @error('screen_name') is-invalid @enderror" name="screen_name"
+                                        value="{{ old('screen_name') }}" required autocomplete="screen_name" autofocus>
 
-                                    @error('scree_name')
+                                    @error('screen_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -46,11 +46,13 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('メール') }}</label>
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.email') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -62,7 +64,7 @@
 
                             <div class="row mb-3">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('パスワード') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -79,7 +81,7 @@
 
                             <div class="row mb-3">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('確認用パスワード') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.re_password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -90,7 +92,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('form.register') }}
                                     </button>
                                 </div>
                             </div>
