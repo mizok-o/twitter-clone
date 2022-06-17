@@ -1,5 +1,53 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 @charset "UTF-8";
+.header__tweetBtn {
+  position: absolute;
+  top: 100%;
+  right: 12px;
+  width: 48px;
+  height: 48px;
+}
+
+.background-twitter {
+  background-color: #00BA7C;
+}
+
+.background-twitter:hover {
+  opacity: 0.7;
+}
+
+.header__tweetBtn--icon {
+  margin: 13px;
+}
+
+@media screen and (max-width: 750px) {
+  .header__tweetBtn {
+    top: 75%;
+    right: 12px;
+    width: 48px;
+    height: 48px;
+  }
+}
+.header__right--container {
+  width: 320px;
+}
+
+.header__text {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-bottom: 2px solid #111;
+  transition: 0.2s ease-in;
+}
+.header__text:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 750px) {
+  .header__right--container {
+    width: 240px;
+  }
+}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

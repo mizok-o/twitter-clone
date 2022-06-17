@@ -65,7 +65,7 @@ export const UserList = (props) => {
     });
 
     return (
-        <div className="container-lg">
+        <div className="mt-4">
             <h1>ユーザ一覧</h1>
             <div className="border">
                 <ul>{userItem}</ul>

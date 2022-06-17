@@ -19,6 +19,11 @@ body {
 header, footer, nav, menu, article, aside, section, details, figcaption, figure{
   display: block;
 }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
 ul, ol {
   list-style: none;
   margin: 0;
@@ -37,6 +42,11 @@ a {
   color: #111111;
   text-decoration: none;
 }
+
+a:hover {
+  color: #111111;
+}
+
 strong {
   font-weight: normal;
 }
@@ -71,7 +81,6 @@ textarea {
   width: 24px;
   height: 24px;
   cursor: pointer;
-  /* color: #111; */
   background-image: url('/images/upload-icon.png');
   background-repeat: no-repeat;
   background-size: cover;

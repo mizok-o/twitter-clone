@@ -1,0 +1,51 @@
+// TweetBtn コンポーネント
+.header__tweetBtn{
+	position: absolute;
+	top: 100%;
+	right: 12px;
+	width: 48px;
+	height: 48px;
+}
+
+.background-twitter {
+	background-color: $twitter-color;
+}
+
+.background-twitter:hover {
+	opacity: .7;
+}
+
+.header__tweetBtn--icon {
+	margin: 13px;
+}
+
+@media screen and (max-width: 750px) {
+	.header__tweetBtn{
+		top: 75%;
+		right: 12px;
+		width: 48px;
+		height: 48px;
+	}
+}
+
+// Header コンポーネント
+.header__right--container {
+	width: 320px;
+}
+
+.header__text {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-bottom: 2px solid #111;
+	transition: .2s ease-in;
+	&:hover {
+		opacity: .5;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.header__right--container{
+		width: 240px;
+	}
+}
