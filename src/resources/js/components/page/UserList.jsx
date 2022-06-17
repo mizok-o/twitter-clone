@@ -11,7 +11,7 @@ export const UserList = (props) => {
 
     // 初期状態で表示するデータを呼び出す
     useEffect(() => {
-        fetch("/users?page=1")
+        fetch("/api/users?page=1")
             .then((res) => res.json())
             .then((data) => {
                 const usersData = data[0].data;
@@ -24,7 +24,7 @@ export const UserList = (props) => {
 
     // ページネーションで表示する追加分を呼び出し
     const handlePaginate = (page) => {
-        fetch(`/users?page=${page}`)
+        fetch(`/api/users?page=${page}`)
             .then((res) => res.json())
             .then((data) => {
                 const usersData = data[0].data;
@@ -40,7 +40,7 @@ export const UserList = (props) => {
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={{
-                                    icon: item.profile_image_id,
+                                    icon: item.profile_image_path,
                                 }}
                             />
                             <div className="ms-2 flex-grow-1">

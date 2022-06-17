@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * usersテーブル一覧を取得
      *
      * @return \Illuminate\Http\Response
      */
-    // usersテーブル一覧を取得
     public function index()
     {
         $users = User::paginate(2);
@@ -37,12 +36,11 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *  usersテーブルからidが一致するレコードを取得
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // usersテーブルからidが同じレコードを取得
     public function show($userId)
     {
         $user = User::find($userId);

@@ -5422,7 +5422,7 @@ var UserList = function UserList(props) {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fetch("/users?page=1").then(function (res) {
+    fetch("/api/users?page=1").then(function (res) {
       return res.json();
     }).then(function (data) {
       var usersData = data[0].data;
@@ -5433,7 +5433,7 @@ var UserList = function UserList(props) {
   }, []); // ページネーションで表示する追加分を呼び出し
 
   var handlePaginate = function handlePaginate(page) {
-    fetch("/users?page=".concat(page)).then(function (res) {
+    fetch("/api/users?page=".concat(page)).then(function (res) {
       return res.json();
     }).then(function (data) {
       var usersData = data[0].data;
@@ -5451,7 +5451,7 @@ var UserList = function UserList(props) {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
               iconData: {
-                icon: item.profile_image_id
+                icon: item.profile_image_path
               }
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
