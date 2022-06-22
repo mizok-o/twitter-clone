@@ -15,7 +15,7 @@ class FollowsTableSeeder extends Seeder
     public function run()
     {
         Follows::truncate();
-        for ($i = 2; $i < 30; $i++) {
+        for ($i = 2; $i < 7; $i++) {
             Follows::create(
                 [
                     'follow_user_id' => $i,

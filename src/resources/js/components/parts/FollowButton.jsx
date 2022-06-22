@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 export const FollowButton = (props) => {
-    const { userId, isFollowing, users, followsData } = props;
+    const { userId, isFollowing, users, authUserfollows } = props;
 
     const [followStatus, setFollowStatus] = useState(false);
 
     useEffect(() => {
-        console.log("isFollowing");
-        console.log(isFollowing);
         setFollowStatus(isFollowing);
-    }, [users, followsData]);
+    }, [users, authUserfollows]);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -26,7 +24,6 @@ export const FollowButton = (props) => {
 
     const followUser = (e) => {
         e.preventDefault();
-
         fetch(`/follow/${userId}`, options).then(() => {
             setFollowStatus(true);
         });
@@ -34,7 +31,6 @@ export const FollowButton = (props) => {
 
     const unfollowUser = (e) => {
         e.preventDefault();
-
         fetch(`/unfollow/${userId}`, options).then(() =>
             setFollowStatus(false)
         );

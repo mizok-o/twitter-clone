@@ -6,95 +6,94 @@ import { Pagenation } from "../parts/Pagenation";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 
-export const UserList = (props) => {
-    //　一覧表示するユーザデータを入れる
-    const [followsData, setFollowsData] = useState([]);
-    const [numUsers, setNumUsers] = useState(0);
+export const UserList = () => {
+    const [authUserfollows, setAuthUserFollows] = useState([]);
     const [users, setUsers] = useState([]);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
-    // api呼び出し用
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrf_token,
-        },
-    };
 
-    // /authuser authユーザーの情報取得
-    const getAuthUser = async () => {
-        const res = await fetch(`/authuser`, options);
+    // /authuser 認証ユーザーの情報取得
+    const getAuthUserData = async () => {
+        const res = await fetch(`/authuser`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrf_token,
+            },
+        });
         if (res.status === 200) {
-            const data = await res.json();
-            return data;
+            const authUserData = await res.json();
+            return authUserData;
         }
     };
 
-    // 今フォローしているユーザ一覧を配列でsetFollowsDataにセット
-    const setAuthFollows = (authFollows, authUserId) => {
-        const authFollowsList = authFollows
+    // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
+    const checkAuthUserFollows = (authUserFollows, authUserId) => {
+        const authUserFollowsList = authUserFollows
             .filter((data) => {
                 return Number(data["follow_user_id"]) === authUserId;
             })
             .map((data) => {
                 return Number(data["followed_user_id"]);
             });
-        console.log(authFollowsList);
-        setFollowsData(authFollowsList);
+        setAuthUserFollows(authUserFollowsList);
     };
 
+    // 認証ユーザーがフォローしているユーザーリストをauthUserfollowsにセットする
     useEffect(() => {
-        // authユーザーのプロフィールとフォロー関係データを呼び出す
-        // data[0]: authのフォロー関係データ、data[1].id: authのユーザーID
-        getAuthUser().then((data) => {
-            // authユーザーがフォローしているユーザーリストをFollowsDataにセットする
-            setAuthFollows(data[0], data[1].id);
+        // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
+        // authUserData[0]: 認証ユーザーのフォロー関係データ、
+        // authUserData[1].id: authのユーザーID
+        getAuthUserData().then((authUserData) => {
+            checkAuthUserFollows(authUserData[0], authUserData[1].id);
         });
     }, []);
 
+    const [numUsers, setNumUsers] = useState(0);
     // １ページ目の情報取得
     const getFirstPage = async () => {
         const res = await fetch("/users?page1");
         if (res.status === 200) {
-            const data = await res.json();
-            return data;
+            const firstPage = await res.json();
+            return firstPage;
         }
     };
-    // フォローされているのかの情報をユーザー一覧に付与する
+    // 認証ユーザーにフォローされているかをユーザー一覧に付与する
     const addIsFollowing = (users) => {
         const usersData = users.map((item) => {
             item.is_following = false;
-            if (followsData.includes(item.id)) {
+            if (authUserfollows.includes(item.id)) {
                 item.is_following = true;
             }
             return item;
         });
+        // console.log(usersData);
         setUsers(usersData);
     };
 
+    //１ページ目に表示するデータにフォロー状態を付与して返す
     useEffect(() => {
         // data[0].data: １ページ目の情報をusersにセットする
         getFirstPage().then((data) => {
+            // ページネーション用に表示する全ユーザー数をセット
             const numUsers = data[1] - 1;
             setNumUsers(numUsers);
 
             const usersData = data[0].data;
             addIsFollowing(usersData);
         });
-    }, [followsData]);
+    }, [authUserfollows]);
 
-    // ページネーションで表示する追加分を呼び出し
-    const handlePaginate = (page) => {
-        fetch(`/users?page=${page}`)
-            .then((res) => res.json())
-            .then((data) => {
-                const usersData = data[0].data;
-                addIsFollowing(usersData);
-            });
+    // ページネーション時に、追加分を呼び出し
+    const handlePaginate = async (page) => {
+        const res = await fetch(`/users?page=${page}`);
+        if (res.status === 200) {
+            const nextPage = await res.json();
+            addIsFollowing(nextPage[0].data);
+        }
     };
 
     const userItem = users.map((item) => {
@@ -120,7 +119,7 @@ export const UserList = (props) => {
                                         userId={item.id}
                                         isFollowing={item.is_following}
                                         users={users}
-                                        followsData={followsData}
+                                        authUserfollows={authUserfollows}
                                     />
                                 </div>
                                 <div className="mt-1">
@@ -136,7 +135,6 @@ export const UserList = (props) => {
 
     return (
         <div className="mt-4">
-            <h1 onClick={() => console.log(users)}>ユーザ一覧</h1>
             <div className="border">
                 <ul>{userItem}</ul>
             </div>

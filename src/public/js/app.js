@@ -7801,43 +7801,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var UserList = function UserList(props) {
-  //　一覧表示するユーザデータを入れる
+var UserList = function UserList() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      followsData = _useState2[0],
-      setFollowsData = _useState2[1];
+      authUserfollows = _useState2[0],
+      setAuthUserFollows = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      numUsers = _useState4[0],
-      setNumUsers = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      users = _useState6[0],
-      setUsers = _useState6[1]; // csrf対策のため、トークンを取得
+      users = _useState4[0],
+      setUsers = _useState4[1]; // csrf対策のため、トークンを取得
 
 
-  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // api呼び出し用
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // /authuser 認証ユーザーの情報取得
 
-  var options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-TOKEN": csrf_token
-    }
-  }; // /authuser authユーザーの情報取得
-
-  var getAuthUser = /*#__PURE__*/function () {
+  var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, data;
+      var res, authUserData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/authuser", options);
+              return fetch("/authuser", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRF-TOKEN": csrf_token
+                }
+              });
 
             case 2:
               res = _context.sent;
@@ -7851,8 +7843,8 @@ var UserList = function UserList(props) {
               return res.json();
 
             case 6:
-              data = _context.sent;
-              return _context.abrupt("return", data);
+              authUserData = _context.sent;
+              return _context.abrupt("return", authUserData);
 
             case 8:
             case "end":
@@ -7862,34 +7854,40 @@ var UserList = function UserList(props) {
       }, _callee);
     }));
 
-    return function getAuthUser() {
+    return function getAuthUserData() {
       return _ref.apply(this, arguments);
     };
-  }(); // 今フォローしているユーザ一覧を配列でsetFollowsDataにセット
+  }(); // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
 
 
-  var setAuthFollows = function setAuthFollows(authFollows, authUserId) {
-    var authFollowsList = authFollows.filter(function (data) {
+  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollows, authUserId) {
+    var authUserFollowsList = authUserFollows.filter(function (data) {
       return Number(data["follow_user_id"]) === authUserId;
     }).map(function (data) {
       return Number(data["followed_user_id"]);
     });
-    console.log(authFollowsList);
-    setFollowsData(authFollowsList);
-  };
+    setAuthUserFollows(authUserFollowsList);
+  }; // 認証ユーザーがフォローしているユーザーリストをauthUserfollowsにセットする
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // authユーザーのプロフィールとフォロー関係データを呼び出す
-    // data[0]: authのフォロー関係データ、data[1].id: authのユーザーID
-    getAuthUser().then(function (data) {
-      // authユーザーがフォローしているユーザーリストをFollowsDataにセットする
-      setAuthFollows(data[0], data[1].id);
+    // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
+    // authUserData[0]: 認証ユーザーのフォロー関係データ、
+    // authUserData[1].id: authのユーザーID
+    getAuthUserData().then(function (authUserData) {
+      checkAuthUserFollows(authUserData[0], authUserData[1].id);
     });
-  }, []); // １ページ目の情報取得
+  }, []);
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      numUsers = _useState6[0],
+      setNumUsers = _useState6[1]; // １ページ目の情報取得
+
 
   var getFirstPage = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var res, data;
+      var res, firstPage;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -7909,8 +7907,8 @@ var UserList = function UserList(props) {
               return res.json();
 
             case 6:
-              data = _context2.sent;
-              return _context2.abrupt("return", data);
+              firstPage = _context2.sent;
+              return _context2.abrupt("return", firstPage);
 
             case 8:
             case "end":
@@ -7923,40 +7921,72 @@ var UserList = function UserList(props) {
     return function getFirstPage() {
       return _ref2.apply(this, arguments);
     };
-  }(); // フォローされているのかの情報をユーザー一覧に付与する
+  }(); // 認証ユーザーにフォローされているかをユーザー一覧に付与する
 
 
   var addIsFollowing = function addIsFollowing(users) {
     var usersData = users.map(function (item) {
       item.is_following = false;
 
-      if (followsData.includes(item.id)) {
+      if (authUserfollows.includes(item.id)) {
         item.is_following = true;
       }
 
       return item;
-    });
+    }); // console.log(usersData);
+
     setUsers(usersData);
-  };
+  }; //１ページ目に表示するデータにフォロー状態を付与して返す
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // data[0].data: １ページ目の情報をusersにセットする
     getFirstPage().then(function (data) {
+      // ページネーション用に表示する全ユーザー数をセット
       var numUsers = data[1] - 1;
       setNumUsers(numUsers);
       var usersData = data[0].data;
       addIsFollowing(usersData);
     });
-  }, [followsData]); // ページネーションで表示する追加分を呼び出し
+  }, [authUserfollows]); // ページネーション時に、追加分を呼び出し
 
-  var handlePaginate = function handlePaginate(page) {
-    fetch("/users?page=".concat(page)).then(function (res) {
-      return res.json();
-    }).then(function (data) {
-      var usersData = data[0].data;
-      addIsFollowing(usersData);
-    });
-  };
+  var handlePaginate = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(page) {
+      var res, nextPage;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return fetch("/users?page=".concat(page));
+
+            case 2:
+              res = _context3.sent;
+
+              if (!(res.status === 200)) {
+                _context3.next = 8;
+                break;
+              }
+
+              _context3.next = 6;
+              return res.json();
+
+            case 6:
+              nextPage = _context3.sent;
+              addIsFollowing(nextPage[0].data);
+
+            case 8:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function handlePaginate(_x) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   var userItem = users.map(function (item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
@@ -7983,7 +8013,7 @@ var UserList = function UserList(props) {
                   userId: item.id,
                   isFollowing: item.is_following,
                   users: users,
-                  followsData: followsData
+                  authUserfollows: authUserfollows
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                 className: "mt-1",
@@ -7999,12 +8029,7 @@ var UserList = function UserList(props) {
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "mt-4",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
-      onClick: function onClick() {
-        return console.log(users);
-      },
-      children: "\u30E6\u30FC\u30B6\u4E00\u89A7"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         children: userItem
@@ -8053,7 +8078,7 @@ var FollowButton = function FollowButton(props) {
   var userId = props.userId,
       isFollowing = props.isFollowing,
       users = props.users,
-      followsData = props.followsData;
+      authUserfollows = props.authUserfollows;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -8061,10 +8086,8 @@ var FollowButton = function FollowButton(props) {
       setFollowStatus = _useState2[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("isFollowing");
-    console.log(isFollowing);
     setFollowStatus(isFollowing);
-  }, [users, followsData]); // csrf対策のため、トークンを取得
+  }, [users, authUserfollows]); // csrf対策のため、トークンを取得
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
   var options = {

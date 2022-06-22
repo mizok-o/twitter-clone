@@ -17,7 +17,7 @@ class User extends Authenticatable
     ];
 
     /**
-     *  'follows', 'follow_user_id', 'followed_user_id'を参照
+     *  認証ユーザーのフォロー、フォロー解除機能'follows', 'follow_user_id', 'followed_user_id'を参照
      */
     public function _follow()
     {
@@ -27,7 +27,7 @@ class User extends Authenticatable
     /**
      * 'follows', 'followed_user_id', 'follow_user_id'を参照
      */
-    public function _unfollow()
+    public function _follower()
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'follow_user_id');
     }
@@ -44,40 +44,26 @@ class User extends Authenticatable
      * フォロー機能
      * _followの定義通りにフォローしたデータを保存する
      *
-     * @param Int $userId
+     * @param int $userId
      *
      * @see followers()
      */
     public function follow(int $userId)
     {
-        // dd($userId, auth()->user()->_follower()->count());
-        return auth()->user()->_follow()->attach($userId);
+        return $this->_follow()->attach($userId);
     }
 
     /**
      * アンフォロー機能
      * _followerの定義通りにフォロー解除したデータを更新する
      *
-     * @param Int $userId
+     * @param int $userId
      *
      * @see followers()
      */
     public function unfollow(int $userId)
     {
-        return auth()->user()->_unfollow()->detach($userId);
+        // dd($this->id);
+        return $this->_follow()->detach($userId);
     }
-
-    /**
-     * フォローされているかどうかを、_follow中間テーブル内のレコードの有無で判断する。
-     *
-     * @param Int $userId
-     *
-     * @see followers()
-     */
-    // public function isFollowing(Int $userId)
-    // {
-    //     // dd($userId);
-    //     dd("test", $this->_follow());
-    //     return $this->_follow()->where('followed_user_id', $userId);
-    // }
 }

@@ -30,10 +30,10 @@ class UserController extends Controller
     /**
      *  usersテーブルからidが一致するレコードを取得
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function show(User $userId)
+    public function show(int $userId)
     {
         $user = User::find($userId);
         return $user;
@@ -42,7 +42,6 @@ class UserController extends Controller
     /**
      *  usersテーブルからidが一致するレコードを取得
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function getAuthuserInfo()
@@ -62,13 +61,12 @@ class UserController extends Controller
      * $authUser: フォローする側のID
      * $userId: フォローされる側のID
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function follow(User $userId)
+    public function follow(int $userId)
     {
-        $followUser =  $userId->follow($userId->id);
-        // dd(User::find($userId), User::find(3), "---", $userId);
+        $followUser = auth()->user()->follow($userId);
         return $followUser;
     }
 
@@ -78,12 +76,12 @@ class UserController extends Controller
      * $authUser: フォロー解除する側のID
      * $userId: フォロー解除される側のID
      *
-     * @param  int  $id
+     * @param  int  $userId
      * @return \Illuminate\Http\Response
      */
-    public function unfollow(User $userId)
+    public function unfollow(int $userId)
     {
-        $unfollowUser = $userId->unfollow($userId->id);
+        $unfollowUser = auth()->user()->unfollow($userId);
         return $unfollowUser;
     }
 
