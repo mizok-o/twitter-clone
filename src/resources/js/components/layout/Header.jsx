@@ -1,8 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export const Header = () => {
+    const navigate = useNavigate();
+    const csrf_token = document.querySelector(
+        'meta[name="csrf-token"]'
+    ).content;
+    const logout = () => {
+        fetch("/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrf_token,
+            },
+        }).then(() => {
+            navigate("/login");
+        });
+    };
+
     // ログイン状態によってトグル内表示を変更する
     const dropdownItem = () => {
         // if (!isLogined) {
@@ -22,7 +38,7 @@ export const Header = () => {
                 <Dropdown.Item to="/userlist" value="1">
                     プロフィール
                 </Dropdown.Item>
-                <Dropdown.Item to="/logout" value="2">
+                <Dropdown.Item onClick={() => logout()} value="2">
                     ログアウト
                 </Dropdown.Item>
             </>

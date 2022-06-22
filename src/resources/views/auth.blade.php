@@ -74,7 +74,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                                                                            document.getElementById('logout-form').submit();">
                                         {{ __('ログアウト') }}
                                     </a>
 
@@ -90,7 +90,7 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            {{-- <div id="example" class="container-sm position-relative"></div> --}}
         </main>
     </div>
 </body>
