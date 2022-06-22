@@ -22,7 +22,7 @@ export const Header = () => {
                 <Dropdown.Item to="/userlist" value="1">
                     プロフィール
                 </Dropdown.Item>
-                <Dropdown.Item to="/login" value="2">
+                <Dropdown.Item to="/logout" value="2">
                     ログアウト
                 </Dropdown.Item>
             </>
