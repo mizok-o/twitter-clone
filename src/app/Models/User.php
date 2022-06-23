@@ -19,7 +19,7 @@ class User extends Authenticatable
     /**
      *  フォロー、フォロー解除するときに、'follows', 'follow_user_id', 'followed_user_id'を参照
      */
-    public function _follow()
+    public function follows()
     {
         return $this->belongsToMany(User::class, 'follows', 'follow_user_id', 'followed_user_id');
     }
@@ -27,7 +27,7 @@ class User extends Authenticatable
     /**
      * フォロー、フォロー解除されるときに、'follows', 'followed_user_id', 'follow_user_id'を参照
      */
-    public function _follower()
+    public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'follow_user_id');
     }
@@ -52,7 +52,7 @@ class User extends Authenticatable
      */
     public function follow(int $userId)
     {
-        return $this->_follow()->attach($userId);
+        return $this->follows()->attach($userId);
     }
 
     /**
@@ -65,6 +65,6 @@ class User extends Authenticatable
     public function unfollow(int $userId)
     {
         // dd($this->id);
-        return $this->_follow()->detach($userId);
+        return $this->follows()->detach($userId);
     }
 }
