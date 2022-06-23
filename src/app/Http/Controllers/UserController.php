@@ -55,6 +55,32 @@ class UserController extends Controller
     }
 
     /**
+     *  フォロー数カウント
+     *
+     * @param  int  $userId
+     * @return int
+     */
+    public function countFollows(int $userId)
+    {
+        // $followsNum = Follows::all()->where('follow_user_id', $userId)->count();
+        return Follows::all()->where('follow_user_id', $userId)->count();
+        //
+    }
+
+    /**
+     *  フォロワー数カウント
+     *
+     * @param  int  $userId
+     * @return int
+     */
+    public function countFollowers(int $userId)
+    {
+        // $followersNum = Follows::all()->where('follower_user_id', $userId)->count();
+        return Follows::all()->where('follower_user_id', $userId)->count();
+        //
+    }
+
+    /**
      *  フォロー機能
      *
      * @param  int  $userId

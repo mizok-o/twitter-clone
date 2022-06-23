@@ -96,7 +96,7 @@ export const UserList = () => {
         return (
             <li key={item.id}>
                 <div className="user__item-container">
-                    <Link to={`/users/${item.id}`}>
+                    <Link to={`/profile/${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={{
@@ -107,8 +107,8 @@ export const UserList = () => {
                                 <div className="d-flex justify-content-between">
                                     <UserName
                                         nameData={{
-                                            name: item.screen_name,
-                                            id: item.user_name,
+                                            screen_name: item.screen_name,
+                                            user_name: item.user_name,
                                         }}
                                     />
                                     <FollowButton

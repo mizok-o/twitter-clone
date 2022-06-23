@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { UserList } from "./page/UserList";
+import { UserProfile } from "./page/UserProfile";
+import { Header } from "./layout/Header";
 
 import "../../css/app.css";
-import { Header } from "./layout/Header";
-import { TweetBtn } from "./layout/TweetBtn";
 
 export const App = () => {
+    //　一覧表示するユーザデータを入れる
+    const [users, setUsers] = useState([]);
+
     return (
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/userList" element={<UserList />} />
+                <Route
+                    path="/userList"
+                    element={<UserList setUsers={setUsers} users={users} />}
+                />
+                <Route path={`/profile/:id`} element={<UserProfile />} />
             </Routes>
-            <TweetBtn />
         </BrowserRouter>
     );
 };
