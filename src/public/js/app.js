@@ -7897,7 +7897,7 @@ var UserList = function UserList() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
     getAuthUserData().then(function (authUserData) {
-      checkAuthUserFollows(authUserData[0], authUserData[1].id);
+      checkAuthUserFollows(authUserData.follows, authUserData.authuser.id);
     });
   }, []);
 

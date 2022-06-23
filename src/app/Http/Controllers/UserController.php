@@ -20,13 +20,6 @@ class UserController extends Controller
         $users = $user->getAllUsers(auth()->user()->id);
 
         $numUsers = User::get()->count();
-        // dd($unfollowUser, json_encode($unfollowUser));
-
-        // return [
-        //     $users,
-        //     $numUsers
-        // ];
-        // dd(gettype($users));
         return [
             "users" => $users,
             "numUsers" => $numUsers
@@ -56,8 +49,8 @@ class UserController extends Controller
         $authuser = auth()->user();
 
         return [
-            $follows,
-            $authuser
+            "follows" => $follows,
+            "authuser" => $authuser
         ];
     }
 

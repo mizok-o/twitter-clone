@@ -17,7 +17,7 @@ export const UserList = () => {
 
     // /authuser 認証ユーザーの情報取得
     const getAuthUserData = async () => {
-        const res = await fetch(`/authuser`, {
+        const res = await fetch("/authuser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,10 @@ export const UserList = () => {
     useEffect(() => {
         // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
         getAuthUserData().then((authUserData) => {
-            checkAuthUserFollows(authUserData[0], authUserData[1].id);
+            checkAuthUserFollows(
+                authUserData.follows,
+                authUserData.authuser.id
+            );
         });
     }, []);
 
