@@ -17,7 +17,7 @@ class User extends Authenticatable
     ];
 
     /**
-     *  認証ユーザーのフォロー、フォロー解除機能'follows', 'follow_user_id', 'followed_user_id'を参照
+     *  フォロー、フォロー解除するときに、'follows', 'follow_user_id', 'followed_user_id'を参照
      */
     public function _follow()
     {
@@ -25,7 +25,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 'follows', 'followed_user_id', 'follow_user_id'を参照
+     * フォロー、フォロー解除されるときに、'follows', 'followed_user_id', 'follow_user_id'を参照
      */
     public function _follower()
     {
@@ -33,16 +33,18 @@ class User extends Authenticatable
     }
 
     /**
-     *  'follows', 'follow_user_id', 'followed_user_id'を参照
+     *  認証ユーザー以外のユーザーを呼び出し
+     *
+     * @param int $authUserId
+     *
      */
-    public function getAllUsers(int $userId)
+    public function getAllUsers(int $authUserId)
     {
-        return $this->where('id', '<>', $userId)->paginate(2);
+        return $this->where('id', '<>', $authUserId)->paginate(2);
     }
 
     /**
      * フォロー機能
-     * _followの定義通りにフォローしたデータを保存する
      *
      * @param int $userId
      *
@@ -54,8 +56,7 @@ class User extends Authenticatable
     }
 
     /**
-     * アンフォロー機能
-     * _followerの定義通りにフォロー解除したデータを更新する
+     * フォロー解除機能
      *
      * @param int $userId
      *

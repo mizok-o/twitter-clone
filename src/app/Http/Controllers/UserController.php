@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
-     * usersテーブル一覧を取得
+     * 認証ユーザーを除いたusersテーブル一覧を取得
      *
-     * @return \Illuminate\Http\Response
+     * @return array<object, int>
      */
     public function index(User $user)
     {
@@ -30,7 +30,7 @@ class UserController extends Controller
      *  usersテーブルからidが一致するレコードを取得
      *
      * @param  int  $userId
-     * @return \Illuminate\Http\Response
+     * @return object
      */
     public function show(int $userId)
     {
@@ -39,9 +39,9 @@ class UserController extends Controller
     }
 
     /**
-     *  usersテーブルからidが一致するレコードを取得
+     *  Followsテーブル一覧と認証ユーザー情報を取得
      *
-     * @return \Illuminate\Http\Response
+     * @return array<object, object>
      */
     public function getAuthUserInfo()
     {
@@ -57,11 +57,8 @@ class UserController extends Controller
     /**
      *  フォロー機能
      *
-     * $authUser: フォローする側のID
-     * $userId: フォローされる側のID
-     *
      * @param  int  $userId
-     * @return \Illuminate\Http\Response
+     * @return function
      */
     public function follow(int $userId)
     {
@@ -72,11 +69,8 @@ class UserController extends Controller
     /**
      *  フォロー解除機能
      *
-     * $authUser: フォロー解除する側のID
-     * $userId: フォロー解除される側のID
-     *
      * @param  int  $userId
-     * @return \Illuminate\Http\Response
+     * @return function
      */
     public function unfollow(int $userId)
     {
