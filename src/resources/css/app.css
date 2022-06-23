@@ -19,6 +19,11 @@ body {
 header, footer, nav, menu, article, aside, section, details, figcaption, figure{
   display: block;
 }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
 ul, ol {
   list-style: none;
   margin: 0;
@@ -37,6 +42,11 @@ a {
   color: #111111;
   text-decoration: none;
 }
+
+a:hover {
+  color: #111111;
+}
+
 strong {
   font-weight: normal;
 }
@@ -71,8 +81,56 @@ textarea {
   width: 24px;
   height: 24px;
   cursor: pointer;
-  /* color: #111; */
   background-image: url('/images/upload-icon.png');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.header__tweetBtn {
+  position: fixed;
+  bottom: 120px;
+  right: 120px;
+  width: 72px;
+  height: 72px;
+}
+
+.background-twitter {
+  background-color: #00BA7C;
+}
+
+.background-twitter:hover {
+  opacity: 0.7;
+}
+
+.header__tweetBtn--icon {
+  margin: 25px;
+}
+
+@media screen and (max-width: 750px) {
+  .header__tweetBtn {
+    top: 75%;
+    right: 12px;
+    width: 48px;
+    height: 48px;
+  }
+}
+.header__right--container {
+  width: 320px;
+}
+
+.header__text {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-bottom: 2px solid #111;
+  transition: 0.2s ease-in;
+}
+.header__text:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 750px) {
+  .header__right--container {
+    width: 240px;
+  }
 }

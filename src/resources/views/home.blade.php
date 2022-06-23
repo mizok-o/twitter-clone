@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div id="example"></div>
+    <div id="example" class="container-sm position-relative py-4"></div>
 </body>
 
 </html>
