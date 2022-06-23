@@ -10,6 +10,7 @@ return [
     */
 	'register' => '新規登録',
 	'login' => 'ログイン',
+	'logout' => 'ログアウト',
 	'reset' => 'パスワードの再設定',
 
 	'user_name' => 'ユーザーID',

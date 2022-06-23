@@ -43,7 +43,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAuthuserInfo()
+    public function getAuthUserInfo()
     {
         $follows = Follows::all();
         $authuser = auth()->user();
