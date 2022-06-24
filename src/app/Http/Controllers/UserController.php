@@ -62,9 +62,10 @@ class UserController extends Controller
      */
     public function countFollows(int $userId)
     {
-        // $followsNum = Follows::all()->where('follow_user_id', $userId)->count();
+<<<<<<< HEAD
+=======
+>>>>>>> 83a80c4 (三宅さんの指摘点再修正)
         return Follows::all()->where('follow_user_id', $userId)->count();
-        //
     }
 
     /**
@@ -75,33 +76,30 @@ class UserController extends Controller
      */
     public function countFollowers(int $userId)
     {
-        // $followersNum = Follows::all()->where('follower_user_id', $userId)->count();
+<<<<<<< HEAD
+=======
+>>>>>>> 83a80c4 (三宅さんの指摘点再修正)
         return Follows::all()->where('follower_user_id', $userId)->count();
-        //
     }
 
     /**
      *  フォロー機能
      *
      * @param  int  $userId
-     * @return function
      */
     public function follow(int $userId)
     {
-        $followUser = auth()->user()->follow($userId);
-        return $followUser;
+        auth()->user()->follow($userId);
     }
 
     /**
      *  フォロー解除機能
      *
      * @param  int  $userId
-     * @return function
      */
     public function unfollow(int $userId)
     {
-        $unfollowUser = auth()->user()->unfollow($userId);
-        return $unfollowUser;
+        auth()->user()->unfollow($userId);
     }
 
     /**
