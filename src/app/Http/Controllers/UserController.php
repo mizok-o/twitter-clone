@@ -55,27 +55,47 @@ class UserController extends Controller
     }
 
     /**
+     *  フォロー数カウント
+     *
+     * @param  int  $userId
+     * @return int
+     */
+    public function countFollows(int $userId)
+    {
+        return Follows::all()->where('follow_user_id', $userId)->count();
+        //
+    }
+
+    /**
+     *  フォロワー数カウント
+     *
+     * @param  int  $userId
+     * @return int
+     */
+    public function countFollowers(int $userId)
+    {
+        return Follows::all()->where('follower_user_id', $userId)->count();
+        //
+    }
+
+    /**
      *  フォロー機能
      *
      * @param  int  $userId
-     * @return function
      */
     public function follow(int $userId)
     {
-        $followUser = auth()->user()->follow($userId);
-        return $followUser;
+        auth()->user()->follow($userId);
     }
 
     /**
      *  フォロー解除機能
      *
      * @param  int  $userId
-     * @return function
      */
     public function unfollow(int $userId)
     {
-        $unfollowUser = auth()->user()->unfollow($userId);
-        return $unfollowUser;
+        auth()->user()->unfollow($userId);
     }
 
     /**
