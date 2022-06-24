@@ -46,11 +46,11 @@ class UserController extends Controller
     public function getAuthUserInfo()
     {
         $follows = Follows::all();
-        $authuser = auth()->user();
+        $profile = auth()->user();
 
         return [
             "follows" => $follows,
-            "profile" => $authuser
+            "profile" => $profile
         ];
     }
 
