@@ -1,19 +1,27 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 export const FollowNumbers = (props) => {
-    // id: 表示ユーザー authUserId: ログインしているユーザー
+    // 表示したいユーザーのID
     const { userId } = props;
 
-    const [follows, setFollows] = useState(0);
-    const [followers, setFollowers] = useState(0);
+    const [followsNum, setFollowsNum] = useState(0);
+    const [followersNum, setFollowersNum] = useState(0);
 
     //フォロー数を取得
     const getFollowsNumber = async () => {
         const res = await fetch(`/countFollows/${userId}`);
         if (res.status === 200) {
-            const followsNum = await res.json();
-            console.log(followsNum);
-            setFollows(followsNum);
+            const follows = await res.json();
+            setFollowsNum(follows);
+        }
+    };
+
+    // フォロワー数を取得
+    const getFollowersNumber = async () => {
+        const res = await fetch(`/countFollowers/${userId}`);
+        if (res.status === 200) {
+            const followers = await res.json();
+            setFollowersNum(followers);
         }
     };
 
@@ -22,28 +30,18 @@ export const FollowNumbers = (props) => {
         getFollowersNumber();
     }, []);
 
-    // フォロワー数を取得
-    const getFollowersNumber = async () => {
-        const res = await fetch(`/countFollowers/${userId}`);
-        if (res.status === 200) {
-            const followersNum = await res.json();
-            console.log(followersNum);
-            setFollowers(followersNum);
-        }
-    };
-
     return (
         <div className="mt-1">
             <div className="d-flex">
                 <div>
                     <button className="d-flex" type="button">
-                        <span className="fw-bold">{follows}</span>
+                        <span className="fw-bold">{followsNum}</span>
                         <p className="ms-1">フォロー</p>
                     </button>
                 </div>
                 <div>
                     <button className="d-flex ms-3" type="button">
-                        <span className="fw-bold">{followers}</span>
+                        <span className="fw-bold">{followersNum}</span>
                         <p className="ms-1">フォロワー</p>
                     </button>
                 </div>

@@ -25,8 +25,8 @@ export const UserList = () => {
             },
         });
         if (res.status === 200) {
-            const authUserData = await res.json();
-            return authUserData;
+            const authUser = await res.json();
+            return authUser;
         }
     };
 
@@ -45,11 +45,8 @@ export const UserList = () => {
     // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
         // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
-        getAuthUserData().then((authUserData) => {
-            checkAuthUserFollows(
-                authUserData.follows,
-                authUserData.authuser.id
-            );
+        getAuthUserData().then((authUser) => {
+            checkAuthUserFollows(authUser.follows, authUser.profile.id);
         });
     }, []);
 

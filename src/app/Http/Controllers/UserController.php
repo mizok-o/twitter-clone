@@ -50,7 +50,7 @@ class UserController extends Controller
 
         return [
             "follows" => $follows,
-            "authuser" => $authuser
+            "profile" => $authuser
         ];
     }
 
