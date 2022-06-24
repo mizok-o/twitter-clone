@@ -8306,8 +8306,7 @@ var UserProfile = function UserProfile() {
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_FollowNumbers__WEBPACK_IMPORTED_MODULE_2__.FollowNumbers, {
-          userId: id,
-          isAuth: isAuth
+          userId: id
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -8421,73 +8420,118 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 var FollowNumbers = function FollowNumbers(props) {
   // id: 表示ユーザー authUserId: ログインしているユーザー
-  var userId = props.userId,
-      isAuth = props.isAuth;
+  var userId = props.userId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      follows = _useState.follows,
-      setFollows = _useState.setFollows;
+      _useState2 = _slicedToArray(_useState, 2),
+      follows = _useState2[0],
+      setFollows = _useState2[1];
 
-  var _useState2 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      followers = _useState2.followers,
-      setFollowers = _useState2.setFollowers; //フォロー数を取得
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      followers = _useState4[0],
+      setFollowers = _useState4[1]; //フォロー数を取得
 
 
-  var getFollowsNumber = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var res, followsNum;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch("/countFollows/".concat(userId));
+  var getFollowsNumber = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var res, followsNum;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("/countFollows/".concat(userId));
 
-          case 2:
-            res = _context.sent;
+            case 2:
+              res = _context.sent;
 
-            if (!(res.status === 200)) {
-              _context.next = 9;
-              break;
-            }
+              if (!(res.status === 200)) {
+                _context.next = 9;
+                break;
+              }
 
-            _context.next = 6;
-            return res.json();
+              _context.next = 6;
+              return res.json();
 
-          case 6:
-            followsNum = _context.sent;
-            console.log(followsNum);
-            setFollows(followsNum);
+            case 6:
+              followsNum = _context.sent;
+              console.log(followsNum);
+              setFollows(followsNum);
 
-          case 9:
-          case "end":
-            return _context.stop();
+            case 9:
+            case "end":
+              return _context.stop();
+          }
         }
-      }
-    }, _callee);
-  })));
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(userId);
-    getFollowsNumber();
+      }, _callee);
+    }));
 
-    var cleanup = function cleanup() {
-      console.log("cleanup!");
+    return function getFollowsNumber() {
+      return _ref.apply(this, arguments);
     };
+  }();
 
-    return cleanup;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getFollowsNumber();
+    getFollowersNumber();
   }, []); // フォロワー数を取得
-  // const getFollowersNumber = async () => {
-  //     const res = await fetch(`/countFollowers/${userId}`);
-  //     if (res.status === 200) {
-  //         const followersNum = await res.json();
-  //         console.log(followersNum);
-  //         return followersNum;
-  //     }
-  // };
+
+  var getFollowersNumber = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var res, followersNum;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return fetch("/countFollowers/".concat(userId));
+
+            case 2:
+              res = _context2.sent;
+
+              if (!(res.status === 200)) {
+                _context2.next = 9;
+                break;
+              }
+
+              _context2.next = 6;
+              return res.json();
+
+            case 6:
+              followersNum = _context2.sent;
+              console.log(followersNum);
+              setFollowers(followersNum);
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getFollowersNumber() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "mt-1",

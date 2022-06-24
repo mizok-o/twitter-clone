@@ -147,7 +147,7 @@ export const UserProfile = () => {
                             <p>{user.profile}</p>
                         </div>
                     </div>
-                    <FollowNumbers userId={id} isAuth={isAuth} />
+                    <FollowNumbers userId={id} />
                 </div>
             </div>
             <div className="border">
