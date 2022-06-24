@@ -1,12 +1,13 @@
 import React from "react";
 
 export const UserName = (props) => {
+    const { isUserDetail, nameData } = props;
     return (
-        <div className={`${props.isUserDetail ? "mt-2" : ""}`}>
-            <p className={`lh-sm fw-bold ${props.isUserDetail ? "fs-4" : ""}`}>
-                {props.nameData.name}
+        <div className={`${isUserDetail ? "mt-2" : ""}`}>
+            <p className={`lh-sm fw-bold ${isUserDetail ? "fs-4" : ""}`}>
+                {nameData.screen_name}
             </p>
-            <span className="opacity-50">＠{props.nameData.id}</span>
+            <span className="opacity-50">＠{nameData.user_name}</span>
         </div>
     );
 };

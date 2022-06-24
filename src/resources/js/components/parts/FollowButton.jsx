@@ -6,10 +6,8 @@ export const FollowButton = (props) => {
     const [followStatus, setFollowStatus] = useState(false);
 
     useEffect(() => {
-        // console.log("isFollowing");
-        // console.log(isFollowing);
         setFollowStatus(isFollowing);
-    }, [users, authUserfollows]);
+    }, [users, isFollowing]);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -39,18 +37,14 @@ export const FollowButton = (props) => {
     };
 
     return (
-        <>
-            <button
-                type="button"
-                className={`btn ${
-                    followStatus ? "btn-dark" : "btn-outline-dark"
-                }`}
-                onClick={
-                    followStatus ? (e) => unfollowUser(e) : (e) => followUser(e)
-                }
-            >
-                {followStatus ? "フォロー解除" : "フォロー"}
-            </button>
-        </>
+        <button
+            type="button"
+            className={`btn ${followStatus ? "btn-dark" : "btn-outline-dark"}`}
+            onClick={
+                followStatus ? (e) => unfollowUser(e) : (e) => followUser(e)
+            }
+        >
+            {followStatus ? "フォロー解除" : "フォロー"}
+        </button>
     );
 };

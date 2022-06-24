@@ -63,7 +63,6 @@ class UserController extends Controller
     public function countFollows(int $userId)
     {
         return Follows::all()->where('follow_user_id', $userId)->count();
-        //
     }
 
     /**
@@ -75,7 +74,6 @@ class UserController extends Controller
     public function countFollowers(int $userId)
     {
         return Follows::all()->where('follower_user_id', $userId)->count();
-        //
     }
 
     /**

@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{userId}', [UserController::class, 'show']);
+    Route::get('/user/{userId}', [UserController::class, 'show']);
 
     Route::post('/follow/{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow/{userId}', [UserController::class, 'unfollow']);
