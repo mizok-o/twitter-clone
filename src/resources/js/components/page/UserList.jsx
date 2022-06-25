@@ -25,28 +25,25 @@ export const UserList = () => {
             },
         });
         if (res.status === 200) {
-            const authUser = await res.json();
-            return authUser;
+            const authUserData = await res.json();
+            return authUserData;
         }
     };
 
-    // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
-    const checkAuthUserFollows = (authUserFollows, authUserId) => {
-        const authUserFollowsList = authUserFollows
-            .filter((data) => {
-                return Number(data["follow_user_id"]) === authUserId;
-            })
-            .map((data) => {
-                return Number(data["followed_user_id"]);
-            });
+    // 認証ユーザーがフォローしているリストを配列でsetAuthUserFollowsにセット
+    const checkAuthUserFollows = (authUserFollows) => {
+        const authUserFollowsList = authUserFollows.map((data) =>
+            Number(data.followed_user_id)
+        );
+
         setAuthUserFollows(authUserFollowsList);
     };
 
     // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
         // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
-        getAuthUserData().then((authUser) => {
-            checkAuthUserFollows(authUser.follows, authUser.profile.id);
+        getAuthUserData().then((authUserData) => {
+            checkAuthUserFollows(authUserData.follows);
         });
     }, []);
 
@@ -93,7 +90,7 @@ export const UserList = () => {
         return (
             <li key={item.id}>
                 <div className="user__item-container">
-                    <Link to={`/profile/${item.id}`}>
+                    <Link to={`/profile-${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={{

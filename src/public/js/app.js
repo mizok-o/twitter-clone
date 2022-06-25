@@ -7819,7 +7819,7 @@ var UserList = function UserList() {
 
   var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, authUser;
+      var res, authUserData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -7845,8 +7845,8 @@ var UserList = function UserList() {
               return res.json();
 
             case 6:
-              authUser = _context.sent;
-              return _context.abrupt("return", authUser);
+              authUserData = _context.sent;
+              return _context.abrupt("return", authUserData);
 
             case 8:
             case "end":
@@ -7859,14 +7859,12 @@ var UserList = function UserList() {
     return function getAuthUserData() {
       return _ref.apply(this, arguments);
     };
-  }(); // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
+  }(); // 認証ユーザーがフォローしているリストを配列でsetAuthUserFollowsにセット
 
 
-  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollows, authUserId) {
-    var authUserFollowsList = authUserFollows.filter(function (data) {
-      return Number(data["follow_user_id"]) === authUserId;
-    }).map(function (data) {
-      return Number(data["followed_user_id"]);
+  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollows) {
+    var authUserFollowsList = authUserFollows.map(function (data) {
+      return Number(data.followed_user_id);
     });
     setAuthUserFollows(authUserFollowsList);
   }; // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
@@ -7874,8 +7872,8 @@ var UserList = function UserList() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
-    getAuthUserData().then(function (authUser) {
-      checkAuthUserFollows(authUser.follows, authUser.profile.id);
+    getAuthUserData().then(function (authUserData) {
+      checkAuthUserFollows(authUserData.follows);
     });
   }, []);
 
@@ -7985,7 +7983,7 @@ var UserList = function UserList() {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "user__item-container",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-          to: "/profile/".concat(item.id),
+          to: "/profile-".concat(item.id),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
@@ -8115,7 +8113,7 @@ var UserProfile = function UserProfile() {
 
   var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, authUser;
+      var res, authUserData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8141,8 +8139,8 @@ var UserProfile = function UserProfile() {
               return res.json();
 
             case 6:
-              authUser = _context.sent;
-              return _context.abrupt("return", authUser);
+              authUserData = _context.sent;
+              return _context.abrupt("return", authUserData);
 
             case 8:
             case "end":
@@ -8158,23 +8156,21 @@ var UserProfile = function UserProfile() {
   }(); // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
 
 
-  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollowsList, authUserId) {
-    var authUserFollows = authUserFollowsList.filter(function (data) {
-      return Number(data["follow_user_id"]) === authUserId;
-    }).map(function (data) {
-      return Number(data["followed_user_id"]);
+  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollows) {
+    var authUserFollowsList = authUserFollows.map(function (data) {
+      return Number(data.followed_user_id);
     });
-    setAuthUserFollows(authUserFollows);
-  };
+    setAuthUserFollows(authUserFollowsList);
+  }; // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getAuthUserData().then(function (authUser) {
-      // 認証ユーザーか確認
-      setIsAuth(authUser.profile.id === Number(id)); // 認証ユーザーがフォローしているか確認
-
-      checkAuthUserFollows(authUser.follows, authUser.profile.id);
+    // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
+    getAuthUserData().then(function (authUserData) {
+      setIsAuth(authUserData.userId === Number(id));
+      checkAuthUserFollows(authUserData.follows);
     });
-  }, []); // 表示するユーザープロフィールをセット
+  }, []);
 
   var getUserProfile = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -8184,7 +8180,7 @@ var UserProfile = function UserProfile() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/user/".concat(id));
+              return fetch("/user-".concat(id));
 
             case 2:
               res = _context2.sent;
@@ -8217,7 +8213,7 @@ var UserProfile = function UserProfile() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getUserProfile();
-  }, [authUserFollows]); // 認証ユーザーとそうでない場合でボタンを切り替え
+  }, [authUserFollows]);
 
   var profileButton = function profileButton() {
     if (isAuth) {
@@ -8305,7 +8301,8 @@ var UserProfile = function UserProfile() {
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_FollowNumbers__WEBPACK_IMPORTED_MODULE_2__.FollowNumbers, {
-          userId: id
+          userId: id,
+          isAuth: isAuth
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -8372,14 +8369,14 @@ var FollowButton = function FollowButton(props) {
 
   var followUser = function followUser(e) {
     e.preventDefault();
-    fetch("/follow/".concat(userId), options).then(function () {
+    fetch("/follow-".concat(userId), options).then(function () {
       setFollowStatus(true);
     });
   };
 
   var unfollowUser = function unfollowUser(e) {
     e.preventDefault();
-    fetch("/unfollow/".concat(userId), options).then(function () {
+    fetch("/unfollow-".concat(userId), options).then(function () {
       return setFollowStatus(false);
     });
   };
@@ -8457,7 +8454,7 @@ var FollowNumbers = function FollowNumbers(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/countFollows/".concat(userId));
+              return fetch("/countFollows-".concat(userId));
 
             case 2:
               res = _context.sent;
@@ -8496,7 +8493,7 @@ var FollowNumbers = function FollowNumbers(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/countFollowers/".concat(userId));
+              return fetch("/countFollowers-".concat(userId));
 
             case 2:
               res = _context2.sent;

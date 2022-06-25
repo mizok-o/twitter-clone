@@ -39,18 +39,17 @@ class UserController extends Controller
     }
 
     /**
-     *  Followsテーブル一覧と認証ユーザー情報を取得
+     *  認証ユーザー情報とフォローしている人リストを取得
      *
-     * @return array<object, object>
+     * @return array<int, object>
      */
     public function getAuthUserInfo()
     {
-        $follows = Follows::all();
-        $profile = auth()->user();
-
+        $user = auth()->user();
+        $follows = Follows::where('follow_user_id', $user->id)->get('followed_user_id');
         return [
-            "follows" => $follows,
-            "profile" => $profile
+            "userId" => $user->id,
+            "follows" => $follows
         ];
     }
 
@@ -62,7 +61,7 @@ class UserController extends Controller
      */
     public function countFollows(int $userId)
     {
-        return Follows::all()->where('follow_user_id', $userId)->count();
+        return Follows::where('follow_user_id', $userId)->count();
     }
 
     /**
@@ -73,7 +72,7 @@ class UserController extends Controller
      */
     public function countFollowers(int $userId)
     {
-        return Follows::all()->where('followed_user_id', $userId)->count();
+        return Follows::where('followed_user_id', $userId)->count();
     }
 
     /**

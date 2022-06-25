@@ -19,7 +19,6 @@ export const UserProfile = () => {
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
-
     // /authuser 認証ユーザーの情報取得
     const getAuthUserData = async () => {
         const res = await fetch("/authuser", {
@@ -30,35 +29,31 @@ export const UserProfile = () => {
             },
         });
         if (res.status === 200) {
-            const authUser = await res.json();
-            return authUser;
+            const authUserData = await res.json();
+            return authUserData;
         }
     };
 
     // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
-    const checkAuthUserFollows = (authUserFollowsList, authUserId) => {
-        const authUserFollows = authUserFollowsList
-            .filter((data) => {
-                return Number(data["follow_user_id"]) === authUserId;
-            })
-            .map((data) => {
-                return Number(data["followed_user_id"]);
-            });
-        setAuthUserFollows(authUserFollows);
+    const checkAuthUserFollows = (authUserFollows) => {
+        const authUserFollowsList = authUserFollows.map((data) =>
+            Number(data.followed_user_id)
+        );
+
+        setAuthUserFollows(authUserFollowsList);
     };
 
+    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        getAuthUserData().then((authUser) => {
-            // 認証ユーザーか確認
-            setIsAuth(authUser.profile.id === Number(id));
-            // 認証ユーザーがフォローしているか確認
-            checkAuthUserFollows(authUser.follows, authUser.profile.id);
+        // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
+        getAuthUserData().then((authUserData) => {
+            setIsAuth(authUserData.userId === Number(id));
+            checkAuthUserFollows(authUserData.follows);
         });
     }, []);
 
-    // 表示するユーザープロフィールをセット
     const getUserProfile = async () => {
-        const res = await fetch(`/user/${id}`);
+        const res = await fetch(`/user-${id}`);
         if (res.status === 200) {
             const userProfile = await res.json();
             setIsFollowing(authUserFollows.includes(Number(id)));
@@ -70,7 +65,6 @@ export const UserProfile = () => {
         getUserProfile();
     }, [authUserFollows]);
 
-    // 認証ユーザーとそうでない場合でボタンを切り替え
     const profileButton = () => {
         if (isAuth) {
             return (
@@ -146,11 +140,9 @@ export const UserProfile = () => {
                             <p>{user.profile}</p>
                         </div>
                     </div>
-                    <FollowNumbers userId={id} />
+                    <FollowNumbers userId={id} isAuth={isAuth} />
                 </div>
             </div>
-
-            {/* ツイート一覧は余裕があれば追加予定 */}
             <div className="border">
                 <p>ツイート一覧</p>
             </div>

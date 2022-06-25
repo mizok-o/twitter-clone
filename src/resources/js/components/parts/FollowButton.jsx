@@ -24,14 +24,14 @@ export const FollowButton = (props) => {
 
     const followUser = (e) => {
         e.preventDefault();
-        fetch(`/follow/${userId}`, options).then(() => {
+        fetch(`/follow-${userId}`, options).then(() => {
             setFollowStatus(true);
         });
     };
 
     const unfollowUser = (e) => {
         e.preventDefault();
-        fetch(`/unfollow/${userId}`, options).then(() =>
+        fetch(`/unfollow-${userId}`, options).then(() =>
             setFollowStatus(false)
         );
     };
