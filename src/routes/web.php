@@ -18,6 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{userId}', [UserController::class, 'show']);
 
+    // ツイート
+    Route::get('/tweets', [UserController::class, 'index']);
+    Route::get('/tweet/{userId}', [UserController::class, 'show']);
+
     Route::post('/follow/{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow/{userId}', [UserController::class, 'unfollow']);
     Route::post('/authuser', [UserController::class, 'getAuthuserInfo']);
