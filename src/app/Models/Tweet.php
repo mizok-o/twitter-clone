@@ -15,4 +15,18 @@ class Tweet extends Authenticatable
     protected $guarded = [
         'id', 'user_id', 'created_at', 'updated_at'
     ];
+
+    /**
+     * ツイート投稿
+     *
+     * @param  int $user_id, array $data
+     * @return \Illuminate\Http\Response
+     */
+    public function tweetStore(int $user_id, array $data)
+    {
+        $this->user_id = $user_id;
+        $this->text = $data['text'];
+        $this->save();
+        return;
+    }
 }

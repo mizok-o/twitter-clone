@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserList } from "./page/UserList";
 import { TweetList } from "./page/TweetList";
 import { TweetDetail } from "./page/TweetDetail";
+import { TweetPost } from "./page/TweetPost";
 
 import "../../css/app.css";
 import { Header } from "./layout/Header";
@@ -18,6 +19,7 @@ export const App = () => {
                 <Route path="/userList" element={<UserList />} />
                 <Route path="/" element={<TweetList />} />
                 <Route path="/tweet/:id" element={<TweetDetail />} />
+                <Route path="/tweet/new" element={<TweetPost />} />
             </Routes>
             <TweetBtn />
         </BrowserRouter>

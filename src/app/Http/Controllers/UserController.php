@@ -41,12 +41,22 @@ class UserController extends Controller
     /**
      *  Followsテーブル一覧と認証ユーザー情報を取得
      *
+     * @return array<object>
+     */
+    public function getAuthUser()
+    {
+        return auth()->user();
+    }
+
+    /**
+     *  Followsテーブル一覧と認証ユーザー情報を取得
+     *
      * @return array<object, object>
      */
     public function getAuthUserInfo()
     {
-        $follows = Follows::all();
         $authuser = auth()->user();
+        $follows = Follows::where('follow_user_id', auth()->user()->id)->get();
 
         return [
             "follows" => $follows,

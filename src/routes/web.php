@@ -23,9 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/tweets', [TweetController::class, 'index']);
     Route::get('/tweet-{userId}', [TweetController::class, 'show']);
 
+    Route::post('/post-tweet', [TweetController::class, 'store']);
+
     Route::post('/follow/{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow/{userId}', [UserController::class, 'unfollow']);
-    Route::post('/authuser', [UserController::class, 'getAuthuserInfo']);
+    Route::post('/authuser', [UserController::class, 'getAuthuser']);
+    Route::post('/authuserInfo', [UserController::class, 'getAuthuserInfo']);
 });
 
 Route::get('/{any}', function () {

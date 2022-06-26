@@ -41,12 +41,6 @@ export const TweetDetail = () => {
         });
     }, []);
 
-    const postedDate = () => {
-        const date = tweet.created_at;
-
-        return date;
-    };
-
     return (
         <div className="container-lg mt-5">
             <div className="border">
@@ -89,7 +83,7 @@ export const TweetDetail = () => {
                     </div>
                     <div className="my-2">
                         <p>{tweet.text}</p>
-                        <p className="pt-2">投稿日: {postedDate()}</p>
+                        <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
                 </div>
             </div>

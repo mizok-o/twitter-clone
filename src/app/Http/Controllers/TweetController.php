@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tweet;
 use App\Models\Follows;
-
-// use Illuminate\Http\Request;
+use App\Models\Tweet;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TweetController extends Controller
 {
     /**
      * ユーザーのツイート一覧取得
      *
-     * @param  int  $userId
-     * @return array<object, int>
+     * @param  Follows $follows, Tweet $tweet
+     * @return array<int, object>
      */
     public function index(Follows $follows, Tweet $tweet)
     {
@@ -22,11 +22,11 @@ class TweetController extends Controller
         $followIds = $follows->getFollowIds($user->id);
 
         $follow_ids[] = $user->id;
-        $tweets = $tweet->whereIn('user_id', $followIds)->paginate(10);
+        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'asc')->paginate(10);
 
         return [
-            "user" => $user->id,
-            "tweets" => $tweets
+            'user' => $user->id,
+            'tweets' => $tweets
         ];
     }
 
@@ -45,12 +45,22 @@ class TweetController extends Controller
     /**
      * ツイート投稿
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request $request, Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'text' => ['required', 'string', 'max:140']
+        ]);
+
+        $validator->validate();
+        $tweet->tweetStore($user->id, $data);
+
+        return;
     }
 
     /**
