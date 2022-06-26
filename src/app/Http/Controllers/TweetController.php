@@ -58,8 +58,20 @@ class TweetController extends Controller
         ]);
 
         $validator->validate();
-        $tweet->tweetStore($user->id, $data);
+        $tweet->storeTweet($user->id, $data);
 
+        return;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $tweetId, Tweet $tweet
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(int $tweetId, Tweet $tweet)
+    {
+        $tweet->where("id", $tweetId)->delete();
         return;
     }
 
@@ -71,17 +83,6 @@ class TweetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }

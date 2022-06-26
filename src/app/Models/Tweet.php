@@ -19,12 +19,12 @@ class Tweet extends Authenticatable
     /**
      * ツイート投稿
      *
-     * @param  int $user_id, array $data
+     * @param  int $userId, array $data
      * @return \Illuminate\Http\Response
      */
-    public function tweetStore(int $user_id, array $data)
+    public function storeTweet(int $userId, array $data)
     {
-        $this->user_id = $user_id;
+        $this->userId = $userId;
         $this->text = $data['text'];
         $this->save();
         return;

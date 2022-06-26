@@ -10,6 +10,11 @@ export const TweetList = () => {
     const [tweets, setTweets] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
 
+    // csrf対策のため、トークンを取得
+    const csrf_token = document.querySelector(
+        'meta[name="csrf-token"]'
+    ).content;
+
     const getUsers = async () => {
         const res = await fetch("/users");
         if (res.status === 200) {
@@ -34,19 +39,36 @@ export const TweetList = () => {
         });
     }, []);
 
-    // ページネーション時に、追加分を呼び出し
-    const handlePaginate = async (page) => {
-        const res = await fetch(`/tweets?page=${page}`);
+    const deleteTweets = async (id) => {
+        const res = await fetch(`/destroy-tweet-${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrf_token,
+            },
+        });
         if (res.status === 200) {
-            const tweetsData = await res.json();
-            setTweets(tweetsData.tweets.data);
+            console.log("deleted!!");
         }
     };
+
+    const deleteTweet = (e, id) => {
+        e.preventDefault();
+        deleteTweets(id);
+    };
+
+    // ページネーション時に、追加分を呼び出し
+    // const handlePaginate = async (page) => {
+    //     const res = await fetch(`/tweets?page=${page}`);
+    //     if (res.status === 200) {
+    //         const tweetsData = await res.json();
+    //         setTweets(tweetsData.tweets.data);
+    //     }
+    // };
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
-        // console.log(userData);
 
         return (
             <li key={tweet.id}>
@@ -66,6 +88,15 @@ export const TweetList = () => {
                                             id: userData.user_name,
                                         }}
                                     />
+                                    <button
+                                        className="btn btn-danger"
+                                        type="button"
+                                        onClick={(e) =>
+                                            deleteTweet(e, tweet.id)
+                                        }
+                                    >
+                                        削除
+                                    </button>
                                 </div>
                                 <div className="mt-1">
                                     <p>{tweet.text}</p>

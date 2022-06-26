@@ -8055,7 +8055,10 @@ var TweetList = function TweetList() {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
       numUsers = _useState6[0],
-      setNumUsers = _useState6[1];
+      setNumUsers = _useState6[1]; // csrf対策のため、トークンを取得
+
+
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
   var getUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8139,34 +8142,32 @@ var TweetList = function TweetList() {
     getUsers().then(function () {
       getTweets();
     });
-  }, []); // ページネーション時に、追加分を呼び出し
+  }, []);
 
-  var handlePaginate = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(page) {
-      var res, tweetsData;
+  var deleteTweets = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
+      var res;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
-              return fetch("/tweets?page=".concat(page));
+              return fetch("/destroy-tweet-".concat(id), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRF-TOKEN": csrf_token
+                }
+              });
 
             case 2:
               res = _context3.sent;
 
-              if (!(res.status === 200)) {
-                _context3.next = 8;
-                break;
+              if (res.status === 200) {
+                console.log("deleted!!");
               }
 
-              _context3.next = 6;
-              return res.json();
-
-            case 6:
-              tweetsData = _context3.sent;
-              setTweets(tweetsData.tweets.data);
-
-            case 8:
+            case 4:
             case "end":
               return _context3.stop();
           }
@@ -8174,17 +8175,29 @@ var TweetList = function TweetList() {
       }, _callee3);
     }));
 
-    return function handlePaginate(_x) {
+    return function deleteTweets(_x) {
       return _ref3.apply(this, arguments);
     };
   }();
+
+  var deleteTweet = function deleteTweet(e, id) {
+    e.preventDefault();
+    deleteTweets(id);
+  }; // ページネーション時に、追加分を呼び出し
+  // const handlePaginate = async (page) => {
+  //     const res = await fetch(`/tweets?page=${page}`);
+  //     if (res.status === 200) {
+  //         const tweetsData = await res.json();
+  //         setTweets(tweetsData.tweets.data);
+  //     }
+  // };
+
 
   var tweetItem = tweets.map(function (tweet) {
     // ツイートユーザーの情報を取得
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
-    }); // console.log(userData);
-
+    });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "user__item-container",
@@ -8198,14 +8211,21 @@ var TweetList = function TweetList() {
               }
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "d-flex justify-content-between",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
                   nameData: {
                     name: userData.screen_name,
                     id: userData.user_name
                   }
-                })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  className: "btn btn-danger",
+                  type: "button",
+                  onClick: function onClick(e) {
+                    return deleteTweet(e, tweet.id);
+                  },
+                  children: "\u524A\u9664"
+                })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "mt-1",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
