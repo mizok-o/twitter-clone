@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{userId}', [UserController::class, 'show']);
+    Route::get('/user-{userId}', [UserController::class, 'show']);
 
     // ツイート
     Route::get('/tweets', [TweetController::class, 'index']);
