@@ -4,31 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tweet;
-// use App\Models\Follows;
-use Illuminate\Http\Request;
+use App\Models\Follows;
+
+// use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
     /**
-     * 認証ユーザーを除いたusersテーブル一覧を取得
+     * ユーザーのツイート一覧取得
      *
      * @param  int  $userId
      * @return array<object, int>
      */
-    public function index(int $userId)
+    public function index(Follows $follows, Tweet $tweet)
     {
-        $tweets = Tweet::where('user_id', $userId)->get();
+        $user = auth()->user();
+        $followIds = $follows->getFollowIds($user->id);
 
-        $numTweets = $tweets->count();
-        dd($tweets, $numTweets);
+        $follow_ids[] = $user->id;
+        $tweets = $tweet->whereIn('user_id', $followIds)->paginate(10);
+
         return [
-            "tweets" => $tweets,
-            "numTweets" => $numTweets
+            "user" => $user->id,
+            "tweets" => $tweets
         ];
     }
 
     /**
-     *  usersテーブルからidが一致するレコードを取得
+     *  ユーザーのツイートID指定して取得
      *
      * @param  int  $userId
      * @return object
@@ -36,12 +39,11 @@ class TweetController extends Controller
     public function show(int $userId)
     {
         $tweet = Tweet::find($userId);
-        dd($tweet);
         return $tweet;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ツイート投稿
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

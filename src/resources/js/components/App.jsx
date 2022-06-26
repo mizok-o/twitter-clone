@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { UserList } from "./page/UserList";
+import { TweetList } from "./page/TweetList";
 
 import "../../css/app.css";
 import { Header } from "./layout/Header";
@@ -14,6 +15,7 @@ export const App = () => {
             <Header />
             <Routes>
                 <Route path="/userList" element={<UserList />} />
+                <Route path="/" element={<TweetList />} />
             </Routes>
             <TweetBtn />
         </BrowserRouter>
