@@ -15,9 +15,9 @@ export const UserList = () => {
         'meta[name="csrf-token"]'
     ).content;
 
-    // /authuser 認証ユーザーの情報取得
+    // 認証ユーザーの情報取得
     const getAuthUserData = async () => {
-        const res = await fetch("/authuser", {
+        const res = await fetch("/auth-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

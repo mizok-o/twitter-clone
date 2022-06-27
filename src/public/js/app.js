@@ -8235,7 +8235,7 @@ var UserList = function UserList() {
       setUsers = _useState4[1]; // csrf対策のため、トークンを取得
 
 
-  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // /authuser 認証ユーザーの情報取得
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // 認証ユーザーの情報取得
 
   var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8245,7 +8245,7 @@ var UserList = function UserList() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/authuser", {
+              return fetch("/auth-user", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -8527,7 +8527,7 @@ var UserProfile = function UserProfile() {
       id = _useParams.id; // csrf対策のため、トークンを取得
 
 
-  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // /authuser 認証ユーザーの情報取得
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // 認証ユーザーの情報取得
 
   var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -8537,7 +8537,7 @@ var UserProfile = function UserProfile() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/authuser", {
+              return fetch("/auth-user", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

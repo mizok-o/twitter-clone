@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Follows extends Authenticatable
+class Follow extends Authenticatable
 {
 
     use Notifiable, HasFactory;
@@ -15,7 +15,7 @@ class Follows extends Authenticatable
     public $timestamps = false;
 
     /**
-     *  フォローしてるIDリストを取得
+     *  フォローしてるIDリストを取得　
      *
      * @param  int  $userId
      * @return object

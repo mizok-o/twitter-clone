@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Consts\Paginate;
 use App\Http\Controllers\Controller;
-use App\Models\Follows;
+use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
 
@@ -11,22 +12,23 @@ use App\Models\User;
 
 class TweetController extends Controller
 {
+
     /**
      * ユーザーのツイート一覧取得
      *
      * @param  int  $userId
      * @return array<object, int>
      */
-    public function index(Follows $follows, Tweet $tweet)
+    public function index(Follow $follow, Tweet $tweet)
     {
-
         $users = User::all();
 
-        $user = auth()->user();
-        $followIds = $follows->getFollowIds($user->id);
+        $userId = auth()->id();
+        $followIds = $follow->getFollowIds($userId);
 
-        $followIds[] = $user->id;
-        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(10);
+        $followIds[] = $userId;
+
+        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
 
         return [
             "users" => $users,
