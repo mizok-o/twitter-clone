@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 import "/css/pagenation.css";
 
 export const Pagenation = (props) => {
-    const [currentPage, setPage] = useState(0);
-
-    useEffect(() => {
-        props.onChange({ page: currentPage });
-    }, [currentPage]);
-
+    const { currentPage, setCurrentPage } = props;
     // ページネーションの総数
     const totalPage = Math.ceil(props.sum / props.per);
 
@@ -17,8 +12,7 @@ export const Pagenation = (props) => {
         if (currentPage === 1) {
             return;
         }
-
-        setPage(currentPage - 1);
+        setCurrentPage(currentPage - 1);
     };
 
     // ボタンで１ページ進む時
@@ -26,13 +20,12 @@ export const Pagenation = (props) => {
         if (currentPage === totalPage) {
             return;
         }
-
-        setPage(currentPage + 1);
+        setCurrentPage(currentPage + 1);
     };
 
     // ページ番号を直接クリックされたときの処理
     const handleMove = (page) => {
-        setPage(page);
+        setCurrentPage(page);
     };
 
     return (

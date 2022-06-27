@@ -5,16 +5,19 @@ import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
 
-export const TweetList = () => {
+export const TweetList = (props) => {
+    const { currentPage, setCurrentPage } = props;
+
     const [users, setUsers] = useState([]);
     const [tweets, setTweets] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch("/tweets?page=1");
+        const res = await fetch(`/tweets?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
+            console.log("aa");
             setUsers(tweetsData.users);
             setNumUsers(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
@@ -22,18 +25,10 @@ export const TweetList = () => {
     };
 
     useEffect(() => {
+        console.log("useEffect");
+        console.log(currentPage);
         getTweets();
-    }, []);
-
-    // ページネーション時に、追加分を呼び出し
-    const handlePaginate = async (page) => {
-        if (page < 1) return;
-        const res = await fetch(`/tweets?page=${page}`);
-        if (res.status === 200) {
-            const tweetsData = await res.json();
-            setTweets(tweetsData.tweets.data);
-        }
-    };
+    }, [currentPage]);
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
@@ -79,7 +74,9 @@ export const TweetList = () => {
             <Pagenation
                 sum={numUsers}
                 per={10}
-                onChange={(e) => handlePaginate(e.page)}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                onChange={(e) => setCurrentPage(e.page)}
             />
         </div>
     );

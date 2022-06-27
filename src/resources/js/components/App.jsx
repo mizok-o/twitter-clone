@@ -11,14 +11,23 @@ import { UserProfile } from "./page/UserProfile";
 import "../../css/app.css";
 
 export const App = () => {
+    const [currentPage, setCurrentPage] = useState(1);
     return (
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path={`/`} element={<TweetList />} />
+                <Route
+                    path="/"
+                    element={
+                        <TweetList
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    }
+                />
                 <Route path="/tweet/:id" element={<TweetDetail />} />
                 <Route path="/userList" element={<UserList />} />
-                <Route path={`/profile/:id`} element={<UserProfile />} />
+                <Route path="/profile/:id" element={<UserProfile />} />
             </Routes>
         </BrowserRouter>
     );

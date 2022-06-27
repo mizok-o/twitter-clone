@@ -7580,6 +7580,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_UserProfile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/UserProfile */ "./resources/js/components/page/UserProfile.jsx");
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -7592,11 +7604,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+      _useState2 = _slicedToArray(_useState, 2),
+      currentPage = _useState2[0],
+      setCurrentPage = _useState2[1];
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_layout_Header__WEBPACK_IMPORTED_MODULE_2__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_TweetList__WEBPACK_IMPORTED_MODULE_3__.TweetList, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_TweetList__WEBPACK_IMPORTED_MODULE_3__.TweetList, {
+          currentPage: currentPage,
+          setCurrentPage: setCurrentPage
+        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/tweet/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_TweetDetail__WEBPACK_IMPORTED_MODULE_4__.TweetDetail, {})
@@ -7994,7 +8014,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var TweetList = function TweetList() {
+var TweetList = function TweetList(props) {
+  var currentPage = props.currentPage,
+      setCurrentPage = props.setCurrentPage;
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       users = _useState2[0],
@@ -8019,13 +8042,13 @@ var TweetList = function TweetList() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/tweets?page=1");
+              return fetch("/tweets?page=".concat(currentPage));
 
             case 2:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 10;
+                _context.next = 11;
                 break;
               }
 
@@ -8034,11 +8057,12 @@ var TweetList = function TweetList() {
 
             case 6:
               tweetsData = _context.sent;
+              console.log("aa");
               setUsers(tweetsData.users);
               setNumUsers(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -8052,55 +8076,10 @@ var TweetList = function TweetList() {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("useEffect");
+    console.log(currentPage);
     getTweets();
-  }, []); // ページネーション時に、追加分を呼び出し
-
-  var handlePaginate = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(page) {
-      var res, tweetsData;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              if (!(page < 1)) {
-                _context2.next = 2;
-                break;
-              }
-
-              return _context2.abrupt("return");
-
-            case 2:
-              _context2.next = 4;
-              return fetch("/tweets?page=".concat(page));
-
-            case 4:
-              res = _context2.sent;
-
-              if (!(res.status === 200)) {
-                _context2.next = 10;
-                break;
-              }
-
-              _context2.next = 8;
-              return res.json();
-
-            case 8:
-              tweetsData = _context2.sent;
-              setTweets(tweetsData.tweets.data);
-
-            case 10:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function handlePaginate(_x) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
+  }, [currentPage]);
   var tweetItem = tweets.map(function (tweet) {
     // ツイートユーザーの情報を取得
     var userData = users.find(function (data) {
@@ -8147,8 +8126,10 @@ var TweetList = function TweetList() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_3__.Pagenation, {
       sum: numUsers,
       per: 10,
+      currentPage: currentPage,
+      setCurrentPage: setCurrentPage,
       onChange: function onChange(e) {
-        return handlePaginate(e.page);
+        return setCurrentPage(e.page);
       }
     })]
   });
@@ -8977,37 +8958,21 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 var Pagenation = function Pagenation(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      currentPage = _useState2[0],
-      setPage = _useState2[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    props.onChange({
-      page: currentPage
-    });
-  }, [currentPage]); // ページネーションの総数
+  var currentPage = props.currentPage,
+      setCurrentPage = props.setCurrentPage; // ページネーションの総数
 
   var totalPage = Math.ceil(props.sum / props.per); // ボタンで１ページ戻る時
 
@@ -9016,7 +8981,7 @@ var Pagenation = function Pagenation(props) {
       return;
     }
 
-    setPage(currentPage - 1);
+    setCurrentPage(currentPage - 1);
   }; // ボタンで１ページ進む時
 
 
@@ -9025,12 +8990,12 @@ var Pagenation = function Pagenation(props) {
       return;
     }
 
-    setPage(currentPage + 1);
+    setCurrentPage(currentPage + 1);
   }; // ページ番号を直接クリックされたときの処理
 
 
   var handleMove = function handleMove(page) {
-    setPage(page);
+    setCurrentPage(page);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
