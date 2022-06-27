@@ -17,13 +17,13 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/user-{userId}', [UserController::class, 'show']);
+    Route::get('/users/{userId}', [UserController::class, 'show']);
 
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
 
     Route::get('/tweets', [TweetController::class, 'index']);
-    Route::get('/tweet-{userId}', [TweetController::class, 'show']);
+    Route::get('/tweets/{userId}', [TweetController::class, 'show']);
 
     Route::post('/follow-{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);

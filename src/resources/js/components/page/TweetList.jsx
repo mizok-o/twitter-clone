@@ -21,13 +21,13 @@ export const TweetList = () => {
         }
     };
 
-    // ツイート一覧をtweetsにセット
     useEffect(() => {
         getTweets();
     }, []);
 
     // ページネーション時に、追加分を呼び出し
     const handlePaginate = async (page) => {
+        if (page < 1) return;
         const res = await fetch(`/tweets?page=${page}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
@@ -38,7 +38,7 @@ export const TweetList = () => {
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
-        console.log(userData);
+        // console.log(userData);
 
         return (
             <li key={tweet.id}>

@@ -13,6 +13,6 @@ class Tweet extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [
-        'user_id', 'created_at'
+        'user_id'
     ];
 }

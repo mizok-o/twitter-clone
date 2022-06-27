@@ -7580,18 +7580,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_UserProfile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/UserProfile */ "./resources/js/components/page/UserProfile.jsx");
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -7604,12 +7592,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var App = function App() {
-  //　一覧表示するユーザデータを入れる
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      users = _useState2[0],
-      setUsers = _useState2[1];
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_layout_Header__WEBPACK_IMPORTED_MODULE_2__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
@@ -7620,10 +7602,7 @@ var App = function App() {
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_TweetDetail__WEBPACK_IMPORTED_MODULE_4__.TweetDetail, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/userList",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_UserList__WEBPACK_IMPORTED_MODULE_5__.UserList, {
-          setUsers: setUsers,
-          users: users
-        })
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_UserList__WEBPACK_IMPORTED_MODULE_5__.UserList, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/profile/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_page_UserProfile__WEBPACK_IMPORTED_MODULE_6__.UserProfile, {})
@@ -7828,7 +7807,7 @@ var TweetDetail = function TweetDetail() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/tweet-".concat(id));
+              return fetch("/tweets/".concat(id));
 
             case 2:
               res = _context.sent;
@@ -7867,7 +7846,7 @@ var TweetDetail = function TweetDetail() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/user-".concat(userId));
+              return fetch("/users/".concat(userId));
 
             case 2:
               res = _context2.sent;
@@ -8070,8 +8049,7 @@ var TweetList = function TweetList() {
     return function getTweets() {
       return _ref.apply(this, arguments);
     };
-  }(); // ツイート一覧をtweetsにセット
-
+  }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getTweets();
@@ -8084,25 +8062,33 @@ var TweetList = function TweetList() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
-              return fetch("/tweets?page=".concat(page));
-
-            case 2:
-              res = _context2.sent;
-
-              if (!(res.status === 200)) {
-                _context2.next = 8;
+              if (!(page < 1)) {
+                _context2.next = 2;
                 break;
               }
 
-              _context2.next = 6;
+              return _context2.abrupt("return");
+
+            case 2:
+              _context2.next = 4;
+              return fetch("/tweets?page=".concat(page));
+
+            case 4:
+              res = _context2.sent;
+
+              if (!(res.status === 200)) {
+                _context2.next = 10;
+                break;
+              }
+
+              _context2.next = 8;
               return res.json();
 
-            case 6:
+            case 8:
               tweetsData = _context2.sent;
               setTweets(tweetsData.tweets.data);
 
-            case 8:
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -8119,8 +8105,8 @@ var TweetList = function TweetList() {
     // ツイートユーザーの情報を取得
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
-    });
-    console.log(userData);
+    }); // console.log(userData);
+
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "user__item-container",
@@ -8598,7 +8584,7 @@ var UserProfile = function UserProfile() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/user-".concat(id));
+              return fetch("/users/".concat(id));
 
             case 2:
               res = _context2.sent;
@@ -8654,9 +8640,6 @@ var UserProfile = function UserProfile() {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "border",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        onClick: function onClick() {
-          return console.log(isFollowing);
-        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "d-flex p-1",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {

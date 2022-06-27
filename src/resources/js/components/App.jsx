@@ -11,19 +11,13 @@ import { UserProfile } from "./page/UserProfile";
 import "../../css/app.css";
 
 export const App = () => {
-    //　一覧表示するユーザデータを入れる
-    const [users, setUsers] = useState([]);
-
     return (
         <BrowserRouter>
             <Header />
             <Routes>
                 <Route path={`/`} element={<TweetList />} />
                 <Route path="/tweet/:id" element={<TweetDetail />} />
-                <Route
-                    path="/userList"
-                    element={<UserList setUsers={setUsers} users={users} />}
-                />
+                <Route path="/userList" element={<UserList />} />
                 <Route path={`/profile/:id`} element={<UserProfile />} />
             </Routes>
         </BrowserRouter>

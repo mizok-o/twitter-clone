@@ -13,7 +13,7 @@ export const TweetDetail = () => {
 
     // 指定のツイートを取得
     const getTweet = async () => {
-        const res = await fetch(`/tweet-${id}`);
+        const res = await fetch(`/tweets/${id}`);
         if (res.status === 200) {
             const tweetData = await res.json();
             return tweetData;
@@ -22,7 +22,7 @@ export const TweetDetail = () => {
 
     // ツイート主のユーザー情報をuserにセット
     const setUserData = async (userId) => {
-        const res = await fetch(`/user-${userId}`);
+        const res = await fetch(`/users/${userId}`);
         if (res.status === 200) {
             const userData = await res.json();
             setUser(userData);

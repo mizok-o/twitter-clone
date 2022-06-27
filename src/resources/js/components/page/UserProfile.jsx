@@ -53,7 +53,7 @@ export const UserProfile = () => {
     }, []);
 
     const getUserProfile = async () => {
-        const res = await fetch(`/user-${id}`);
+        const res = await fetch(`/users/${id}`);
         if (res.status === 200) {
             const userProfile = await res.json();
             setIsFollowing(authUserFollows.includes(Number(id)));
@@ -86,7 +86,7 @@ export const UserProfile = () => {
     return (
         <div className="container-lg mt-5">
             <div className="border">
-                <div onClick={() => console.log(isFollowing)}>
+                <div>
                     <div className="d-flex p-1">
                         <Link to="/userlist">
                             <button className="btn">
