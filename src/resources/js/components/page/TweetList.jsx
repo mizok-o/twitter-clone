@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
+import { EditButtns } from "../parts/EditButtns";
 
 export const TweetList = () => {
     const [currentPage, setCurrentPage] = useState(1);
-
     const [users, setUsers] = useState([]);
-    const [tweets, setTweets] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
+    const [tweets, setTweets] = useState([]);
+    const [authUserId, setAuthUserId] = useState(0);
+
+    // csrf対策のため、トークンを取得
+    const csrf_token = document.querySelector(
+        'meta[name="csrf-token"]'
+    ).content;
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
@@ -23,13 +29,34 @@ export const TweetList = () => {
         }
     };
 
+    const getAuthUser = async () => {
+        const res = await fetch("/auth-user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrf_token,
+            },
+        });
+        if (res.status === 200) {
+            const auth = await res.json();
+            setAuthUserId(auth.user.id);
+        }
+    };
+
     useEffect(() => {
         getTweets();
+        getAuthUser();
     }, [currentPage]);
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
+
+        const showEditButtns = () => {
+            if (authUserId === tweet.user_id) {
+                return <EditButtns tweetId={tweet.id} />;
+            }
+        };
 
         return (
             <li key={tweet.id}>
@@ -51,6 +78,7 @@ export const TweetList = () => {
                                             user_name: userData.user_name,
                                         }}
                                     />
+                                    {showEditButtns()}
                                 </div>
                                 <div className="mt-1">
                                     <p>{tweet.text}</p>

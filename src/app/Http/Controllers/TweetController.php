@@ -87,11 +87,12 @@ class TweetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $tweetId, Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $tweetId, Tweet $tweet)
     {
-        //
+        $tweet->where("id", $tweetId)->delete();
+        return;
     }
 }

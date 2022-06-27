@@ -8,7 +8,7 @@ export const TweetDetail = () => {
     const [tweet, setTweet] = useState({});
     const [user, setUser] = useState({});
 
-    // urlからユーザーIDの取得
+    // urlからツイートIDの取得
     const { id } = useParams();
 
     // 指定のツイートを取得
