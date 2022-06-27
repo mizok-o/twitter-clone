@@ -5,8 +5,8 @@ import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
 
-export const TweetList = (props) => {
-    const { currentPage, setCurrentPage } = props;
+export const TweetList = () => {
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [users, setUsers] = useState([]);
     const [tweets, setTweets] = useState([]);
