@@ -10,20 +10,12 @@ export const TweetList = () => {
     const [tweets, setTweets] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
 
-    // 認証ユーザー以外の全ユーザーを取得
-    const getUsers = async () => {
-        const res = await fetch("/users");
-        if (res.status === 200) {
-            const usersData = await res.json();
-            setUsers(usersData.users.data);
-        }
-    };
-
     // １ページ目のツイートを取得
     const getTweets = async () => {
         const res = await fetch("/tweets?page=1");
         if (res.status === 200) {
             const tweetsData = await res.json();
+            setUsers(tweetsData.users);
             setNumUsers(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
         }
@@ -31,9 +23,7 @@ export const TweetList = () => {
 
     // ツイート一覧をtweetsにセット
     useEffect(() => {
-        getUsers().then(() => {
-            getTweets();
-        });
+        getTweets();
     }, []);
 
     // ページネーション時に、追加分を呼び出し
@@ -48,6 +38,7 @@ export const TweetList = () => {
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
+        console.log(userData);
 
         return (
             <li key={tweet.id}>
@@ -55,9 +46,11 @@ export const TweetList = () => {
                     <Link to={`/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
-                                iconData={{
-                                    icon: userData.profile_image_path,
-                                }}
+                                iconData={
+                                    userData.profile_image_path
+                                        ? userData.profile_image_path
+                                        : "no-image.png"
+                                }
                             />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">

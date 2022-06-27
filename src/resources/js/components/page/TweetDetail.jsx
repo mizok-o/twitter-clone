@@ -70,9 +70,7 @@ export const TweetDetail = () => {
                     <div className="d-flex">
                         <UserIcon
                             userList={false}
-                            iconData={{
-                                icon: user.profile_image_path,
-                            }}
+                            iconData={user.profile_image_path}
                         />
                         <div className="ms-2">
                             <UserName

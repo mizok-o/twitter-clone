@@ -92,11 +92,7 @@ export const UserList = () => {
                 <div className="user__item-container">
                     <Link to={`/profile/${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon
-                                iconData={{
-                                    icon: item.profile_image_path,
-                                }}
-                            />
+                            <UserIcon iconData={item.profile_image_path} />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName

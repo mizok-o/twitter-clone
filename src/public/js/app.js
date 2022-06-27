@@ -7944,9 +7944,7 @@ var TweetDetail = function TweetDetail() {
           className: "d-flex",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
             userList: false,
-            iconData: {
-              icon: user.profile_image_path
-            }
+            iconData: user.profile_image_path
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ms-2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
@@ -8031,24 +8029,24 @@ var TweetList = function TweetList() {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
       numUsers = _useState6[0],
-      setNumUsers = _useState6[1]; // 認証ユーザー以外の全ユーザーを取得
+      setNumUsers = _useState6[1]; // １ページ目のツイートを取得
 
 
-  var getUsers = /*#__PURE__*/function () {
+  var getTweets = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, usersData;
+      var res, tweetsData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/users");
+              return fetch("/tweets?page=1");
 
             case 2:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 10;
                 break;
               }
 
@@ -8056,10 +8054,12 @@ var TweetList = function TweetList() {
               return res.json();
 
             case 6:
-              usersData = _context.sent;
-              setUsers(usersData.users.data);
+              tweetsData = _context.sent;
+              setUsers(tweetsData.users);
+              setNumUsers(tweetsData.tweets.total);
+              setTweets(tweetsData.tweets.data);
 
-            case 8:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -8067,27 +8067,31 @@ var TweetList = function TweetList() {
       }, _callee);
     }));
 
-    return function getUsers() {
+    return function getTweets() {
       return _ref.apply(this, arguments);
     };
-  }(); // １ページ目のツイートを取得
+  }(); // ツイート一覧をtweetsにセット
 
 
-  var getTweets = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getTweets();
+  }, []); // ページネーション時に、追加分を呼び出し
+
+  var handlePaginate = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(page) {
       var res, tweetsData;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/tweets?page=1");
+              return fetch("/tweets?page=".concat(page));
 
             case 2:
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
@@ -8096,10 +8100,9 @@ var TweetList = function TweetList() {
 
             case 6:
               tweetsData = _context2.sent;
-              setNumUsers(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -8107,53 +8110,8 @@ var TweetList = function TweetList() {
       }, _callee2);
     }));
 
-    return function getTweets() {
-      return _ref2.apply(this, arguments);
-    };
-  }(); // ツイート一覧をtweetsにセット
-
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getUsers().then(function () {
-      getTweets();
-    });
-  }, []); // ページネーション時に、追加分を呼び出し
-
-  var handlePaginate = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(page) {
-      var res, tweetsData;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return fetch("/tweets?page=".concat(page));
-
-            case 2:
-              res = _context3.sent;
-
-              if (!(res.status === 200)) {
-                _context3.next = 8;
-                break;
-              }
-
-              _context3.next = 6;
-              return res.json();
-
-            case 6:
-              tweetsData = _context3.sent;
-              setTweets(tweetsData.tweets.data);
-
-            case 8:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
     return function handlePaginate(_x) {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -8162,6 +8120,7 @@ var TweetList = function TweetList() {
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
     });
+    console.log(userData);
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "user__item-container",
@@ -8170,9 +8129,7 @@ var TweetList = function TweetList() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
-              iconData: {
-                icon: userData.profile_image_path
-              }
+              iconData: userData.profile_image_path ? userData.profile_image_path : "no-image.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -8450,9 +8407,7 @@ var UserList = function UserList() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
-              iconData: {
-                icon: item.profile_image_path
-              }
+              iconData: item.profile_image_path
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -8745,10 +8700,7 @@ var UserProfile = function UserProfile() {
             children: profileButton()
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
             userList: false,
-            iconData: {
-              icon: user.icon,
-              desc: user.iconDesc
-            }
+            iconData: user.icon
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_4__.UserName, {
@@ -9168,7 +9120,7 @@ var UserIcon = function UserIcon(props) {
       className: "w-100 h-100 overflow-hidden rounded-circle border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         className: "w-100 h-100",
-        src: "/images/".concat(props.iconData.icon),
+        src: "/images/".concat(props.iconData),
         alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
       })
     })

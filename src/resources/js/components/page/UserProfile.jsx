@@ -120,13 +120,7 @@ export const UserProfile = () => {
                         <div className="w-100 d-flex justify-content-end">
                             {profileButton()}
                         </div>
-                        <UserIcon
-                            userList={false}
-                            iconData={{
-                                icon: user.icon,
-                                desc: user.iconDesc,
-                            }}
-                        />
+                        <UserIcon userList={false} iconData={user.icon} />
                     </div>
                     <div>
                         <UserName

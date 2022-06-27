@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tweet;
 use App\Models\Follows;
+use App\Models\Tweet;
+use App\Models\User;
 
 // use Illuminate\Http\Request;
 
@@ -18,14 +19,17 @@ class TweetController extends Controller
      */
     public function index(Follows $follows, Tweet $tweet)
     {
+
+        $users = User::all();
+
         $user = auth()->user();
         $followIds = $follows->getFollowIds($user->id);
 
-        $follow_ids[] = $user->id;
-        $tweets = $tweet->whereIn('user_id', $followIds)->paginate(10);
+        $followIds[] = $user->id;
+        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(10);
 
         return [
-            "user" => $user->id,
+            "users" => $users,
             "tweets" => $tweets
         ];
     }
@@ -39,7 +43,6 @@ class TweetController extends Controller
     public function show(int $userId)
     {
         $tweet = Tweet::where('id', $userId)->get();
-        // dd($tweet[0]);
         return $tweet[0];
     }
 
