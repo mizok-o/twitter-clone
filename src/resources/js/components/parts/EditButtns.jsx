@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const EditButtns = (props) => {
-    const { tweetId } = props;
+    const { tweetId, currentText } = props;
 
     const navigate = useNavigate();
 
@@ -13,7 +13,9 @@ export const EditButtns = (props) => {
 
     const moveEditPage = (e) => {
         e.preventDefault();
-        navigate(`/tweet/edit/${tweetId}`);
+        navigate(`/tweet/edit/${tweetId}`, {
+            state: { defaultText: currentText },
+        });
     };
 
     const deleteTweet = async (e) => {

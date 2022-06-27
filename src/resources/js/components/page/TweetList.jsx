@@ -75,7 +75,10 @@ export const TweetList = () => {
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
                                     {authUserId === tweet.user_id ? (
-                                        <EditButtns tweetId={tweet.id} />
+                                        <EditButtns
+                                            currentText={tweet.text}
+                                            tweetId={tweet.id}
+                                        />
                                     ) : (
                                         ""
                                     )}

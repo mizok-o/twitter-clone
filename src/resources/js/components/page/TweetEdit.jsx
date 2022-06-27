@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { UserIcon } from "../parts/UserIcon";
 
 export const TweetEdit = () => {
+    //　ツイート後に遷移させる用
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [defaultText] = useState(location.state.defaultText);
     const [user, setUser] = useState({});
 
     // urlからツイートIDの取得
     const { id } = useParams();
-
-    //　ツイート後に遷移させる用
-    const navigate = useNavigate();
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -32,6 +33,7 @@ export const TweetEdit = () => {
     };
 
     useEffect(() => {
+        console.log("currentText");
         getAuthUserData();
     }, []);
 
@@ -71,9 +73,9 @@ export const TweetEdit = () => {
                         <textarea
                             className="p-2 w-100"
                             name="text"
+                            defaultValue={defaultText}
                             cols="30"
                             rows="5"
-                            placeholder="今日を呟こう"
                         ></textarea>
                         <div className="mt-1 d-flex justify-content-between align-items-center">
                             <label>
@@ -86,10 +88,10 @@ export const TweetEdit = () => {
                                 />
                             </label>
                             <button
-                                className="btn btn-primary mt-1"
+                                className="btn btn-success mt-1"
                                 type="submit"
                             >
-                                ツイートする
+                                ツイートを更新する
                             </button>
                         </div>
                     </form>

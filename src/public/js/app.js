@@ -7982,17 +7982,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TweetEdit = function TweetEdit() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      user = _useState2[0],
-      setUser = _useState2[1]; // urlからツイートIDの取得
+  //　ツイート後に遷移させる用
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useLocation)();
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(location.state.defaultText),
+      _useState2 = _slicedToArray(_useState, 1),
+      defaultText = _useState2[0];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      user = _useState4[0],
+      setUser = _useState4[1]; // urlからツイートIDの取得
 
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
-      id = _useParams.id; //　ツイート後に遷移させる用
+      id = _useParams.id; // csrf対策のため、トークンを取得
 
-
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)(); // csrf対策のため、トークンを取得
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
@@ -8041,6 +8047,7 @@ var TweetEdit = function TweetEdit() {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("currentText");
     getAuthUserData();
   }, []);
 
@@ -8082,9 +8089,9 @@ var TweetEdit = function TweetEdit() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
             className: "p-2 w-100",
             name: "text",
+            defaultValue: defaultText,
             cols: "30",
-            rows: "5",
-            placeholder: "\u4ECA\u65E5\u3092\u545F\u3053\u3046"
+            rows: "5"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "mt-1 d-flex justify-content-between align-items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
@@ -8097,9 +8104,9 @@ var TweetEdit = function TweetEdit() {
                 accept: ".png, .jpeg, .jpg"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-              className: "btn btn-primary mt-1",
+              className: "btn btn-success mt-1",
               type: "submit",
-              children: "\u30C4\u30A4\u30FC\u30C8\u3059\u308B"
+              children: "\u30C4\u30A4\u30FC\u30C8\u3092\u66F4\u65B0\u3059\u308B"
             })]
           })]
         })]
@@ -8298,6 +8305,7 @@ var TweetList = function TweetList() {
                     user_name: userData.user_name
                   }
                 }), authUserId === tweet.user_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
+                  currentText: tweet.text,
                   tweetId: tweet.id
                 }) : ""]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -9081,14 +9089,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var EditButtns = function EditButtns(props) {
-  var tweetId = props.tweetId;
+  var tweetId = props.tweetId,
+      currentText = props.currentText;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)(); // // csrf対策のため、トークンを取得
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
   var moveEditPage = function moveEditPage(e) {
     e.preventDefault();
-    navigate("/tweet/edit/".concat(tweetId));
+    navigate("/tweet/edit/".concat(tweetId), {
+      state: {
+        defaultText: currentText
+      }
+    });
   };
 
   var deleteTweet = /*#__PURE__*/function () {
