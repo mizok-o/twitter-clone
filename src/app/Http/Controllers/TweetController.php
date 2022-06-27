@@ -8,15 +8,14 @@ use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
 
-// use Illuminate\Http\Request;
-
 class TweetController extends Controller
 {
 
     /**
      * ユーザーのツイート一覧取得
      *
-     * @param  int  $userId
+     * @param Follow $follow
+     * @param Tweet $tweet
      * @return array<object, int>
      */
     public function index(Follow $follow, Tweet $tweet)
