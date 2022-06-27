@@ -44,10 +44,10 @@ class UserController extends Controller
      */
     public function getAuthUserInfo()
     {
-        $userId = auth()->id();
-        $follows = Follow::where('follow_user_id', $userId)->get('followed_user_id');
+        $user = auth()->user();
+        $follows = Follow::where('follow_user_id', $user->id)->get('followed_user_id');
         return [
-            "userId" => $userId,
+            "user" => $user,
             "follows" => $follows
         ];
     }

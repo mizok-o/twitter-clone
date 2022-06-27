@@ -47,7 +47,7 @@ export const UserProfile = () => {
     useEffect(() => {
         // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
         getAuthUserData().then((authUserData) => {
-            setIsAuth(authUserData.userId === Number(id));
+            setIsAuth(authUserData.user.id === Number(id));
             checkAuthUserFollows(authUserData.follows);
         });
     }, []);

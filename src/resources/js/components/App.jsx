@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Header } from "./layout/Header";
 import { TweetList } from "./page/TweetList";
 import { TweetDetail } from "./page/TweetDetail";
+import { TweetPost } from "./page/TweetPost";
 import { UserList } from "./page/UserList";
 import { UserProfile } from "./page/UserProfile";
 
@@ -17,6 +18,7 @@ export const App = () => {
             <Routes>
                 <Route path="/" element={<TweetList />} />
                 <Route path="/tweet/:id" element={<TweetDetail />} />
+                <Route path="/tweet/new" element={<TweetPost />} />
                 <Route path="/userList" element={<UserList />} />
                 <Route path="/profile/:id" element={<UserProfile />} />
             </Routes>
