@@ -4,9 +4,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 export const Header = () => {
     const navigate = useNavigate();
+
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
+
     const logout = () => {
         fetch("/logout", {
             method: "POST",
@@ -19,37 +21,11 @@ export const Header = () => {
         });
     };
 
-    // ログイン状態によってトグル内表示を変更する
-    const dropdownItem = () => {
-        // if (!isLogined) {
-        //     return (
-        //         <>
-        //             <Dropdown.Item to="/userlist" value="1">
-        //                 ログイン
-        //             </Dropdown.Item>
-        //             <Dropdown.Item to="/userlist" value="2">
-        //                 新規登録
-        //             </Dropdown.Item>
-        //         </>
-        //     );
-        // }
-        return (
-            <>
-                <Dropdown.Item to="/userlist" value="1">
-                    プロフィール
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => logout()} value="2">
-                    ログアウト
-                </Dropdown.Item>
-            </>
-        );
-    };
-
     return (
         <header>
             <div className="d-flex justify-content-between align-items-center">
                 <div>
-                    <Link to="/">
+                    <Link to="/tweet/new">
                         <h1 className="fs-3">
                             <img
                                 src="/images/twitter-logo.svg"
@@ -82,7 +58,18 @@ export const Header = () => {
                                         alt="プロフィール アイコン"
                                     />
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu>{dropdownItem()}</Dropdown.Menu>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item to="/userlist" value="1">
+                                        プロフィール
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        onClick={() => logout()}
+                                        href="/login"
+                                        value="2"
+                                    >
+                                        ログアウト
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
                             </Dropdown>
                         </li>
                     </ul>
