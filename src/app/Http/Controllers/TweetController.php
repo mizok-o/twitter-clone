@@ -2,31 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Consts\Paginate;
 use App\Http\Controllers\Controller;
-use App\Models\Follows;
+use App\Models\Follow;
 use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class TweetController extends Controller
 {
+
     /**
      * ユーザーのツイート一覧取得
      *
-     * @param  Follows $follows, Tweet $tweet
-     * @return array<int, object>
+     * @param Follow $follow
+     * @param Tweet $tweet
+     * @return array<object, int>
      */
-    public function index(Follows $follows, Tweet $tweet)
+    public function index(Follow $follow, Tweet $tweet)
     {
-        $user = auth()->user();
-        $followIds = $follows->getFollowIds($user->id);
+        $users = User::all();
 
-        $follow_ids[] = $user->id;
-        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'asc')->paginate(10);
+        $userId = auth()->id();
+        $followIds = $follow->getFollowIds($userId);
+
+        $followIds[] = $userId;
+
+        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
 
         return [
-            'user' => $user->id,
-            'tweets' => $tweets
+            "users" => $users,
+            "tweets" => $tweets
         ];
     }
 
@@ -38,8 +44,8 @@ class TweetController extends Controller
      */
     public function show(int $userId)
     {
-        $tweet = Tweet::find($userId);
-        return $tweet;
+        $tweet = Tweet::where('id', $userId)->get();
+        return $tweet[0];
     }
 
     /**

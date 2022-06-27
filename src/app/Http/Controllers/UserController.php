@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Follows;
+use App\Models\Follow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function getAuthUserInfo()
     {
         $authuser = auth()->user();
-        $follows = Follows::where('follow_user_id', auth()->user()->id)->get();
+        $follows = Follow::where('follow_user_id', auth()->user()->id)->get();
 
         return [
             "follows" => $follows,
@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function countFollows(int $userId)
     {
-        return Follows::all()->where('follow_user_id', $userId)->count();
+        return Follow::all()->where('follow_user_id', $userId)->count();
         //
     }
 
@@ -84,7 +84,7 @@ class UserController extends Controller
      */
     public function countFollowers(int $userId)
     {
-        return Follows::all()->where('follower_user_id', $userId)->count();
+        return Follow::all()->where('follower_user_id', $userId)->count();
         //
     }
 

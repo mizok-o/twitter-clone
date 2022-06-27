@@ -8310,7 +8310,7 @@ var TweetPost = function TweetPost() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/authuser", {
+              return fetch("/auth-user", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -8322,7 +8322,7 @@ var TweetPost = function TweetPost() {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 10;
                 break;
               }
 
@@ -8331,9 +8331,11 @@ var TweetPost = function TweetPost() {
 
             case 6:
               userData = _context.sent;
+              console.log(userData);
+              console.log(userData.profile_image_path);
               setUser(userData);
 
-            case 8:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -8377,9 +8379,7 @@ var TweetPost = function TweetPost() {
         className: "d-flex",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
           userList: true,
-          iconData: {
-            icon: user.icon
-          }
+          iconData: user.profile_image_path
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
           onSubmit: function onSubmit(e) {
             return handleSubmit(e);
@@ -8910,6 +8910,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
+
 var UserIcon = function UserIcon(props) {
   // ユーザ詳細ページではスタイルを切り替える
   var general = {
@@ -8925,13 +8926,15 @@ var UserIcon = function UserIcon(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "".concat(props.isUserDetail ? "position-absolute start-16" : ""),
     style: props.isUserDetail ? userDetailSize : general,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "w-100 h-100 overflow-hidden rounded-circle border",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         className: "w-100 h-100",
-        src: "/images/".concat(props.iconData.icon),
+        src: "/images/".concat(props.iconData),
         alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+        children: ["aa", props.iconData]
+      })]
     })
   });
 };

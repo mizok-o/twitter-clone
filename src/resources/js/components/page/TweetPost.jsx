@@ -15,7 +15,7 @@ export const TweetPost = () => {
     ).content;
 
     const getAuthUserData = async () => {
-        const res = await fetch("/authuser", {
+        const res = await fetch("/auth-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,6 +24,8 @@ export const TweetPost = () => {
         });
         if (res.status === 200) {
             const userData = await res.json();
+            console.log(userData);
+            console.log(userData.profile_image_path);
             setUser(userData);
         }
     };
@@ -55,9 +57,7 @@ export const TweetPost = () => {
                 <div className="d-flex">
                     <UserIcon
                         userList={true}
-                        iconData={{
-                            icon: user.icon,
-                        }}
+                        iconData={user.profile_image_path}
                     />
                     <form onSubmit={(e) => handleSubmit(e)} className="ms-2">
                         <textarea
