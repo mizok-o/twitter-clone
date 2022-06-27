@@ -9,7 +9,7 @@ export const FollowNumbers = (props) => {
 
     //フォロー数を取得
     const getFollowsNumber = async () => {
-        const res = await fetch(`/countFollows-${userId}`);
+        const res = await fetch(`/count-follows/${userId}`);
         if (res.status === 200) {
             const follows = await res.json();
             setFollowsNum(follows);
@@ -18,7 +18,7 @@ export const FollowNumbers = (props) => {
 
     // フォロワー数を取得
     const getFollowersNumber = async () => {
-        const res = await fetch(`/countFollowers-${userId}`);
+        const res = await fetch(`/count-followers/${userId}`);
         if (res.status === 200) {
             const followers = await res.json();
             setFollowersNum(followers);

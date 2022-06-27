@@ -8454,7 +8454,7 @@ var FollowNumbers = function FollowNumbers(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/countFollows-".concat(userId));
+              return fetch("/count-follows/".concat(userId));
 
             case 2:
               res = _context.sent;
@@ -8493,7 +8493,7 @@ var FollowNumbers = function FollowNumbers(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/countFollowers-".concat(userId));
+              return fetch("/count-followers/".concat(userId));
 
             case 2:
               res = _context2.sent;
