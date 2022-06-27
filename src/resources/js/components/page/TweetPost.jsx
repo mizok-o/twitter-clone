@@ -36,9 +36,13 @@ export const TweetPost = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(e.target.image.value);
 
         // DBに登録するツイートデータ
-        const tests = { text: e.target.text.value };
+        const tests = {
+            text: e.target.text.value,
+            image: e.target.image.value,
+        };
 
         //　投稿するツイートを保存して、ツイート一覧へ遷移させる
         fetch("/post-tweet", {
@@ -48,19 +52,25 @@ export const TweetPost = () => {
                 "X-CSRF-TOKEN": csrf_token,
             },
             body: JSON.stringify(tests),
-        }).then(() => navigate("/"));
+        });
+        // .then(() => navigate("/"));
     };
 
     return (
-        <div className="container-lg my-3">
-            <div className="w-100 p-3 bg-light shadow rounded">
+        <div className="my-3">
+            <div className="w-100 p-2 bg-light shadow rounded">
                 <div className="d-flex">
                     <UserIcon
                         userList={true}
                         iconData={user.profile_image_path}
                     />
-                    <form onSubmit={(e) => handleSubmit(e)} className="ms-2">
+                    <form
+                        encType="multipart/form-data"
+                        onSubmit={(e) => handleSubmit(e)}
+                        className="ms-2"
+                    >
                         <textarea
+                            className="p-2 w-100"
                             name="text"
                             cols="30"
                             rows="5"
@@ -72,7 +82,7 @@ export const TweetPost = () => {
                                 <input
                                     className="d-none"
                                     type="file"
-                                    name="example"
+                                    name="image"
                                     accept=".png, .jpeg, .jpg"
                                 />
                             </label>

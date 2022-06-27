@@ -8353,10 +8353,12 @@ var TweetPost = function TweetPost() {
   }, []);
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); // DBに登録するツイートデータ
+    e.preventDefault();
+    console.log(e.target.image.value); // DBに登録するツイートデータ
 
     var tests = {
-      text: e.target.text.value
+      text: e.target.text.value,
+      image: e.target.image.value
     }; //　投稿するツイートを保存して、ツイート一覧へ遷移させる
 
     fetch("/post-tweet", {
@@ -8366,26 +8368,26 @@ var TweetPost = function TweetPost() {
         "X-CSRF-TOKEN": csrf_token
       },
       body: JSON.stringify(tests)
-    }).then(function () {
-      return navigate("/");
-    });
+    }); // .then(() => navigate("/"));
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "container-lg my-3",
+    className: "my-3",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "w-100 p-3 bg-light shadow rounded",
+      className: "w-100 p-2 bg-light shadow rounded",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "d-flex",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
           userList: true,
           iconData: user.profile_image_path
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+          encType: "multipart/form-data",
           onSubmit: function onSubmit(e) {
             return handleSubmit(e);
           },
           className: "ms-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            className: "p-2 w-100",
             name: "text",
             cols: "30",
             rows: "5",
@@ -8398,7 +8400,7 @@ var TweetPost = function TweetPost() {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 className: "d-none",
                 type: "file",
-                name: "example",
+                name: "image",
                 accept: ".png, .jpeg, .jpg"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {

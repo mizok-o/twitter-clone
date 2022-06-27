@@ -8,6 +8,7 @@ use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TweetController extends Controller
 {
@@ -59,6 +60,7 @@ class TweetController extends Controller
         $user = auth()->user();
         $data = $request->all();
 
+        dd($request->image, $data['image']);
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140']
         ]);
