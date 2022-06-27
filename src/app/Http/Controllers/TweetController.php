@@ -55,7 +55,6 @@ class TweetController extends Controller
      *
      * @param  Request $request
      * @param  Tweet $tweet
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Tweet $tweet)
     {
@@ -73,10 +72,10 @@ class TweetController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ツイート削除
      *
-     * @param  int $tweetId, Tweet $tweet
-     * @return \Illuminate\Http\Response
+     * @param  int $tweetId
+     * @param  Tweet $tweet
      */
     public function destroy(int $tweetId, Tweet $tweet)
     {
