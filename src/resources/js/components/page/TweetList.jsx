@@ -50,7 +50,7 @@ export const TweetList = () => {
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
-                    <Link to={`/tweet-${tweet.id}`}>
+                    <Link to={`/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={{

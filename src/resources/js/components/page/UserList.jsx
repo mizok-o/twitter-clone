@@ -90,7 +90,7 @@ export const UserList = () => {
         return (
             <li key={item.id}>
                 <div className="user__item-container">
-                    <Link to={`/profile-${item.id}`}>
+                    <Link to={`/profile/${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={{
