@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export const EditButtns = (props) => {
     const { tweetId } = props;
@@ -15,13 +14,17 @@ export const EditButtns = (props) => {
 
     const deleteTweet = async (e) => {
         e.preventDefault();
-        await fetch(`/destroy-tweet/${tweetId}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrf_token,
-            },
-        });
+
+        const checkDelete = confirm("ツイート削除しますか？");
+        if (checkDelete) {
+            await fetch(`/destroy-tweet/${tweetId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrf_token,
+                },
+            });
+        }
     };
 
     return (

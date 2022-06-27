@@ -8929,7 +8929,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 var EditButtns = function EditButtns(props) {
   var tweetId = props.tweetId; // // csrf対策のため、トークンを取得
 
@@ -8941,12 +8940,20 @@ var EditButtns = function EditButtns(props) {
 
   var deleteTweet = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var checkDelete;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               e.preventDefault();
-              _context.next = 3;
+              checkDelete = confirm("ツイート削除しますか？");
+
+              if (!checkDelete) {
+                _context.next = 5;
+                break;
+              }
+
+              _context.next = 5;
               return fetch("/destroy-tweet/".concat(tweetId), {
                 method: "POST",
                 headers: {
@@ -8955,7 +8962,7 @@ var EditButtns = function EditButtns(props) {
                 }
               });
 
-            case 3:
+            case 5:
             case "end":
               return _context.stop();
           }
