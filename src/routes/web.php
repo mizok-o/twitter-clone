@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
+
+    Route::get('/tweets', [TweetController::class, 'index']);
+    Route::get('/tweet-{userId}', [TweetController::class, 'show']);
 
     Route::post('/follow-{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
