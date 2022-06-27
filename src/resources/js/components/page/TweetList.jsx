@@ -17,7 +17,6 @@ export const TweetList = (props) => {
         const res = await fetch(`/tweets?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
-            console.log("aa");
             setUsers(tweetsData.users);
             setNumUsers(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
@@ -25,8 +24,6 @@ export const TweetList = (props) => {
     };
 
     useEffect(() => {
-        console.log("useEffect");
-        console.log(currentPage);
         getTweets();
     }, [currentPage]);
 

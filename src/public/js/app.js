@@ -8048,7 +8048,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 11;
+                _context.next = 10;
                 break;
               }
 
@@ -8057,12 +8057,11 @@ var TweetList = function TweetList(props) {
 
             case 6:
               tweetsData = _context.sent;
-              console.log("aa");
               setUsers(tweetsData.users);
               setNumUsers(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
 
-            case 11:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -8076,8 +8075,6 @@ var TweetList = function TweetList(props) {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log("useEffect");
-    console.log(currentPage);
     getTweets();
   }, [currentPage]);
   var tweetItem = tweets.map(function (tweet) {
