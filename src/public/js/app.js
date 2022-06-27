@@ -8068,7 +8068,8 @@ var TweetList = function TweetList() {
     return function getTweets() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); // 認証ユーザーのIDを取得
+
 
   var getAuthUser = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -8123,15 +8124,6 @@ var TweetList = function TweetList() {
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
     });
-
-    var showEditButtns = function showEditButtns() {
-      if (authUserId === tweet.user_id) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
-          tweetId: tweet.id
-        });
-      }
-    };
-
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "user__item-container",
@@ -8150,7 +8142,9 @@ var TweetList = function TweetList() {
                     screen_name: userData.screen_name,
                     user_name: userData.user_name
                   }
-                }), showEditButtns()]
+                }), authUserId === tweet.user_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
+                  tweetId: tweet.id
+                }) : ""]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                 className: "mt-1",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {

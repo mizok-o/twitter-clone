@@ -29,6 +29,7 @@ export const TweetList = () => {
         }
     };
 
+    // 認証ユーザーのIDを取得
     const getAuthUser = async () => {
         const res = await fetch("/auth-user", {
             method: "POST",
@@ -52,12 +53,6 @@ export const TweetList = () => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
 
-        const showEditButtns = () => {
-            if (authUserId === tweet.user_id) {
-                return <EditButtns tweetId={tweet.id} />;
-            }
-        };
-
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
@@ -78,7 +73,12 @@ export const TweetList = () => {
                                             user_name: userData.user_name,
                                         }}
                                     />
-                                    {showEditButtns()}
+                                    {/* 認証ユーザーの時のみ表示 */}
+                                    {authUserId === tweet.user_id ? (
+                                        <EditButtns tweetId={tweet.id} />
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                                 <div className="mt-1">
                                     <p>{tweet.text}</p>
