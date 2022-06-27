@@ -8105,8 +8105,7 @@ var TweetList = function TweetList() {
     // ツイートユーザーの情報を取得
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
-    }); // console.log(userData);
-
+    });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "user__item-container",

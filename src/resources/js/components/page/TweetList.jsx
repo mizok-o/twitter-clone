@@ -38,7 +38,6 @@ export const TweetList = () => {
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
-        // console.log(userData);
 
         return (
             <li key={tweet.id}>
