@@ -16,12 +16,12 @@ export const TweetDetail = () => {
         const res = await fetch(`/tweet-${id}`);
         if (res.status === 200) {
             const tweetData = await res.json();
-            return tweetData[0];
+            return tweetData;
         }
     };
 
-    // ツイート主のユーザー情報を取得
-    const getUserData = async (userId) => {
+    // ツイート主のユーザー情報をuserにセット
+    const setUserData = async (userId) => {
         const res = await fetch(`/user-${userId}`);
         if (res.status === 200) {
             const userData = await res.json();
@@ -30,16 +30,17 @@ export const TweetDetail = () => {
     };
 
     // 日付データをyy/mm/ddに加工
-    const cutPostedDate = (dateData) => {
+    const editPostedDate = (dateData) => {
         return dateData.split("T")[0].replace(/-/g, "/");
     };
 
+    // ツイートを取得してから、ユーザー情報を取得
     useEffect(() => {
         getTweet().then((tweetData) => {
-            tweetData.created_at = cutPostedDate(tweetData.created_at);
+            tweetData.created_at = editPostedDate(tweetData.created_at);
             setTweet(tweetData);
 
-            getUserData(tweetData.user_id);
+            setUserData(tweetData.user_id);
         });
     }, []);
 

@@ -7843,7 +7843,7 @@ var TweetDetail = function TweetDetail() {
 
             case 6:
               tweetData = _context.sent;
-              return _context.abrupt("return", tweetData[0]);
+              return _context.abrupt("return", tweetData);
 
             case 8:
             case "end":
@@ -7856,10 +7856,10 @@ var TweetDetail = function TweetDetail() {
     return function getTweet() {
       return _ref.apply(this, arguments);
     };
-  }(); // ツイート主のユーザー情報を取得
+  }(); // ツイート主のユーザー情報をuserにセット
 
 
-  var getUserData = /*#__PURE__*/function () {
+  var setUserData = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(userId) {
       var res, userData;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
@@ -7892,21 +7892,22 @@ var TweetDetail = function TweetDetail() {
       }, _callee2);
     }));
 
-    return function getUserData(_x) {
+    return function setUserData(_x) {
       return _ref2.apply(this, arguments);
     };
   }(); // 日付データをyy/mm/ddに加工
 
 
-  var cutPostedDate = function cutPostedDate(dateData) {
+  var editPostedDate = function editPostedDate(dateData) {
     return dateData.split("T")[0].replace(/-/g, "/");
-  };
+  }; // ツイートを取得してから、ユーザー情報を取得
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getTweet().then(function (tweetData) {
-      tweetData.created_at = cutPostedDate(tweetData.created_at);
+      tweetData.created_at = editPostedDate(tweetData.created_at);
       setTweet(tweetData);
-      getUserData(tweetData.user_id);
+      setUserData(tweetData.user_id);
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -8030,11 +8031,12 @@ var TweetList = function TweetList() {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
       numUsers = _useState6[0],
-      setNumUsers = _useState6[1];
+      setNumUsers = _useState6[1]; // 認証ユーザー以外の全ユーザーを取得
+
 
   var getUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, firstPage;
+      var res, usersData;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8054,8 +8056,8 @@ var TweetList = function TweetList() {
               return res.json();
 
             case 6:
-              firstPage = _context.sent;
-              setUsers(firstPage.users.data);
+              usersData = _context.sent;
+              setUsers(usersData.users.data);
 
             case 8:
             case "end":
@@ -8068,7 +8070,8 @@ var TweetList = function TweetList() {
     return function getUsers() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); // １ページ目のツイートを取得
+
 
   var getTweets = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {

@@ -39,7 +39,8 @@ class TweetController extends Controller
     public function show(int $userId)
     {
         $tweet = Tweet::where('id', $userId)->get();
-        return $tweet;
+        // dd($tweet[0]);
+        return $tweet[0];
     }
 
     /**

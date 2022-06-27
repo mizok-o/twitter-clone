@@ -10,14 +10,16 @@ export const TweetList = () => {
     const [tweets, setTweets] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
 
+    // 認証ユーザー以外の全ユーザーを取得
     const getUsers = async () => {
         const res = await fetch("/users");
         if (res.status === 200) {
-            const firstPage = await res.json();
-            setUsers(firstPage.users.data);
+            const usersData = await res.json();
+            setUsers(usersData.users.data);
         }
     };
 
+    // １ページ目のツイートを取得
     const getTweets = async () => {
         const res = await fetch("/tweets?page=1");
         if (res.status === 200) {
