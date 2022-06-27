@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class TweetController extends Controller
 {
@@ -50,12 +53,23 @@ class TweetController extends Controller
     /**
      * ツイート投稿
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request $request
+     * @param  Tweet $tweet
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'text' => ['required', 'string', 'max:140']
+        ]);
+
+        $validator->validate();
+        $tweet->tweetStore($user->id, $data);
+
+        return;
     }
 
     /**
