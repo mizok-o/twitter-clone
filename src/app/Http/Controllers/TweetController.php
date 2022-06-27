@@ -73,7 +73,24 @@ class TweetController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * ツイート更新
+     *
+     * @param  int $tweetId
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(int $tweetId, Request $request)
+    {
+        $tweet = Tweet::where('id', $tweetId)->first();
+        $tweet->text = $request->text;
+        $tweet->image = $request->image;
+
+        $tweet->save();
+        return;
+    }
+
+    /**
+     * ツイート削除
      *
      * @param  int $tweetId, Tweet $tweet
      * @return \Illuminate\Http\Response
