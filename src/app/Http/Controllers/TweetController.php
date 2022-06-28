@@ -8,7 +8,6 @@ use App\Http\Requests\PostRequest;
 use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Gate;
 
 class TweetController extends Controller
@@ -29,7 +28,6 @@ class TweetController extends Controller
         $followIds = $follow->getFollowIds($userId);
 
         $followIds[] = $userId;
-
         $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
 
         return [
@@ -51,7 +49,7 @@ class TweetController extends Controller
     }
 
     /**
-     * ツイート投稿
+     * 認証ユーザーのみツイート投稿
      *
      * @param  PostRequest $request
      * @param  Tweet $tweet
@@ -59,7 +57,6 @@ class TweetController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet, User $user)
     {
-        // 認証ユーザーかチェック
         $isAuthUser = Gate::forUser($request->user())->allows('store-tweet', $tweet);
         $user->checkIsAuth($isAuthUser);
 
