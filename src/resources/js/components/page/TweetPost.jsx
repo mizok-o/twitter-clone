@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { PageBackButton } from "../parts/PageBackButton";
 import { UserIcon } from "../parts/UserIcon";
 
 export const TweetPost = () => {
@@ -57,6 +58,8 @@ export const TweetPost = () => {
     return (
         <div className="my-3">
             <div className="w-100 p-2 bg-light shadow rounded">
+                <PageBackButton />
+
                 <div className="d-flex">
                     <UserIcon
                         userList={true}

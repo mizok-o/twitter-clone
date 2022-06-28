@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { UserIcon } from "../parts/UserIcon";
+import { PageBackButton } from "../parts/PageBackButton";
 
 export const TweetEdit = () => {
     //　ツイート後に遷移させる用
-    const navigate = useNavigate();
     const location = useLocation();
     const [defaultText] = useState(location.state.defaultText);
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
 
     // urlからツイートIDの取得
     const { id } = useParams();
@@ -33,13 +34,11 @@ export const TweetEdit = () => {
     };
 
     useEffect(() => {
-        console.log("currentText");
         getAuthUserData();
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         // DBに更新するツイートデータ
         const tests = {
             text: e.target.text.value,
@@ -60,6 +59,7 @@ export const TweetEdit = () => {
     return (
         <div className="my-3">
             <div className="w-100 p-2 bg-light shadow rounded">
+                <PageBackButton />
                 <div className="d-flex">
                     <UserIcon
                         userList={true}
