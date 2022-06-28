@@ -8203,7 +8203,12 @@ var TweetPost = function TweetPost() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       user = _useState2[0],
-      setUser = _useState2[1]; //　ツイート後に遷移させる用
+      setUser = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      errorMessage = _useState4[0],
+      setErrorMessage = _useState4[1]; //　ツイート後に遷移させる用
 
 
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)(); // csrf対策のため、トークンを取得
@@ -8257,24 +8262,62 @@ var TweetPost = function TweetPost() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getAuthUserData();
-  }, []);
+  }, []); // ツイート投稿APIを呼ぶ。エラーの場合エラーテキストをセット
+
+  var postTweet = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(tweet) {
+      var res, error;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return fetch("/post-tweet", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRF-TOKEN": csrf_token
+                },
+                body: JSON.stringify(tweet)
+              });
+
+            case 2:
+              res = _context2.sent;
+
+              if (!(res.status === 422)) {
+                _context2.next = 8;
+                break;
+              }
+
+              _context2.next = 6;
+              return res.json();
+
+            case 6:
+              error = _context2.sent;
+              setErrorMessage(error.text[0]);
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function postTweet(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault(); // DBに登録するツイートデータ
 
-    var tests = {
+    var tweet = {
       text: e.target.text.value,
       image: e.target.image.value
     }; //　投稿するツイートを保存して、ツイート一覧へ遷移させる
 
-    fetch("/post-tweet", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": csrf_token
-      },
-      body: JSON.stringify(tests)
-    }); // .then(() => navigate("/"));
+    postTweet(tweet);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -8298,6 +8341,11 @@ var TweetPost = function TweetPost() {
             cols: "30",
             rows: "5",
             placeholder: "\u4ECA\u65E5\u3092\u545F\u3053\u3046"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "api__error__message",
+              children: errorMessage
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "mt-1 d-flex justify-content-between align-items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {

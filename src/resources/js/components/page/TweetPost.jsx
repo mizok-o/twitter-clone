@@ -5,6 +5,7 @@ import { UserIcon } from "../parts/UserIcon";
 
 export const TweetPost = () => {
     const [user, setUser] = useState({});
+    const [errorMessage, setErrorMessage] = useState("");
 
     //　ツイート後に遷移させる用
     const navigate = useNavigate();
@@ -33,25 +34,32 @@ export const TweetPost = () => {
         getAuthUserData();
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // DBに登録するツイートデータ
-        const tests = {
-            text: e.target.text.value,
-            image: e.target.image.value,
-        };
-
-        //　投稿するツイートを保存して、ツイート一覧へ遷移させる
-        fetch("/post-tweet", {
+    // ツイート投稿APIを呼ぶ。エラーの場合エラーテキストをセット
+    const postTweet = async (tweet) => {
+        const res = await fetch("/post-tweet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-            body: JSON.stringify(tests),
+            body: JSON.stringify(tweet),
         });
-        // .then(() => navigate("/"));
+        if (res.status === 422) {
+            const error = await res.json();
+            setErrorMessage(error.text[0]);
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // DBに登録するツイートデータ
+        const tweet = {
+            text: e.target.text.value,
+            image: e.target.image.value,
+        };
+        //　投稿するツイートを保存して、ツイート一覧へ遷移させる
+        postTweet(tweet);
     };
 
     return (
@@ -74,6 +82,11 @@ export const TweetPost = () => {
                             rows="5"
                             placeholder="今日を呟こう"
                         ></textarea>
+                        <div>
+                            <p className="api__error__message">
+                                {errorMessage}
+                            </p>
+                        </div>
                         <div className="mt-1 d-flex justify-content-between align-items-center">
                             <label>
                                 <div className="tweet-form-file"></div>

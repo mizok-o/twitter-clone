@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Consts\Paginate;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 
 class TweetController extends Controller
 {
@@ -53,21 +52,15 @@ class TweetController extends Controller
     /**
      * ツイート投稿
      *
-     * @param  Request $request
+     * @param  PostRequest $request
      * @param  Tweet $tweet
      */
-    public function store(Request $request, Tweet $tweet)
+    public function store(PostRequest $request, Tweet $tweet)
     {
-        $user = auth()->user();
-        $data = $request->all();
+        $userId = auth()->id();
+        $postContent = $request->all();
 
-        $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
-        ]);
-
-        $validator->validate();
-        $tweet->tweetStore($user->id, $data);
-
+        $tweet->tweetStore($userId, $postContent);
         return;
     }
 
