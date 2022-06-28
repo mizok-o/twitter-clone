@@ -63,7 +63,7 @@ class TweetController extends Controller
         $userId = auth()->id();
         $postContent = $request->all();
 
-        $tweet->tweetStore($userId, $postContent);
+        $tweet->postTweet($userId, $postContent);
         return;
     }
 

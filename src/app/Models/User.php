@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Consts\Paginate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,7 +65,7 @@ class User extends Authenticatable
      */
     public function getAllUsers(int $authUserId)
     {
-        return $this->where('id', '<>', $authUserId)->paginate(2);
+        return $this->where('id', '<>', $authUserId)->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**

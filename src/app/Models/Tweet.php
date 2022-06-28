@@ -19,7 +19,7 @@ class Tweet extends Authenticatable
      * @param  array $postContent
      * @return \Illuminate\Http\Response
      */
-    public function tweetStore(int $user_id, array $postContent)
+    public function postTweet(int $user_id, array $postContent)
     {
         $this->user_id = $user_id;
         $this->text = $postContent['text'];
