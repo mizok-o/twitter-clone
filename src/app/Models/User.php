@@ -33,17 +33,6 @@ class User extends Authenticatable
     }
 
     /**
-     *  認証ユーザー以外のユーザーを呼び出し
-     *
-     * @param int $authUserId
-     *
-     */
-    public function getAllUsers(int $authUserId)
-    {
-        return $this->where('id', '<>', $authUserId)->paginate(2);
-    }
-
-    /**
      * フォロー機能
      *
      * @param int $userId
@@ -65,5 +54,28 @@ class User extends Authenticatable
     public function unfollow(int $userId)
     {
         return $this->followsAction()->detach($userId);
+    }
+
+    /**
+     *  認証ユーザー以外のユーザーを呼び出し
+     *
+     * @param int $authUserId
+     *
+     */
+    public function getAllUsers(int $authUserId)
+    {
+        return $this->where('id', '<>', $authUserId)->paginate(2);
+    }
+
+    /**
+     * 認証されていないユーザーの場合400エラーで返す
+     *
+     * @param bool $isAuthUser
+     */
+    public function checkIsAuth(bool $isAuthUser)
+    {
+        if (!$isAuthUser) {
+            abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
+        }
     }
 }

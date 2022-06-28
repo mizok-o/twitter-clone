@@ -44,9 +44,12 @@ export const TweetPost = () => {
             },
             body: JSON.stringify(tweet),
         });
-        if (res.status === 422) {
+        if (res.status === 401) {
             const error = await res.json();
             setErrorMessage(error.text[0]);
+        } else if (res.status === 403) {
+            const message = await res.json();
+            setErrorMessage(message.error);
         }
     };
 
@@ -59,7 +62,7 @@ export const TweetPost = () => {
             image: e.target.image.value,
         };
         //　投稿するツイートを保存して、ツイート一覧へ遷移させる
-        postTweet(tweet);
+        postTweet(tweet).then(() => navigate("/"));
     };
 
     return (

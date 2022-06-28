@@ -8266,7 +8266,7 @@ var TweetPost = function TweetPost() {
 
   var postTweet = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(tweet) {
-      var res, error;
+      var res, error, message;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -8284,8 +8284,8 @@ var TweetPost = function TweetPost() {
             case 2:
               res = _context2.sent;
 
-              if (!(res.status === 422)) {
-                _context2.next = 8;
+              if (!(res.status === 401)) {
+                _context2.next = 10;
                 break;
               }
 
@@ -8295,8 +8295,23 @@ var TweetPost = function TweetPost() {
             case 6:
               error = _context2.sent;
               setErrorMessage(error.text[0]);
+              _context2.next = 15;
+              break;
 
-            case 8:
+            case 10:
+              if (!(res.status === 403)) {
+                _context2.next = 15;
+                break;
+              }
+
+              _context2.next = 13;
+              return res.json();
+
+            case 13:
+              message = _context2.sent;
+              setErrorMessage(message.error);
+
+            case 15:
             case "end":
               return _context2.stop();
           }
@@ -8317,7 +8332,9 @@ var TweetPost = function TweetPost() {
       image: e.target.image.value
     }; //　投稿するツイートを保存して、ツイート一覧へ遷移させる
 
-    postTweet(tweet);
+    postTweet(tweet).then(function () {
+      return navigate("/");
+    });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {

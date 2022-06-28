@@ -8,7 +8,8 @@ use App\Http\Requests\PostRequest;
 use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Facade\FlareClient\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class TweetController extends Controller
 {
@@ -54,9 +55,14 @@ class TweetController extends Controller
      *
      * @param  PostRequest $request
      * @param  Tweet $tweet
+     * @param  User $user
      */
-    public function store(PostRequest $request, Tweet $tweet)
+    public function store(PostRequest $request, Tweet $tweet, User $user)
     {
+        // 認証ユーザーかチェック
+        $isAuthUser = Gate::forUser($request->user())->allows('store-tweet', $tweet);
+        $user->checkIsAuth($isAuthUser);
+
         $userId = auth()->id();
         $postContent = $request->all();
 

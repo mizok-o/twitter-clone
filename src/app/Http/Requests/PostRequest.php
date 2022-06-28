@@ -52,6 +52,6 @@ class PostRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $errorResponse = $validator->errors()->toArray();
-        throw new HttpResponseException(response()->json($errorResponse, 422));
+        throw new HttpResponseException(response()->json($errorResponse, 401));
     }
 }
