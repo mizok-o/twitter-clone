@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { UserIcon } from "../parts/UserIcon";
 import { PageBackButton } from "../parts/PageBackButton";
 
 export const UserEdit = () => {
-    //　ツイート後に遷移させる用
     const [user, setUser] = useState({});
     const navigate = useNavigate();
-
-    // urlからツイートIDの取得
-    const { id } = useParams();
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -37,21 +32,22 @@ export const UserEdit = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // DBに更新するツイートデータ
-        const tests = {
-            text: e.target.text.value,
-            image: e.target.image.value,
+        // 更新するユーザーデータ
+        const userProfile = {
+            screen_name: e.target.screen_name.value,
+            profile: e.target.profile.value,
         };
 
-        //　ツイートを更新して、ツイート一覧へ遷移させる
-        fetch(`/edit-tweet/${id}`, {
+        //　ユーザー情報を更新する
+        fetch(`/edit-user/${user.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-            body: JSON.stringify(tests),
-        }).then(() => navigate("/"));
+            body: JSON.stringify(userProfile),
+        });
+        // .then(() => navigate("/"));
     };
 
     return (
@@ -66,12 +62,13 @@ export const UserEdit = () => {
                     >
                         <input
                             type="name"
+                            name="screen_name"
                             placeholder="名前"
                             defaultValue={user.screen_name}
                         />
                         <textarea
                             className="p-2 w-100 mt-2"
-                            name="text"
+                            name="profile"
                             defaultValue={user.profile}
                             cols="20"
                             rows="5"

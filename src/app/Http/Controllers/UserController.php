@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Follow;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -64,13 +65,16 @@ class UserController extends Controller
     /**
      * ユーザー情報編集
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $userId
      */
-    public function update(User $user)
+    public function update(int $userId, Request $request)
     {
-        dd($user);
+
+        // $tweet = User::where('id', $userId)->first();
+        // $tweet->text = $request->text;
+        // $tweet->image = $request->image;
+
+        // $tweet->save();
     }
 
     /**
