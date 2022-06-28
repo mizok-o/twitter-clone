@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Follow;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -53,6 +52,39 @@ class UserController extends Controller
     }
 
     /**
+     *  認証ユーザーのIDを取得
+     *
+     * @return int
+     */
+    public function getAuthUserId()
+    {
+        return auth()->id();
+    }
+
+    /**
+     * ユーザー情報編集
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(User $user)
+    {
+        dd($user);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    /**
      *  フォロー数カウント
      *
      * @param  int  $userId
@@ -92,39 +124,5 @@ class UserController extends Controller
     public function unfollow(int $userId)
     {
         auth()->user()->unfollow($userId);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

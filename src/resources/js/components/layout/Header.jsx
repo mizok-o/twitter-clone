@@ -2,8 +2,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 
-export const Header = () => {
+export const Header = (props) => {
+    const { authUserId } = props;
     const navigate = useNavigate();
+
+    const toProfile = () => {
+        navigate(`/profile/${authUserId}`);
+    };
 
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
@@ -16,8 +21,6 @@ export const Header = () => {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-        }).then(() => {
-            navigate("/login");
         });
     };
 
@@ -59,7 +62,10 @@ export const Header = () => {
                                     />
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item to="/userlist" value="1">
+                                    <Dropdown.Item
+                                        onClick={toProfile}
+                                        value="1"
+                                    >
                                         プロフィール
                                     </Dropdown.Item>
                                     <Dropdown.Item

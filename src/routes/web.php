@@ -16,22 +16,24 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
+    // ユーザー
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{userId}', [UserController::class, 'show']);
-
+    Route::get('/auth-user-id', [UserController::class, 'getAuthUserId']);
+    Route::post('/auth-user', [UserController::class, 'getAuthuserInfo']);
+    Route::post('/edit-user/{userId}', [UserController::class, 'update']);
+    // フォロー
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
+    Route::post('/follow-{userId}', [UserController::class, 'follow']);
+    Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
 
+    // ツイート
     Route::get('/tweets', [TweetController::class, 'index']);
     Route::get('/tweets/{userId}', [TweetController::class, 'show']);
-
     Route::post('/post-tweet', [TweetController::class, 'store']);
     Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
     Route::post('/destroy-tweet/{tweetId}', [TweetController::class, 'destroy']);
-
-    Route::post('/follow-{userId}', [UserController::class, 'follow']);
-    Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
-    Route::post('/auth-user', [UserController::class, 'getAuthuserInfo']);
 });
 
 Route::get('/{any}', function () {

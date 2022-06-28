@@ -68,8 +68,8 @@ export const UserProfile = () => {
     const profileButton = () => {
         if (isAuth) {
             return (
-                <button type="button" className="btn btn-outline-dark">
-                    編集
+                <button className="btn btn-outline-dark">
+                    <Link to="/user/edit">編集</Link>
                 </button>
             );
         } else {
