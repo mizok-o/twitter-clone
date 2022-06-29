@@ -4,13 +4,11 @@ namespace App\Models;
 
 use App\Consts\Paginate;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tweet extends Model
 {
 
-    use HasFactory;
     /**
      * フォローしているユーザーのツイートを取得
      *
