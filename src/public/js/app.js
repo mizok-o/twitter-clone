@@ -7789,10 +7789,10 @@ var TweetAction = function TweetAction(props) {
 
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useLocation)();
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(isEditPage ? location.state.defaultText : ""),
-      _useState2 = _slicedToArray(_useState, 1),
-      defaultText = _useState2[0]; // ここまで--------------------
-
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      defaultText = _useState2[0],
+      setDefaultText = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -7848,12 +7848,13 @@ var TweetAction = function TweetAction(props) {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setDefaultText(isEditPage ? location.state.defaultText : "");
     getAuthUserData();
   }, []); // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
 
   var postTweet = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(url, tweet) {
-      var res, _errorMessage, _errorMessage2;
+      var res, _errorMessage;
 
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
@@ -7878,38 +7879,18 @@ var TweetAction = function TweetAction(props) {
               }
 
               navigate("/");
-              _context2.next = 19;
+              _context2.next = 11;
               break;
 
             case 7:
-              if (!(res.status === 401)) {
-                _context2.next = 14;
-                break;
-              }
-
-              _context2.next = 10;
+              _context2.next = 9;
               return res.json();
 
-            case 10:
+            case 9:
               _errorMessage = _context2.sent;
-              setErrorMessage(_errorMessage.text[0]);
-              _context2.next = 19;
-              break;
+              setErrorMessage(_errorMessage.text);
 
-            case 14:
-              if (!(res.status === 403)) {
-                _context2.next = 19;
-                break;
-              }
-
-              _context2.next = 17;
-              return res.json();
-
-            case 17:
-              _errorMessage2 = _context2.sent;
-              setErrorMessage(_errorMessage2.error);
-
-            case 19:
+            case 11:
             case "end":
               return _context2.stop();
           }

@@ -18,11 +18,8 @@ export const TweetAction = (props) => {
     // ツイート「更新」ページで使用
     const { id } = useParams();
     const location = useLocation();
-    const [defaultText] = useState(
-        isEditPage ? location.state.defaultText : ""
-    );
-    // ここまで--------------------
 
+    const [defaultText, setDefaultText] = useState("");
     const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -44,6 +41,7 @@ export const TweetAction = (props) => {
     };
 
     useEffect(() => {
+        setDefaultText(isEditPage ? location.state.defaultText : "");
         getAuthUserData();
     }, []);
 
@@ -59,12 +57,9 @@ export const TweetAction = (props) => {
         });
         if (res.status === 200) {
             navigate("/");
-        } else if (res.status === 401) {
+        } else {
             const errorMessage = await res.json();
-            setErrorMessage(errorMessage.text[0]);
-        } else if (res.status === 403) {
-            const errorMessage = await res.json();
-            setErrorMessage(errorMessage.error);
+            setErrorMessage(errorMessage.text);
         }
     };
 
