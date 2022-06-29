@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Consts\Paginate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tweet extends Model
 {
 
+    use HasFactory;
     /**
      * フォローしているユーザーのツイートを取得
      *
@@ -42,6 +44,21 @@ class Tweet extends Model
         $this->user_id = $userId;
         $this->text = $postContent['text'];
         return $this->save();
+    }
+
+    /**
+     * ツイート更新
+     *
+     * @param  int $user_id
+     * @param  object $request
+     */
+    public function updateTweet(int $tweetId, object $request): bool
+    {
+        $tweet = $this->where('id', $tweetId)->first();
+        $tweet->text = $request->text;
+        $tweet->image = $request->image;
+
+        return $tweet->save();
     }
 
     /**

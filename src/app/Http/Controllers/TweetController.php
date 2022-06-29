@@ -70,6 +70,25 @@ class TweetController extends Controller
     }
 
     /**
+     * 認証ユーザーのみツイート更新
+     *
+     * @param  PostRequest $request
+     * @param  int $tweetId
+     * @param  Tweet $tweet
+     * @param  User $user
+     */
+    public function update(PostRequest $request, int $tweetId, Tweet $tweet, User $user)
+    {
+        $isAuthUser = $user->checkIsAuth($request->user(), 'update-tweet', $tweet);
+        if (!$isAuthUser) {
+            abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
+        }
+
+        $tweet->updateTweet($tweetId, $request);
+        return;
+    }
+
+    /**
      * 認証ユーザーのみツイート削除
      *
      * @param  Request $request

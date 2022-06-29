@@ -21,6 +21,17 @@ class TweetPolicy
     }
 
     /**
+     * update
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function update(User $user): bool
+    {
+        return $user->id === auth()->id();
+    }
+
+    /**
      * destroy
      *
      * @param  \App\Models\User  $user

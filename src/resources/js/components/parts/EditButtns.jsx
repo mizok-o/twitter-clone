@@ -1,15 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const EditButtns = (props) => {
-    const { tweetId } = props;
+    const { tweetId, currentText } = props;
+
+    const navigate = useNavigate();
 
     // // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
 
-    const editTweet = (e) => {
+    const moveEditPage = (e) => {
         e.preventDefault();
+        navigate(`/tweet/edit/${tweetId}`, {
+            state: { defaultText: currentText },
+        });
     };
 
     const deleteTweet = async (e) => {
@@ -32,7 +38,7 @@ export const EditButtns = (props) => {
             <button
                 type="button"
                 className="btn btn-outline-dark py-0 px-2 fs-6"
-                onClick={(e) => editTweet(e)}
+                onClick={(e) => moveEditPage(e)}
             >
                 更新
             </button>
