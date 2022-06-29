@@ -24,7 +24,7 @@ export const EditButtns = (props) => {
         const checkDelete = confirm("ツイート削除しますか？");
         if (checkDelete) {
             await fetch(`/destroy-tweet/${tweetId}`, {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": csrf_token,

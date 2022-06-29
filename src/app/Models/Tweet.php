@@ -49,7 +49,7 @@ class Tweet extends Model
     /**
      * ツイート更新
      *
-     * @param  int $user_id
+     * @param  int $tweetId
      * @param  object $request
      */
     public function updateTweet(int $tweetId, object $request): bool

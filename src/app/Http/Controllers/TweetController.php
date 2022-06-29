@@ -71,6 +71,7 @@ class TweetController extends Controller
 
     /**
      * 認証ユーザーのみツイート更新
+     * imageは空だが、今後使用予定
      *
      * @param  PostRequest $request
      * @param  int $tweetId
@@ -84,8 +85,7 @@ class TweetController extends Controller
             abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
         }
 
-        $tweet->updateTweet($tweetId, $request);
-        return;
+        return $tweet->updateTweet($tweetId, $request);;
     }
 
     /**

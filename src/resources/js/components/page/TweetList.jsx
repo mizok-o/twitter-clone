@@ -13,11 +13,6 @@ export const TweetList = () => {
     const [tweets, setTweets] = useState([]);
     const [authUserId, setAuthUserId] = useState(0);
 
-    // csrf対策のため、トークンを取得
-    const csrf_token = document.querySelector(
-        'meta[name="csrf-token"]'
-    ).content;
-
     // １ページ目のツイートを取得
     const getTweets = async () => {
         const res = await fetch(`/tweets?page=${currentPage}`);
@@ -69,7 +64,10 @@ export const TweetList = () => {
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
                                     {authUserId === tweet.user_id ? (
-                                        <EditButtns tweetId={tweet.id} />
+                                        <EditButtns
+                                            currentText={tweet.text}
+                                            tweetId={tweet.id}
+                                        />
                                     ) : (
                                         ""
                                     )}

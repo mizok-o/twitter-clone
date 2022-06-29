@@ -1,9 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { PageBackButton } from "../parts/BackToTweetList";
 import { UserIcon } from "../parts/UserIcon";
 
-export const TweetPost = () => {
+/*
+    TweetActionファイルでツイート更新、投稿の両方のページを表示。
+
+    props:isEditPageは、ツイート更新ページのみ「true」がセットされる。
+    isEditPageが「false」 → ツイート「投稿」ページ
+    isEditPageが「true」 → ツイート「更新」ページ
+*/
+
+export const TweetAction = (props) => {
+    const { isEditPage } = props;
+
+    // ツイート「更新」ページで使用
+    const { id } = useParams();
+    const location = useLocation();
+    const [defaultText] = useState(
+        isEditPage ? location.state.defaultText : ""
+    );
+    // ここまで--------------------
+
     const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -15,6 +34,7 @@ export const TweetPost = () => {
         'meta[name="csrf-token"]'
     ).content;
 
+    // 認証ユーザー情報を取得
     const getAuthUserData = async () => {
         const res = await fetch("/auth-user");
         if (res.status === 200) {
@@ -27,40 +47,52 @@ export const TweetPost = () => {
         getAuthUserData();
     }, []);
 
-    // ツイート投稿APIを呼ぶ。エラーの場合エラーテキストをセット
-    const postTweet = async (tweet) => {
-        const res = await fetch("/post-tweet", {
-            method: "POST",
+    // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
+    const postTweet = async (url, tweet) => {
+        const res = await fetch(url, {
+            method: isEditPage ? "PUT" : "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
             body: JSON.stringify(tweet),
         });
-        if (res.status === 401) {
-            const error = await res.json();
-            setErrorMessage(error.text[0]);
+        if (res.status === 200) {
+            navigate("/");
+        } else if (res.status === 401) {
+            const errorMessage = await res.json();
+            setErrorMessage(errorMessage.text[0]);
         } else if (res.status === 403) {
-            const message = await res.json();
-            setErrorMessage(message.error);
+            const errorMessage = await res.json();
+            setErrorMessage(errorMessage.error);
         }
+    };
+
+    // ページによってurlを変更
+    const setApiUrl = () => {
+        if (isEditPage) {
+            return `/edit-tweet/${id}`;
+        }
+        return "/post-tweet";
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // DBに登録するツイートデータ
+        // 入力されたツイートデータ
         const tweet = {
             text: e.target.text.value,
             image: e.target.image.value,
         };
-        //　投稿するツイートを保存して、ツイート一覧へ遷移させる
-        postTweet(tweet);
+
+        const url = setApiUrl();
+        postTweet(url, tweet);
     };
 
     return (
         <div className="my-3">
             <div className="w-100 p-2 bg-light shadow rounded">
+                <PageBackButton />
                 <div className="d-flex">
                     <UserIcon
                         userList={true}
@@ -74,9 +106,10 @@ export const TweetPost = () => {
                         <textarea
                             className="p-2 w-100"
                             name="text"
+                            defaultValue={isEditPage ? defaultText : ""}
                             cols="30"
                             rows="5"
-                            placeholder="今日を呟こう"
+                            placeholder={isEditPage ? "" : "今日を呟こう"}
                         ></textarea>
                         <div>
                             <p className="api__error__message">
@@ -94,10 +127,14 @@ export const TweetPost = () => {
                                 />
                             </label>
                             <button
-                                className="btn btn-primary mt-1"
+                                className={`btn ${
+                                    isEditPage ? "btn-success" : "btn-primary"
+                                } mt-1`}
                                 type="submit"
                             >
-                                ツイートする
+                                {isEditPage
+                                    ? "ツイートを更新する"
+                                    : "ツイートする"}
                             </button>
                         </div>
                     </form>
