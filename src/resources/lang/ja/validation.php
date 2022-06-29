@@ -79,7 +79,7 @@ return [
     'max'                  => [
         'numeric' => ':attributeには、:max以下の数字を指定してください。',
         'file'    => ':attributeには、:max kB以下のファイルを指定してください。',
-        'string'  => ':attributeは、:max文字以下で指定してください。',
+        'string'  => ':attributeは、:max文字以下で入力してください。',
         'array'   => ':attributeは:max個以下指定してください。',
     ],
     'mimes'                => ':attributeには:valuesタイプのファイルを指定してください。',
@@ -154,6 +154,7 @@ return [
         're_password' => '確認用パスワード',
         'remember' => 'ログインしたままにする',
         'password_forgot' => 'パスワードを忘れた場合',
+        'text' => 'ツイート'
     ],
 
 ];

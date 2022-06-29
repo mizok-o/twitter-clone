@@ -21,13 +21,7 @@ export const UserProfile = () => {
     ).content;
     // 認証ユーザーの情報取得
     const getAuthUserData = async () => {
-        const res = await fetch("/auth-user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrf_token,
-            },
-        });
+        const res = await fetch("/auth-user");
         if (res.status === 200) {
             const authUserData = await res.json();
             return authUserData;

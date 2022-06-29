@@ -31,13 +31,7 @@ export const TweetList = () => {
 
     // 認証ユーザーのIDを取得
     const getAuthUser = async () => {
-        const res = await fetch("/auth-user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrf_token,
-            },
-        });
+        const res = await fetch("/auth-user");
         if (res.status === 200) {
             const auth = await res.json();
             setAuthUserId(auth.user.id);

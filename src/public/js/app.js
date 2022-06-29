@@ -8060,13 +8060,7 @@ var TweetList = function TweetList() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/auth-user", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-CSRF-TOKEN": csrf_token
-                }
-              });
+              return fetch("/auth-user");
 
             case 2:
               res = _context2.sent;
@@ -8223,19 +8217,13 @@ var TweetPost = function TweetPost() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/auth-user", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-CSRF-TOKEN": csrf_token
-                }
-              });
+              return fetch("/auth-user");
 
             case 2:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 9;
+                _context.next = 8;
                 break;
               }
 
@@ -8244,10 +8232,9 @@ var TweetPost = function TweetPost() {
 
             case 6:
               userData = _context.sent;
-              console.log(userData);
               setUser(userData.user);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -8332,9 +8319,7 @@ var TweetPost = function TweetPost() {
       image: e.target.image.value
     }; //　投稿するツイートを保存して、ツイート一覧へ遷移させる
 
-    postTweet(tweet).then(function () {
-      return navigate("/");
-    });
+    postTweet(tweet);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -8462,13 +8447,7 @@ var UserList = function UserList() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/auth-user", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-CSRF-TOKEN": csrf_token
-                }
-              });
+              return fetch("/auth-user");
 
             case 2:
               res = _context.sent;
@@ -8754,13 +8733,7 @@ var UserProfile = function UserProfile() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/auth-user", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "X-CSRF-TOKEN": csrf_token
-                }
-              });
+              return fetch("/auth-user");
 
             case 2:
               res = _context.sent;

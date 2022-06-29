@@ -16,16 +16,9 @@ export const TweetPost = () => {
     ).content;
 
     const getAuthUserData = async () => {
-        const res = await fetch("/auth-user", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrf_token,
-            },
-        });
+        const res = await fetch("/auth-user");
         if (res.status === 200) {
             const userData = await res.json();
-            console.log(userData);
             setUser(userData.user);
         }
     };
@@ -62,7 +55,7 @@ export const TweetPost = () => {
             image: e.target.image.value,
         };
         //　投稿するツイートを保存して、ツイート一覧へ遷移させる
-        postTweet(tweet).then(() => navigate("/"));
+        postTweet(tweet);
     };
 
     return (
