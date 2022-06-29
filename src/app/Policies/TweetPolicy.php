@@ -16,32 +16,19 @@ class TweetPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function store(User $user)
+    public function store(User $user): bool
     {
         return $user->id === auth()->id();
     }
 
     /**
-     * Determine whether the user can update the model.
+     * destroy
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Tweet  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Tweet $tweet)
+    public function destroy(User $user): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Tweet  $tweet
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Tweet $tweet)
-    {
-        //
+        return $user->id === auth()->id();
     }
 }

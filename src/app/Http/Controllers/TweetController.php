@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class TweetController extends Controller
@@ -57,7 +58,7 @@ class TweetController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet, User $user)
     {
-        $isAuthUser = Gate::forUser($request->user())->allows('store-tweet', $tweet);
+        $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $tweet);
         if (!$isAuthUser) {
             abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
         }
@@ -70,13 +71,18 @@ class TweetController extends Controller
     }
 
     /**
-     * ツイート削除
+     * 認証ユーザーのみツイート削除
      *
      * @param  int $tweetId
      * @param  Tweet $tweet
      */
-    public function destroy(int $tweetId, Tweet $tweet)
+    public function destroy(Request $request, int $tweetId, Tweet $tweet, User $user)
     {
+        $isAuthUser = $user->checkIsAuth($request->user(), 'destroy-tweet', $tweet);
+        if (!$isAuthUser) {
+            abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
+        }
+
         $tweet->destroyTweet($tweetId);
         return;
     }

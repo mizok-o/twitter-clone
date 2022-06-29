@@ -22,7 +22,7 @@ class Tweet extends Authenticatable
      */
     public function getFollowsTweets(array $followIds): object
     {
-        return $this->whereIn('user_id', $followIds)->orderBy('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        return $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**
@@ -44,7 +44,7 @@ class Tweet extends Authenticatable
      */
     public function postTweet(int $userId, array $postContent)
     {
-        $this->userId = $userId;
+        $this->user_id = $userId;
         $this->text = $postContent['text'];
         $this->save();
         return;
@@ -55,7 +55,7 @@ class Tweet extends Authenticatable
      *
      * @param  int $tweetId
      */
-    public function destroyTweet(int $tweetId)
+    public function destroyTweet(int $tweetId): int
     {
         return $this->where("id", $tweetId)->delete();
     }

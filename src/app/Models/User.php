@@ -6,6 +6,7 @@ use App\Consts\Paginate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -25,7 +26,7 @@ class User extends Authenticatable
      */
     public function getAllUsers(int $authUserId): object
     {
-        return $this->where('id', '<>', $authUserId)->orderBy('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        return $this->where('id', '<>', $authUserId)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**
@@ -79,12 +80,15 @@ class User extends Authenticatable
     }
 
     /**
-     * 認証されていないユーザーの場合400エラーで返す
+     * 認証されているかをチェック
      *
-     * @param bool $isAuthUser
+     * @param object $request
+     * @param string $actionName
+     * @param object $tweet
+     * @return bool
      */
-    // public function checkIsAuth($request, $tweet)
-    // {
-    //     return Gate::forUser($request)->allows('store-tweet', $tweet);
-    // }
+    public function checkIsAuth(object $user, string $actionName, object $tweet): bool
+    {
+        return Gate::forUser($user)->allows($actionName, $tweet);
+    }
 }

@@ -27,5 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('store-tweet', [TweetPolicy::class, 'store']);
+        Gate::define('destroy-tweet', [TweetPolicy::class, 'destroy']);
     }
 }

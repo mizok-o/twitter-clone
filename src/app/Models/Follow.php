@@ -36,7 +36,7 @@ class Follow extends Authenticatable
     }
 
     /**
-     *  フォローしてるIDリストを取得　
+     *  フォロー・フォロワー数をカウント
      *
      * @param  string $columnName
      * @param  int  $userId
