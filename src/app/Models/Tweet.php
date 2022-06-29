@@ -4,15 +4,10 @@ namespace App\Models;
 
 use App\Consts\Paginate;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class Tweet extends Authenticatable
+class Tweet extends Model
 {
-
-    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * フォローしているユーザーのツイートを取得
@@ -20,7 +15,7 @@ class Tweet extends Authenticatable
      * @param  array $followIds
      * @return object
      */
-    public function getFollowsTweets(array $followIds): object
+    public function getPaginatedFollowsTweets(array $followIds): object
     {
         return $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
@@ -42,12 +37,11 @@ class Tweet extends Authenticatable
      * @param  int $user_id
      * @param  array $postContent
      */
-    public function postTweet(int $userId, array $postContent)
+    public function postTweet(int $userId, array $postContent): bool
     {
         $this->user_id = $userId;
         $this->text = $postContent['text'];
-        $this->save();
-        return;
+        return $this->save();
     }
 
     /**

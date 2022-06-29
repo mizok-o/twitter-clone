@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Follow;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
      * 認証ユーザーを除いたusersテーブル一覧を取得
      *
+     * @param  User $user
      * @return array<object, int>
      */
-    public function index(User $user)
+    public function index(User $user): array
     {
         $users = $user->getAllUsers(auth()->id());
         $numUsers = $users->count();
@@ -31,7 +31,7 @@ class UserController extends Controller
      * @param  int  $userId
      * @return object
      */
-    public function show(int $userId, User $user)
+    public function show(int $userId, User $user): object
     {
         return $user->getUserById($userId);
     }
@@ -42,7 +42,7 @@ class UserController extends Controller
      * @param  Follow $follow
      * @return array<int, object>
      */
-    public function getAuthUserInfo(Follow $follow)
+    public function getAuthUserInfo(Follow $follow): array
     {
         $user = auth()->user();
         $follows = $follow->getFollowsList($user->id);
@@ -59,7 +59,7 @@ class UserController extends Controller
      * @param  Follow $follow
      * @return int
      */
-    public function countFollows(int $userId, Follow $follow)
+    public function countFollows(int $userId, Follow $follow): int
     {
         return $follow->countFollowsNum('follow_user_id', $userId);
     }
@@ -71,7 +71,7 @@ class UserController extends Controller
      * @param  Follow $follow
      * @return int
      */
-    public function countFollowers(int $userId, Follow $follow)
+    public function countFollowers(int $userId, Follow $follow): int
     {
         return $follow->countFollowsNum('followed_user_id', $userId);
     }
@@ -96,39 +96,5 @@ class UserController extends Controller
     {
         $user->unfollow($userId);
         return;
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

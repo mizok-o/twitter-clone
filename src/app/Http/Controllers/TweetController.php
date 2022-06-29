@@ -8,18 +8,17 @@ use App\Models\Follow;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class TweetController extends Controller
 {
     /**
-     * ユーザーのツイート一覧取得
+     * ユーザーのフォローしているツイート一覧ページネーションして取得
      *
      * @param Follow $follow
      * @param Tweet $tweet
-     * @return array<object, int>
+     * @return array<object, object>
      */
-    public function index(Follow $follow, Tweet $tweet)
+    public function index(Follow $follow, Tweet $tweet): array
     {
         $users = User::all();
 
@@ -28,8 +27,7 @@ class TweetController extends Controller
 
         $followIds[] = $userId;
 
-        // followIdsの配列からツイートをソートとページネーションして取得する
-        $tweets = $tweet->getFollowsTweets($followIds);
+        $tweets = $tweet->getPaginatedFollowsTweets($followIds);
         return [
             "users" => $users,
             "tweets" => $tweets
@@ -43,7 +41,7 @@ class TweetController extends Controller
      * @param  Tweet $tweet
      * @return object
      */
-    public function show(int $userId, Tweet $tweet)
+    public function show(int $userId, Tweet $tweet): object
     {
         $userTweet = $tweet->getTweetByUserId($userId);
         return $userTweet[0];
@@ -51,6 +49,7 @@ class TweetController extends Controller
 
     /**
      * 認証ユーザーのみツイート投稿
+     * 今後画像付きツイートの実装をするために、$postContentは配列で渡す
      *
      * @param  PostRequest $request
      * @param  Tweet $tweet
@@ -73,8 +72,10 @@ class TweetController extends Controller
     /**
      * 認証ユーザーのみツイート削除
      *
+     * @param  Request $request
      * @param  int $tweetId
      * @param  Tweet $tweet
+     * @param  User $user
      */
     public function destroy(Request $request, int $tweetId, Tweet $tweet, User $user)
     {

@@ -3,23 +3,18 @@
 namespace App\Models;
 
 use App\Consts\Paginate;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-
-    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'user_name', 'screen_name', 'email', 'password'
     ];
 
     /**
-     *  認証ユーザー以外のユーザー一覧ページネートして取得
+     *  認証ユーザー以外のユーザー一覧をページネートして取得
      *
      * @param int $authUserId
      * @return object
@@ -33,8 +28,9 @@ class User extends Authenticatable
      *  ID指定してユーザーを取得
      *
      * @param int $userId
+     * @return object
      */
-    public function getUserById(int $userId)
+    public function getUserById(int $userId): object
     {
         return $this->find($userId);
     }

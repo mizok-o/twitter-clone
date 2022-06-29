@@ -2,14 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Follow extends Authenticatable
+class Follow extends Model
 {
-
-    use Notifiable, HasFactory;
 
     protected $fillable = ['follow_user_id', 'followed_user_id'];
     public $timestamps = false;
@@ -19,7 +15,7 @@ class Follow extends Authenticatable
      *
      * @param int $userId
      */
-    public function getFollowsList(int $userId)
+    public function getFollowsList(int $userId): object
     {
         return $this->where('follow_user_id', $userId)->get('followed_user_id');
     }
