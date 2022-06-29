@@ -17,8 +17,8 @@ class UserController extends Controller
     public function index(User $user)
     {
         $users = $user->getAllUsers(auth()->id());
+        $numUsers = $users->count();
 
-        $numUsers = User::get()->count();
         return [
             "users" => $users,
             "numUsers" => $numUsers
@@ -31,21 +31,21 @@ class UserController extends Controller
      * @param  int  $userId
      * @return object
      */
-    public function show(int $userId)
+    public function show(int $userId, User $user)
     {
-        $user = User::find($userId);
-        return $user;
+        return $user->getUserById($userId);
     }
 
     /**
      *  認証ユーザー情報とフォローしている人リストを取得
      *
+     * @param  Follow $follow
      * @return array<int, object>
      */
-    public function getAuthUserInfo()
+    public function getAuthUserInfo(Follow $follow)
     {
         $user = auth()->user();
-        $follows = Follow::where('follow_user_id', $user->id)->get('followed_user_id');
+        $follows = $follow->getFollowsList($user->id);
         return [
             "user" => $user,
             "follows" => $follows
@@ -56,22 +56,24 @@ class UserController extends Controller
      *  フォロー数カウント
      *
      * @param  int  $userId
+     * @param  Follow $follow
      * @return int
      */
-    public function countFollows(int $userId)
+    public function countFollows(int $userId, Follow $follow)
     {
-        return Follow::where('follow_user_id', $userId)->count();
+        return $follow->countFollowsNum('follow_user_id', $userId);
     }
 
     /**
      *  フォロワー数カウント
      *
      * @param  int  $userId
+     * @param  Follow $follow
      * @return int
      */
-    public function countFollowers(int $userId)
+    public function countFollowers(int $userId, Follow $follow)
     {
-        return Follow::where('followed_user_id', $userId)->count();
+        return $follow->countFollowsNum('followed_user_id', $userId);
     }
 
     /**
@@ -79,9 +81,10 @@ class UserController extends Controller
      *
      * @param  int  $userId
      */
-    public function follow(int $userId)
+    public function follow(int $userId, User $user)
     {
-        auth()->user()->follow($userId);
+        $user->follow($userId);
+        return;
     }
 
     /**
@@ -89,9 +92,10 @@ class UserController extends Controller
      *
      * @param  int  $userId
      */
-    public function unfollow(int $userId)
+    public function unfollow(int $userId, User $user)
     {
-        auth()->user()->unfollow($userId);
+        $user->unfollow($userId);
+        return;
     }
 
     /**

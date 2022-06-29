@@ -18,6 +18,27 @@ class User extends Authenticatable
     ];
 
     /**
+     *  認証ユーザー以外のユーザー一覧ページネートして取得
+     *
+     * @param int $authUserId
+     * @return object
+     */
+    public function getAllUsers(int $authUserId): object
+    {
+        return $this->where('id', '<>', $authUserId)->orderBy('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+    }
+
+    /**
+     *  ID指定してユーザーを取得
+     *
+     * @param int $userId
+     */
+    public function getUserById(int $userId)
+    {
+        return $this->find($userId);
+    }
+
+    /**
      *  フォロー、フォロー解除するときに、'follows', 'follow_user_id', 'followed_user_id'を参照
      */
     public function followsAction()
@@ -58,25 +79,12 @@ class User extends Authenticatable
     }
 
     /**
-     *  認証ユーザー以外のユーザーを呼び出し
-     *
-     * @param int $authUserId
-     *
-     */
-    public function getAllUsers(int $authUserId)
-    {
-        return $this->where('id', '<>', $authUserId)->paginate(Paginate::NUM_TWEET_PER_PAGE);
-    }
-
-    /**
      * 認証されていないユーザーの場合400エラーで返す
      *
      * @param bool $isAuthUser
      */
-    public function checkIsAuth(bool $isAuthUser)
-    {
-        if (!$isAuthUser) {
-            abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
-        }
-    }
+    // public function checkIsAuth($request, $tweet)
+    // {
+    //     return Gate::forUser($request)->allows('store-tweet', $tweet);
+    // }
 }
