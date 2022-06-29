@@ -55,7 +55,7 @@ class TweetController extends Controller
      * @param  Tweet $tweet
      * @param  User $user
      */
-    public function store(PostRequest $request, Tweet $tweet, User $user)
+    public function store(PostRequest $request, Tweet $tweet, User $user): bool
     {
         $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $tweet);
         if (!$isAuthUser) {
@@ -65,8 +65,7 @@ class TweetController extends Controller
         $userId = auth()->id();
         $postContent = $request->all();
 
-        $tweet->postTweet($userId, $postContent);
-        return;
+        return $tweet->postTweet($userId, $postContent);
     }
 
     /**
@@ -78,14 +77,14 @@ class TweetController extends Controller
      * @param  Tweet $tweet
      * @param  User $user
      */
-    public function update(PostRequest $request, int $tweetId, Tweet $tweet, User $user)
+    public function update(PostRequest $request, int $tweetId, Tweet $tweet, User $user): bool
     {
         $isAuthUser = $user->checkIsAuth($request->user(), 'update-tweet', $tweet);
         if (!$isAuthUser) {
             abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
         }
 
-        return $tweet->updateTweet($tweetId, $request);;
+        return $tweet->updateTweet($tweetId, $request);
     }
 
     /**
@@ -96,14 +95,13 @@ class TweetController extends Controller
      * @param  Tweet $tweet
      * @param  User $user
      */
-    public function destroy(Request $request, int $tweetId, Tweet $tweet, User $user)
+    public function destroy(Request $request, int $tweetId, Tweet $tweet, User $user): bool
     {
         $isAuthUser = $user->checkIsAuth($request->user(), 'destroy-tweet', $tweet);
         if (!$isAuthUser) {
             abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
         }
 
-        $tweet->destroyTweet($tweetId);
-        return;
+        return $tweet->destroyTweet($tweetId);
     }
 }

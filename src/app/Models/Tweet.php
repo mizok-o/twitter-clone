@@ -66,7 +66,7 @@ class Tweet extends Model
      *
      * @param  int $tweetId
      */
-    public function destroyTweet(int $tweetId): int
+    public function destroyTweet(int $tweetId): bool
     {
         return $this->where("id", $tweetId)->delete();
     }
