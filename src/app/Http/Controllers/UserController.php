@@ -45,7 +45,7 @@ class UserController extends Controller
     public function getAuthUserInfo(Follow $follow): array
     {
         $user = auth()->user();
-        $follows = $follow->getFollowsList($user->id);
+        $follows = $follow->getFollowsList(auth()->id());
         return [
             "user" => $user,
             "follows" => $follows
