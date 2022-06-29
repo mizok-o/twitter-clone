@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Consts\Paginate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Follow;
@@ -12,7 +11,6 @@ use Illuminate\Support\Facades\Gate;
 
 class TweetController extends Controller
 {
-
     /**
      * ユーザーのツイート一覧取得
      *
@@ -28,8 +26,9 @@ class TweetController extends Controller
         $followIds = $follow->getFollowIds($userId);
 
         $followIds[] = $userId;
-        $tweets = $tweet->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
 
+        // followIdsの配列からツイートをソートとページネーションして取得する
+        $tweets = $tweet->getFollowsTweets($followIds);
         return [
             "users" => $users,
             "tweets" => $tweets
@@ -40,12 +39,13 @@ class TweetController extends Controller
      *  ユーザーのツイートID指定して取得
      *
      * @param  int  $userId
+     * @param  Tweet $tweet
      * @return object
      */
-    public function show(int $userId)
+    public function show(int $userId, Tweet $tweet)
     {
-        $tweet = Tweet::where('id', $userId)->get();
-        return $tweet[0];
+        $userTweet = $tweet->getTweetByUserId($userId);
+        return $userTweet[0];
     }
 
     /**
@@ -58,7 +58,9 @@ class TweetController extends Controller
     public function store(PostRequest $request, Tweet $tweet, User $user)
     {
         $isAuthUser = Gate::forUser($request->user())->allows('store-tweet', $tweet);
-        $user->checkIsAuth($isAuthUser);
+        if (!$isAuthUser) {
+            abort(Response()->json(['error' => '認証されていないユーザーです。'], 401));
+        }
 
         $userId = auth()->id();
         $postContent = $request->all();
@@ -75,7 +77,7 @@ class TweetController extends Controller
      */
     public function destroy(int $tweetId, Tweet $tweet)
     {
-        $tweet->where("id", $tweetId)->delete();
+        $tweet->destroyTweet($tweetId);
         return;
     }
 }
