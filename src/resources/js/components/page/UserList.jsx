@@ -9,11 +9,8 @@ import { UserName } from "../parts/UserName";
 export const UserList = () => {
     const [authUserFollows, setAuthUserFollows] = useState([]);
     const [users, setUsers] = useState([]);
-
-    // csrf対策のため、トークンを取得
-    const csrf_token = document.querySelector(
-        'meta[name="csrf-token"]'
-    ).content;
+    const [numUsers, setNumUsers] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     // 認証ユーザーの情報取得
     const getAuthUserData = async () => {
@@ -40,7 +37,6 @@ export const UserList = () => {
         getAuthUserData();
     }, []);
 
-    const [numUsers, setNumUsers] = useState(0);
     // １ページ目の情報取得
     const getFirstPage = async () => {
         const res = await fetch("/users?page=1");
@@ -69,15 +65,6 @@ export const UserList = () => {
             addIsFollowing(data.users.data);
         });
     }, [authUserFollows]);
-
-    // ページネーション時に、追加分を呼び出し
-    const handlePaginate = async (page) => {
-        const res = await fetch(`/users?page=${page}`);
-        if (res.status === 200) {
-            const nextPage = await res.json();
-            addIsFollowing(nextPage.users.data);
-        }
-    };
 
     const userItem = users.map((item) => {
         return (
@@ -112,6 +99,8 @@ export const UserList = () => {
         );
     });
 
+    // １ページごとのコンテンツ数
+    const contentNumPerPage = 10;
     return (
         <div className="mt-4">
             <div className="border">
@@ -119,8 +108,10 @@ export const UserList = () => {
             </div>
             <Pagenation
                 sum={numUsers}
-                per={2}
-                onChange={(e) => handlePaginate(e.page)}
+                per={contentNumPerPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                onChange={(e) => setCurrentPage(e.page)}
             />
         </div>
     );

@@ -39,9 +39,8 @@ export const Pagenation = (props) => {
                                     ? "pagenation__arrow--disabled"
                                     : ""
                             }`}
-                            onClick={() => handleBack()}
                         >
-                            ＜
+                            <button onClick={handleBack}>＜</button>
                         </li>
                         {[...Array(totalPage).keys()].map((page) => {
                             page++;
@@ -54,9 +53,10 @@ export const Pagenation = (props) => {
                                             : ""
                                     }`}
                                     key={page}
-                                    onClick={() => handleMove(page)}
                                 >
-                                    {page}
+                                    <button onClick={() => handleMove(page)}>
+                                        {page}
+                                    </button>
                                 </li>
                             );
                         })}
@@ -68,9 +68,8 @@ export const Pagenation = (props) => {
                                     : ""
                             }
                             `}
-                            onClick={() => handleForward()}
                         >
-                            ＞
+                            <button onClick={handleForward}>＞</button>
                         </li>
                     </ul>
                 </nav>

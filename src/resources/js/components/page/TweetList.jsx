@@ -73,6 +73,8 @@ export const TweetList = (props) => {
         );
     });
 
+    // １ページごとのコンテンツ数
+    const contentNumPerPage = 10;
     return (
         <div className="mt-4">
             <div className="border">
@@ -80,7 +82,7 @@ export const TweetList = (props) => {
             </div>
             <Pagenation
                 sum={numUsers}
-                per={10}
+                per={contentNumPerPage}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 onChange={(e) => setCurrentPage(e.page)}
