@@ -6,7 +6,9 @@ import { FollowNumbers } from "../parts/FollowNumbers";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 
-export const UserProfile = () => {
+export const UserProfile = (props) => {
+    const { authUserId } = props;
+
     const [authUserFollows, setAuthUserFollows] = useState([]);
     const [user, setUser] = useState({});
     const [isFollowing, setIsFollowing] = useState(false);
@@ -14,19 +16,6 @@ export const UserProfile = () => {
 
     // ユーザーIDの取得
     const { id } = useParams();
-
-    // csrf対策のため、トークンを取得
-    const csrf_token = document.querySelector(
-        'meta[name="csrf-token"]'
-    ).content;
-    // 認証ユーザーの情報取得
-    const getAuthUserData = async () => {
-        const res = await fetch("/auth-user");
-        if (res.status === 200) {
-            const authUserData = await res.json();
-            return authUserData;
-        }
-    };
 
     // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
     const checkAuthUserFollows = (authUserFollows) => {
@@ -36,14 +25,22 @@ export const UserProfile = () => {
 
         setAuthUserFollows(authUserFollowsList);
     };
+    // 認証ユーザーのフォローリストを取得
+    const getAuthUserData = async () => {
+        const res = await fetch("/auth-user/follows");
+        try {
+            const authUserFollowsArray = await res.json();
+            checkAuthUserFollows(authUserFollowsArray);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
-        getAuthUserData().then((authUserData) => {
-            setIsAuth(authUserData.user.id === Number(id));
-            checkAuthUserFollows(authUserData.follows);
-        });
+        // 認証ユーザーかチェック
+        setIsAuth(authUserId === Number(id));
+        // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+        getAuthUserData();
     }, []);
 
     const getUserProfile = async () => {
@@ -114,7 +111,10 @@ export const UserProfile = () => {
                         <div className="w-100 d-flex justify-content-end">
                             {profileButton()}
                         </div>
-                        <UserIcon userList={false} iconData={user.icon} />
+                        <UserIcon
+                            userList={false}
+                            iconData={user.profile_image_path}
+                        />
                     </div>
                     <div>
                         <UserName

@@ -17,10 +17,12 @@ export const UserList = () => {
 
     // 認証ユーザーの情報取得
     const getAuthUserData = async () => {
-        const res = await fetch("/auth-user");
-        if (res.status === 200) {
-            const authUserData = await res.json();
-            return authUserData;
+        const res = await fetch("/auth-user/follows");
+        try {
+            const authUserFollowsArray = await res.json();
+            checkAuthUserFollows(authUserFollowsArray);
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -33,12 +35,9 @@ export const UserList = () => {
         setAuthUserFollows(authUserFollowsList);
     };
 
-    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        // 認証ユーザーのプロフィールとフォロー関係データを呼び出す
-        getAuthUserData().then((authUserData) => {
-            checkAuthUserFollows(authUserData.follows);
-        });
+        // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+        getAuthUserData();
     }, []);
 
     const [numUsers, setNumUsers] = useState(0);

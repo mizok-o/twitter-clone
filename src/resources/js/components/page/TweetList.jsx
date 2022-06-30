@@ -6,12 +6,13 @@ import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
 import { EditButtns } from "../parts/EditButtns";
 
-export const TweetList = () => {
+export const TweetList = (props) => {
+    const { authUserId } = props;
+
     const [currentPage, setCurrentPage] = useState(1);
     const [users, setUsers] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
     const [tweets, setTweets] = useState([]);
-    const [authUserId, setAuthUserId] = useState(0);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
@@ -24,24 +25,13 @@ export const TweetList = () => {
         }
     };
 
-    // 認証ユーザーのIDを取得
-    const getAuthUser = async () => {
-        const res = await fetch("/auth-user");
-        if (res.status === 200) {
-            const auth = await res.json();
-            setAuthUserId(auth.user.id);
-        }
-    };
-
     useEffect(() => {
         getTweets();
-        getAuthUser();
     }, [currentPage]);
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
-
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">

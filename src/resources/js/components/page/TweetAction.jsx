@@ -13,36 +13,23 @@ import { UserIcon } from "../parts/UserIcon";
 */
 
 export const TweetAction = (props) => {
-    const { isEditPage } = props;
+    const { isEditPage, authUser } = props;
 
     // ツイート「更新」ページで使用
     const { id } = useParams();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [defaultText, setDefaultText] = useState("");
-    const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
-
-    //　ツイート後に遷移させる用
-    const navigate = useNavigate();
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
 
-    // 認証ユーザー情報を取得
-    const getAuthUserData = async () => {
-        const res = await fetch("/auth-user");
-        if (res.status === 200) {
-            const userData = await res.json();
-            setUser(userData.user);
-        }
-    };
-
     useEffect(() => {
         setDefaultText(isEditPage ? location.state.defaultText : "");
-        getAuthUserData();
     }, []);
 
     // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
@@ -91,7 +78,7 @@ export const TweetAction = (props) => {
                 <div className="d-flex">
                     <UserIcon
                         userList={true}
-                        iconData={user.profile_image_path}
+                        iconData={authUser.profile_image_path}
                     />
                     <form
                         encType="multipart/form-data"
