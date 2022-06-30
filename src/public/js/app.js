@@ -7665,7 +7665,9 @@ var App = function App() {
     getAuthUser();
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_layout_Header__WEBPACK_IMPORTED_MODULE_2__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Routes, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_layout_Header__WEBPACK_IMPORTED_MODULE_2__.Header, {
+      authUserId: authUser.id
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_page_TweetList__WEBPACK_IMPORTED_MODULE_3__.TweetList, {
@@ -7730,9 +7732,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Header = function Header() {
+var Header = function Header(props) {
+  var authUserId = props.authUserId;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
+
+  var moveToProfile = function moveToProfile() {
+    navigate("/profile-edit");
+  };
 
   var logout = function logout() {
     fetch("/logout", {
@@ -7791,13 +7798,11 @@ var Header = function Header() {
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_4__["default"].Menu, {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
-                  to: "/userlist",
+                  onClick: moveToProfile,
                   value: "1",
                   children: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap_Dropdown__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
-                  onClick: function onClick() {
-                    return logout();
-                  },
+                  onClick: logout,
                   href: "/login",
                   value: "2",
                   children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
@@ -7978,6 +7983,7 @@ var TweetAction = function TweetAction(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
             className: "p-2 w-100",
             name: "text",
+            required: true,
             defaultValue: isEditPage ? defaultText : "",
             cols: "30",
             rows: "5",
@@ -8191,7 +8197,8 @@ var TweetDetail = function TweetDetail() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "py-1 px-2",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          to: "/profile/".concat(user.id),
           className: "d-flex",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
             userList: false,
@@ -8574,10 +8581,10 @@ var UserList = function UserList() {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getFirstPage().then(function (data) {
+    getFirstPage().then(function (firstPage) {
       // ページネーション用に表示する全ユーザー数をセット
-      setNumUsers(data.numUsers);
-      addIsFollowing(data.users.data);
+      setNumUsers(firstPage.numUsers);
+      addIsFollowing(firstPage.users.data);
     });
   }, [authUserFollows]);
   var userItem = users.map(function (item) {
@@ -8761,14 +8768,12 @@ var UserProfile = function UserProfile(props) {
     return function getAuthUserData() {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); // 認証ユーザーかチェック
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // 認証ユーザーかチェック
-    setIsAuth(authUserId === Number(id)); // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
-
-    getAuthUserData();
-  }, []);
+    setIsAuth(authUserId === Number(id));
+  }, [authUserId]);
 
   var getUserProfile = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -8807,18 +8812,24 @@ var UserProfile = function UserProfile(props) {
     return function getUserProfile() {
       return _ref2.apply(this, arguments);
     };
-  }();
+  }(); // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getUserProfile();
-  }, [authUserFollows]);
+    getAuthUserData().then(function () {
+      return getUserProfile();
+    });
+  }, [isAuth]);
 
   var profileButton = function profileButton() {
     if (isAuth) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        type: "button",
-        className: "btn btn-outline-dark",
-        children: "\u7DE8\u96C6"
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        to: "/profile-edit",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+          type: "button",
+          className: "btn btn-outline-dark",
+          children: "\u7DE8\u96C6"
+        })
       });
     } else {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__.FollowButton, {
@@ -8999,8 +9010,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
                 break;
               }
 
-              // navigate("/");
-              console.log("success");
+              navigate("/");
               _context.next = 11;
               break;
 
@@ -9010,7 +9020,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
 
             case 9:
               _errorMessage = _context.sent;
-              setErrorMessage(_errorMessage.text);
+              setErrorMessage(_errorMessage.screen_name ? _errorMessage.screen_name : "やり直してください。");
 
             case 11:
             case "end":
@@ -9066,11 +9076,11 @@ var UserProfileEdit = function UserProfileEdit(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "mt-2 mb-1 d-flex flex-column",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-              htmlFor: "",
               children: "\u30E6\u30FC\u30B6\u30FC\u30CD\u30FC\u30E0"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "name",
-              name: "screen_name"
+              name: "screen_name",
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "mt-2 mb-1",
@@ -9093,7 +9103,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "mt-1 d-flex justify-content-between align-items-center",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "btn btn-primary mt-1",
+              className: "btn btn-success mt-1",
               type: "submit",
               children: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u3092\u66F4\u65B0\u3059\u308B"
             })

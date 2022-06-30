@@ -67,7 +67,7 @@ export const TweetDetail = () => {
                     </div>
                 </div>
                 <div className="py-1 px-2">
-                    <div className="d-flex">
+                    <Link to={`/profile/${user.id}`} className="d-flex">
                         <UserIcon
                             userList={false}
                             iconData={user.profile_image_path}
@@ -81,7 +81,7 @@ export const TweetDetail = () => {
                                 }}
                             />
                         </div>
-                    </div>
+                    </Link>
                     <div className="my-2">
                         <p>{tweet.text}</p>
                         <p className="pt-2">投稿日: {tweet.created_at}</p>

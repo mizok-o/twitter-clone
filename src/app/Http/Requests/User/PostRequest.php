@@ -15,7 +15,7 @@ class PostRequest extends BaseRequest
     {
         return [
             'screen_name' => ['required', 'max:20', 'unique:users'],
-            'profile' => 'max:140'
+            'profile' => ['max:140']
         ];
     }
 }

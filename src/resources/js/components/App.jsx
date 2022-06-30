@@ -31,7 +31,7 @@ export const App = () => {
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header authUserId={authUser.id} />
             <Routes>
                 <Route
                     path="/"

@@ -58,11 +58,11 @@ export const UserList = () => {
 
     //１ページ目に表示するデータにフォロー状態を付与して返す
     useEffect(() => {
-        getFirstPage().then((data) => {
+        getFirstPage().then((firstPage) => {
             // ページネーション用に表示する全ユーザー数をセット
-            setNumUsers(data.numUsers);
+            setNumUsers(firstPage.numUsers);
 
-            addIsFollowing(data.users.data);
+            addIsFollowing(firstPage.users.data);
         });
     }, [authUserFollows]);
 

@@ -36,12 +36,10 @@ export const UserProfile = (props) => {
         }
     };
 
+    // 認証ユーザーかチェック
     useEffect(() => {
-        // 認証ユーザーかチェック
         setIsAuth(authUserId === Number(id));
-        // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
-        getAuthUserData();
-    }, []);
+    }, [authUserId]);
 
     const getUserProfile = async () => {
         const res = await fetch(`/users/${id}`);
@@ -52,16 +50,19 @@ export const UserProfile = (props) => {
         }
     };
 
+    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        getUserProfile();
-    }, [authUserFollows]);
+        getAuthUserData().then(() => getUserProfile());
+    }, [isAuth]);
 
     const profileButton = () => {
         if (isAuth) {
             return (
-                <button type="button" className="btn btn-outline-dark">
-                    編集
-                </button>
+                <Link to="/profile-edit">
+                    <button type="button" className="btn btn-outline-dark">
+                        編集
+                    </button>
+                </Link>
             );
         } else {
             return (

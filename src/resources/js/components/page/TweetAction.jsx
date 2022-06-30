@@ -88,6 +88,7 @@ export const TweetAction = (props) => {
                         <textarea
                             className="p-2 w-100"
                             name="text"
+                            required
                             defaultValue={isEditPage ? defaultText : ""}
                             cols="30"
                             rows="5"

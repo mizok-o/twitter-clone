@@ -34,11 +34,14 @@ export const UserProfileEdit = (props) => {
             body: JSON.stringify(tweet),
         });
         if (res.status === 200) {
-            // navigate("/");
-            console.log("success");
+            navigate("/");
         } else {
             const errorMessage = await res.json();
-            setErrorMessage(errorMessage.text);
+            setErrorMessage(
+                errorMessage.screen_name
+                    ? errorMessage.screen_name
+                    : "やり直してください。"
+            );
         }
     };
 
@@ -80,8 +83,8 @@ export const UserProfileEdit = (props) => {
                             </label>
                         </div>
                         <div className="mt-2 mb-1 d-flex flex-column">
-                            <label htmlFor="">ユーザーネーム</label>
-                            <input type="name" name="screen_name" />
+                            <label>ユーザーネーム</label>
+                            <input type="name" name="screen_name" required />
                         </div>
                         <div className="mt-2 mb-1">
                             <label htmlFor="">プロフィールテキスト</label>
@@ -94,7 +97,6 @@ export const UserProfileEdit = (props) => {
                                 rows="5"
                             ></textarea>
                         </div>
-
                         <div>
                             <p className="api__error__message">
                                 {errorMessage}
@@ -102,7 +104,7 @@ export const UserProfileEdit = (props) => {
                         </div>
                         <div className="mt-1 d-flex justify-content-between align-items-center">
                             <button
-                                className="btn btn-primary mt-1"
+                                className="btn btn-success mt-1"
                                 type="submit"
                             >
                                 ユーザー情報を更新する

@@ -154,7 +154,8 @@ return [
         're_password' => '確認用パスワード',
         'remember' => 'ログインしたままにする',
         'password_forgot' => 'パスワードを忘れた場合',
-        'text' => 'ツイート'
+        'text' => 'ツイート',
+        'profile' => 'プロフィール'
     ],
 
 ];
