@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/auth-user', [UserController::class, 'getAuthUser']);
     Route::get('/auth-user/follows', [UserController::class, 'getAuthUserFollows']);
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{userId}', [UserController::class, 'show']);
-    Route::put('/edit-user/{tweetId}', [UserController::class, 'update']);
+    Route::put('/edit-user/{userId}', [UserController::class, 'update']);
 
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);

@@ -44,7 +44,7 @@ class User extends Authenticatable
     public function updateUser(int $userId, object $request): bool
     {
         $user = $this->where('id', $userId)->first();
-        $user->name = $request->name;
+        $user->screen_name = $request->screen_name;
         $user->profile = $request->profile;
 
         return $user->save();

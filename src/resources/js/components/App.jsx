@@ -9,6 +9,7 @@ import { TweetDetail } from "./page/TweetDetail";
 import { TweetAction } from "./page/TweetAction";
 import { UserList } from "./page/UserList";
 import { UserProfile } from "./page/UserProfile";
+import { UserProfileEdit } from "./page/UserProfileEdit";
 
 import "../../css/app.css";
 
@@ -51,6 +52,10 @@ export const App = () => {
                 <Route
                     path="/profile/:id"
                     element={<UserProfile authUserId={authUser.id} />}
+                />
+                <Route
+                    path="/profile-edit"
+                    element={<UserProfileEdit authUser={authUser} />}
                 />
             </Routes>
         </BrowserRouter>

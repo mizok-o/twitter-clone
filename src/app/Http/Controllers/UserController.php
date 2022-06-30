@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tweet\PostRequest;
+use App\Http\Requests\User\PostRequest;
 use App\Models\User;
 use App\Models\Follow;
-use App\Models\Tweet;
 
 class UserController extends Controller
 {
