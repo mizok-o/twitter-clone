@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Policies\TweetPolicy;
+use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,20 +14,24 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        'App\Models\Tweet' => 'App\Policies\TweetPolicy',
+        'App\Models\User' => 'App\Policies\PostPolicy',
+        'App\Models\Tweet' => 'App\Policies\PostPolicy'
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * User系ポリシー
      *
-     * @return void
+     * Tweet系ポリシー
+     *
      */
     public function boot()
     {
         $this->registerPolicies();
 
-        Gate::define('store-tweet', [TweetPolicy::class, 'store']);
-        Gate::define('update-tweet', [TweetPolicy::class, 'update']);
-        Gate::define('destroy-tweet', [TweetPolicy::class, 'destroy']);
+        Gate::define('update-user', [PostPolicy::class, 'checkIsAuth']);
+
+        Gate::define('store-tweet', [PostPolicy::class, 'checkIsAuth']);
+        Gate::define('update-tweet', [PostPolicy::class, 'checkIsAuth']);
+        Gate::define('destroy-tweet', [PostPolicy::class, 'checkIsAuth']);
     }
 }
