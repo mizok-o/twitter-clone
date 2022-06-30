@@ -37,19 +37,24 @@ class UserController extends Controller
     }
 
     /**
+     *  認証ユーザーを取得
+     *
+     * @return object
+     */
+    public function getAuthUser(): object
+    {
+        return auth()->user();
+    }
+
+    /**
      *  認証ユーザー情報とフォローしている人リストを取得
      *
      * @param  Follow $follow
-     * @return array<int, object>
+     * @return object
      */
-    public function getAuthUserInfo(Follow $follow): array
+    public function getAuthUserFollows(Follow $follow): object
     {
-        $user = auth()->user();
-        $follows = $follow->getFollowsList(auth()->id());
-        return [
-            "user" => $user,
-            "follows" => $follows
-        ];
+        return $follow->getFollowsList(auth()->id());
     }
 
     /**
