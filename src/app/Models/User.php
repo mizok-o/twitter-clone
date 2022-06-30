@@ -36,6 +36,21 @@ class User extends Authenticatable
     }
 
     /**
+     * 認証ユーザーのみユーザー情報更新
+     *
+     * @param  int $userId
+     * @param  object $request
+     */
+    public function updateUser(int $userId, object $request): bool
+    {
+        $user = $this->where('id', $userId)->first();
+        $user->name = $request->name;
+        $user->profile = $request->profile;
+
+        return $user->save();
+    }
+
+    /**
      *  フォロー、フォロー解除するときに、'follows', 'follow_user_id', 'followed_user_id'を参照
      */
     public function followsAction()

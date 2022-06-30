@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Tweet\PostRequest;
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Tweet;
 
 class UserController extends Controller
 {
@@ -34,6 +36,24 @@ class UserController extends Controller
     public function show(int $userId, User $user): object
     {
         return $user->getUserById($userId);
+    }
+
+    /**
+     * 認証ユーザーのみツイート更新
+     * imageは空だが、今後使用予定
+     *
+     * @param  PostRequest $request
+     * @param  int $userId
+     * @param  User $user
+     */
+    public function update(PostRequest $request, int $userId, User $user): bool
+    {
+        $isAuthUser = $user->checkIsAuth($request->user(), 'update-user', $user);
+        if (!$isAuthUser) {
+            abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
+        }
+
+        return $user->updateUser($userId, $request);
     }
 
     /**
