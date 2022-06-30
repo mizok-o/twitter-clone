@@ -15,6 +15,7 @@ return [
 
 	'user_name' => 'ユーザーID',
 	'screen_name' => '表示名',
+	'profile_image_path' => 'ユーザー画像',
 	'email' => 'メール',
 	'password' => 'パスワード',
 	're_password' => '確認用パスワード',

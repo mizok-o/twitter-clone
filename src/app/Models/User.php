@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
 
     protected $fillable = [
-        'user_name', 'screen_name', 'email', 'password'
+        'user_name', 'screen_name', 'email', 'profile', 'profile_image_path', 'remember_token', 'password'
     ];
 
     /**

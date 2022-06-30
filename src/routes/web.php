@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/{any}', function () {
+        return view('home');
+    })->where('any', '.*');
+
     Route::get('/auth-user', [UserController::class, 'getAuthUser']);
     Route::get('/auth-user/follows', [UserController::class, 'getAuthUserFollows']);
     Route::get('/users', [UserController::class, 'index']);
@@ -34,7 +39,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/follow-{userId}', [UserController::class, 'follow']);
     Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
 });
-
-Route::get('/{any}', function () {
-    return view('home');
-})->where('any', '.*');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth')
 
 @section('content')
     <div class="container">
@@ -10,6 +10,28 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
+
+                            <div class="row mb-3">
+                                <label for="profile_image_path"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('form.profile_image_path') }}</label>
+
+                                <div class="col-md-6">
+                                    <label>
+                                        <div className="tweet-form-file"></div>
+                                        <input id="profile_image_path" className="d-none" type="file"
+                                            name="profile_image_path" accept=".png, .jpeg, .jpg"
+                                            @error('profile_image_path') is-invalid @enderror"
+                                            value="{{ old('profile_image_path') }}" required autocomplete="image"
+                                            autofocus>
+                                    </label>
+
+                                    @error('profile_image_path')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="user_name"
