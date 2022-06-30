@@ -9361,16 +9361,16 @@ var Pagenation = function Pagenation(props) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
         className: "pagination",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-          className: "page-item pagenation__arrow py-2 ".concat(currentPage === 0 || currentPage === 1 ? "pagenation__arrow--disabled" : ""),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            className: "page-item pagenation__arrow py-2 ".concat(currentPage === 0 || currentPage === 1 ? "pagenation__arrow--disabled" : ""),
             onClick: handleBack,
             children: "\uFF1C"
           })
         }), _toConsumableArray(Array(totalPage).keys()).map(function (page) {
           page++;
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-            className: "page-item pagenation__item py-2 ".concat(page === currentPage || currentPage === 0 && page === 1 ? "pagenation__item--active" : ""),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "page-item pagenation__item py-2 ".concat(page === currentPage || currentPage === 0 && page === 1 ? "pagenation__item--active" : ""),
               onClick: function onClick() {
                 return handleMove(page);
               },
@@ -9378,8 +9378,8 @@ var Pagenation = function Pagenation(props) {
             })
           }, page);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-          className: "page-item pagenation__arrow py-2\n                            ".concat(currentPage === totalPage ? "pagenation__arrow--disabled" : "", "\n                            "),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            className: "page-item pagenation__arrow py-2\n                                ".concat(currentPage === totalPage ? "pagenation__arrow--disabled" : "", "\n                                "),
             onClick: handleForward,
             children: "\uFF1E"
           })
