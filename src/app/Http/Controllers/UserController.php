@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\PostRequest;
 use App\Models\User;
 use App\Models\Follow;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -38,8 +39,7 @@ class UserController extends Controller
     }
 
     /**
-     * 認証ユーザーのみツイート更新
-     * imageは空だが、今後使用予定
+     * 認証ユーザーのみユーザー情報更新
      *
      * @param  PostRequest $request
      * @param  int $userId
@@ -121,4 +121,17 @@ class UserController extends Controller
         $user->unfollow($userId);
         return;
     }
+
+    /**
+     * 画像を保存する処理
+     *
+     * @param Follow $follow
+     * @param Tweet $tweet
+     * @return array<object, object>
+     */
+    // public function upload(User $user, Request $request)
+    // {
+    //     $request->file('image');
+    //     return;
+    // }
 }

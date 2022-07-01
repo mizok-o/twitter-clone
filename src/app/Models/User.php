@@ -46,6 +46,12 @@ class User extends Authenticatable
         $user = $this->where('id', $userId)->first();
         $user->screen_name = $request->screen_name;
         $user->profile = $request->profile;
+        // $user->image = $request->image;
+
+        //画像の処理
+        $image_name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('', $image_name);
+        // dd($test);
 
         return $user->save();
     }

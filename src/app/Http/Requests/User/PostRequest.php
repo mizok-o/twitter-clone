@@ -14,7 +14,7 @@ class PostRequest extends BaseRequest
     public function rules()
     {
         return [
-            'screen_name' => ['required', 'max:20', 'unique:users'],
+            'screen_name' => ['required', 'max:20'],
             'profile' => ['max:140']
         ];
     }

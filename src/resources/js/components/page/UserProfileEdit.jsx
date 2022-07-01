@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { PageBackButton } from "../parts/BackToTweetList";
 import { UserIcon } from "../parts/UserIcon";
@@ -24,19 +24,31 @@ export const UserProfileEdit = (props) => {
     }, []);
 
     // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
-    const postTweet = async (tweet) => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const file = e.target.image.files[0];
+        const screen_name = e.target.screen_name.value;
+        const profile = e.target.profile.value;
+
+        let userData = new FormData();
+        userData.append("image", file, "test.png");
+        userData.append("screen_name", screen_name);
+        userData.append("profile", profile);
+
         const res = await fetch(`/edit-user/${authUser.id}`, {
-            method: "PUT",
+            method: "POST",
             headers: {
-                "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-            body: JSON.stringify(tweet),
+            body: userData,
         });
         if (res.status === 200) {
-            navigate("/");
+            console.log("success");
         } else {
             const errorMessage = await res.json();
+            console.log(errorMessage);
             setErrorMessage(
                 errorMessage.screen_name
                     ? errorMessage.screen_name
@@ -45,26 +57,16 @@ export const UserProfileEdit = (props) => {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // 入力されたユーザーデータ
-        const userData = {
-            screen_name: e.target.screen_name.value,
-            profile: e.target.profile.value,
-        };
-
-        postTweet(userData);
-    };
-
     return (
         <div className="my-3">
             <div className="w-100 p-2 bg-light shadow rounded">
                 <PageBackButton />
                 <div className="d-flex">
                     <form
+                        id="form"
+                        method="POST"
                         encType="multipart/form-data"
-                        onSubmit={(e) => handleSubmit(e)}
+                        onSubmit={(event) => handleSubmit(event)}
                         className="ms-2"
                     >
                         <div className="d-flex align-items-center">
@@ -77,6 +79,7 @@ export const UserProfileEdit = (props) => {
                                 <input
                                     className="d-none"
                                     type="file"
+                                    id="userImage"
                                     name="image"
                                     accept=".png, .jpeg, .jpg"
                                 />
@@ -91,7 +94,6 @@ export const UserProfileEdit = (props) => {
                             <textarea
                                 className="p-2 w-100"
                                 name="profile"
-                                required
                                 defaultValue={isEditPage ? defaultText : ""}
                                 cols="30"
                                 rows="5"

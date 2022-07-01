@@ -8984,45 +8984,53 @@ var UserProfileEdit = function UserProfileEdit(props) {
     setDefaultText(isEditPage ? location.state.defaultText : "");
   }, []); // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
 
-  var postTweet = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(tweet) {
-      var res, _errorMessage;
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var file, screen_name, profile, userData, res, _errorMessage;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              e.preventDefault();
+              file = e.target.image.files[0];
+              screen_name = e.target.screen_name.value;
+              profile = e.target.profile.value;
+              userData = new FormData();
+              userData.append("image", file, "test.png");
+              userData.append("screen_name", screen_name);
+              userData.append("profile", profile);
+              _context.next = 10;
               return fetch("/edit-user/".concat(authUser.id), {
-                method: "PUT",
+                method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
                   "X-CSRF-TOKEN": csrf_token
                 },
-                body: JSON.stringify(tweet)
+                body: userData
               });
 
-            case 2:
+            case 10:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 7;
+                _context.next = 15;
                 break;
               }
 
-              navigate("/");
-              _context.next = 11;
+              console.log("success");
+              _context.next = 20;
               break;
 
-            case 7:
-              _context.next = 9;
+            case 15:
+              _context.next = 17;
               return res.json();
 
-            case 9:
+            case 17:
               _errorMessage = _context.sent;
+              console.log(_errorMessage);
               setErrorMessage(_errorMessage.screen_name ? _errorMessage.screen_name : "やり直してください。");
 
-            case 11:
+            case 20:
             case "end":
               return _context.stop();
           }
@@ -9030,20 +9038,10 @@ var UserProfileEdit = function UserProfileEdit(props) {
       }, _callee);
     }));
 
-    return function postTweet(_x) {
+    return function handleSubmit(_x) {
       return _ref.apply(this, arguments);
     };
   }();
-
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); // 入力されたユーザーデータ
-
-    var userData = {
-      screen_name: e.target.screen_name.value,
-      profile: e.target.profile.value
-    };
-    postTweet(userData);
-  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "my-3",
@@ -9052,9 +9050,11 @@ var UserProfileEdit = function UserProfileEdit(props) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "d-flex",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+          id: "form",
+          method: "POST",
           encType: "multipart/form-data",
-          onSubmit: function onSubmit(e) {
-            return handleSubmit(e);
+          onSubmit: function onSubmit(event) {
+            return handleSubmit(event);
           },
           className: "ms-2",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -9069,6 +9069,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 className: "d-none",
                 type: "file",
+                id: "userImage",
                 name: "image",
                 accept: ".png, .jpeg, .jpg"
               })]
@@ -9090,7 +9091,6 @@ var UserProfileEdit = function UserProfileEdit(props) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
               className: "p-2 w-100",
               name: "profile",
-              required: true,
               defaultValue: isEditPage ? defaultText : "",
               cols: "30",
               rows: "5"
