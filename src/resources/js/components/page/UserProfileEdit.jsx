@@ -13,6 +13,7 @@ export const UserProfileEdit = (props) => {
 
     const [defaultText, setDefaultText] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [imageIsSelected, setImageIsSelected] = useState(false);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -33,10 +34,10 @@ export const UserProfileEdit = (props) => {
         const profile = e.target.profile.value;
 
         let userData = new FormData();
-        userData.append("image", file, "test3.png");
+        userData.append("image", file);
         userData.append("screen_name", screen_name);
         userData.append("profile", profile);
-        console.log(userData.get("screen_name"));
+        console.log(userData.get("image"));
 
         const res = await fetch(`/edit-user/${authUser.id}`, {
             method: "POST",
@@ -78,13 +79,21 @@ export const UserProfileEdit = (props) => {
                             <label className="ms-3">
                                 <div className="tweet-form-file"></div>
                                 <input
+                                    id="userImage"
                                     className="d-none"
                                     type="file"
-                                    id="userImage"
                                     name="image"
                                     accept=".png, .jpeg, .jpg"
+                                    onChange={(e) =>
+                                        setImageIsSelected(e.target.files[0])
+                                    }
                                 />
                             </label>
+                            <p className="ms-2">
+                                {imageIsSelected
+                                    ? "画像を選択中"
+                                    : "画像を選択してください。"}
+                            </p>
                         </div>
                         <div className="mt-2 mb-1 d-flex flex-column">
                             <label>ユーザーネーム</label>
@@ -114,9 +123,6 @@ export const UserProfileEdit = (props) => {
                             </button>
                         </div>
                     </form>
-                    <div>
-                        <img src="/storage/test3.png" alt="" />
-                    </div>
                 </div>
             </div>
         </div>

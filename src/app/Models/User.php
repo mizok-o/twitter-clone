@@ -37,6 +37,7 @@ class User extends Authenticatable
 
     /**
      * 認証ユーザーのみユーザー情報更新
+     * 画像名が重複しないようにハッシュ化
      *
      * @param  int $userId
      * @param  object $request
@@ -44,13 +45,13 @@ class User extends Authenticatable
     public function updateUser(int $userId, object $request): bool
     {
         $user = $this->where('id', $userId)->first();
+
         $user->screen_name = $request->screen_name;
         $user->profile = $request->profile;
 
-        //画像の処理
-        $image_name = $request->file('image')->getClientOriginalName();
+        $image_name = $request->file('image')->hashName();
+        $user->profile_image_path = $image_name;
         $request->file('image')->storeAs('public', $image_name);
-        // dd($test);
 
         return $user->save();
     }

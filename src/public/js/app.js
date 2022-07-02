@@ -8976,7 +8976,12 @@ var UserProfileEdit = function UserProfileEdit(props) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       errorMessage = _useState4[0],
-      setErrorMessage = _useState4[1]; // csrf対策のため、トークンを取得
+      setErrorMessage = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      imageIsSelected = _useState6[0],
+      setImageIsSelected = _useState6[1]; // csrf対策のため、トークンを取得
 
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
@@ -8997,10 +9002,10 @@ var UserProfileEdit = function UserProfileEdit(props) {
               screen_name = e.target.screen_name.value;
               profile = e.target.profile.value;
               userData = new FormData();
-              userData.append("image", file, "test3.png");
+              userData.append("image", file);
               userData.append("screen_name", screen_name);
               userData.append("profile", profile);
-              console.log(userData.get("screen_name"));
+              console.log(userData.get("image"));
               _context.next = 11;
               return fetch("/edit-user/".concat(authUser.id), {
                 method: "POST",
@@ -9048,9 +9053,9 @@ var UserProfileEdit = function UserProfileEdit(props) {
     className: "my-3",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "w-100 p-2 bg-light shadow rounded",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "d-flex",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           id: "form",
           method: "POST",
           encType: "multipart/form-data",
@@ -9068,12 +9073,18 @@ var UserProfileEdit = function UserProfileEdit(props) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 className: "tweet-form-file"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                id: "userImage",
                 className: "d-none",
                 type: "file",
-                id: "userImage",
                 name: "image",
-                accept: ".png, .jpeg, .jpg"
+                accept: ".png, .jpeg, .jpg",
+                onChange: function onChange(e) {
+                  return setImageIsSelected(e.target.files[0]);
+                }
               })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "ms-2",
+              children: imageIsSelected ? "画像を選択中" : "画像を選択してください。"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "mt-2 mb-1 d-flex flex-column",
@@ -9109,12 +9120,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
               children: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u3092\u66F4\u65B0\u3059\u308B"
             })
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            src: "/storage/test3.png",
-            alt: ""
-          })
-        })]
+        })
       })]
     })
   });
