@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { PageBackButton } from "../parts/BackToTweetList";
@@ -11,7 +11,9 @@ export const UserProfileEdit = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [defaultText, setDefaultText] = useState("");
+    const [defaultText] = useState(
+        isEditPage ? location.state.defaultText : ""
+    );
     const [errorMessage, setErrorMessage] = useState("");
     const [imageIsSelected, setImageIsSelected] = useState(false);
 
@@ -20,15 +22,11 @@ export const UserProfileEdit = (props) => {
         'meta[name="csrf-token"]'
     ).content;
 
-    useEffect(() => {
-        setDefaultText(isEditPage ? location.state.defaultText : "");
-    }, []);
-
     // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // postするデータ作成
+        // postするFormData作成
         let userData = new FormData();
         const image = e.target.image.files[0];
         const screen_name = e.target.screen_name.value;

@@ -16,24 +16,15 @@ export const UserList = () => {
     const getAuthUserData = async () => {
         const res = await fetch("/auth-user/follows");
         try {
-            const authUserFollowsArray = await res.json();
-            checkAuthUserFollows(authUserFollowsArray);
+            const authUserFollowsList = await res.json();
+            setAuthUserFollows(authUserFollowsList);
         } catch (error) {
             console.log(error);
         }
     };
 
-    // 認証ユーザーがフォローしているリストを配列でsetAuthUserFollowsにセット
-    const checkAuthUserFollows = (authUserFollows) => {
-        const authUserFollowsList = authUserFollows.map((data) =>
-            Number(data.followed_user_id)
-        );
-
-        setAuthUserFollows(authUserFollowsList);
-    };
-
+    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
         getAuthUserData();
     }, []);
 
