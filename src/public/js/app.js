@@ -8355,7 +8355,7 @@ var TweetList = function TweetList(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
-              iconData: userData.profile_image_path ? userData.profile_image_path : "no-image.png"
+              iconData: userData.profile_image_path
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -9646,7 +9646,7 @@ var UserIcon = function UserIcon(props) {
       className: "w-100 h-100 overflow-hidden rounded-circle border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         className: "w-100 h-100",
-        src: "/images/".concat(props.iconData),
+        src: props.iconData ? "/storage/".concat(props.iconData) : "/images/default-user-icon.png",
         alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
       })
     })

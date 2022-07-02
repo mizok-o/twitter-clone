@@ -37,13 +37,7 @@ export const TweetList = (props) => {
                 <div className="user__item-container">
                     <Link to={`/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon
-                                iconData={
-                                    userData.profile_image_path
-                                        ? userData.profile_image_path
-                                        : "no-image.png"
-                                }
-                            />
+                            <UserIcon iconData={userData.profile_image_path} />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName
