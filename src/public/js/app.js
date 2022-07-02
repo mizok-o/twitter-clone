@@ -8997,7 +8997,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault(); // postするデータ作成
+              e.preventDefault(); // postするFormData作成
 
               userData = new FormData();
               image = e.target.image.files[0];

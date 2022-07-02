@@ -121,17 +121,4 @@ class UserController extends Controller
         $user->unfollow($userId);
         return;
     }
-
-    /**
-     * 画像を保存する処理
-     *
-     * @param Follow $follow
-     * @param Tweet $tweet
-     * @return array<object, object>
-     */
-    // public function upload(User $user, Request $request)
-    // {
-    //     $request->file('image');
-    //     return;
-    // }
 }

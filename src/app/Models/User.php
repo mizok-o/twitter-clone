@@ -54,8 +54,6 @@ class User extends Authenticatable
             $request->file('image')->storeAs('public', $image_name);
         }
 
-
-
         return $user->save();
     }
 

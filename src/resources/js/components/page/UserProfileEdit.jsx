@@ -28,7 +28,7 @@ export const UserProfileEdit = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // postするデータ作成
+        // postするFormData作成
         let userData = new FormData();
         const image = e.target.image.files[0];
         const screen_name = e.target.screen_name.value;
