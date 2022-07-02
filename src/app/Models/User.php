@@ -37,7 +37,6 @@ class User extends Authenticatable
 
     /**
      * 認証ユーザーのみユーザー情報更新
-     * 画像名が重複しないようにハッシュ化
      *
      * @param  int $userId
      * @param  object $request
@@ -49,9 +48,13 @@ class User extends Authenticatable
         $user->screen_name = $request->screen_name;
         $user->profile = $request->profile;
 
-        $image_name = $request->file('image')->hashName();
-        $user->profile_image_path = $image_name;
-        $request->file('image')->storeAs('public', $image_name);
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->hashName();
+            $user->profile_image_path = $image_name;
+            $request->file('image')->storeAs('public', $image_name);
+        }
+
+
 
         return $user->save();
     }

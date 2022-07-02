@@ -8991,18 +8991,23 @@ var UserProfileEdit = function UserProfileEdit(props) {
 
   var handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var file, screen_name, profile, userData, res, _errorMessage;
+      var userData, image, screen_name, profile, res, _errorMessage;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              file = e.target.image.files[0];
-              screen_name = e.target.screen_name.value;
-              profile = e.target.profile.value;
+              e.preventDefault(); // postするデータ作成
+
               userData = new FormData();
-              userData.append("image", file);
+              image = e.target.image.files[0];
+              screen_name = e.target.screen_name.value;
+              profile = e.target.profile.value; // 画像が選択されてない時は追加しない
+
+              if (image) {
+                userData.append("image", image);
+              }
+
               userData.append("screen_name", screen_name);
               userData.append("profile", profile);
               _context.next = 10;
@@ -9022,21 +9027,19 @@ var UserProfileEdit = function UserProfileEdit(props) {
                 break;
               }
 
-              console.log("success");
-              _context.next = 21;
+              navigate("/");
+              _context.next = 19;
               break;
 
             case 15:
-              console.log("failed");
-              _context.next = 18;
+              _context.next = 17;
               return res.json();
 
-            case 18:
+            case 17:
               _errorMessage = _context.sent;
-              console.log(_errorMessage);
               setErrorMessage(_errorMessage.screen_name ? _errorMessage.screen_name : "やり直してください。");
 
-            case 21:
+            case 19:
             case "end":
               return _context.stop();
           }

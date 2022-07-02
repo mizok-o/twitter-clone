@@ -28,12 +28,16 @@ export const UserProfileEdit = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const file = e.target.image.files[0];
+        // postするデータ作成
+        let userData = new FormData();
+        const image = e.target.image.files[0];
         const screen_name = e.target.screen_name.value;
         const profile = e.target.profile.value;
 
-        let userData = new FormData();
-        userData.append("image", file);
+        // 画像が選択されてない時は追加しない
+        if (image) {
+            userData.append("image", image);
+        }
         userData.append("screen_name", screen_name);
         userData.append("profile", profile);
 
@@ -45,11 +49,9 @@ export const UserProfileEdit = (props) => {
             body: userData,
         });
         if (res.status === 200) {
-            console.log("success");
+            navigate("/");
         } else {
-            console.log("failed");
             const errorMessage = await res.json();
-            console.log(errorMessage);
             setErrorMessage(
                 errorMessage.screen_name
                     ? errorMessage.screen_name
