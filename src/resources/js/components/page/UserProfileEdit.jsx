@@ -25,7 +25,6 @@ export const UserProfileEdit = (props) => {
     }, []);
 
     // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -37,7 +36,6 @@ export const UserProfileEdit = (props) => {
         userData.append("image", file);
         userData.append("screen_name", screen_name);
         userData.append("profile", profile);
-        console.log(userData.get("image"));
 
         const res = await fetch(`/edit-user/${authUser.id}`, {
             method: "POST",
@@ -49,6 +47,7 @@ export const UserProfileEdit = (props) => {
         if (res.status === 200) {
             console.log("success");
         } else {
+            console.log("failed");
             const errorMessage = await res.json();
             console.log(errorMessage);
             setErrorMessage(
@@ -83,7 +82,7 @@ export const UserProfileEdit = (props) => {
                                     className="d-none"
                                     type="file"
                                     name="image"
-                                    accept=".png, .jpeg, .jpg"
+                                    accept=".png, .jpeg, .jpg, .webp"
                                     onChange={(e) =>
                                         setImageIsSelected(e.target.files[0])
                                     }

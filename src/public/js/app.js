@@ -9005,8 +9005,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
               userData.append("image", file);
               userData.append("screen_name", screen_name);
               userData.append("profile", profile);
-              console.log(userData.get("image"));
-              _context.next = 11;
+              _context.next = 10;
               return fetch("/edit-user/".concat(authUser.id), {
                 method: "POST",
                 headers: {
@@ -9015,11 +9014,11 @@ var UserProfileEdit = function UserProfileEdit(props) {
                 body: userData
               });
 
-            case 11:
+            case 10:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 16;
+                _context.next = 15;
                 break;
               }
 
@@ -9027,7 +9026,8 @@ var UserProfileEdit = function UserProfileEdit(props) {
               _context.next = 21;
               break;
 
-            case 16:
+            case 15:
+              console.log("failed");
               _context.next = 18;
               return res.json();
 
@@ -9077,7 +9077,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
                 className: "d-none",
                 type: "file",
                 name: "image",
-                accept: ".png, .jpeg, .jpg",
+                accept: ".png, .jpeg, .jpg, .webp",
                 onChange: function onChange(e) {
                   return setImageIsSelected(e.target.files[0]);
                 }

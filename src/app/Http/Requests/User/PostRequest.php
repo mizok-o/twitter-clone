@@ -14,6 +14,7 @@ class PostRequest extends BaseRequest
     public function rules()
     {
         return [
+            'image' => ['mimes:png,jpg,jpeg,webp', 'max:800'],
             'screen_name' => ['required', 'max:20'],
             'profile' => ['max:140']
         ];
