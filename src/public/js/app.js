@@ -8997,10 +8997,11 @@ var UserProfileEdit = function UserProfileEdit(props) {
               screen_name = e.target.screen_name.value;
               profile = e.target.profile.value;
               userData = new FormData();
-              userData.append("image", file, "test.png");
+              userData.append("image", file, "test3.png");
               userData.append("screen_name", screen_name);
               userData.append("profile", profile);
-              _context.next = 10;
+              console.log(userData.get("screen_name"));
+              _context.next = 11;
               return fetch("/edit-user/".concat(authUser.id), {
                 method: "POST",
                 headers: {
@@ -9009,28 +9010,28 @@ var UserProfileEdit = function UserProfileEdit(props) {
                 body: userData
               });
 
-            case 10:
+            case 11:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 15;
+                _context.next = 16;
                 break;
               }
 
               console.log("success");
-              _context.next = 20;
+              _context.next = 21;
               break;
 
-            case 15:
-              _context.next = 17;
+            case 16:
+              _context.next = 18;
               return res.json();
 
-            case 17:
+            case 18:
               _errorMessage = _context.sent;
               console.log(_errorMessage);
               setErrorMessage(_errorMessage.screen_name ? _errorMessage.screen_name : "やり直してください。");
 
-            case 20:
+            case 21:
             case "end":
               return _context.stop();
           }
@@ -9047,9 +9048,9 @@ var UserProfileEdit = function UserProfileEdit(props) {
     className: "my-3",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "w-100 p-2 bg-light shadow rounded",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "d-flex",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           id: "form",
           method: "POST",
           encType: "multipart/form-data",
@@ -9108,7 +9109,12 @@ var UserProfileEdit = function UserProfileEdit(props) {
               children: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831\u3092\u66F4\u65B0\u3059\u308B"
             })
           })]
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: "/storage/test3.png",
+            alt: ""
+          })
+        })]
       })]
     })
   });

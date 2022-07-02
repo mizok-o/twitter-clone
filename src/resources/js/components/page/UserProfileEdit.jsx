@@ -33,9 +33,10 @@ export const UserProfileEdit = (props) => {
         const profile = e.target.profile.value;
 
         let userData = new FormData();
-        userData.append("image", file, "test.png");
+        userData.append("image", file, "test3.png");
         userData.append("screen_name", screen_name);
         userData.append("profile", profile);
+        console.log(userData.get("screen_name"));
 
         const res = await fetch(`/edit-user/${authUser.id}`, {
             method: "POST",
@@ -113,6 +114,9 @@ export const UserProfileEdit = (props) => {
                             </button>
                         </div>
                     </form>
+                    <div>
+                        <img src="/storage/test3.png" alt="" />
+                    </div>
                 </div>
             </div>
         </div>
