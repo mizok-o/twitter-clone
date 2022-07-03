@@ -8572,7 +8572,7 @@ var UserList = function UserList() {
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
@@ -8581,10 +8581,9 @@ var UserList = function UserList() {
 
             case 6:
               userList = _context2.sent;
-              console.log(userList);
               return _context2.abrupt("return", userList);
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -9713,12 +9712,12 @@ var UserName = function UserName(props) {
   var isUserDetail = props.isUserDetail,
       nameData = props.nameData;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "".concat(isUserDetail ? "mt-2" : ""),
+    className: "omit__text__container ".concat(isUserDetail ? "mt-2" : ""),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-      className: "lh-sm fw-bold ".concat(isUserDetail ? "fs-4" : ""),
+      className: "lh-sm fw-bold ".concat(isUserDetail ? "fs-4" : "", " omit__text"),
       children: nameData.screen_name
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
-      className: "opacity-50",
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+      className: "opacity-50 omit__text",
       children: ["\uFF20", nameData.user_name]
     })]
   });
@@ -14861,7 +14860,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.user__item-container {\n  transition: .2s;\n}\n\n.user__item-container:hover {\n  background-color: #E9EBED;\n}\n\n/* tweet */\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.user__item-container {\n  transition: .2s;\n}\n\n.user__item-container:hover {\n  background-color: #E9EBED;\n}\n\n/* ３点リーダー */\n.omit__text__container {\n  overflow: hidden;\n  max-width: calc(100% - 120px);\n  width: 100%;\n}\n\n.omit__text {\n  overflow: hidden;\n  max-width: 100%;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n\n/* tweet */\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n@media screen and (max-width: 750px) {\n\t.omit__text__container{\n\t\tmax-width: 160px;\n\t}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

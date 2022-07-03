@@ -42,7 +42,6 @@ export const UserList = () => {
         const res = await fetch(`/users?page=${currentPage}`);
         if (res.status === 200) {
             const userList = await res.json();
-            console.log(userList);
             return userList;
         }
     };

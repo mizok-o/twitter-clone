@@ -76,6 +76,20 @@ textarea {
   background-color: #E9EBED;
 }
 
+/* ３点リーダー */
+.omit__text__container {
+  overflow: hidden;
+  max-width: calc(100% - 120px);
+  width: 100%;
+}
+
+.omit__text {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* tweet */
 .tweet-form-file {
   width: 24px;
@@ -84,4 +98,10 @@ textarea {
   background-image: url('/images/upload-icon.png');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media screen and (max-width: 750px) {
+	.omit__text__container{
+		max-width: 160px;
+	}
 }
