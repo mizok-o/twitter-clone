@@ -8551,28 +8551,28 @@ var UserList = function UserList() {
       return Number(data.followed_user_id);
     });
     setAuthUserFollows(authUserFollowsList);
-  };
+  }; // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     getAuthUserData();
   }, []); // １ページ目の情報取得
 
-  var getFirstPage = /*#__PURE__*/function () {
+  var getUserList = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var res, firstPage;
+      var res, userList;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/users?page=1");
+              return fetch("/users?page=".concat(currentPage));
 
             case 2:
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 8;
+                _context2.next = 9;
                 break;
               }
 
@@ -8580,10 +8580,11 @@ var UserList = function UserList() {
               return res.json();
 
             case 6:
-              firstPage = _context2.sent;
-              return _context2.abrupt("return", firstPage);
+              userList = _context2.sent;
+              console.log(userList);
+              return _context2.abrupt("return", userList);
 
-            case 8:
+            case 9:
             case "end":
               return _context2.stop();
           }
@@ -8591,7 +8592,7 @@ var UserList = function UserList() {
       }, _callee2);
     }));
 
-    return function getFirstPage() {
+    return function getUserList() {
       return _ref2.apply(this, arguments);
     };
   }(); // 認証ユーザーにフォローされているかをユーザー一覧に付与する
@@ -8608,12 +8609,13 @@ var UserList = function UserList() {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getFirstPage().then(function (firstPage) {
+    getUserList().then(function (userList) {
       // ページネーション用に表示する全ユーザー数をセット
-      setNumUsers(firstPage.numUsers);
-      addIsFollowing(firstPage.users.data);
+      console.log(userList.numUsers);
+      setNumUsers(userList.numUsers);
+      addIsFollowing(userList.users.data);
     });
-  }, [authUserFollows]);
+  }, [authUserFollows, currentPage]);
   var userItem = users.map(function (item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {

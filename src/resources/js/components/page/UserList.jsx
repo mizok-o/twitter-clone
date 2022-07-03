@@ -32,17 +32,18 @@ export const UserList = () => {
         setAuthUserFollows(authUserFollowsList);
     };
 
+    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
         getAuthUserData();
     }, []);
 
     // １ページ目の情報取得
-    const getFirstPage = async () => {
-        const res = await fetch("/users?page=1");
+    const getUserList = async () => {
+        const res = await fetch(`/users?page=${currentPage}`);
         if (res.status === 200) {
-            const firstPage = await res.json();
-            return firstPage;
+            const userList = await res.json();
+            console.log(userList);
+            return userList;
         }
     };
     // 認証ユーザーにフォローされているかをユーザー一覧に付与する
@@ -58,13 +59,14 @@ export const UserList = () => {
 
     //１ページ目に表示するデータにフォロー状態を付与して返す
     useEffect(() => {
-        getFirstPage().then((firstPage) => {
+        getUserList().then((userList) => {
             // ページネーション用に表示する全ユーザー数をセット
-            setNumUsers(firstPage.numUsers);
+            console.log(userList.numUsers);
+            setNumUsers(userList.numUsers);
 
-            addIsFollowing(firstPage.users.data);
+            addIsFollowing(userList.users.data);
         });
-    }, [authUserFollows]);
+    }, [authUserFollows, currentPage]);
 
     const userItem = users.map((item) => {
         return (

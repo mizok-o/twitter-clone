@@ -19,11 +19,10 @@ class UserController extends Controller
     public function index(User $user): array
     {
         $users = $user->getAllUsers(auth()->id());
-        $numUsers = $users->count();
 
         return [
             "users" => $users,
-            "numUsers" => $numUsers
+            "numUsers" => $user->count()
         ];
     }
 
