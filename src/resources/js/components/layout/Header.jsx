@@ -21,7 +21,7 @@ export const Header = (props) => {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-        });
+        }).then(() => (window.location.href = "/login"));
     };
 
     return (

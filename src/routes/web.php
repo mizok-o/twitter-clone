@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+    // Route::get('/home/timeline', function () {
+    //     return view('home');
+    // });
     Route::get('/home/{any}', function () {
         return view('home');
     })->where('any', '.*');
