@@ -79,7 +79,7 @@ export const TweetAction = (props) => {
         <div className="my-3">
             <div className="w-100 p-2 bg-light shadow rounded">
                 <PageBackButton />
-                <div className="d-flex">
+                <div className="d-flex justify-content-center">
                     <UserIcon
                         userList={true}
                         iconData={authUser.profile_image_path}
@@ -104,7 +104,7 @@ export const TweetAction = (props) => {
                             </p>
                         </div>
                         <div className="mt-1 d-flex justify-content-between align-items-center">
-                            <div className="d-flex">
+                            <div className="d-flex select__image__area">
                                 <label>
                                     <div className="tweet-form-file"></div>
                                     <input
@@ -123,13 +123,13 @@ export const TweetAction = (props) => {
                                 <p className="ms-2">
                                     {imageIsSelected
                                         ? "画像を選択中"
-                                        : "画像を選択してください。"}
+                                        : "画像を選択"}
                                 </p>
                             </div>
                             <button
                                 className={`btn ${
                                     isEditPage ? "btn-success" : "btn-primary"
-                                } mt-1`}
+                                }`}
                                 type="submit"
                             >
                                 {isEditPage ? "ツイートを更新" : "ツイート"}

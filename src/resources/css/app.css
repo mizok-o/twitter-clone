@@ -132,4 +132,13 @@ textarea {
   .header__tweetBtn--icon {
     margin: 13px;
   }
+
+  /* 画像アップロードボタン */
+  .select__image__area {
+    display: block !important;
+    max-width: 152px;
+  }
+  .select__image__area p {
+    margin: 0 !important;
+  }
 }
