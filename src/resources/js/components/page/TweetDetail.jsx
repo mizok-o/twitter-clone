@@ -48,7 +48,7 @@ export const TweetDetail = () => {
         <div className="container-lg mt-5">
             <div className="border">
                 <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/home/timeline">
                         <button className="btn">
                             <svg
                                 viewBox="0 0 16 16"

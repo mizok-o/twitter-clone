@@ -36,14 +36,14 @@ export const TweetAction = (props) => {
     // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
     const postTweet = async (url, tweetData) => {
         const res = await fetch(url, {
-            method: isEditPage ? "PUT" : "POST",
+            method: "POST",
             headers: {
                 "X-CSRF-TOKEN": csrf_token,
             },
             body: tweetData,
         });
         if (res.status === 200) {
-            navigate("/");
+            navigate("/home/timeline");
         } else {
             const errorMessage = await res.json();
             setErrorMessage(errorMessage.text);

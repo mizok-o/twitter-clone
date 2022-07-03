@@ -11,7 +11,7 @@ export const UserProfile = (props) => {
 
     const [user, setUser] = useState({});
     const [isFollowing, setIsFollowing] = useState(false);
-    const [isAuth] = useState(authUserId === Number(id));
+    const [isAuth, setIsAuth] = useState(false);
 
     // ユーザーIDの取得
     const { id } = useParams();
@@ -25,6 +25,7 @@ export const UserProfile = (props) => {
     };
 
     useEffect(() => {
+        setIsAuth(authUserId === Number(id));
         setIsFollowing(authUserFollows.includes(Number(id)));
         getUserProfile();
     }, [authUserFollows]);
@@ -32,7 +33,7 @@ export const UserProfile = (props) => {
     const profileButton = () => {
         if (isAuth) {
             return (
-                <Link to="/profile-edit">
+                <Link to="/home/profile-edit">
                     <button type="button" className="btn btn-outline-dark">
                         編集
                     </button>

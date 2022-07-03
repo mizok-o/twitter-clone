@@ -56,6 +56,8 @@ export const TweetList = (props) => {
                                         <EditButtns
                                             currentText={tweet.text}
                                             tweetId={tweet.id}
+                                            setCurrentPage={setCurrentPage}
+                                            authUserId={authUserId}
                                         />
                                     ) : (
                                         ""

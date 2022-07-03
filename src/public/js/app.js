@@ -7800,7 +7800,7 @@ var Header = function Header(props) {
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
   var moveToProfile = function moveToProfile() {
-    navigate("/home/profile-edit");
+    navigate("/home/profile/".concat(authUserId));
   };
 
   var logout = function logout() {
@@ -7993,7 +7993,7 @@ var TweetAction = function TweetAction(props) {
             case 0:
               _context.next = 2;
               return fetch(url, {
-                method: isEditPage ? "PUT" : "POST",
+                method: "POST",
                 headers: {
                   "X-CSRF-TOKEN": csrf_token
                 },
@@ -8008,7 +8008,7 @@ var TweetAction = function TweetAction(props) {
                 break;
               }
 
-              navigate("/");
+              navigate("/home/timeline");
               _context.next = 11;
               break;
 
@@ -8276,7 +8276,7 @@ var TweetDetail = function TweetDetail() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "d-flex align-items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-          to: "/",
+          to: "/home/timeline",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             className: "btn",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("svg", {
@@ -8484,7 +8484,9 @@ var TweetList = function TweetList(props) {
                   }
                 }), authUserId === tweet.user_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
                   currentText: tweet.text,
-                  tweetId: tweet.id
+                  tweetId: tweet.id,
+                  setCurrentPage: setCurrentPage,
+                  authUserId: authUserId
                 }) : ""]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 className: "mt-2",
@@ -9018,9 +9020,10 @@ var UserProfile = function UserProfile(props) {
       isFollowing = _useState4[0],
       setIsFollowing = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(authUserId === Number(id)),
-      _useState6 = _slicedToArray(_useState5, 1),
-      isAuth = _useState6[0]; // ユーザーIDの取得
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isAuth = _useState6[0],
+      setIsAuth = _useState6[1]; // ユーザーIDの取得
 
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
@@ -9065,6 +9068,7 @@ var UserProfile = function UserProfile(props) {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsAuth(authUserId === Number(id));
     setIsFollowing(authUserFollows.includes(Number(id)));
     getUserProfile();
   }, [authUserFollows]);
@@ -9072,7 +9076,7 @@ var UserProfile = function UserProfile(props) {
   var profileButton = function profileButton() {
     if (isAuth) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-        to: "/profile-edit",
+        to: "/home/profile-edit",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           type: "button",
           className: "btn btn-outline-dark",
@@ -9455,8 +9459,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var EditButtns = function EditButtns(props) {
   var tweetId = props.tweetId,
-      currentText = props.currentText;
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)(); // // csrf対策のため、トークンを取得
+      currentText = props.currentText,
+      setCurrentPage = props.setCurrentPage,
+      authUserId = props.authUserId;
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)(); // csrf対策のため、トークンを取得
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
@@ -9471,7 +9477,7 @@ var EditButtns = function EditButtns(props) {
 
   var deleteTweet = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-      var checkDelete;
+      var checkDelete, res;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -9480,7 +9486,7 @@ var EditButtns = function EditButtns(props) {
               checkDelete = confirm("ツイート削除しますか？");
 
               if (!checkDelete) {
-                _context.next = 5;
+                _context.next = 7;
                 break;
               }
 
@@ -9494,6 +9500,14 @@ var EditButtns = function EditButtns(props) {
               });
 
             case 5:
+              res = _context.sent;
+
+              if (res.status === 200) {
+                setCurrentPage(1);
+                navigate("/home/profile/".concat(authUserId));
+              }
+
+            case 7:
             case "end":
               return _context.stop();
           }

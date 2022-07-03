@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tweets/{userId}', [TweetController::class, 'show']);
 
     Route::post('/post-tweet', [TweetController::class, 'store']);
-    Route::put('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
+    Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
     Route::delete('/destroy-tweet/{tweetId}', [TweetController::class, 'destroy']);
 
     Route::post('/follow-{userId}', [UserController::class, 'follow']);

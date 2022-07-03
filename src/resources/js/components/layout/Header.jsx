@@ -11,7 +11,7 @@ export const Header = (props) => {
     ).content;
 
     const moveToProfile = () => {
-        navigate("/home/profile-edit");
+        navigate(`/home/profile/${authUserId}`);
     };
 
     const logout = () => {
