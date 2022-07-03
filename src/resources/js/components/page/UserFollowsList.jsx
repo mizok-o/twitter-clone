@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { FollowButton } from "../parts/FollowButton";
+import { PageBackButton } from "../parts/PageBackButton";
 import { Pagenation } from "../parts/Pagenation";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 
 export const UserFollowsList = (props) => {
-    const { isFollowList, authUserFollows } = props;
+    const { isFollowList, authUserFollows, authUserId } = props;
 
     const [users, setUsers] = useState([]);
-    const [isFollowing, setIsFollowing] = useState(false);
     const [numUsers, setNumUsers] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -75,7 +75,7 @@ export const UserFollowsList = (props) => {
                                     />
                                     <FollowButton
                                         userId={user.id}
-                                        isFollowing={isFollowing}
+                                        isFollowing={user.is_following}
                                         users={users}
                                     />
                                 </div>
@@ -95,6 +95,7 @@ export const UserFollowsList = (props) => {
     return (
         <div className="mt-4">
             <div className="border">
+                <PageBackButton isProfile={true} authUserId={authUserId} />
                 <ul>{userItem}</ul>
             </div>
             <Pagenation

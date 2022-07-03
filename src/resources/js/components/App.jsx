@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -70,6 +70,7 @@ export const App = () => {
                         <UserFollowsList
                             isFollowList={true}
                             authUserFollows={authUserFollows}
+                            authUserId={authUser.id}
                         />
                     }
                 />
@@ -79,6 +80,7 @@ export const App = () => {
                         <UserFollowsList
                             isFollowList={false}
                             authUserFollows={authUserFollows}
+                            authUserId={authUser.id}
                         />
                     }
                 />

@@ -7743,13 +7743,15 @@ var App = function App() {
         path: "/home/followList/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_10__.UserFollowsList, {
           isFollowList: true,
-          authUserFollows: authUserFollows
+          authUserFollows: authUserFollows,
+          authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
         path: "/home/followerList/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_10__.UserFollowsList, {
           isFollowList: false,
-          authUserFollows: authUserFollows
+          authUserFollows: authUserFollows,
+          authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
         path: "/home/profile/:id",
@@ -7915,7 +7917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/BackToTweetList */ "./resources/js/components/parts/BackToTweetList.jsx");
+/* harmony import */ var _parts_PageBackButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/PageBackButton */ "./resources/js/components/parts/PageBackButton.jsx");
 /* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -8061,7 +8063,7 @@ var TweetAction = function TweetAction(props) {
     className: "my-3",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "w-100 p-2 bg-light shadow rounded",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_PageBackButton__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "d-flex justify-content-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__.UserIcon, {
           userList: true,
@@ -8547,13 +8549,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "UserFollowsList": () => (/* binding */ UserFollowsList)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/FollowButton */ "./resources/js/components/parts/FollowButton.jsx");
-/* harmony import */ var _parts_Pagenation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/Pagenation */ "./resources/js/components/parts/Pagenation.jsx");
-/* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
-/* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _parts_PageBackButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/PageBackButton */ "./resources/js/components/parts/PageBackButton.jsx");
+/* harmony import */ var _parts_Pagenation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/Pagenation */ "./resources/js/components/parts/Pagenation.jsx");
+/* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
+/* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -8588,31 +8591,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var UserFollowsList = function UserFollowsList(props) {
   var isFollowList = props.isFollowList,
-      authUserFollows = props.authUserFollows;
+      authUserFollows = props.authUserFollows,
+      authUserId = props.authUserId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       users = _useState2[0],
       setUsers = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      isFollowing = _useState4[0],
-      setIsFollowing = _useState4[1];
+      numUsers = _useState4[0],
+      setNumUsers = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState6 = _slicedToArray(_useState5, 2),
-      numUsers = _useState6[0],
-      setNumUsers = _useState6[1];
+      currentPage = _useState6[0],
+      setCurrentPage = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
-      _useState8 = _slicedToArray(_useState7, 2),
-      currentPage = _useState8[0],
-      setCurrentPage = _useState8[1];
-
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
       id = _useParams.id; // フォローの取得
 
 
@@ -8714,32 +8714,32 @@ var UserFollowsList = function UserFollowsList(props) {
   };
 
   var userItem = users.map(function (user) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "user__item-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
           to: "/home/profile/".concat(user.id),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_4__.UserIcon, {
               iconData: user.profile_image_path
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "d-flex justify-content-between",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_4__.UserName, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_5__.UserName, {
                   nameData: {
                     screen_name: user.screen_name,
                     user_name: user.user_name
                   }
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__.FollowButton, {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_FollowButton__WEBPACK_IMPORTED_MODULE_1__.FollowButton, {
                   userId: user.id,
-                  isFollowing: isFollowing,
+                  isFollowing: user.is_following,
                   users: users
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "mt-2",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                   children: user.profile
                 })
               })]
@@ -8751,14 +8751,17 @@ var UserFollowsList = function UserFollowsList(props) {
   }); // １ページごとのコンテンツ数
 
   var contentNumPerPage = 10;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "mt-4",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "border",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_PageBackButton__WEBPACK_IMPORTED_MODULE_2__.PageBackButton, {
+        isProfile: true,
+        authUserId: authUserId
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("ul", {
         children: userItem
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_2__.Pagenation, {
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_3__.Pagenation, {
       sum: numUsers,
       per: contentNumPerPage,
       currentPage: currentPage,
@@ -9189,7 +9192,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/BackToTweetList */ "./resources/js/components/parts/BackToTweetList.jsx");
+/* harmony import */ var _parts_PageBackButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/PageBackButton */ "./resources/js/components/parts/PageBackButton.jsx");
 /* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -9313,7 +9316,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
     className: "my-3",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "w-100 p-2 bg-light shadow rounded",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_BackToTweetList__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_PageBackButton__WEBPACK_IMPORTED_MODULE_1__.PageBackButton, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "d-flex",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           id: "form",
@@ -9577,54 +9580,6 @@ var AuthUserTweets = function AuthUserTweets(props) {
       onChange: function onChange(e) {
         return setCurrentPage(e.page);
       }
-    })]
-  });
-};
-
-/***/ }),
-
-/***/ "./resources/js/components/parts/BackToTweetList.jsx":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/parts/BackToTweetList.jsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PageBackButton": () => (/* binding */ PageBackButton)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-var PageBackButton = function PageBackButton() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "d-flex align-items-center mb-3",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-      to: "/home/timeline",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        className: "btn",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
-          viewBox: "0 0 16 16",
-          width: "16",
-          height: "16",
-          xmlns: "http://www.w3.org/2000/svg",
-          fill: "#111111",
-          className: "bi bi-arrow-left",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
-            d: "M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-          })
-        })
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "ms-2",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
-        children: "\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3\u3078"
-      })
     })]
   });
 };
@@ -9985,6 +9940,56 @@ var FollowNumbers = function FollowNumbers(props) {
         })
       })]
     })
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/parts/PageBackButton.jsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/parts/PageBackButton.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageBackButton": () => (/* binding */ PageBackButton)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var PageBackButton = function PageBackButton(props) {
+  var isProfile = props.isProfile,
+      authUserId = props.authUserId;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "d-flex align-items-center mb-3",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: isProfile ? "/home/profile/".concat(authUserId) : "/home/timeline",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+        className: "btn",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+          viewBox: "0 0 16 16",
+          width: "16",
+          height: "16",
+          xmlns: "http://www.w3.org/2000/svg",
+          fill: "#111111",
+          className: "bi bi-arrow-left",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+            d: "M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+          })
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "ms-2",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h2", {
+        children: [isProfile ? "プロフィール" : "タイムライン", "\u3078"]
+      })
+    })]
   });
 };
 

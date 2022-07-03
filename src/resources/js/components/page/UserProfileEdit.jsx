@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { PageBackButton } from "../parts/BackToTweetList";
+import { PageBackButton } from "../parts/PageBackButton";
 import { UserIcon } from "../parts/UserIcon";
 
 export const UserProfileEdit = (props) => {
