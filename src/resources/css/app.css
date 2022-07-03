@@ -100,8 +100,36 @@ textarea {
   background-size: cover;
 }
 
+/* ツイートボタン */
+.header__tweetBtn {
+  position: fixed;
+  bottom: 64px;
+  right: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+.background-twitter {
+  background-color: #03A9F4;
+}
+
+.header__tweetBtn--icon {
+  margin: 22px;
+}
+
 @media screen and (max-width: 750px) {
 	.omit__text__container{
 		max-width: 160px;
 	}
+
+  .header__tweetBtn {
+    bottom: 32px;
+    right: 12px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .header__tweetBtn--icon {
+    margin: 13px;
+  }
 }
