@@ -21,10 +21,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/auth-user', [UserController::class, 'getAuthUser']);
     Route::get('/auth-user/follows', [UserController::class, 'getAuthUserFollows']);
+
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{userId}', [UserController::class, 'show']);
     Route::post('/edit-user/{userId}', [UserController::class, 'update']);
 
+    Route::get('/users-follows/{userId}', [UserController::class, 'getFollowUsers']);
+    Route::get('/users-followers/{userId}', [UserController::class, 'getFollowedUsers']);
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
 

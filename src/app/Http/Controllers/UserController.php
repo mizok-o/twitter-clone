@@ -68,11 +68,11 @@ class UserController extends Controller
      *  認証ユーザー情報とフォローしている人リストを取得
      *
      * @param  Follow $follow
-     * @return object
+     * @return array
      */
-    public function getAuthUserFollows(Follow $follow): object
+    public function getAuthUserFollows(Follow $follow): array
     {
-        return $follow->getFollowsList(auth()->id());
+        return $follow->getFollowIds(auth()->id());
     }
 
     /**
@@ -100,14 +100,41 @@ class UserController extends Controller
     }
 
     /**
+     *  フォローしてるユーザーIDを配列で取得
+     *
+     * @param  int  $userId
+     * @param  Follow $follow
+     * @param  User $user
+     * @return object
+     */
+    public function getFollowUsers(int $userId, Follow $follow, User $user): object
+    {
+        $followIds = $follow->getFollowIds($userId);
+        return $user->getUserListByFollowIds($followIds);
+    }
+
+    /**
+     *  フォローしてるユーザーIDを配列で取得
+     *
+     * @param  int  $userId
+     * @param  Follow $follow
+     * @param  User $user
+     * @return object
+     */
+    public function getFollowedUsers(int $userId, Follow $follow, User $user): object
+    {
+        $followerIds = $follow->getFollowerIds($userId);
+        return $user->getUserListByFollowIds($followerIds);
+    }
+
+    /**
      *  フォロー機能
      *
      * @param  int  $userId
      */
-    public function follow(int $userId, User $user)
+    public function follow(int $userId)
     {
-        $user->follow($userId);
-        return;
+        return auth()->user()->follow($userId);
     }
 
     /**
@@ -115,9 +142,9 @@ class UserController extends Controller
      *
      * @param  int  $userId
      */
-    public function unfollow(int $userId, User $user)
+    public function unfollow(int $userId)
     {
-        $user->unfollow($userId);
+        auth()->user()->unfollow($userId);
         return;
     }
 }

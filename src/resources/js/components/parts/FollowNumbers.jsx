@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const FollowNumbers = (props) => {
     // 表示したいユーザーのID
@@ -34,16 +35,19 @@ export const FollowNumbers = (props) => {
         <div className="mt-1">
             <div className="d-flex">
                 <div>
-                    <button className="d-flex" type="button">
+                    <Link className="d-flex" to={`/home/followList/${userId}`}>
                         <span className="fw-bold">{followsNum}</span>
                         <p className="ms-1">フォロー</p>
-                    </button>
+                    </Link>
                 </div>
                 <div>
-                    <button className="d-flex ms-3" type="button">
+                    <Link
+                        className="d-flex ms-3"
+                        to={`/home/followerList/${userId}`}
+                    >
                         <span className="fw-bold">{followersNum}</span>
                         <p className="ms-1">フォロワー</p>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

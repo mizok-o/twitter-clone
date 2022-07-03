@@ -12,9 +12,11 @@ import { UserProfile } from "./page/UserProfile";
 import { UserProfileEdit } from "./page/UserProfileEdit";
 
 import "../../css/app.css";
+import { UserFollowsList } from "./page/UserFollowsList";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});
+    const [authUserFollows, setAuthUserFollows] = useState([]);
 
     // 認証ユーザー情報を取得
     const getAuthUser = async () => {
@@ -25,8 +27,18 @@ export const App = () => {
         }
     };
 
+    // 認証ユーザーのフォローリストを取得
+    const getAuthUserFollows = async () => {
+        const res = await fetch("/auth-user/follows");
+        if (res.status === 200) {
+            const authUserFollowsList = await res.json();
+            setAuthUserFollows(authUserFollowsList);
+        }
+    };
+
     useEffect(() => {
         getAuthUser();
+        getAuthUserFollows();
     }, []);
 
     return (
@@ -48,10 +60,36 @@ export const App = () => {
                         <TweetAction isEditPage={true} authUser={authUser} />
                     }
                 />
-                <Route path="/home/userList" element={<UserList />} />
+                <Route
+                    path="/home/userList"
+                    element={<UserList authUserFollows={authUserFollows} />}
+                />
+                <Route
+                    path="/home/followList/:id"
+                    element={
+                        <UserFollowsList
+                            isFollowList={true}
+                            authUserFollows={authUserFollows}
+                        />
+                    }
+                />
+                <Route
+                    path="/home/followerList/:id"
+                    element={
+                        <UserFollowsList
+                            isFollowList={false}
+                            authUserFollows={authUserFollows}
+                        />
+                    }
+                />
                 <Route
                     path="/home/profile/:id"
-                    element={<UserProfile authUserId={authUser.id} />}
+                    element={
+                        <UserProfile
+                            authUserId={authUser.id}
+                            authUserFollows={authUserFollows}
+                        />
+                    }
                 />
                 <Route
                     path="/home/profile-edit"
