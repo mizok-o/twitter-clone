@@ -9,13 +9,12 @@ import { UserName } from "../parts/UserName";
 
 export const UserProfile = (props) => {
     const { authUserId, authUserFollows } = props;
+    // ユーザーIDの取得
+    const { id } = useParams();
 
     const [user, setUser] = useState({});
     const [isFollowing, setIsFollowing] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
-
-    // ユーザーIDの取得
-    const { id } = useParams();
 
     const getUserProfile = async () => {
         const res = await fetch(`/users/${id}`);

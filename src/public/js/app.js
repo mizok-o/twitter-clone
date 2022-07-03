@@ -7756,7 +7756,7 @@ var App = function App() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
         path: "/home/profile/:id",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_page_UserProfile__WEBPACK_IMPORTED_MODULE_7__.UserProfile, {
-          authUser: authUser,
+          authUserId: authUser.id,
           authUserFollows: authUserFollows
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
@@ -9013,7 +9013,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfile = function UserProfile(props) {
   var authUserId = props.authUserId,
-      authUserFollows = props.authUserFollows;
+      authUserFollows = props.authUserFollows; // ユーザーIDの取得
+
+  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
+      id = _useParams.id;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -9028,11 +9031,7 @@ var UserProfile = function UserProfile(props) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
       isAuth = _useState6[0],
-      setIsAuth = _useState6[1]; // ユーザーIDの取得
-
-
-  var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
-      id = _useParams.id;
+      setIsAuth = _useState6[1];
 
   var getUserProfile = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
