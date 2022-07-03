@@ -8387,11 +8387,20 @@ var TweetList = function TweetList(props) {
                   currentText: tweet.text,
                   tweetId: tweet.id
                 }) : ""]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 className: "mt-1",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-                  children: tweet.text
-                })
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                    children: tweet.text
+                  })
+                }), tweet.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  className: "w-100 mt-1 border rounded",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+                    className: "w-100",
+                    src: "/storage/tweet/".concat(tweet.image),
+                    alt: "\u30C4\u30A4\u30FC\u30C8 \u753B\u50CF"
+                  })
+                }) : ""]
               })]
             })]
           })

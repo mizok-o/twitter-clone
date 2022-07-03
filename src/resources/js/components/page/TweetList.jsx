@@ -57,7 +57,21 @@ export const TweetList = (props) => {
                                     )}
                                 </div>
                                 <div className="mt-1">
-                                    <p>{tweet.text}</p>
+                                    <div>
+                                        <p>{tweet.text}</p>
+                                    </div>
+
+                                    {tweet.image ? (
+                                        <div className="w-100 mt-1 border rounded">
+                                            <img
+                                                className="w-100"
+                                                src={`/storage/tweet/${tweet.image}`}
+                                                alt="ツイート 画像"
+                                            />
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </div>
                             </div>
                         </div>
