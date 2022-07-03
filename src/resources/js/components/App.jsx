@@ -34,27 +34,27 @@ export const App = () => {
             <Header authUserId={authUser.id} />
             <Routes>
                 <Route
-                    path="/"
+                    path="/home/timeline"
                     element={<TweetList authUserId={authUser.id} />}
                 />
-                <Route path="/tweet/:id" element={<TweetDetail />} />
+                <Route path="/home/tweet/:id" element={<TweetDetail />} />
                 <Route
-                    path="/tweet/new"
+                    path="/home/tweet/new"
                     element={<TweetAction authUser={authUser} />}
                 />
                 <Route
-                    path="/tweet/edit/:id"
+                    path="/home/tweet/edit/:id"
                     element={
                         <TweetAction isEditPage={true} authUser={authUser} />
                     }
                 />
-                <Route path="/userList" element={<UserList />} />
+                <Route path="/home/userList" element={<UserList />} />
                 <Route
-                    path="/profile/:id"
+                    path="/home/profile/:id"
                     element={<UserProfile authUserId={authUser.id} />}
                 />
                 <Route
-                    path="/profile-edit"
+                    path="/home/profile-edit"
                     element={<UserProfileEdit authUser={authUser} />}
                 />
             </Routes>

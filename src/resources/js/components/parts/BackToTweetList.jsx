@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const PageBackButton = () => {
     return (
         <div className="d-flex align-items-center mb-3">
-            <Link to="/">
+            <Link to="/home/timeline">
                 <button className="btn">
                     <svg
                         viewBox="0 0 16 16"

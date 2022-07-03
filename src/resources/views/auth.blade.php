@@ -28,7 +28,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Twitterクローン') }}
                 </a>
-                <a class="navbar-brand" href="{{ url('/userlist') }}">
+                <a class="navbar-brand" href="{{ url('/home/userList') }}">
                     ユーザ一覧
                 </a>
                 <a class="navbar-brand" href="{{ url('/Mizoguchi3') }}">
@@ -74,7 +74,7 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                            document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('form.logout') }}
                                     </a>
 
@@ -91,8 +91,6 @@
 
         <main class="py-4">
             @yield('content')
-
-            {{-- <div id="example" class="container-sm position-relative"></div> --}}
         </main>
     </div>
 </body>

@@ -71,7 +71,7 @@ export const UserList = () => {
         return (
             <li key={item.id}>
                 <div className="user__item-container">
-                    <Link to={`/profile/${item.id}`}>
+                    <Link to={`/home/profile/${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon iconData={item.profile_image_path} />
                             <div className="ms-2 flex-grow-1">
@@ -89,7 +89,7 @@ export const UserList = () => {
                                         authUserFollows={authUserFollows}
                                     />
                                 </div>
-                                <div className="mt-1">
+                                <div className="mt-2">
                                     <p>{item.profile}</p>
                                 </div>
                             </div>

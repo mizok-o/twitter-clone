@@ -58,7 +58,7 @@ export const UserProfile = (props) => {
     const profileButton = () => {
         if (isAuth) {
             return (
-                <Link to="/profile-edit">
+                <Link to="/home/profile-edit">
                     <button type="button" className="btn btn-outline-dark">
                         編集
                     </button>
@@ -80,7 +80,7 @@ export const UserProfile = (props) => {
             <div className="border">
                 <div>
                     <div className="d-flex p-1">
-                        <Link to="/userlist">
+                        <Link to="/home/userList">
                             <button className="btn">
                                 <svg
                                     viewBox="0 0 16 16"

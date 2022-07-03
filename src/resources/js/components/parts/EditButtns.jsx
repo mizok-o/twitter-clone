@@ -13,7 +13,7 @@ export const EditButtns = (props) => {
 
     const moveEditPage = (e) => {
         e.preventDefault();
-        navigate(`/tweet/edit/${tweetId}`, {
+        navigate(`/home/tweet/edit/${tweetId}`, {
             state: { defaultText: currentText },
         });
     };

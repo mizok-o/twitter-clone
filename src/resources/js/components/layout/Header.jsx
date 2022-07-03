@@ -11,7 +11,7 @@ export const Header = (props) => {
     ).content;
 
     const moveToProfile = () => {
-        navigate("/profile-edit");
+        navigate("/home/profile-edit");
     };
 
     const logout = () => {
@@ -21,8 +21,6 @@ export const Header = (props) => {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-        }).then(() => {
-            navigate("/login");
         });
     };
 
@@ -30,7 +28,7 @@ export const Header = (props) => {
         <header>
             <div className="d-flex justify-content-between align-items-center">
                 <div>
-                    <Link to="/tweet/new">
+                    <Link to="/home/timeline">
                         <h1 className="fs-3">
                             <img
                                 src="/images/twitter-logo.svg"
@@ -42,12 +40,12 @@ export const Header = (props) => {
                 <div className="header__right--container">
                     <ul className="d-flex align-items-center justify-content-between">
                         <li className="fs-6">
-                            <Link className="header__text" to="/">
+                            <Link className="header__text" to="/home/timeline">
                                 タイムライン
                             </Link>
                         </li>
                         <li className="fs-6">
-                            <Link className="header__text" to="/userlist">
+                            <Link className="header__text" to="/home/userList">
                                 ユーザ一覧
                             </Link>
                         </li>
@@ -70,11 +68,7 @@ export const Header = (props) => {
                                     >
                                         プロフィール
                                     </Dropdown.Item>
-                                    <Dropdown.Item
-                                        onClick={logout}
-                                        href="/login"
-                                        value="2"
-                                    >
+                                    <Dropdown.Item onClick={logout} value="2">
                                         ログアウト
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
@@ -84,7 +78,7 @@ export const Header = (props) => {
                 </div>
                 <div className="header__tweetBtn">
                     <div className="w-100 h-100 rounded-circle background-twitter">
-                        <Link className="w-100 h-100" to="/tweet/new">
+                        <Link className="w-100 h-100" to="/home/tweet/new">
                             <div className="w-100 h-100">
                                 <svg
                                     className="header__tweetBtn--icon"

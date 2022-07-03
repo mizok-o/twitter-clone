@@ -67,7 +67,7 @@ export const TweetDetail = () => {
                     </div>
                 </div>
                 <div className="py-1 px-2">
-                    <Link to={`/profile/${user.id}`} className="d-flex">
+                    <Link to={`/home/profile/${user.id}`} className="d-flex">
                         <UserIcon
                             userList={false}
                             iconData={user.profile_image_path}

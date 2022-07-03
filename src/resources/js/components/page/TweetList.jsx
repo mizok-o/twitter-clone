@@ -35,7 +35,7 @@ export const TweetList = (props) => {
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
-                    <Link to={`/tweet/${tweet.id}`}>
+                    <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon iconData={userData.profile_image_path} />
                             <div className="ms-2 flex-grow-1">
@@ -56,7 +56,7 @@ export const TweetList = (props) => {
                                         ""
                                     )}
                                 </div>
-                                <div className="mt-1">
+                                <div className="mt-2">
                                     <div>
                                         <p>{tweet.text}</p>
                                     </div>
