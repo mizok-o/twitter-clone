@@ -6,28 +6,26 @@ import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
 import { EditButtns } from "../parts/EditButtns";
 
-export const TweetList = (props) => {
-    const { authUserId } = props;
+export const AuthUserTweets = (props) => {
+    const { user } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [users, setUsers] = useState([]);
     const [numTweets, setNumTweets] = useState(0);
     const [tweets, setTweets] = useState([]);
     const [nofollows, setNoFollows] = useState(false);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch(`/tweets?page=${currentPage}`);
+        const res = await fetch("/tweets-auth-user");
         if (res.status === 200) {
             const tweetsData = await res.json();
             // ツイートが無い場合
-            if (!tweetsData.tweets.total) {
+            if (!tweetsData.total) {
                 setNoFollows(true);
                 return;
             }
-            setUsers(tweetsData.users);
-            setNumTweets(tweetsData.tweets.total);
-            setTweets(tweetsData.tweets.data);
+            setTweets(tweetsData.data);
+            setNumTweets(tweetsData.total);
         }
     };
 
@@ -37,28 +35,27 @@ export const TweetList = (props) => {
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
-        const userData = users.find((data) => data.id === tweet.user_id);
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={userData.profile_image_path} />
+                            <UserIcon iconData={user.profile_image_path} />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName
                                         nameData={{
-                                            screen_name: userData.screen_name,
-                                            user_name: userData.user_name,
+                                            screen_name: user.screen_name,
+                                            user_name: user.user_name,
                                         }}
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
-                                    {authUserId === tweet.user_id ? (
+                                    {user.id === tweet.user_id ? (
                                         <EditButtns
                                             currentText={tweet.text}
                                             tweetId={tweet.id}
                                             setCurrentPage={setCurrentPage}
-                                            authUserId={authUserId}
+                                            authUserId={user.id}
                                         />
                                     ) : (
                                         ""
@@ -92,7 +89,7 @@ export const TweetList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className="mt-4">
+        <div className="mt-2">
             <div className="border">
                 {nofollows ? (
                     <h2 className="py-4 px-2 fs-5">

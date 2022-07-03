@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+import { AuthUserTweets } from "../parts/AuthUserTweets";
 import { FollowButton } from "../parts/FollowButton";
 import { FollowNumbers } from "../parts/FollowNumbers";
 import { UserIcon } from "../parts/UserIcon";
@@ -51,7 +52,7 @@ export const UserProfile = (props) => {
     };
 
     return (
-        <div className="container-lg mt-5">
+        <div className="mt-5">
             <div className="border">
                 <div>
                     <div className="d-flex p-1">
@@ -108,7 +109,8 @@ export const UserProfile = (props) => {
                 </div>
             </div>
             <div className="border">
-                <p>ツイート一覧</p>
+                <h3 className="mt-3 ms-3 fs-4">ツイート一覧</h3>
+                <AuthUserTweets user={user} />
             </div>
         </div>
     );

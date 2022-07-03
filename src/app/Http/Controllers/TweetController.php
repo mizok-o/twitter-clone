@@ -37,14 +37,24 @@ class TweetController extends Controller
     /**
      *  ユーザーのツイートID指定して取得
      *
-     * @param  int  $userId
+     * @param  int  $tweetId
      * @param  Tweet $tweet
      * @return object
      */
-    public function show(int $userId, Tweet $tweet): object
+    public function show(int $tweetId, Tweet $tweet): object
     {
-        $userTweet = $tweet->getTweetByUserId($userId);
-        return $userTweet[0];
+        return $tweet->getTweetByUserId($tweetId);
+    }
+
+    /**
+     *  認証ユーザーのツイート一覧を取得
+     *
+     * @param  Tweet $tweet
+     * @return object
+     */
+    public function getAuthUserTweets(Tweet $tweet): object
+    {
+        return $tweet->getTweetsByAuthUserId();
     }
 
     /**
@@ -57,14 +67,12 @@ class TweetController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet, User $user): bool
     {
-        // dd($request->user());
         $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $tweet);
         if (!$isAuthUser) {
             abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
         }
 
         $userId = auth()->id();
-        // $postContent = $request->all();
 
         return $tweet->postTweet($userId, $request);
     }

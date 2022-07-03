@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tweet extends Model
 {
-
     /**
      * フォローしているユーザーのツイートを取得
      *
@@ -23,12 +22,22 @@ class Tweet extends Model
     /**
      * ID指定してツイート取得
      *
-     * @param  int $user_id
-     * @return　Collection
+     * @param  int $tweetId
+     * @return　object
      */
-    public function getTweetByUserId(int $userId): Collection
+    public function getTweetByUserId(int $tweetId): object
     {
-        return $this->where('id', $userId)->get();
+        return $this->where('id', $tweetId)->first();
+    }
+
+    /**
+     * 認証ユーザーのツイート一覧を取得
+     *
+     * @return　object
+     */
+    public function getTweetsByAuthUserId(): object
+    {
+        return $this->where('user_id', auth()->id())->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**
@@ -47,8 +56,6 @@ class Tweet extends Model
             $this->image = $image_name;
             $request->file('image')->storeAs('public/tweet', $image_name);
         }
-
-
         return $this->save();
     }
 

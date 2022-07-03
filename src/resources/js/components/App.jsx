@@ -86,7 +86,7 @@ export const App = () => {
                     path="/home/profile/:id"
                     element={
                         <UserProfile
-                            authUserId={authUser.id}
+                            authUser={authUser}
                             authUserFollows={authUserFollows}
                         />
                     }

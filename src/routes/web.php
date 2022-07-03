@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
 
     Route::get('/tweets', [TweetController::class, 'index']);
-    Route::get('/tweets/{userId}', [TweetController::class, 'show']);
+    Route::get('/tweets/{tweetId}', [TweetController::class, 'show']);
+    Route::get('/tweets-auth-user', [TweetController::class, 'getAuthUserTweets']);
 
     Route::post('/post-tweet', [TweetController::class, 'store']);
     Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
