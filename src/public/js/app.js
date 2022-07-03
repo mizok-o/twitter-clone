@@ -8516,7 +8516,7 @@ var UserList = function UserList() {
     return function getAuthUserData() {
       return _ref.apply(this, arguments);
     };
-  }(); // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+  }(); // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセット
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {

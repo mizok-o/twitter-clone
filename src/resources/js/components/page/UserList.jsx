@@ -23,7 +23,7 @@ export const UserList = () => {
         }
     };
 
-    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
+    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセット
     useEffect(() => {
         getAuthUserData();
     }, []);
