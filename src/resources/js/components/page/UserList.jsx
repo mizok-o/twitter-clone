@@ -36,7 +36,7 @@ export const UserList = () => {
             return firstPage;
         }
     };
-    // 認証ユーザーにフォローされているかをユーザー一覧に付与する
+    // 認証ユーザーにフォローされているかをユーザー一覧に付与
     const addIsFollowing = (users) => {
         const usersData = users.map((user) => {
             return {

@@ -8559,7 +8559,7 @@ var UserList = function UserList() {
     return function getFirstPage() {
       return _ref2.apply(this, arguments);
     };
-  }(); // 認証ユーザーにフォローされているかをユーザー一覧に付与する
+  }(); // 認証ユーザーにフォローされているかをユーザー一覧に付与
 
 
   var addIsFollowing = function addIsFollowing(users) {
