@@ -22,6 +22,7 @@ export const TweetAction = (props) => {
 
     const [defaultText, setDefaultText] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [imageIsSelected, setImageIsSelected] = useState(false);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -33,14 +34,13 @@ export const TweetAction = (props) => {
     }, []);
 
     // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
-    const postTweet = async (url, tweet) => {
+    const postTweet = async (url, tweetData) => {
         const res = await fetch(url, {
             method: isEditPage ? "PUT" : "POST",
             headers: {
-                "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrf_token,
             },
-            body: JSON.stringify(tweet),
+            body: tweetData,
         });
         if (res.status === 200) {
             navigate("/");
@@ -61,14 +61,18 @@ export const TweetAction = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 入力されたツイートデータ
-        const tweet = {
-            text: e.target.text.value,
-            image: e.target.image.value,
-        };
+        // postするツイート作成
+        let tweetData = new FormData();
+        const image = e.target.image.files[0];
+        const text = e.target.text.value;
 
-        const url = setApiUrl();
-        postTweet(url, tweet);
+        // 画像が選択されてない時は追加しない
+        if (image) {
+            tweetData.append("image", image);
+        }
+        tweetData.append("text", text);
+
+        postTweet(setApiUrl(), tweetData);
     };
 
     return (
@@ -100,24 +104,35 @@ export const TweetAction = (props) => {
                             </p>
                         </div>
                         <div className="mt-1 d-flex justify-content-between align-items-center">
-                            <label>
-                                <div className="tweet-form-file"></div>
-                                <input
-                                    className="d-none"
-                                    type="file"
-                                    name="image"
-                                    accept=".png, .jpeg, .jpg"
-                                />
-                            </label>
+                            <div className="d-flex">
+                                <label>
+                                    <div className="tweet-form-file"></div>
+                                    <input
+                                        id="userImage"
+                                        className="d-none"
+                                        type="file"
+                                        name="image"
+                                        accept=".png, .jpeg, .jpg, .webp"
+                                        onChange={(e) =>
+                                            setImageIsSelected(
+                                                e.target.files[0]
+                                            )
+                                        }
+                                    />
+                                </label>
+                                <p className="ms-2">
+                                    {imageIsSelected
+                                        ? "画像を選択中"
+                                        : "画像を選択してください。"}
+                                </p>
+                            </div>
                             <button
                                 className={`btn ${
                                     isEditPage ? "btn-success" : "btn-primary"
                                 } mt-1`}
                                 type="submit"
                             >
-                                {isEditPage
-                                    ? "ツイートを更新する"
-                                    : "ツイートする"}
+                                {isEditPage ? "ツイートを更新" : "ツイート"}
                             </button>
                         </div>
                     </form>

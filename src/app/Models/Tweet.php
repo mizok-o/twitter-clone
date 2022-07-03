@@ -35,12 +35,20 @@ class Tweet extends Model
      * ツイート投稿
      *
      * @param  int $user_id
-     * @param  array $postContent
+     * @param  object $postContent
      */
-    public function postTweet(int $userId, array $postContent): bool
+    public function postTweet(int $userId, object $request): bool
     {
         $this->user_id = $userId;
-        $this->text = $postContent['text'];
+        $this->text = $request->text;
+
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->hashName();
+            $this->image = $image_name;
+            $request->file('image')->storeAs('public/tweet', $image_name);
+        }
+
+
         return $this->save();
     }
 

@@ -10,7 +10,7 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
-     * 認証済みがチェックする
+     * 認証済みかチェックする
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool

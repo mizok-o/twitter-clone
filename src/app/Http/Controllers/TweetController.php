@@ -57,15 +57,16 @@ class TweetController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet, User $user): bool
     {
+        // dd($request->user());
         $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $tweet);
-        if ($isAuthUser) {
+        if (!$isAuthUser) {
             abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
         }
 
         $userId = auth()->id();
-        $postContent = $request->all();
+        // $postContent = $request->all();
 
-        return $tweet->postTweet($userId, $postContent);
+        return $tweet->postTweet($userId, $request);
     }
 
     /**

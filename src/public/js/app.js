@@ -7886,7 +7886,12 @@ var TweetAction = function TweetAction(props) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       errorMessage = _useState4[0],
-      setErrorMessage = _useState4[1]; // csrf対策のため、トークンを取得
+      setErrorMessage = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      imageIsSelected = _useState6[0],
+      setImageIsSelected = _useState6[1]; // csrf対策のため、トークンを取得
 
 
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
@@ -7895,7 +7900,7 @@ var TweetAction = function TweetAction(props) {
   }, []); // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
 
   var postTweet = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, tweet) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, tweetData) {
       var res, _errorMessage;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -7906,10 +7911,9 @@ var TweetAction = function TweetAction(props) {
               return fetch(url, {
                 method: isEditPage ? "PUT" : "POST",
                 headers: {
-                  "Content-Type": "application/json",
                   "X-CSRF-TOKEN": csrf_token
                 },
-                body: JSON.stringify(tweet)
+                body: tweetData
               });
 
             case 2:
@@ -7955,14 +7959,18 @@ var TweetAction = function TweetAction(props) {
   };
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); // 入力されたツイートデータ
+    e.preventDefault(); // postするツイート作成
 
-    var tweet = {
-      text: e.target.text.value,
-      image: e.target.image.value
-    };
-    var url = setApiUrl();
-    postTweet(url, tweet);
+    var tweetData = new FormData();
+    var image = e.target.image.files[0];
+    var text = e.target.text.value; // 画像が選択されてない時は追加しない
+
+    if (image) {
+      tweetData.append("image", image);
+    }
+
+    tweetData.append("text", text);
+    postTweet(setApiUrl(), tweetData);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -7995,19 +8003,29 @@ var TweetAction = function TweetAction(props) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "mt-1 d-flex justify-content-between align-items-center",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "tweet-form-file"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                className: "d-none",
-                type: "file",
-                name: "image",
-                accept: ".png, .jpeg, .jpg"
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "d-flex",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  className: "tweet-form-file"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                  id: "userImage",
+                  className: "d-none",
+                  type: "file",
+                  name: "image",
+                  accept: ".png, .jpeg, .jpg, .webp",
+                  onChange: function onChange(e) {
+                    return setImageIsSelected(e.target.files[0]);
+                  }
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "ms-2",
+                children: imageIsSelected ? "画像を選択中" : "画像を選択してください。"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn ".concat(isEditPage ? "btn-success" : "btn-primary", " mt-1"),
               type: "submit",
-              children: isEditPage ? "ツイートを更新する" : "ツイートする"
+              children: isEditPage ? "ツイートを更新" : "ツイート"
             })]
           })]
         })]
