@@ -8336,7 +8336,12 @@ var TweetList = function TweetList(props) {
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
       tweets = _useState8[0],
-      setTweets = _useState8[1]; // １ページ目のツイートを取得
+      setTweets = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      nofollows = _useState10[0],
+      setNoFollows = _useState10[1]; // １ページ目のツイートを取得
 
 
   var getTweets = /*#__PURE__*/function () {
@@ -8353,7 +8358,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 10;
+                _context.next = 13;
                 break;
               }
 
@@ -8362,11 +8367,21 @@ var TweetList = function TweetList(props) {
 
             case 6:
               tweetsData = _context.sent;
+
+              if (tweetsData.tweets.total) {
+                _context.next = 10;
+                break;
+              }
+
+              setNoFollows(true);
+              return _context.abrupt("return");
+
+            case 10:
               setUsers(tweetsData.users);
               setNumUsers(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
 
-            case 10:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -8436,7 +8451,10 @@ var TweetList = function TweetList(props) {
     className: "mt-4",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "border",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
+      children: nofollows ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+        className: "py-4 px-2 fs-5",
+        children: "\u30D5\u30A9\u30ED\u30FC\u3057\u305F\u4EBA\u306E\u30C4\u30A4\u30FC\u30C8\u304C\u3053\u3053\u306B\u8868\u793A\u3055\u308C\u307E\u3059\u3002"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
         children: tweetItem
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_Pagenation__WEBPACK_IMPORTED_MODULE_3__.Pagenation, {

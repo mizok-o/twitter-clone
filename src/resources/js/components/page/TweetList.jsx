@@ -13,12 +13,17 @@ export const TweetList = (props) => {
     const [users, setUsers] = useState([]);
     const [numUsers, setNumUsers] = useState(0);
     const [tweets, setTweets] = useState([]);
+    const [nofollows, setNoFollows] = useState(false);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
         const res = await fetch(`/tweets?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
+            if (!tweetsData.tweets.total) {
+                setNoFollows(true);
+                return;
+            }
             setUsers(tweetsData.users);
             setNumUsers(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
@@ -86,7 +91,13 @@ export const TweetList = (props) => {
     return (
         <div className="mt-4">
             <div className="border">
-                <ul>{tweetItem}</ul>
+                {nofollows ? (
+                    <h2 className="py-4 px-2 fs-5">
+                        フォローした人のツイートがここに表示されます。
+                    </h2>
+                ) : (
+                    <ul>{tweetItem}</ul>
+                )}
             </div>
             <Pagenation
                 sum={numUsers}
