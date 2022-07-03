@@ -69,9 +69,9 @@ class UserController extends Controller
      *  認証ユーザー情報とフォローしている人リストを取得
      *
      * @param  Follow $follow
-     * @return object
+     * @return array<int>
      */
-    public function getAuthUserFollows(Follow $follow): object
+    public function getAuthUserFollows(Follow $follow): array
     {
         return $follow->getFollowsList(auth()->id());
     }

@@ -9,50 +9,36 @@ import { UserName } from "../parts/UserName";
 export const UserProfile = (props) => {
     const { authUserId } = props;
 
-    const [authUserFollows, setAuthUserFollows] = useState([]);
     const [user, setUser] = useState({});
     const [isFollowing, setIsFollowing] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth] = useState(authUserId === Number(id));
 
     // ユーザーIDの取得
     const { id } = useParams();
 
-    // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
-    const checkAuthUserFollows = (authUserFollows) => {
-        const authUserFollowsList = authUserFollows.map((data) =>
-            Number(data.followed_user_id)
-        );
-
-        setAuthUserFollows(authUserFollowsList);
-    };
     // 認証ユーザーのフォローリストを取得
     const getAuthUserData = async () => {
         const res = await fetch("/auth-user/follows");
         try {
-            const authUserFollowsArray = await res.json();
-            checkAuthUserFollows(authUserFollowsArray);
+            const authUserFollowsList = await res.json();
+            // 認証ユーザーからフォローされているか判定
+            setIsFollowing(authUserFollowsList.includes(Number(id)));
         } catch (error) {
             console.log(error);
         }
     };
 
-    // 認証ユーザーかチェック
-    useEffect(() => {
-        setIsAuth(authUserId === Number(id));
-    }, [authUserId]);
-
     const getUserProfile = async () => {
         const res = await fetch(`/users/${id}`);
         if (res.status === 200) {
             const userProfile = await res.json();
-            setIsFollowing(authUserFollows.includes(Number(id)));
             setUser(userProfile);
         }
     };
 
-    // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
     useEffect(() => {
-        getAuthUserData().then(() => getUserProfile());
+        getAuthUserData();
+        getUserProfile();
     }, [isAuth]);
 
     const profileButton = () => {

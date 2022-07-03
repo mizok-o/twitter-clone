@@ -11,13 +11,15 @@ class Follow extends Model
     public $timestamps = false;
 
     /**
-     *  フォローしているリストを取得する
+     *  フォローしているリストを取得して、要素を数値に変換
      *
      * @param int $userId
+     * @return array<int>
      */
-    public function getFollowsList(int $userId): object
+    public function getFollowsList(int $userId): array
     {
-        return $this->where('follow_user_id', $userId)->get('followed_user_id');
+        $followsListArray = $this->where('follow_user_id', $userId)->pluck('followed_user_id')->toArray();
+        return array_map('intval', $followsListArray);
     }
 
     /**

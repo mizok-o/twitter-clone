@@ -8697,42 +8697,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserProfile = function UserProfile(props) {
   var authUserId = props.authUserId;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      authUserFollows = _useState2[0],
-      setAuthUserFollows = _useState2[1];
+      user = _useState2[0],
+      setUser = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      user = _useState4[0],
-      setUser = _useState4[1];
+      isFollowing = _useState4[0],
+      setIsFollowing = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isFollowing = _useState6[0],
-      setIsFollowing = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isAuth = _useState8[0],
-      setIsAuth = _useState8[1]; // ユーザーIDの取得
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(authUserId === Number(id)),
+      _useState6 = _slicedToArray(_useState5, 1),
+      isAuth = _useState6[0]; // ユーザーIDの取得
 
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useParams)(),
-      id = _useParams.id; // 認証ユーザーがフォローしているユーザ一覧を配列でsetAuthUserFollowsにセット
-
-
-  var checkAuthUserFollows = function checkAuthUserFollows(authUserFollows) {
-    var authUserFollowsList = authUserFollows.map(function (data) {
-      return Number(data.followed_user_id);
-    });
-    setAuthUserFollows(authUserFollowsList);
-  }; // 認証ユーザーのフォローリストを取得
+      id = _useParams.id; // 認証ユーザーのフォローリストを取得
 
 
   var getAuthUserData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, authUserFollowsArray;
+      var res, authUserFollowsList;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -8747,8 +8733,9 @@ var UserProfile = function UserProfile(props) {
               return res.json();
 
             case 6:
-              authUserFollowsArray = _context.sent;
-              checkAuthUserFollows(authUserFollowsArray);
+              authUserFollowsList = _context.sent;
+              // 認証ユーザーからフォローされているか判定
+              setIsFollowing(authUserFollowsList.includes(Number(id)));
               _context.next = 13;
               break;
 
@@ -8768,12 +8755,7 @@ var UserProfile = function UserProfile(props) {
     return function getAuthUserData() {
       return _ref.apply(this, arguments);
     };
-  }(); // 認証ユーザーかチェック
-
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setIsAuth(authUserId === Number(id));
-  }, [authUserId]);
+  }();
 
   var getUserProfile = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
@@ -8789,7 +8771,7 @@ var UserProfile = function UserProfile(props) {
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
@@ -8798,10 +8780,9 @@ var UserProfile = function UserProfile(props) {
 
             case 6:
               userProfile = _context2.sent;
-              setIsFollowing(authUserFollows.includes(Number(id)));
               setUser(userProfile);
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -8812,13 +8793,11 @@ var UserProfile = function UserProfile(props) {
     return function getUserProfile() {
       return _ref2.apply(this, arguments);
     };
-  }(); // 認証ユーザーがフォローしているユーザーリストをauthUserFollowsにセットする
-
+  }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getAuthUserData().then(function () {
-      return getUserProfile();
-    });
+    getAuthUserData();
+    getUserProfile();
   }, [isAuth]);
 
   var profileButton = function profileButton() {
@@ -8968,10 +8947,9 @@ var UserProfileEdit = function UserProfileEdit(props) {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useLocation)();
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      defaultText = _useState2[0],
-      setDefaultText = _useState2[1];
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(isEditPage ? location.state.defaultText : ""),
+      _useState2 = _slicedToArray(_useState, 1),
+      defaultText = _useState2[0];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -8984,10 +8962,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
       setImageIsSelected = _useState6[1]; // csrf対策のため、トークンを取得
 
 
-  var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setDefaultText(isEditPage ? location.state.defaultText : "");
-  }, []); // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // ユーザー情報更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
 
   var handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
