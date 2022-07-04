@@ -44,7 +44,7 @@ export const TweetList = (props) => {
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon iconData={userData.profile_image_path} />
-                            <div className="ms-2 flex-grow-1">
+                            <div className="ms-2 flex-grow-1 w-100">
                                 <div className="d-flex justify-content-between">
                                     <UserName
                                         nameData={{
@@ -64,11 +64,8 @@ export const TweetList = (props) => {
                                         ""
                                     )}
                                 </div>
-                                <div className="mt-2">
-                                    <div>
-                                        <p>{tweet.text}</p>
-                                    </div>
-
+                                <div className="mt-2 w-100 new__line">
+                                    <p>{tweet.text}</p>
                                     {tweet.image ? (
                                         <div className="w-100 mt-1 border rounded">
                                             <img
