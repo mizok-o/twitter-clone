@@ -49,7 +49,7 @@ export const UserProfileEdit = (props) => {
             body: userData,
         });
         if (res.status === 200) {
-            navigate("/");
+            navigate(`/home/profile/${authUser.id}`);
         } else {
             const errorMessage = await res.json();
             setErrorMessage(

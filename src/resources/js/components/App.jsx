@@ -13,10 +13,12 @@ import { UserProfileEdit } from "./page/UserProfileEdit";
 
 import "../../css/app.css";
 import { UserFollowsList } from "./page/UserFollowsList";
+import { Loading } from "./parts/Loading";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});
     const [authUserFollows, setAuthUserFollows] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     // 認証ユーザー情報を取得
     const getAuthUser = async () => {
@@ -33,6 +35,7 @@ export const App = () => {
         if (res.status === 200) {
             const authUserFollowsList = await res.json();
             setAuthUserFollows(authUserFollowsList);
+            setIsLoading(false);
         }
     };
 
@@ -47,55 +50,101 @@ export const App = () => {
             <Routes>
                 <Route
                     path="/home/timeline"
-                    element={<TweetList authUserId={authUser.id} />}
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetList authUserId={authUser.id} />
+                        )
+                    }
                 />
-                <Route path="/home/tweet/:id" element={<TweetDetail />} />
+                <Route
+                    path="/home/tweet/:id"
+                    element={isLoading ? <Loading /> : <TweetDetail />}
+                />
                 <Route
                     path="/home/tweet/new"
-                    element={<TweetAction authUser={authUser} />}
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetAction authUser={authUser} />
+                        )
+                    }
                 />
                 <Route
                     path="/home/tweet/edit/:id"
                     element={
-                        <TweetAction isEditPage={true} authUser={authUser} />
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetAction
+                                isEditPage={true}
+                                authUser={authUser}
+                            />
+                        )
                     }
                 />
                 <Route
                     path="/home/userList"
-                    element={<UserList authUserFollows={authUserFollows} />}
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <UserList authUserFollows={authUserFollows} />
+                        )
+                    }
                 />
                 <Route
                     path="/home/followList/:id"
                     element={
-                        <UserFollowsList
-                            isFollowList={true}
-                            authUserFollows={authUserFollows}
-                            authUserId={authUser.id}
-                        />
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <UserFollowsList
+                                isFollowList={true}
+                                authUserFollows={authUserFollows}
+                                authUserId={authUser.id}
+                            />
+                        )
                     }
                 />
                 <Route
                     path="/home/followerList/:id"
                     element={
-                        <UserFollowsList
-                            isFollowList={false}
-                            authUserFollows={authUserFollows}
-                            authUserId={authUser.id}
-                        />
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <UserFollowsList
+                                isFollowList={false}
+                                authUserFollows={authUserFollows}
+                                authUserId={authUser.id}
+                            />
+                        )
                     }
                 />
                 <Route
                     path="/home/profile/:id"
                     element={
-                        <UserProfile
-                            authUserId={authUser.id}
-                            authUserFollows={authUserFollows}
-                        />
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <UserProfile
+                                authUserId={authUser.id}
+                                authUserFollows={authUserFollows}
+                            />
+                        )
                     }
                 />
                 <Route
                     path="/home/profile-edit"
-                    element={<UserProfileEdit authUser={authUser} />}
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <UserProfileEdit authUser={authUser} />
+                        )
+                    }
                 />
             </Routes>
         </BrowserRouter>

@@ -7,7 +7,7 @@ import { Pagenation } from "../parts/Pagenation";
 import { EditButtns } from "../parts/EditButtns";
 
 export const TweetList = (props) => {
-    const { authUserId } = props;
+    const { authUserId, isLoading } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [users, setUsers] = useState([]);
@@ -89,7 +89,7 @@ export const TweetList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className="mt-4">
+        <div className={`mt-4 ${isLoading ? "is__loading" : "showing"}`}>
             <div className="border">
                 {nofollows ? (
                     <h2 className="py-4 px-2 fs-5">
@@ -106,6 +106,7 @@ export const TweetList = (props) => {
                 setCurrentPage={setCurrentPage}
                 onChange={(e) => setCurrentPage(e.page)}
             />
+            {isLoading ? <Loading /> : ""}
         </div>
     );
 };
