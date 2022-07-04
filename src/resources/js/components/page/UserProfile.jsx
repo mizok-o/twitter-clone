@@ -25,10 +25,11 @@ export const UserProfile = (props) => {
     };
 
     useEffect(() => {
+        console.log(id);
         setIsAuth(authUserId === Number(id));
         setIsFollowing(authUserFollows.includes(Number(id)));
         getUserProfile();
-    }, [authUserFollows]);
+    }, [authUserFollows, id]);
 
     const profileButton = () => {
         if (isAuth) {

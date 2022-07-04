@@ -9088,10 +9088,11 @@ var UserProfile = function UserProfile(props) {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(id);
     setIsAuth(authUserId === Number(id));
     setIsFollowing(authUserFollows.includes(Number(id)));
     getUserProfile();
-  }, [authUserFollows]);
+  }, [authUserFollows, id]);
 
   var profileButton = function profileButton() {
     if (isAuth) {
