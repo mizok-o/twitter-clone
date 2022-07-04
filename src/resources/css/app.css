@@ -68,12 +68,44 @@ textarea {
   height: 200px;
 }
 
+.main__container {
+  max-width: 516px;
+  margin: 0 auto;
+}
+
 .user__item-container {
   transition: .2s;
 }
 
 .user__item-container:hover {
   background-color: #E9EBED;
+}
+
+/* ３点リーダー */
+.omit__text__container {
+  overflow: hidden;
+  max-width: calc(100% - 120px);
+  width: 100%;
+}
+
+.omit__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  white-space: nowrap;
+}
+
+.non__omit .omit__text__container {
+  max-width: none;
+  overflow: auto;
+}
+
+.non__omit .omit__text {
+  white-space: inherit;
+}
+
+.btn__size {
+  height: 48px;
 }
 
 /* tweet */
@@ -84,4 +116,119 @@ textarea {
   background-image: url('/images/upload-icon.png');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* .tweet__image {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+} */
+
+.tweet__images {
+  max-height: 240px;
+}
+
+/* ツイートボタン */
+.header__tweetBtn {
+  position: fixed;
+  bottom: 64px;
+  right: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+.background-twitter {
+  background-color: #00A770;
+}
+
+.header__tweetBtn--icon {
+  margin: 22px;
+}
+
+.new__line {
+  white-space: pre-wrap;
+}
+
+/* ローディング画面 */
+.is__loading {
+  position: relative;
+  pointer-events: none;
+  /* opacity: .6; */
+}
+
+.looping-spinner-container {
+  margin-top: 120px;
+}
+
+.looping-rhombuses-spinner, .looping-rhombuses-spinner * {
+  box-sizing: border-box;
+}
+
+.looping-rhombuses-spinner {
+  width: calc(15px * 4);
+  height: 15px;
+  position: relative;
+}
+
+.looping-rhombuses-spinner .rhombus {
+  height: 15px;
+  width: 15px;
+  background-color: #00A770;
+  left: calc(15px * 4);
+  position: absolute;
+  margin: 0 auto;
+  border-radius: 2px;
+  transform: translateY(0) rotate(45deg) scale(0);
+  animation: looping-rhombuses-spinner-animation 2500ms linear infinite;
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(1) {
+  animation-delay: calc(2500ms * 1 / -1.5);
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(2) {
+  animation-delay: calc(2500ms * 2 / -1.5);
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(3) {
+  animation-delay: calc(2500ms * 3 / -1.5);
+}
+
+@keyframes looping-rhombuses-spinner-animation {
+  0% {
+    transform: translateX(0) rotate(45deg) scale(0);
+  }
+  50% {
+    transform: translateX(-233%) rotate(45deg) scale(1);
+  }
+  100% {
+    transform: translateX(-466%) rotate(45deg) scale(0);
+  }
+}
+
+@media screen and (max-width: 750px) {
+	/* .omit__text__container{
+		max-width: 160px;
+	} */
+
+  .header__tweetBtn {
+    bottom: 32px;
+    right: 12px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .header__tweetBtn--icon {
+    margin: 13px;
+  }
+
+  /* 画像アップロードボタン */
+  .select__image__area {
+    display: block !important;
+    max-width: 152px;
+  }
+  .select__image__area p {
+    margin: 0 !important;
+  }
 }

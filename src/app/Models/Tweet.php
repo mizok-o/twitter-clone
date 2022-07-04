@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use App\Consts\Paginate;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Tweet extends Model
 {
-
     /**
      * フォローしているユーザーのツイートを取得
      *
@@ -23,24 +22,41 @@ class Tweet extends Model
     /**
      * ID指定してツイート取得
      *
-     * @param  int $user_id
-     * @return　Collection
+     * @param  int $tweetId
+     * @return　object
      */
-    public function getTweetByUserId(int $userId): Collection
+    public function getTweetByUserId(int $tweetId): object
     {
-        return $this->where('id', $userId)->get();
+        return $this->where('id', $tweetId)->first();
+    }
+
+    /**
+     * 認証ユーザーのツイート一覧を取得
+     *
+     * @param int $userId
+     * @return　object
+     */
+    public function getTweetsByUserId(int $userId): object
+    {
+        return $this->where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**
      * ツイート投稿
      *
      * @param  int $user_id
-     * @param  array $postContent
+     * @param  object $postContent
      */
-    public function postTweet(int $userId, array $postContent): bool
+    public function postTweet(int $userId, object $request): bool
     {
         $this->user_id = $userId;
-        $this->text = $postContent['text'];
+        $this->text = $request->text;
+
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->hashName();
+            $this->image = $image_name;
+            $request->file('image')->storeAs('public/tweet', $image_name);
+        }
         return $this->save();
     }
 
@@ -66,6 +82,8 @@ class Tweet extends Model
      */
     public function destroyTweet(int $tweetId): bool
     {
+        $tweetImage = $this->where("id", $tweetId)->value('image');
+        Storage::disk('public')->delete('/tweet/' . $tweetImage);
         return $this->where("id", $tweetId)->delete();
     }
 }

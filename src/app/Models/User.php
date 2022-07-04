@@ -36,6 +36,18 @@ class User extends Authenticatable
     }
 
     /**
+     *  IDの一致するユーザーリストを取得
+     *
+     * @param array $followIds
+     * @return object
+     */
+    public function getUserListByFollowIds(array $followIds)
+    {
+        $userList = $this->whereIn('id', $followIds)->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        return $userList;
+    }
+
+    /**
      * 認証ユーザーのみユーザー情報更新
      *
      * @param  int $userId
@@ -94,6 +106,9 @@ class User extends Authenticatable
      */
     public function unfollow(int $userId)
     {
+        if (auth()->id() === $userId) {
+            return;
+        }
         return $this->followsAction()->detach($userId);
     }
 

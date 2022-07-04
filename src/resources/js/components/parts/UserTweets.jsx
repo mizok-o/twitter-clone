@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { UserIcon } from "../parts/UserIcon";
-import { UserName } from "../parts/UserName";
-import { Pagenation } from "../parts/Pagenation";
-import { EditButtns } from "../parts/EditButtns";
+import { UserIcon } from "./UserIcon";
+import { UserName } from "./UserName";
+import { Pagenation } from "./Pagenation";
+import { EditButtns } from "./EditButtns";
 
-export const TweetList = (props) => {
-    const { authUserId, isLoading } = props;
+export const UserTweets = (props) => {
+    const { user, userId } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [users, setUsers] = useState([]);
     const [numTweets, setNumTweets] = useState(0);
     const [tweets, setTweets] = useState([]);
     const [nofollows, setNoFollows] = useState(false);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch(`/tweets?page=${currentPage}`);
+        const res = await fetch(`/tweets-list/${userId}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
             // ツイートが無い場合
-            if (!tweetsData.tweets.total) {
+            if (!tweetsData.total) {
                 setNoFollows(true);
                 return;
             }
-            setUsers(tweetsData.users);
-            setNumTweets(tweetsData.tweets.total);
-            setTweets(tweetsData.tweets.data);
+            setTweets(tweetsData.data);
+            setNumTweets(tweetsData.total);
         }
     };
 
@@ -37,37 +35,39 @@ export const TweetList = (props) => {
 
     const tweetItem = tweets.map((tweet) => {
         // ツイートユーザーの情報を取得
-        const userData = users.find((data) => data.id === tweet.user_id);
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={userData.profile_image_path} />
-                            <div className="ms-2 flex-grow-1 w-100">
+                            <UserIcon iconData={user.profile_image_path} />
+                            <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName
                                         nameData={{
-                                            screen_name: userData.screen_name,
-                                            user_name: userData.user_name,
+                                            screen_name: user.screen_name,
+                                            user_name: user.user_name,
                                         }}
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
-                                    {authUserId === tweet.user_id ? (
+                                    {user.id === tweet.user_id ? (
                                         <EditButtns
                                             currentText={tweet.text}
                                             tweetId={tweet.id}
                                             setCurrentPage={setCurrentPage}
-                                            authUserId={authUserId}
+                                            authUserId={user.id}
                                         />
                                     ) : (
                                         ""
                                     )}
                                 </div>
-                                <div className="mt-2 w-100 new__line">
-                                    <p>{tweet.text}</p>
+                                <div className="mt-2">
+                                    <div>
+                                        <p>{tweet.text}</p>
+                                    </div>
+
                                     {tweet.image ? (
-                                        <div className="tweet__image w-100 mt-1 border rounded">
+                                        <div className="w-100 mt-1 border rounded">
                                             <img
                                                 className="w-100 tweet__images"
                                                 src={`/storage/tweet/${tweet.image}`}
@@ -89,20 +89,17 @@ export const TweetList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div
-            className={`mt-4 ${
-                isLoading ? "is__loading" : "showing"
-            } main__container`}
-        >
-            <div className="border">
-                {nofollows ? (
-                    <h2 className="py-4 px-2 fs-5">
-                        フォローした人のツイートがここに表示されます。
-                    </h2>
-                ) : (
+        <div className="mt-2">
+            {nofollows ? (
+                <h2 className="py-4 px-2 fs-5">
+                    自身のツイートがここに表示されます。
+                </h2>
+            ) : (
+                <div className="border">
+                    <h3 className="mt-3 ms-3 fs-4">ツイート一覧</h3>
                     <ul>{tweetItem}</ul>
-                )}
-            </div>
+                </div>
+            )}
             <Pagenation
                 sum={numTweets}
                 per={contentNumPerPage}
@@ -110,7 +107,6 @@ export const TweetList = (props) => {
                 setCurrentPage={setCurrentPage}
                 onChange={(e) => setCurrentPage(e.page)}
             />
-            {isLoading ? <Loading /> : ""}
         </div>
     );
 };

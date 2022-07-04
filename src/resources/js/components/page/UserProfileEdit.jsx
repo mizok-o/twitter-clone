@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { PageBackButton } from "../parts/BackToTweetList";
+import { PageBackButton } from "../parts/PageBackButton";
 import { UserIcon } from "../parts/UserIcon";
 
 export const UserProfileEdit = (props) => {
@@ -47,7 +47,7 @@ export const UserProfileEdit = (props) => {
             body: userData,
         });
         if (res.status === 200) {
-            navigate("/");
+            navigate(`/home/profile/${authUser.id}`);
         } else {
             const errorMessage = await res.json();
             setErrorMessage(
@@ -59,7 +59,7 @@ export const UserProfileEdit = (props) => {
     };
 
     return (
-        <div className="my-3">
+        <div className="my-3 main__container">
             <div className="w-100 p-2 bg-light shadow rounded">
                 <PageBackButton />
                 <div className="d-flex">

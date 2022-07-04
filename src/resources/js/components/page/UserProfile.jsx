@@ -5,28 +5,16 @@ import { FollowButton } from "../parts/FollowButton";
 import { FollowNumbers } from "../parts/FollowNumbers";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
+import { UserTweets } from "../parts/UserTweets";
 
 export const UserProfile = (props) => {
-    const { authUserId } = props;
-
-    const [user, setUser] = useState({});
-    const [isFollowing, setIsFollowing] = useState(false);
-    const [isAuth] = useState(authUserId === Number(id));
-
+    const { authUserId, authUserFollows } = props;
     // ユーザーIDの取得
     const { id } = useParams();
 
-    // 認証ユーザーのフォローリストを取得
-    const getAuthUserData = async () => {
-        const res = await fetch("/auth-user/follows");
-        try {
-            const authUserFollowsList = await res.json();
-            // 認証ユーザーからフォローされているか判定
-            setIsFollowing(authUserFollowsList.includes(Number(id)));
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [user, setUser] = useState({});
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
 
     const getUserProfile = async () => {
         const res = await fetch(`/users/${id}`);
@@ -37,14 +25,16 @@ export const UserProfile = (props) => {
     };
 
     useEffect(() => {
-        getAuthUserData();
+        console.log(id);
+        setIsAuth(authUserId === Number(id));
+        setIsFollowing(authUserFollows.includes(Number(id)));
         getUserProfile();
-    }, [isAuth]);
+    }, [authUserFollows, id]);
 
     const profileButton = () => {
         if (isAuth) {
             return (
-                <Link to="/profile-edit">
+                <Link to="/home/profile-edit">
                     <button type="button" className="btn btn-outline-dark">
                         編集
                     </button>
@@ -62,11 +52,11 @@ export const UserProfile = (props) => {
     };
 
     return (
-        <div className="container-lg mt-5">
+        <div className="mt-5 main__container">
             <div className="border">
                 <div>
-                    <div className="d-flex p-1">
-                        <Link to="/userlist">
+                    <div className="d-flex p-1 aligin-items-center">
+                        <Link to="/home/userList">
                             <button className="btn">
                                 <svg
                                     viewBox="0 0 16 16"
@@ -80,8 +70,8 @@ export const UserProfile = (props) => {
                                 </svg>
                             </button>
                         </Link>
-                        <div className="me-3">
-                            <h2>{user.screen_name}</h2>
+                        <div className="me-3 omit__text__container">
+                            <h2 className="omit__text">{user.screen_name}</h2>
                         </div>
                     </div>
                     <div>
@@ -103,7 +93,7 @@ export const UserProfile = (props) => {
                             iconData={user.profile_image_path}
                         />
                     </div>
-                    <div>
+                    <div className="non__omit">
                         <UserName
                             isUserProfile={true}
                             nameData={{
@@ -119,7 +109,7 @@ export const UserProfile = (props) => {
                 </div>
             </div>
             <div className="border">
-                <p>ツイート一覧</p>
+                <UserTweets user={user} userId={id} />
             </div>
         </div>
     );

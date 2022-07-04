@@ -39,7 +39,7 @@ export const FollowButton = (props) => {
     return (
         <button
             type="button"
-            className={`btn ${followStatus ? "btn-dark" : "btn-outline-dark"}`}
+            className={`btn btn__size ${followStatus ? "btn-dark" : "btn-outline-dark"}`}
             onClick={
                 followStatus ? (e) => unfollowUser(e) : (e) => followUser(e)
             }

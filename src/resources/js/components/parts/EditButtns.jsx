@@ -2,18 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const EditButtns = (props) => {
-    const { tweetId, currentText } = props;
+    const { tweetId, currentText, setCurrentPage, authUserId } = props;
 
     const navigate = useNavigate();
 
-    // // csrf対策のため、トークンを取得
+    // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
 
     const moveEditPage = (e) => {
         e.preventDefault();
-        navigate(`/tweet/edit/${tweetId}`, {
+        navigate(`/home/tweet/edit/${tweetId}`, {
             state: { defaultText: currentText },
         });
     };
@@ -23,13 +23,17 @@ export const EditButtns = (props) => {
 
         const checkDelete = confirm("ツイート削除しますか？");
         if (checkDelete) {
-            await fetch(`/destroy-tweet/${tweetId}`, {
+            const res = await fetch(`/destroy-tweet/${tweetId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": csrf_token,
                 },
             });
+            if (res.status === 200) {
+                setCurrentPage(1);
+                navigate(`/home/profile/${authUserId}`);
+            }
         }
     };
 
