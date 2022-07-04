@@ -92,7 +92,7 @@ export const UserProfile = (props) => {
                             iconData={user.profile_image_path}
                         />
                     </div>
-                    <div className="user__profile__name">
+                    <div className="non__omit">
                         <UserName
                             isUserProfile={true}
                             nameData={{

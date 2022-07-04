@@ -90,17 +90,17 @@ textarea {
 
 .omit__text {
   overflow: hidden;
-  max-width: 100%;
   text-overflow: ellipsis;
+  max-width: 160px;
   white-space: nowrap;
 }
 
-.user__profile__name .omit__text__container {
+.non__omit .omit__text__container {
   max-width: none;
   overflow: auto;
 }
 
-.user__profile__name .omit__text {
+.non__omit .omit__text {
   white-space: inherit;
 }
 
@@ -208,9 +208,9 @@ textarea {
 }
 
 @media screen and (max-width: 750px) {
-	.omit__text__container{
+	/* .omit__text__container{
 		max-width: 160px;
-	}
+	} */
 
   .header__tweetBtn {
     bottom: 32px;

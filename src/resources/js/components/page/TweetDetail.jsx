@@ -75,7 +75,7 @@ export const TweetDetail = () => {
                             userList={false}
                             iconData={user.profile_image_path}
                         />
-                        <div className="ms-2">
+                        <div className="ms-2 non__omit">
                             <UserName
                                 isUserProfile={true}
                                 nameData={{
