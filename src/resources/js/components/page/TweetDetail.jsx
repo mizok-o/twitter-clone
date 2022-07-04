@@ -25,7 +25,6 @@ export const TweetDetail = () => {
         const res = await fetch(`/users/${userId}`);
         if (res.status === 200) {
             const userData = await res.json();
-            console.log(userData);
             setUser(userData);
         }
     };

@@ -69,8 +69,8 @@ export const UserProfile = (props) => {
                                 </svg>
                             </button>
                         </Link>
-                        <div className="me-3">
-                            <h2>{user.screen_name}</h2>
+                        <div className="me-3 omit__text__container">
+                            <h2 className="omit__text">{user.screen_name}</h2>
                         </div>
                     </div>
                     <div>
@@ -92,7 +92,7 @@ export const UserProfile = (props) => {
                             iconData={user.profile_image_path}
                         />
                     </div>
-                    <div>
+                    <div className="user__profile__name">
                         <UserName
                             isUserProfile={true}
                             nameData={{

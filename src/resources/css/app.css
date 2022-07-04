@@ -92,6 +92,16 @@ textarea {
   overflow: hidden;
   max-width: 100%;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user__profile__name .omit__text__container {
+  max-width: none;
+  overflow: auto;
+}
+
+.user__profile__name .omit__text {
+  white-space: inherit;
 }
 
 .btn__size {
