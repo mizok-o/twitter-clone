@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Consts\Paginate;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Tweet extends Model
 {
@@ -81,6 +81,8 @@ class Tweet extends Model
      */
     public function destroyTweet(int $tweetId): bool
     {
+        $tweetImage = $this->where("id", $tweetId)->value('image');
+        Storage::disk('public')->delete('/tweet/' . $tweetImage);
         return $this->where("id", $tweetId)->delete();
     }
 }
