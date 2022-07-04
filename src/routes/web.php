@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/tweets', [TweetController::class, 'index']);
     Route::get('/tweets/{tweetId}', [TweetController::class, 'show']);
-    Route::get('/tweets-auth-user', [TweetController::class, 'getAuthUserTweets']);
+    Route::get('/tweets-list/{userId}', [TweetController::class, 'getUserTweets']);
 
     Route::post('/post-tweet', [TweetController::class, 'store']);
     Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);

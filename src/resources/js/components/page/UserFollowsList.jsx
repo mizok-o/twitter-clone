@@ -96,7 +96,7 @@ export const UserFollowsList = (props) => {
     return (
         <div className="mt-4 main__container">
             <div className="border">
-                <PageBackButton isProfile={true} authUserId={authUserId} />
+                <PageBackButton isProfile={true} userId={id} />
                 <ul>{userItem}</ul>
             </div>
             <Pagenation

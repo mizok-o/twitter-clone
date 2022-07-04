@@ -21,10 +21,11 @@ export const TweetDetail = () => {
     };
 
     // ツイート主のユーザー情報をuserにセット
-    const setUserData = async (userId) => {
+    const getUserData = async (userId) => {
         const res = await fetch(`/users/${userId}`);
         if (res.status === 200) {
             const userData = await res.json();
+            console.log(userData);
             setUser(userData);
         }
     };
@@ -40,7 +41,7 @@ export const TweetDetail = () => {
             tweetData.created_at = editPostedDate(tweetData.created_at);
             setTweet(tweetData);
 
-            setUserData(tweetData.user_id);
+            getUserData(tweetData.user_id);
         });
     }, []);
 
@@ -67,7 +68,10 @@ export const TweetDetail = () => {
                     </div>
                 </div>
                 <div className="py-1 px-2">
-                    <Link to={`/home/profile/${user.id}`} className="d-flex">
+                    <Link
+                        to={`/home/profile/${user.id}`}
+                        className="d-flex align-items-center"
+                    >
                         <UserIcon
                             userList={false}
                             iconData={user.profile_image_path}
@@ -82,8 +86,19 @@ export const TweetDetail = () => {
                             />
                         </div>
                     </Link>
-                    <div className="my-2">
+                    <div className="mt-3 w-100 new__line">
                         <p>{tweet.text}</p>
+                        {tweet.image ? (
+                            <div className="tweet__image w-100 mt-1 border rounded">
+                                <img
+                                    className="w-100 tweet__images"
+                                    src={`/storage/tweet/${tweet.image}`}
+                                    alt="ツイート 画像"
+                                />
+                            </div>
+                        ) : (
+                            ""
+                        )}
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
                 </div>

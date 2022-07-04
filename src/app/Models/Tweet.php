@@ -33,11 +33,12 @@ class Tweet extends Model
     /**
      * 認証ユーザーのツイート一覧を取得
      *
+     * @param int $userId
      * @return　object
      */
-    public function getTweetsByAuthUserId(): object
+    public function getTweetsByUserId(int $userId): object
     {
-        return $this->where('user_id', auth()->id())->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        return $this->where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**

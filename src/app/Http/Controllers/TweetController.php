@@ -46,14 +46,15 @@ class TweetController extends Controller
     }
 
     /**
-     *  認証ユーザーのツイート一覧を取得
+     *  ユーザーのツイート一覧を取得
      *
+     * @param  int  $userId
      * @param  Tweet $tweet
      * @return object
      */
-    public function getAuthUserTweets(Tweet $tweet): object
+    public function getUserTweets(int $userId, Tweet $tweet): object
     {
-        return $tweet->getTweetsByAuthUserId();
+        return $tweet->getTweetsByUserId($userId);
     }
 
     /**

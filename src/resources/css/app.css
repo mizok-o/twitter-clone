@@ -94,6 +94,10 @@ textarea {
   text-overflow: ellipsis;
 }
 
+.btn__size {
+  height: 48px;
+}
+
 /* tweet */
 .tweet-form-file {
   width: 24px;
@@ -102,6 +106,17 @@ textarea {
   background-image: url('/images/upload-icon.png');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* .tweet__image {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+} */
+
+.tweet__images {
+  max-height: 240px;
 }
 
 /* ツイートボタン */

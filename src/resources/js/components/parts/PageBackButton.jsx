@@ -2,14 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const PageBackButton = (props) => {
-    const { isProfile, authUserId } = props;
+    const { isProfile, userId } = props;
     return (
         <div className="d-flex align-items-center mb-3">
-            <Link
-                to={
-                    isProfile ? `/home/profile/${authUserId}` : "/home/timeline"
-                }
-            >
+            <Link to={isProfile ? `/home/profile/${userId}` : "/home/timeline"}>
                 <button className="btn">
                     <svg
                         viewBox="0 0 16 16"

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { UserIcon } from "../parts/UserIcon";
-import { UserName } from "../parts/UserName";
-import { Pagenation } from "../parts/Pagenation";
-import { EditButtns } from "../parts/EditButtns";
+import { UserIcon } from "./UserIcon";
+import { UserName } from "./UserName";
+import { Pagenation } from "./Pagenation";
+import { EditButtns } from "./EditButtns";
 
-export const AuthUserTweets = (props) => {
-    const { user } = props;
+export const UserTweets = (props) => {
+    const { user, userId } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [numTweets, setNumTweets] = useState(0);
@@ -16,7 +16,7 @@ export const AuthUserTweets = (props) => {
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch("/tweets-auth-user");
+        const res = await fetch(`/tweets-list/${userId}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
             // ツイートが無い場合
@@ -69,7 +69,7 @@ export const AuthUserTweets = (props) => {
                                     {tweet.image ? (
                                         <div className="w-100 mt-1 border rounded">
                                             <img
-                                                className="w-100"
+                                                className="w-100 tweet__images"
                                                 src={`/storage/tweet/${tweet.image}`}
                                                 alt="ツイート 画像"
                                             />
@@ -90,15 +90,16 @@ export const AuthUserTweets = (props) => {
     const contentNumPerPage = 10;
     return (
         <div className="mt-2">
-            <div className="border">
-                {nofollows ? (
-                    <h2 className="py-4 px-2 fs-5">
-                        フォローした人のツイートがここに表示されます。
-                    </h2>
-                ) : (
+            {nofollows ? (
+                <h2 className="py-4 px-2 fs-5">
+                    自身のツイートがここに表示されます。
+                </h2>
+            ) : (
+                <div className="border">
+                    <h3 className="mt-3 ms-3 fs-4">ツイート一覧</h3>
                     <ul>{tweetItem}</ul>
-                )}
-            </div>
+                </div>
+            )}
             <Pagenation
                 sum={numTweets}
                 per={contentNumPerPage}

@@ -67,9 +67,9 @@ export const TweetList = (props) => {
                                 <div className="mt-2 w-100 new__line">
                                     <p>{tweet.text}</p>
                                     {tweet.image ? (
-                                        <div className="w-100 mt-1 border rounded">
+                                        <div className="tweet__image w-100 mt-1 border rounded">
                                             <img
-                                                className="w-100"
+                                                className="w-100 tweet__images"
                                                 src={`/storage/tweet/${tweet.image}`}
                                                 alt="ツイート 画像"
                                             />
@@ -89,7 +89,11 @@ export const TweetList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className={`mt-4 ${isLoading ? "is__loading" : "showing"} main__container`}>
+        <div
+            className={`mt-4 ${
+                isLoading ? "is__loading" : "showing"
+            } main__container`}
+        >
             <div className="border">
                 {nofollows ? (
                     <h2 className="py-4 px-2 fs-5">

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { AuthUserTweets } from "../parts/AuthUserTweets";
 import { FollowButton } from "../parts/FollowButton";
 import { FollowNumbers } from "../parts/FollowNumbers";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
+import { UserTweets } from "../parts/UserTweets";
 
 export const UserProfile = (props) => {
     const { authUserId, authUserFollows } = props;
@@ -54,7 +54,7 @@ export const UserProfile = (props) => {
         <div className="mt-5 main__container">
             <div className="border">
                 <div>
-                    <div className="d-flex p-1">
+                    <div className="d-flex p-1 aligin-items-center">
                         <Link to="/home/userList">
                             <button className="btn">
                                 <svg
@@ -108,8 +108,7 @@ export const UserProfile = (props) => {
                 </div>
             </div>
             <div className="border">
-                <h3 className="mt-3 ms-3 fs-4">ツイート一覧</h3>
-                <AuthUserTweets user={user} />
+                <UserTweets user={user} userId={id} />
             </div>
         </div>
     );
