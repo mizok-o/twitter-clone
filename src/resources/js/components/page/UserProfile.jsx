@@ -51,7 +51,7 @@ export const UserProfile = (props) => {
     };
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 main__container">
             <div className="border">
                 <div>
                     <div className="d-flex p-1">

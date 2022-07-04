@@ -68,6 +68,11 @@ textarea {
   height: 200px;
 }
 
+.main__container {
+  max-width: 516px;
+  margin: 0 auto;
+}
+
 .user__item-container {
   transition: .2s;
 }

@@ -45,7 +45,7 @@ export const TweetDetail = () => {
     }, []);
 
     return (
-        <div className="container-lg mt-5">
+        <div className="container-lg mt-5 main__container">
             <div className="border">
                 <div className="d-flex align-items-center">
                     <Link to="/home/timeline">

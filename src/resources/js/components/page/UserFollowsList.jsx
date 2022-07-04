@@ -94,7 +94,7 @@ export const UserFollowsList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className="mt-4">
+        <div className="mt-4 main__container">
             <div className="border">
                 <PageBackButton isProfile={true} authUserId={authUserId} />
                 <ul>{userItem}</ul>

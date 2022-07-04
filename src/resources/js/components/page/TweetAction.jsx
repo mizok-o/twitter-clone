@@ -76,7 +76,7 @@ export const TweetAction = (props) => {
     };
 
     return (
-        <div className="my-3">
+        <div className="my-3 main__container">
             <div className="w-100 p-2 bg-light shadow rounded">
                 <PageBackButton />
                 <div className="d-flex justify-content-center">

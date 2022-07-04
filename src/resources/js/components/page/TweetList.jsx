@@ -89,7 +89,7 @@ export const TweetList = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className={`mt-4 ${isLoading ? "is__loading" : "showing"}`}>
+        <div className={`mt-4 ${isLoading ? "is__loading" : "showing"} main__container`}>
             <div className="border">
                 {nofollows ? (
                     <h2 className="py-4 px-2 fs-5">
