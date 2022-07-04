@@ -8695,6 +8695,8 @@ var UserFollowsList = function UserFollowsList(props) {
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!authUserFollows) return;
+
     if (isFollowList) {
       getFollowUsersList();
     } else {
@@ -8705,7 +8707,7 @@ var UserFollowsList = function UserFollowsList(props) {
   var addIsFollowing = function addIsFollowing(followUsersData) {
     var followUsers = followUsersData.map(function (user) {
       return _objectSpread(_objectSpread({}, user), {}, {
-        is_following: isFollowList ? true : authUserFollows.includes(Number(id))
+        is_following: isFollowList ? true : authUserFollows.includes(Number(user.id))
       });
     });
     setUsers(followUsers);

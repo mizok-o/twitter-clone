@@ -106,6 +106,9 @@ class User extends Authenticatable
      */
     public function unfollow(int $userId)
     {
+        if (auth()->id() === $userId) {
+            return;
+        }
         return $this->followsAction()->detach($userId);
     }
 

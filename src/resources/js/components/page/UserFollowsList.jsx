@@ -38,6 +38,7 @@ export const UserFollowsList = (props) => {
 
     // フォローかフォロワーか判定して、ユーザーリストをセット
     useEffect(() => {
+        if (!authUserFollows) return;
         if (isFollowList) {
             getFollowUsersList();
         } else {
@@ -52,7 +53,7 @@ export const UserFollowsList = (props) => {
                 ...user,
                 is_following: isFollowList
                     ? true
-                    : authUserFollows.includes(Number(id)),
+                    : authUserFollows.includes(Number(user.id)),
             };
         });
         setUsers(followUsers);

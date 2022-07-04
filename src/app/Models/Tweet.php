@@ -37,7 +37,7 @@ class Tweet extends Model
      */
     public function getTweetsByAuthUserId(): object
     {
-        return $this->where('user_id', auth()->id())->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        return $this->where('user_id', auth()->id())->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
 
     /**

@@ -11,16 +11,6 @@ class Follow extends Model
     public $timestamps = false;
 
     /**
-     *  フォローしているリストからfollowed_user_idを取得する
-     *
-     * @param int $userId
-     */
-    // public function getFollowsList(int $userId): object
-    // {
-    //     return $this->where('follow_user_id', $userId)->get('followed_user_id');
-    // }
-
-    /**
      *  フォローしてるIDリストを取得　
      *
      * @param  int  $userId
