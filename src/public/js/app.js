@@ -8497,7 +8497,7 @@ var TweetList = function TweetList(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
-              iconData: userData.profile_image_path
+              iconData: userData.profile_image_path !== null ? userData.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1 w-100",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -8740,7 +8740,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
-              iconData: user.profile_image_path ? user.profile_image_path : ""
+              iconData: user.profile_image_path !== null ? user.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1 w-100",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -9180,7 +9180,7 @@ var UserList = function UserList(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
-              iconData: item.profile_image_path
+              iconData: item.profile_image_path !== null ? item.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {

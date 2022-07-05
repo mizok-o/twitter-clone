@@ -55,9 +55,9 @@ export const TweetListOnlyFollows = (props) => {
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon
                                 iconData={
-                                    user.profile_image_path
+                                    user.profile_image_path !== null
                                         ? user.profile_image_path
-                                        : ""
+                                        : "default-user-icon.png"
                                 }
                             />
                             <div className="ms-2 flex-grow-1 w-100">

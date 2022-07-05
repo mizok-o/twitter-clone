@@ -46,7 +46,13 @@ export const UserList = (props) => {
                 <div className="user__item-container">
                     <Link to={`/home/profile/${item.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={item.profile_image_path} />
+                            <UserIcon
+                                iconData={
+                                    item.profile_image_path !== null
+                                        ? item.profile_image_path
+                                        : "default-user-icon.png"
+                                }
+                            />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName
