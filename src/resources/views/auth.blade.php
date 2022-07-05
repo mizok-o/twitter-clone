@@ -25,17 +25,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="d-flex container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Twitterクローン') }}
-                </a>
-                <a class="navbar-brand" href="{{ url('/home/userList') }}">
-                    ユーザ一覧
-                </a>
-                <a class="navbar-brand" href="{{ url('/Mizoguchi3') }}">
-                    ユーザ詳細
-                </a>
-                <a class="navbar-brand" href="{{ url('/tweet') }}">
-                    新規ツイート
+                <a class="navbar-brand" href="{{ url('/register') }}">
+                    <img src="/images/twitter-logo.svg" alt="Twitter アイコン" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -44,12 +35,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -65,14 +51,9 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                            <li class="nav-item">
+                                <div class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                         {{ __('form.logout') }}

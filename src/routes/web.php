@@ -46,3 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', function () {
     return view('auth');
 });
+
+Route::get('/', function () {
+    return redirect('/register');
+});
