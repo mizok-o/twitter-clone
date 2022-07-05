@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\PostRequest;
 use App\Models\User;
 use App\Models\Follow;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {

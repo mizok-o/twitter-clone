@@ -58,6 +58,19 @@ class TweetController extends Controller
     }
 
     /**
+     *  全てのツイートを取得
+     *
+     * @param  int  $userId
+     * @param  Tweet $tweet
+     * @return object
+     */
+    public function getAllTweets(Tweet $tweet): object
+    {
+        $tweets = $tweet->getPaginatedAllTweets();
+        return $tweets;
+    }
+
+    /**
      * 認証ユーザーのみツイート投稿
      * 今後画像付きツイートの実装をするために、$postContentは配列で渡す
      *

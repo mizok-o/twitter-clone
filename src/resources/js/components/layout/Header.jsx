@@ -40,8 +40,8 @@ export const Header = (props) => {
                 <div className="header__right--container">
                     <ul className="d-flex align-items-center justify-content-between">
                         <li className="fs-6">
-                            <Link className="header__text" to="/home/timeline">
-                                タイムライン
+                            <Link className="header__text" to="/home/follows-timeline">
+                                全てのツイート
                             </Link>
                         </li>
                         <li className="fs-6">

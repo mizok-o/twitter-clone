@@ -14,6 +14,7 @@ import { UserProfileEdit } from "./page/UserProfileEdit";
 import "../../css/app.css";
 import { UserFollowsList } from "./page/UserFollowsList";
 import { Loading } from "./parts/Loading";
+import { TweetListOnlyFollows } from "./page/TweetListOnlyFollows";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});
@@ -48,6 +49,16 @@ export const App = () => {
         <BrowserRouter>
             <Header authUserId={authUser.id} />
             <Routes>
+                <Route
+                    path="/home/follows-timeline"
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetListOnlyFollows authUserId={authUser.id} />
+                        )
+                    }
+                />
                 <Route
                     path="/home/timeline"
                     element={

@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Storage;
 class Tweet extends Model
 {
     /**
+     * 全ユーザーのツイートを取得
+     *
+     * @param  array $followIds
+     * @return object
+     */
+    public function getPaginatedAllTweets(): object
+    {
+        return $this->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+    }
+
+    /**
      * フォローしているユーザーのツイートを取得
      *
      * @param  array $followIds
