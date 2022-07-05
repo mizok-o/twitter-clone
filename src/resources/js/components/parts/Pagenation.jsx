@@ -29,7 +29,7 @@ export const Pagenation = (props) => {
     };
 
     return (
-        <div className="mt-4">
+        <div className="my-4">
             {totalPage !== 0 && (
                 <nav className="Page navigation example">
                     <ul className="pagination">
