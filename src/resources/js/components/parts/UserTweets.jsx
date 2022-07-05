@@ -92,7 +92,7 @@ export const UserTweets = (props) => {
         <div className="mt-2">
             {nofollows ? (
                 <h2 className="py-4 px-2 fs-5">
-                    自身のツイートがここに表示されます。
+                    ツイートがここに表示されます。
                 </h2>
             ) : (
                 <div className="border">
