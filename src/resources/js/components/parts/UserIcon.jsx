@@ -23,11 +23,7 @@ export const UserIcon = (props) => {
             <div className="w-100 h-100 overflow-hidden rounded-circle border">
                 <img
                     className="w-100 h-100"
-                    src={
-                        props.iconData
-                            ? `/storage/${props.iconData}`
-                            : "/images/default-user-icon.png"
-                    }
+                    src={`/storage/${props.iconData}`}
                     alt="ユーザアイコン"
                 />
             </div>

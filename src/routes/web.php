@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth-user/follows', [UserController::class, 'getAuthUserFollows']);
 
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users-all', [UserController::class, 'getAllUsers']);
     Route::get('/users/{userId}', [UserController::class, 'show']);
     Route::post('/edit-user/{userId}', [UserController::class, 'update']);
 
@@ -30,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/users-followers/{userId}', [UserController::class, 'getFollowedUsers']);
     Route::get('/count-follows/{userId}', [UserController::class, 'countFollows']);
     Route::get('/count-followers/{userId}', [UserController::class, 'countFollowers']);
+
+    Route::post('/follow-{userId}', [UserController::class, 'follow']);
+    Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
 
     Route::get('/tweets', [TweetController::class, 'index']);
     Route::get('/tweets/{tweetId}', [TweetController::class, 'show']);
@@ -39,9 +43,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/post-tweet', [TweetController::class, 'store']);
     Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
     Route::delete('/destroy-tweet/{tweetId}', [TweetController::class, 'destroy']);
-
-    Route::post('/follow-{userId}', [UserController::class, 'follow']);
-    Route::post('/unfollow-{userId}', [UserController::class, 'unfollow']);
 });
 
 Route::get('/', function () {

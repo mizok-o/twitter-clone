@@ -16,12 +16,10 @@ export const TweetListOnlyFollows = (props) => {
     const [nofollows, setNoFollows] = useState(false);
 
     const getAllUsers = async () => {
-        const res = await fetch("/users");
+        const res = await fetch("/users-all");
         if (res.status === 200) {
             const UsersData = await res.json();
-            console.log(UsersData);
-            setUsers(UsersData.users.data);
-            // return UsersData;
+            setUsers(UsersData);
         }
     };
 
@@ -34,8 +32,6 @@ export const TweetListOnlyFollows = (props) => {
         const res = await fetch("/tweets-only-follows");
         if (res.status === 200) {
             const tweetsData = await res.json();
-
-            console.log(tweetsData);
             if (!tweetsData.total) {
                 setNoFollows(true);
                 return;
@@ -57,7 +53,13 @@ export const TweetListOnlyFollows = (props) => {
                 <div className="user__item-container">
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={user.profile_image_path} />
+                            <UserIcon
+                                iconData={
+                                    user.profile_image_path
+                                        ? user.profile_image_path
+                                        : ""
+                                }
+                            />
                             <div className="ms-2 flex-grow-1 w-100">
                                 <div className="d-flex justify-content-between">
                                     <UserName
@@ -104,6 +106,7 @@ export const TweetListOnlyFollows = (props) => {
     const contentNumPerPage = 10;
     return (
         <div
+            onClick={() => console.log(users)}
             className={`mt-4 ${
                 isLoading ? "is__loading" : "showing"
             } main__container`}

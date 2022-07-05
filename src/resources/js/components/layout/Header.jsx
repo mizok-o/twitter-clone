@@ -39,12 +39,15 @@ export const Header = (props) => {
                 </div>
                 <div className="header__right--container">
                     <ul className="d-flex align-items-center justify-content-between">
-                        <li className="fs-6">
-                            <Link className="header__text" to="/home/follows-timeline">
+                        <li className="fs-6 me-1">
+                            <Link
+                                className="header__text"
+                                to="/home/follows-timeline"
+                            >
                                 全てのツイート
                             </Link>
                         </li>
-                        <li className="fs-6">
+                        <li className="fs-6 me-1">
                             <Link className="header__text" to="/home/userList">
                                 ユーザ一覧
                             </Link>

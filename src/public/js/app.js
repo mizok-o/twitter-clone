@@ -7851,14 +7851,14 @@ var Header = function Header(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
           className: "d-flex align-items-center justify-content-between",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-            className: "fs-6",
+            className: "fs-6 me-1",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
               className: "header__text",
               to: "/home/follows-timeline",
               children: "\u5168\u3066\u306E\u30C4\u30A4\u30FC\u30C8"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-            className: "fs-6",
+            className: "fs-6 me-1",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
               className: "header__text",
               to: "/home/userList",
@@ -8641,13 +8641,13 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("/users");
+              return fetch("/users-all");
 
             case 2:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 9;
+                _context.next = 8;
                 break;
               }
 
@@ -8656,10 +8656,9 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
 
             case 6:
               UsersData = _context.sent;
-              console.log(UsersData);
-              setUsers(UsersData.users.data); // return UsersData;
+              setUsers(UsersData);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -8690,7 +8689,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 13;
+                _context2.next = 12;
                 break;
               }
 
@@ -8699,21 +8698,20 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
 
             case 6:
               tweetsData = _context2.sent;
-              console.log(tweetsData);
 
               if (tweetsData.total) {
-                _context2.next = 11;
+                _context2.next = 10;
                 break;
               }
 
               setNoFollows(true);
               return _context2.abrupt("return");
 
-            case 11:
+            case 10:
               setNumTweets(tweetsData.total);
               setTweets(tweetsData.data);
 
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -8742,7 +8740,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
-              iconData: user.profile_image_path
+              iconData: user.profile_image_path ? user.profile_image_path : ""
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "ms-2 flex-grow-1 w-100",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -8780,6 +8778,9 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
 
   var contentNumPerPage = 10;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    onClick: function onClick() {
+      return console.log(users);
+    },
     className: "mt-4 ".concat(isLoading ? "is__loading" : "showing", " main__container"),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "border",
@@ -10227,7 +10228,7 @@ var UserIcon = function UserIcon(props) {
       className: "w-100 h-100 overflow-hidden rounded-circle border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
         className: "w-100 h-100",
-        src: props.iconData ? "/storage/".concat(props.iconData) : "/images/default-user-icon.png",
+        src: "/storage/".concat(props.iconData),
         alt: "\u30E6\u30FC\u30B6\u30A2\u30A4\u30B3\u30F3"
       })
     })

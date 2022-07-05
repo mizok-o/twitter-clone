@@ -13,6 +13,17 @@ class UserController extends Controller
      * 認証ユーザーを除いたusersテーブル一覧を取得
      *
      * @param  User $user
+     * @return object
+     */
+    public function getAllUsers(User $user): object
+    {
+        return $user->get();
+    }
+
+    /**
+     * 認証ユーザーを除いたusersテーブル一覧を取得
+     *
+     * @param  User $user
      * @return array<object, int>
      */
     public function index(User $user): array
