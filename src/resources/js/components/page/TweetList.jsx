@@ -100,6 +100,9 @@ export const TweetList = (props) => {
                 isLoading ? "is__loading" : "showing"
             } main__container`}
         >
+            <h2 className="fs-4 border py-2 px-3">
+                フォロー中のユーザーのツイート
+            </h2>
             <div className="border">
                 {nofollows ? (
                     <h2 className="py-4 px-2 fs-5">

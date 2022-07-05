@@ -15,6 +15,7 @@ import "../../css/app.css";
 import { UserFollowsList } from "./page/UserFollowsList";
 import { Loading } from "./parts/Loading";
 import { TweetListOnlyFollows } from "./page/TweetListOnlyFollows";
+import { NotFound } from "./page/NotFound";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});
@@ -157,6 +158,7 @@ export const App = () => {
                         )
                     }
                 />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
