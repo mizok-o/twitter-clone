@@ -73,7 +73,9 @@ export const TweetDetail = () => {
                     >
                         <UserIcon
                             userList={false}
-                            iconData={user.profile_image_path}
+                            iconData={user.profile_image_path !== null
+                                ? user.profile_image_path
+                                : "default-user-icon.png"}
                         />
                         <div className="ms-2 non__omit">
                             <UserName

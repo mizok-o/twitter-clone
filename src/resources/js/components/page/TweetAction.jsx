@@ -82,7 +82,11 @@ export const TweetAction = (props) => {
                 <div className="d-flex justify-content-center">
                     <UserIcon
                         userList={true}
-                        iconData={authUser.profile_image_path}
+                        iconData={
+                            authUser.profile_image_path !== null
+                                ? authUser.profile_image_path
+                                : "default-user-icon.png"
+                        }
                     />
                     <form
                         encType="multipart/form-data"

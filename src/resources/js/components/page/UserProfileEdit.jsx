@@ -73,7 +73,11 @@ export const UserProfileEdit = (props) => {
                         <div className="d-flex align-items-center">
                             <UserIcon
                                 userList={true}
-                                iconData={authUser.profile_image_path}
+                                iconData={
+                                    authUser.profile_image_path !== null
+                                        ? authUser.profile_image_path
+                                        : "default-user-icon.png"
+                                }
                             />
                             <label className="ms-3">
                                 <div className="tweet-form-file"></div>

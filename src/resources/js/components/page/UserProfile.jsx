@@ -25,7 +25,6 @@ export const UserProfile = (props) => {
     };
 
     useEffect(() => {
-        console.log(id);
         setIsAuth(authUserId === Number(id));
         setIsFollowing(authUserFollows.includes(Number(id)));
         getUserProfile();
@@ -90,7 +89,9 @@ export const UserProfile = (props) => {
                         </div>
                         <UserIcon
                             userList={false}
-                            iconData={user.profile_image_path}
+                            iconData={user.profile_image_path !== null
+                                ? user.profile_image_path
+                                : "default-user-icon.png"}
                         />
                     </div>
                     <div className="non__omit">

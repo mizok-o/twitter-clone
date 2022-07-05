@@ -65,7 +65,13 @@ export const UserFollowsList = (props) => {
                 <div className="user__item-container">
                     <Link to={`/home/profile/${user.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={user.profile_image_path} />
+                            <UserIcon
+                                iconData={
+                                    user.profile_image_path !== null
+                                        ? user.profile_image_path
+                                        : "default-user-icon.png"
+                                }
+                            />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName

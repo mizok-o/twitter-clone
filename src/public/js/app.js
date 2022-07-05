@@ -8122,7 +8122,7 @@ var TweetAction = function TweetAction(props) {
         className: "d-flex justify-content-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__.UserIcon, {
           userList: true,
-          iconData: authUser.profile_image_path
+          iconData: authUser.profile_image_path !== null ? authUser.profile_image_path : "default-user-icon.png"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           encType: "multipart/form-data",
           onSubmit: function onSubmit(e) {
@@ -8361,7 +8361,7 @@ var TweetDetail = function TweetDetail() {
           className: "d-flex align-items-center",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
             userList: false,
-            iconData: user.profile_image_path
+            iconData: user.profile_image_path !== null ? user.profile_image_path : "default-user-icon.png"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "ms-2 non__omit",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
@@ -9037,7 +9037,7 @@ var UserFollowsList = function UserFollowsList(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "d-flex px-2 py-4 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_4__.UserIcon, {
-              iconData: user.profile_image_path
+              iconData: user.profile_image_path !== null ? user.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "ms-2 flex-grow-1",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -9387,7 +9387,6 @@ var UserProfile = function UserProfile(props) {
   }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(id);
     setIsAuth(authUserId === Number(id));
     setIsFollowing(authUserFollows.includes(Number(id)));
     getUserProfile();
@@ -9461,7 +9460,7 @@ var UserProfile = function UserProfile(props) {
             children: profileButton()
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_3__.UserIcon, {
             userList: false,
-            iconData: user.profile_image_path
+            iconData: user.profile_image_path !== null ? user.profile_image_path : "default-user-icon.png"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "non__omit",
@@ -9641,7 +9640,7 @@ var UserProfileEdit = function UserProfileEdit(props) {
             className: "d-flex align-items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_2__.UserIcon, {
               userList: true,
-              iconData: authUser.profile_image_path
+              iconData: authUser.profile_image_path !== null ? authUser.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
               className: "ms-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
