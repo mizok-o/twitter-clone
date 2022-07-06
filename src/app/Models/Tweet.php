@@ -81,7 +81,12 @@ class Tweet extends Model
     {
         $tweet = $this->where('id', $tweetId)->first();
         $tweet->text = $request->text;
-        $tweet->image = $request->image;
+        $tweet->image = null;
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->hashName();
+            $tweet->image = $image_name;
+            $request->file('image')->storeAs('public/tweet', $image_name);
+        }
 
         return $tweet->save();
     }

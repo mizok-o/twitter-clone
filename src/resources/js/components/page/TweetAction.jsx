@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { PageBackButton } from "../parts/PageBackButton";
@@ -20,7 +20,9 @@ export const TweetAction = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [defaultText, setDefaultText] = useState("");
+    const [defaultText] = useState(
+        isEditPage ? location.state.defaultText : ""
+    );
     const [errorMessage, setErrorMessage] = useState("");
     const [imageIsSelected, setImageIsSelected] = useState(false);
 
@@ -28,10 +30,6 @@ export const TweetAction = (props) => {
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
-
-    useEffect(() => {
-        setDefaultText(isEditPage ? location.state.defaultText : "");
-    }, []);
 
     // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
     const postTweet = async (url, tweetData) => {
@@ -46,15 +44,11 @@ export const TweetAction = (props) => {
             navigate("/home/timeline");
         } else if (res.status > 400) {
             const errorMessage = await res.json();
-            console.log(errorMessage);
-            console.log("aa");
+            setErrorMessage(errorMessage.text);
+        } else {
+            const errorMessage = await res.json();
             setErrorMessage(errorMessage.text);
         }
-        //  else {
-        //     const errorMessage = await res.json();
-        //     console.log(errorMessage);
-        //     setErrorMessage(errorMessage.text);
-        // }
     };
 
     // ページによってurlを変更

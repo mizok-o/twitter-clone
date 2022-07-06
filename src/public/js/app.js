@@ -8019,10 +8019,9 @@ var TweetAction = function TweetAction(props) {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useLocation)();
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      defaultText = _useState2[0],
-      setDefaultText = _useState2[1];
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(isEditPage ? location.state.defaultText : ""),
+      _useState2 = _slicedToArray(_useState, 1),
+      defaultText = _useState2[0];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -8035,14 +8034,11 @@ var TweetAction = function TweetAction(props) {
       setImageIsSelected = _useState6[1]; // csrf対策のため、トークンを取得
 
 
-  var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setDefaultText(isEditPage ? location.state.defaultText : "");
-  }, []); // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
+  var csrf_token = document.querySelector('meta[name="csrf-token"]').content; // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
 
   var postTweet = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, tweetData) {
-      var res, _errorMessage;
+      var res, _errorMessage, _errorMessage2;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -8066,7 +8062,7 @@ var TweetAction = function TweetAction(props) {
               }
 
               navigate("/home/timeline");
-              _context.next = 14;
+              _context.next = 18;
               break;
 
             case 7:
@@ -8080,11 +8076,19 @@ var TweetAction = function TweetAction(props) {
 
             case 10:
               _errorMessage = _context.sent;
-              console.log(_errorMessage);
-              console.log("aa");
               setErrorMessage(_errorMessage.text);
+              _context.next = 18;
+              break;
 
             case 14:
+              _context.next = 16;
+              return res.json();
+
+            case 16:
+              _errorMessage2 = _context.sent;
+              setErrorMessage(_errorMessage2.text);
+
+            case 18:
             case "end":
               return _context.stop();
           }
