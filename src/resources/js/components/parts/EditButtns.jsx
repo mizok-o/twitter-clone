@@ -44,7 +44,7 @@ export const EditButtns = (props) => {
                 className="btn btn-outline-dark py-0 px-2 fs-6"
                 onClick={(e) => moveEditPage(e)}
             >
-                更新
+                編集
             </button>
             <button
                 type="button"

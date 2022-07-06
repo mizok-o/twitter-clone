@@ -118,13 +118,6 @@ textarea {
   background-size: cover;
 }
 
-/* .tweet__image {
-  position: relative;
-  width: 100%;
-  height: 240px;
-  overflow: hidden;
-} */
-
 .tweet__images {
   max-height: 240px;
 }
@@ -154,7 +147,6 @@ textarea {
 .is__loading {
   position: relative;
   pointer-events: none;
-  /* opacity: .6; */
 }
 
 .looping-spinner-container {
@@ -214,7 +206,7 @@ textarea {
 
   .header__tweetBtn {
     bottom: 32px;
-    right: 12px;
+    right: 32px;
     width: 48px;
     height: 48px;
   }

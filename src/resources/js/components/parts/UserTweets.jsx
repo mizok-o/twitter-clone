@@ -16,7 +16,7 @@ export const UserTweets = (props) => {
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch(`/tweets-list/${userId}`);
+        const res = await fetch(`/tweets-list/${userId}?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
             // ツイートが無い場合
@@ -34,13 +34,18 @@ export const UserTweets = (props) => {
     }, [currentPage]);
 
     const tweetItem = tweets.map((tweet) => {
-        // ツイートユーザーの情報を取得
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
-                            <UserIcon iconData={user.profile_image_path} />
+                            <UserIcon
+                                iconData={
+                                    user.profile_image_path !== null
+                                        ? user.profile_image_path
+                                        : "default-user-icon.png"
+                                }
+                            />
                             <div className="ms-2 flex-grow-1">
                                 <div className="d-flex justify-content-between">
                                     <UserName
@@ -89,14 +94,14 @@ export const UserTweets = (props) => {
     // １ページごとのコンテンツ数
     const contentNumPerPage = 10;
     return (
-        <div className="mt-2">
+        <div>
             {nofollows ? (
                 <h2 className="py-4 px-2 fs-5">
                     ツイートがここに表示されます。
                 </h2>
             ) : (
                 <div className="border">
-                    <h3 className="mt-3 ms-3 fs-4">ツイート一覧</h3>
+                    <h3 className="my-3 ms-2 fs-4">ツイート一覧</h3>
                     <ul>{tweetItem}</ul>
                 </div>
             )}
