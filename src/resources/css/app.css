@@ -122,6 +122,10 @@ textarea {
   max-height: 240px;
 }
 
+.btn-clicking {
+  pointer-events: none;
+}
+
 /* ツイートボタン */
 .header__tweetBtn {
   position: fixed;

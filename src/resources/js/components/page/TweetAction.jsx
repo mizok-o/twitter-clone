@@ -25,6 +25,7 @@ export const TweetAction = (props) => {
     );
     const [errorMessage, setErrorMessage] = useState("");
     const [imageIsSelected, setImageIsSelected] = useState(false);
+    const [isClicking, setIsclicking] = useState(false);
 
     // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
@@ -61,7 +62,8 @@ export const TweetAction = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setIsclicking(true);
+        console.log("clicked");
         // postするツイート作成
         let tweetData = new FormData();
         const image = e.target.image.files[0];
@@ -73,7 +75,7 @@ export const TweetAction = (props) => {
         }
         tweetData.append("text", text);
 
-        postTweet(setApiUrl(), tweetData);
+        postTweet(setApiUrl(), tweetData).then(() => setIsclicking(false));
     };
 
     return (
@@ -134,7 +136,7 @@ export const TweetAction = (props) => {
                             <button
                                 className={`btn ${
                                     isEditPage ? "btn-success" : "btn-primary"
-                                }`}
+                                } ${isClicking ? "btn-clicking" : ""}`}
                                 type="submit"
                             >
                                 {isEditPage ? "ツイートを更新" : "ツイート"}
