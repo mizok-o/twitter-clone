@@ -44,10 +44,17 @@ export const TweetAction = (props) => {
         });
         if (res.status === 200) {
             navigate("/home/timeline");
-        } else {
+        } else if (res.status > 400) {
             const errorMessage = await res.json();
+            console.log(errorMessage);
+            console.log("aa");
             setErrorMessage(errorMessage.text);
         }
+        //  else {
+        //     const errorMessage = await res.json();
+        //     console.log(errorMessage);
+        //     setErrorMessage(errorMessage.text);
+        // }
     };
 
     // ページによってurlを変更

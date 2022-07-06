@@ -8066,18 +8066,25 @@ var TweetAction = function TweetAction(props) {
               }
 
               navigate("/home/timeline");
-              _context.next = 11;
+              _context.next = 14;
               break;
 
             case 7:
-              _context.next = 9;
+              if (!(res.status > 400)) {
+                _context.next = 14;
+                break;
+              }
+
+              _context.next = 10;
               return res.json();
 
-            case 9:
+            case 10:
               _errorMessage = _context.sent;
+              console.log(_errorMessage);
+              console.log("aa");
               setErrorMessage(_errorMessage.text);
 
-            case 11:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -8726,7 +8733,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/tweets-only-follows");
+              return fetch("/tweets-only-follows?page=".concat(currentPage));
 
             case 2:
               res = _context2.sent;

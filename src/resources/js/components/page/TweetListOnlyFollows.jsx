@@ -29,7 +29,7 @@ export const TweetListOnlyFollows = (props) => {
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
-        const res = await fetch("/tweets-only-follows");
+        const res = await fetch(`/tweets-only-follows?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
             if (!tweetsData.total) {
