@@ -7,7 +7,7 @@ import { Pagenation } from "./Pagenation";
 import { EditButtns } from "./EditButtns";
 
 export const UserTweets = (props) => {
-    const { user, userId } = props;
+    const { user, userId, authUserId } = props;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [numTweets, setNumTweets] = useState(0);
@@ -55,7 +55,7 @@ export const UserTweets = (props) => {
                                         }}
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
-                                    {user.id === tweet.user_id ? (
+                                    {user.id === authUserId ? (
                                         <EditButtns
                                             currentText={tweet.text}
                                             tweetId={tweet.id}

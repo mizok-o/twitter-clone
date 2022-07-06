@@ -9497,7 +9497,8 @@ var UserProfile = function UserProfile(props) {
       className: "border",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserTweets__WEBPACK_IMPORTED_MODULE_5__.UserTweets, {
         user: user,
-        userId: id
+        userId: id,
+        authUserId: authUserId
       })
     })]
   });
@@ -10375,7 +10376,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserTweets = function UserTweets(props) {
   var user = props.user,
-      userId = props.userId;
+      userId = props.userId,
+      authUserId = props.authUserId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10469,7 +10471,7 @@ var UserTweets = function UserTweets(props) {
                     screen_name: user.screen_name,
                     user_name: user.user_name
                   }
-                }), user.id === tweet.user_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
+                }), user.id === authUserId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
                   currentText: tweet.text,
                   tweetId: tweet.id,
                   setCurrentPage: setCurrentPage,

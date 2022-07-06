@@ -110,7 +110,7 @@ export const UserProfile = (props) => {
                 </div>
             </div>
             <div className="border">
-                <UserTweets user={user} userId={id} />
+                <UserTweets user={user} userId={id} authUserId={authUserId} />
             </div>
         </div>
     );
