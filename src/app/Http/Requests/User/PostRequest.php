@@ -17,7 +17,7 @@ class PostRequest extends BaseRequest
     {
         if ($request->get('image')) {
             return [
-                'image' => ['mimes:png,jpg,jpeg,webp', 'max:800'],
+                'image' => ['mimes:png,jpg,jpeg,webp', 'max:3000'],
                 'screen_name' => ['required', 'max:20'],
                 'profile' => ['max:140']
             ];
