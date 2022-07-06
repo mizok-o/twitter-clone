@@ -9872,6 +9872,11 @@ var FollowButton = function FollowButton(props) {
       followStatus = _useState2[0],
       setFollowStatus = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isClicking = _useState4[0],
+      setIsclicking = _useState4[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setFollowStatus(isFollowing);
   }, [users, isFollowing]); // csrf対策のため、トークンを取得
@@ -9887,21 +9892,25 @@ var FollowButton = function FollowButton(props) {
 
   var followUser = function followUser(e) {
     e.preventDefault();
+    setIsclicking(true);
     fetch("/follow-".concat(userId), options).then(function () {
       setFollowStatus(true);
+      setIsclicking(false);
     });
   };
 
   var unfollowUser = function unfollowUser(e) {
     e.preventDefault();
+    setIsclicking(true);
     fetch("/unfollow-".concat(userId), options).then(function () {
-      return setFollowStatus(false);
+      setFollowStatus(false);
+      setIsclicking(false);
     });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
     type: "button",
-    className: "btn btn__size ".concat(followStatus ? "btn-dark" : "btn-outline-dark"),
+    className: "btn btn__size ".concat(followStatus ? "btn-dark" : "btn-outline-dark", " ").concat(isClicking ? "btn-clicking" : ""),
     onClick: followStatus ? function (e) {
       return unfollowUser(e);
     } : function (e) {

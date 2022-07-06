@@ -4,6 +4,7 @@ export const FollowButton = (props) => {
     const { userId, isFollowing, users, authUserfollows } = props;
 
     const [followStatus, setFollowStatus] = useState(false);
+    const [isClicking, setIsclicking] = useState(false);
 
     useEffect(() => {
         setFollowStatus(isFollowing);
@@ -24,22 +25,28 @@ export const FollowButton = (props) => {
 
     const followUser = (e) => {
         e.preventDefault();
+        setIsclicking(true);
         fetch(`/follow-${userId}`, options).then(() => {
             setFollowStatus(true);
+            setIsclicking(false);
         });
     };
 
     const unfollowUser = (e) => {
         e.preventDefault();
-        fetch(`/unfollow-${userId}`, options).then(() =>
-            setFollowStatus(false)
-        );
+        setIsclicking(true);
+        fetch(`/unfollow-${userId}`, options).then(() => {
+            setFollowStatus(false);
+            setIsclicking(false);
+        });
     };
 
     return (
         <button
             type="button"
-            className={`btn btn__size ${followStatus ? "btn-dark" : "btn-outline-dark"}`}
+            className={`btn btn__size ${
+                followStatus ? "btn-dark" : "btn-outline-dark"
+            } ${isClicking ? "btn-clicking" : ""}`}
             onClick={
                 followStatus ? (e) => unfollowUser(e) : (e) => followUser(e)
             }
