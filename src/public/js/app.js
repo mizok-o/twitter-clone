@@ -8336,10 +8336,51 @@ var TweetDetail = function TweetDetail() {
 
   var editPostedDate = function editPostedDate(dateData) {
     return dateData.split("T")[0].replace(/-/g, "/");
-  }; // ツイートを取得してから、ユーザー情報を取得
+  };
+
+  var getReplys = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var res, replysData;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log("reply");
+              _context3.next = 3;
+              return fetch("/replys/".concat(id));
+
+            case 3:
+              res = _context3.sent;
+
+              if (!(res.status === 200)) {
+                _context3.next = 10;
+                break;
+              }
+
+              console.log("reply");
+              _context3.next = 8;
+              return res.json();
+
+            case 8:
+              replysData = _context3.sent;
+              console.log(replysData);
+
+            case 10:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function getReplys() {
+      return _ref3.apply(this, arguments);
+    };
+  }(); // ツイートを取得してから、ユーザー情報を取得
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getReplys();
     getTweet().then(function (tweetData) {
       tweetData.created_at = editPostedDate(tweetData.created_at);
       setTweet(tweetData);

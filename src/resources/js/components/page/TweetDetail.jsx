@@ -34,8 +34,20 @@ export const TweetDetail = () => {
         return dateData.split("T")[0].replace(/-/g, "/");
     };
 
+    const getReplys = async () => {
+        console.log("reply");
+        const res = await fetch(`/replys/${id}`);
+        if (res.status === 200) {
+            console.log("reply");
+            const replysData = await res.json();
+            console.log(replysData);
+        }
+    };
+
     // ツイートを取得してから、ユーザー情報を取得
     useEffect(() => {
+        getReplys();
+
         getTweet().then((tweetData) => {
             tweetData.created_at = editPostedDate(tweetData.created_at);
             setTweet(tweetData);
@@ -73,9 +85,11 @@ export const TweetDetail = () => {
                     >
                         <UserIcon
                             userList={false}
-                            iconData={user.profile_image_path !== null
-                                ? user.profile_image_path
-                                : "default-user-icon.png"}
+                            iconData={
+                                user.profile_image_path !== null
+                                    ? user.profile_image_path
+                                    : "default-user-icon.png"
+                            }
                         />
                         <div className="ms-2 non__omit">
                             <UserName
