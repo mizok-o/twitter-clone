@@ -13,7 +13,9 @@ class ChangeImageNullable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('tweets', function (Blueprint $table) {
+            $table->string('image')->nullable()->change();
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class ChangeImageNullable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tweets', function (Blueprint $table) {
+            $table->string('image')->nullable(false)->change();
+        });
     }
 }

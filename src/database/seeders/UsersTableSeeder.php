@@ -14,9 +14,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
-        // \DB::table('users')->truncate();
-
         $users = [
             [
                 'user_name' => 'testuser_01',
