@@ -14,7 +14,7 @@ class Reply extends Model
      */
     public function getReplysByTweetId(int $tweetId): object
     {
-        // dd($this->where('tweets_id', $tweetId)->get());
+        dd($this->count(), "aa");
         return $this->where('tweets_id', $tweetId)->get();
     }
 }
