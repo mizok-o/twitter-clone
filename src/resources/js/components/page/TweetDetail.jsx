@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
+import { Replies } from "../parts/Replies";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
+import { TweetReply } from "./TweetReply";
 
 export const TweetDetail = () => {
     const [tweet, setTweet] = useState({});
@@ -34,20 +36,8 @@ export const TweetDetail = () => {
         return dateData.split("T")[0].replace(/-/g, "/");
     };
 
-    const getReplys = async () => {
-        console.log("reply");
-        const res = await fetch(`/replys/${id}`);
-        if (res.status === 200) {
-            console.log("reply");
-            const replysData = await res.json();
-            console.log(replysData);
-        }
-    };
-
     // ツイートを取得してから、ユーザー情報を取得
     useEffect(() => {
-        getReplys();
-
         getTweet().then((tweetData) => {
             tweetData.created_at = editPostedDate(tweetData.created_at);
             setTweet(tweetData);
@@ -115,6 +105,13 @@ export const TweetDetail = () => {
                             ""
                         )}
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
+                    </div>
+                    <Replies tweetId={id} />
+                    <div>
+                        <TweetReply tweetId={id} />
+                        {/* <Link to={"/home/reply/new"}>
+                            <button className="btn">返信する</button>
+                        </Link> */}
                     </div>
                 </div>
             </div>

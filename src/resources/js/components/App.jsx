@@ -6,6 +6,7 @@ import { Header } from "./layout/Header";
 
 import { TweetList } from "./page/TweetList";
 import { TweetDetail } from "./page/TweetDetail";
+import { TweetReply } from "./page/TweetReply";
 import { TweetAction } from "./page/TweetAction";
 import { UserList } from "./page/UserList";
 import { UserProfile } from "./page/UserProfile";
@@ -81,6 +82,16 @@ export const App = () => {
                             <Loading />
                         ) : (
                             <TweetAction authUser={authUser} />
+                        )
+                    }
+                />
+                <Route
+                    path="/home/reply/new"
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetReply authUser={authUser} />
                         )
                     }
                 />

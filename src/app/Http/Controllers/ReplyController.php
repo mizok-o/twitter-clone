@@ -7,6 +7,7 @@ use App\Http\Requests\Tweet\PostRequest;
 use App\Models\Follow;
 use App\Models\Reply;
 use App\Models\Tweet;
+use App\Models\User;
 
 class ReplyController extends Controller
 {
@@ -19,7 +20,6 @@ class ReplyController extends Controller
      */
     public function index(int $tweetId, Reply $reply): object
     {
-        dd($reply->all());
         $replys = $reply->getReplysByTweetId($tweetId);
         return $replys;
     }
@@ -29,10 +29,16 @@ class ReplyController extends Controller
      *
      * @param  PostRequest $request
      * @param  Reply $reply
+     * @param  int $tweetId
      * @param  User $user
      */
-    public function store(PostRequest $request, int $userId, Reply $reply): bool
+    public function store(PostRequest $request, int $tweetId, Reply $reply, User $user): bool
     {
-        return $reply->postTweet($userId, $request);
+        $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $reply);
+        if (!$isAuthUser) {
+            abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
+        }
+
+        return $reply->postReply($tweetId, $request);
     }
 }
