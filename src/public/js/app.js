@@ -8505,7 +8505,12 @@ var TweetList = function TweetList(props) {
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
       nofollows = _useState10[0],
-      setNoFollows = _useState10[1]; // １ページ目のツイートを取得
+      setNoFollows = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      repliesNum = _useState12[0],
+      setRepliesNum = _useState12[1]; // １ページ目のツイートを取得
 
 
   var getTweets = /*#__PURE__*/function () {
@@ -8522,7 +8527,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 13;
+                _context.next = 14;
                 break;
               }
 
@@ -8544,8 +8549,9 @@ var TweetList = function TweetList(props) {
               setUsers(tweetsData.users);
               setNumTweets(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
+              setRepliesNum(tweetsData.repliesNum);
 
-            case 13:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -8561,11 +8567,12 @@ var TweetList = function TweetList(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getTweets();
   }, [currentPage]);
-  var tweetItem = tweets.map(function (tweet) {
+  var tweetItem = tweets.map(function (tweet, i) {
     // ツイートユーザーの情報を取得
     var userData = users.find(function (data) {
       return data.id === tweet.user_id;
-    });
+    }); // const replyNum = repliesNum[tweet.id];
+
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "user__item-container",
@@ -8602,6 +8609,8 @@ var TweetList = function TweetList(props) {
                     alt: "\u30C4\u30A4\u30FC\u30C8 \u753B\u50CF"
                   })
                 }) : ""]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+                children: ["\u30EA\u30D7: ", repliesNum[i]]
               })]
             })]
           })

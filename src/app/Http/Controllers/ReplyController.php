@@ -18,7 +18,7 @@ class ReplyController extends Controller
      * @param Tweet $tweet
      * @return object
      */
-    public function index(int $tweetId, Reply $reply): object
+    public function getRepliesByTweetId(int $tweetId, Reply $reply): object
     {
         $replys = $reply->getReplysByTweetId($tweetId);
         return $replys;

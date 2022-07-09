@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tweets-list/{userId}', [TweetController::class, 'getUserTweets']);
     Route::get('/tweets-only-follows', [TweetController::class, 'getAllTweets']);
 
-    Route::get('/replys/{tweetId}', [ReplyController::class, 'index']);
+    Route::get('/replys/{tweetId}', [ReplyController::class, 'getRepliesByTweetId']);
     Route::post('/post-replys-{tweetId}', [ReplyController::class, 'store']);
 
     Route::post('/post-tweet', [TweetController::class, 'store']);

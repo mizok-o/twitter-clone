@@ -14,6 +14,7 @@ export const TweetList = (props) => {
     const [numTweets, setNumTweets] = useState(0);
     const [tweets, setTweets] = useState([]);
     const [nofollows, setNoFollows] = useState(false);
+    const [repliesNum, setRepliesNum] = useState([]);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
@@ -28,6 +29,7 @@ export const TweetList = (props) => {
             setUsers(tweetsData.users);
             setNumTweets(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
+            setRepliesNum(tweetsData.repliesNum);
         }
     };
 
@@ -35,9 +37,11 @@ export const TweetList = (props) => {
         getTweets();
     }, [currentPage]);
 
-    const tweetItem = tweets.map((tweet) => {
+    const tweetItem = tweets.map((tweet, i) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
+        // const replyNum = repliesNum[tweet.id];
+
         return (
             <li key={tweet.id}>
                 <div className="user__item-container">
@@ -84,6 +88,7 @@ export const TweetList = (props) => {
                                         ""
                                     )}
                                 </div>
+                                <p>リプ: {repliesNum[i]}</p>
                             </div>
                         </div>
                     </Link>

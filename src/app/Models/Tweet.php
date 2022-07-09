@@ -53,6 +53,25 @@ class Tweet extends Model
     }
 
     /**
+     * リプ数を配列で返す
+     *
+     * @param  array $followIds
+     * @return array
+     */
+    public function countTweetsInfo(object $tweets, object $countedItems): array
+    {
+        $tweetIds = $tweets->pluck('id');
+        $replyNum = array();
+
+        foreach ($tweetIds as $tweetId) {
+            $replyNum = $countedItems->where('tweet_id', $tweetId)->count();
+            $repliesNum[] = $replyNum;
+        }
+        // dd($repliesNum);
+        return $repliesNum;
+    }
+
+    /**
      * ツイート投稿
      *
      * @param  int $user_id

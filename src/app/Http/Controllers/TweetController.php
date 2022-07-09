@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tweet\PostRequest;
 use App\Models\Follow;
+use App\Models\Reply;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class TweetController extends Controller
      * @param Tweet $tweet
      * @return array<object, object>
      */
-    public function index(Follow $follow, Tweet $tweet): array
+    public function index(Follow $follow, Tweet $tweet, Reply $reply): array
     {
         $users = User::all();
 
@@ -28,9 +29,11 @@ class TweetController extends Controller
         $followIds[] = $userId;
 
         $tweets = $tweet->getPaginatedFollowsTweets($followIds);
+        $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
         return [
             "users" => $users,
-            "tweets" => $tweets
+            "tweets" => $tweets,
+            "repliesNum" => $repliesNum,
         ];
     }
 
