@@ -53,6 +53,17 @@ export const TweetReply = (props) => {
         postReply(tweetData).then(() => setIsclicking(false));
     };
 
+    function replyTextarea(el) {
+        const dummy = el.querySelector(".reply__textarea__dummy");
+        el.querySelector(".reply__textarea").addEventListener("input", (e) => {
+            dummy.textContent = e.target.value + "\u200b";
+        });
+    }
+
+    document
+        .querySelectorAll(".reply__textarea__container")
+        .forEach(replyTextarea);
+
     return (
         <div className="my-3 main__container">
             <form
@@ -60,14 +71,17 @@ export const TweetReply = (props) => {
                 onSubmit={(e) => handleSubmit(e)}
                 className="ms-2"
             >
-                <textarea
-                    className="p-2 w-100"
-                    name="text"
-                    required
-                    cols="30"
-                    rows="1"
-                    placeholder={"返信しよう"}
-                ></textarea>
+                <div className="reply__textarea__container">
+                    <div
+                        className="reply__textarea__dummy"
+                        aria-hidden="true"
+                    ></div>
+                    <textarea
+                        id="replyTextarea"
+                        className="reply__textarea"
+                    ></textarea>
+                </div>
+
                 <div>
                     <p className="api__error__message">{errorMessage}</p>
                 </div>

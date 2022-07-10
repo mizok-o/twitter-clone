@@ -33,23 +33,26 @@ export const Replies = (props) => {
             <li key={reply.id}>
                 <div className="border p-3">
                     <p>これはリプライ</p>
-                    <UserIcon
-                        userList={false}
-                        iconData={
-                            user.profile_image_path !== null
-                                ? user.profile_image_path
-                                : "default-user-icon.png"
-                        }
-                    />
-                    <div className="ms-2 non__omit">
-                        <UserName
-                            isUserProfile={true}
-                            nameData={{
-                                screen_name: user.screen_name,
-                                user_name: user.user_name,
-                            }}
+                    <div className="d-flex">
+                        <UserIcon
+                            userList={false}
+                            iconData={
+                                user.profile_image_path !== null
+                                    ? user.profile_image_path
+                                    : "default-user-icon.png"
+                            }
                         />
+                        <div className="ms-2 non__omit">
+                            <UserName
+                                isUserProfile={true}
+                                nameData={{
+                                    screen_name: user.screen_name,
+                                    user_name: user.user_name,
+                                }}
+                            />
+                        </div>
                     </div>
+
                     <div className="mt-3 w-100 new__line">
                         <p>{reply.text}</p>
                         {/* {reply.image ? (
@@ -72,7 +75,6 @@ export const Replies = (props) => {
 
     return (
         <div className="">
-            <h3>リプライ</h3>
             <ul>{reply}</ul>
         </div>
     );
