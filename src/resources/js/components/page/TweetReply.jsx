@@ -78,6 +78,7 @@ export const TweetReply = (props) => {
                     <textarea
                         id="replyTextarea"
                         name="text"
+                        placeholder="返信する"
                         className="reply__textarea"
                     ></textarea>
                 </div>
@@ -108,7 +109,7 @@ export const TweetReply = (props) => {
                         className={`btn ${isClicking ? "btn-clicking" : ""}`}
                         type="submit"
                     >
-                        リプライする
+                        返信する
                     </button>
                 </div>
             </form>
