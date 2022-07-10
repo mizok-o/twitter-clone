@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class FavoriteController extends Controller
 {
     /**
-     * ツイートごとのリプライを配列で取得
+     * いいねごとのリプライを配列で取得
      *
      * @param int $tweetId
      * @param Tweet $tweet
@@ -25,7 +25,7 @@ class FavoriteController extends Controller
     }
 
     /**
-     * ツイートごとのリプライを配列で取得
+     * いいねごとのリプライを配列で取得
      *
      * @param int $tweetId
      * @param Tweet $tweet
@@ -36,6 +36,19 @@ class FavoriteController extends Controller
         $favorites = $favorite->getFavsById($tweetId, "tweet_id");
         return $favorites;
     }
+
+    /**
+     *  ツイートIDからいいねを取得
+     *
+     * @param int $tweetId
+     * @param Tweet $tweet
+     * @return object
+     */
+    // public function getFavsByTweetId(int $tweetId, Favorite $favorite): object
+    // {
+    //     $favorites = $favorite->getFavsById($tweetId, "tweet_id");
+    //     return $favorites;
+    // }
 
     /**
      * リプ投稿

@@ -5,6 +5,7 @@ import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { Pagenation } from "../parts/Pagenation";
 import { EditButtns } from "../parts/EditButtns";
+import { TweetStatus } from "../parts/TweetStatus";
 
 export const TweetList = (props) => {
     const { authUserId, isLoading } = props;
@@ -90,12 +91,6 @@ export const TweetList = (props) => {
                                     ) : (
                                         ""
                                     )}
-                                </div>
-                                <div className="d-flex">
-                                    <p className="me-2">
-                                        リプ: {repliesNum[i]}
-                                    </p>
-                                    <p>いいね: {favsNum[i]}</p>
                                 </div>
                             </div>
                         </div>

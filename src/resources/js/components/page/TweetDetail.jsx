@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Replies } from "../parts/Replies";
+import { TweetStatus } from "../parts/TweetStatus";
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { TweetReply } from "./TweetReply";
@@ -10,6 +11,8 @@ export const TweetDetail = (props) => {
     const { authUserId } = props;
     const [tweet, setTweet] = useState({});
     const [user, setUser] = useState({});
+    const [favs, setFavs] = useState([]);
+    const [replies, setReplies] = useState([]);
 
     // urlからツイートIDの取得
     const { id } = useParams();
@@ -20,6 +23,30 @@ export const TweetDetail = (props) => {
         if (res.status === 200) {
             const tweetData = await res.json();
             return tweetData;
+        }
+    };
+
+    // 指定のツイートのいいねを取得
+    const getFavs = async () => {
+        const res = await fetch(`/favs/${id}`);
+        if (res.status === 200) {
+            const favsData = await res.json();
+            if (!favsData) {
+                return;
+            }
+            setFavs(favsData);
+        }
+    };
+
+    // 指定のツイートのいいねを取得
+    const getReplies = async () => {
+        const res = await fetch(`/replys/${id}`);
+        if (res.status === 200) {
+            const replieData = await res.json();
+            if (!replieData) {
+                return;
+            }
+            setReplies(replieData);
         }
     };
 
@@ -45,6 +72,8 @@ export const TweetDetail = (props) => {
 
             getUserData(tweetData.user_id);
         });
+        getReplies();
+        getFavs();
     }, []);
 
     return (
@@ -105,6 +134,10 @@ export const TweetDetail = (props) => {
                         ) : (
                             ""
                         )}
+                        <TweetStatus
+                            replies={replies}
+                            favs={favs}
+                        />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
                     <Replies tweetId={id} authUserId={authUserId} />
