@@ -20,34 +20,21 @@ class Favorite extends Model
     }
 
     /**
-     * いいね投稿
+     * いいねといいね解除
      *
      * @param  int $tweetId
-     * @param  object $request
      */
-    public function postReply(int $tweetId, object $request): bool
+    public function actionFav(int $tweetId): bool
     {
-        $this->tweet_id = $tweetId;
-        $this->user_id = auth()->id();
-        $this->text = $request->text;
+        $authUserId = auth()->id();
+        $isLiked = $this->where('tweet_id', $tweetId)->where('user_id', $authUserId);
 
-        if ($request->file('image')) {
-            $image_name = $request->file('image')->hashName();
-            $this->image = $image_name;
-            $request->file('image')->storeAs('public/reply', $image_name);
+        if ($isLiked->exists()) {
+            return $isLiked->delete();
         }
-        return $this->save();
-    }
 
-    /**
-     * いいね削除
-     *
-     * @param  int $replyId
-     */
-    public function destroyReply(int $replyId): bool
-    {
-        $tweetImage = $this->where("id", $replyId)->value('image');
-        Storage::disk('public')->delete('/reply/' . $tweetImage);
-        return $this->where("id", $replyId)->delete();
+        $this->tweet_id = $tweetId;
+        $this->user_id = $authUserId;
+        return $this->save();
     }
 }

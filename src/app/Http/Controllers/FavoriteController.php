@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tweet\PostRequest;
 use App\Models\Favorite;
 use App\Models\Tweet;
 use App\Models\User;
@@ -53,19 +52,18 @@ class FavoriteController extends Controller
     /**
      * リプ投稿
      *
-     * @param  PostRequest $request
      * @param  Reply $reply
      * @param  int $tweetId
      * @param  User $user
      */
-    public function store(PostRequest $request, int $tweetId, Reply $reply, User $user): bool
+    public function store(Request $request, int $tweetId, Favorite $favorite, User $user): bool
     {
-        $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $reply);
+        $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $favorite);
         if (!$isAuthUser) {
             abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
         }
 
-        return $reply->postReply($tweetId, $request);
+        return $favorite->actionFav($tweetId);
     }
     /**
      * リプ更新

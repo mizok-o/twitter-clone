@@ -135,8 +135,11 @@ export const TweetDetail = (props) => {
                             ""
                         )}
                         <TweetStatus
+                            setFavs={setFavs}
+                            setReplies={setReplies}
                             replies={replies}
                             favs={favs}
+                            tweetId={id}
                         />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
