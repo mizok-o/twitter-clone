@@ -42,11 +42,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tweets-only-follows', [TweetController::class, 'getAllTweets']);
 
     Route::get('/replys/{tweetId}', [ReplyController::class, 'getRepliesByTweetId']);
-    Route::post('/post-replys-{tweetId}', [ReplyController::class, 'store']);
+    Route::post('/reply/{tweetId}', [ReplyController::class, 'store']);
+    Route::put('/reply/{replyId}', [ReplyController::class, 'update']);
+    Route::delete('/reply/{replyId}', [ReplyController::class, 'destroy']);
 
-    Route::post('/post-tweet', [TweetController::class, 'store']);
-    Route::post('/edit-tweet/{tweetId}', [TweetController::class, 'update']);
-    Route::delete('/destroy-tweet/{tweetId}', [TweetController::class, 'destroy']);
+    Route::post('/tweet', [TweetController::class, 'store']);
+    Route::put('/tweet/{tweetId}', [TweetController::class, 'update']);
+    Route::delete('/tweet/{tweetId}', [TweetController::class, 'destroy']);
 });
 
 Route::get('/', function () {

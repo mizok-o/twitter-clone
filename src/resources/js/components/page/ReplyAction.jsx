@@ -4,25 +4,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { PageBackButton } from "../parts/PageBackButton";
 import { UserIcon } from "../parts/UserIcon";
 
-/*
-    TweetActionファイルでツイート更新、投稿の両方のページを表示。
+export const ReplyAction = (props) => {
+    const { authUser } = props;
 
-    props:isEditPageは、ツイート更新ページのみ「true」がセットされる。
-    isEditPageが「false」 → ツイート「投稿」ページ
-    isEditPageが「true」 → ツイート「更新」ページ
-*/
-
-export const TweetAction = (props) => {
-    const { isEditPage, authUser } = props;
-
-    // ツイート「更新」ページで使用
+    // リプライ「更新」ページで使用
     const { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [defaultText] = useState(
-        isEditPage ? location.state.defaultText : ""
-    );
+    const [defaultText] = useState(location.state.defaultText);
     const [errorMessage, setErrorMessage] = useState("");
     const [imageIsSelected, setImageIsSelected] = useState(false);
     const [isClicking, setIsclicking] = useState(false);
@@ -32,19 +22,15 @@ export const TweetAction = (props) => {
         'meta[name="csrf-token"]'
     ).content;
 
-    // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
-    const postTweet = async (url, tweetData) => {
-        const res = await fetch(url, {
+    // リプライ投稿もしくは更新を行う。成功の場合リプライ一覧へ遷移。エラーの場合はエラーテキストを表示。
+    const postTweet = async (replyData) => {
+        const res = await fetch(`/reply/${id}`, {
             method: "POST",
-            headers: isEditPage
-                ? {
-                      "X-HTTP-Method-Override": "PUT",
-                      "X-CSRF-TOKEN": csrf_token,
-                  }
-                : {
-                      "X-CSRF-TOKEN": csrf_token,
-                  },
-            body: tweetData,
+            headers: {
+                "X-HTTP-Method-Override": "PUT",
+                "X-CSRF-TOKEN": csrf_token,
+            },
+            body: replyData,
         });
         if (res.status === 200) {
             navigate("/home/timeline");
@@ -57,30 +43,21 @@ export const TweetAction = (props) => {
         }
     };
 
-    // ページによってurlを変更
-    const setApiUrl = () => {
-        if (isEditPage) {
-            return `/tweet/${id}`;
-        }
-        return "/tweet";
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsclicking(true);
-        console.log("clicked");
-        // postするツイート作成
-        let tweetData = new FormData();
+        // postするリプライ作成
+        let replyData = new FormData();
         const image = e.target.image.files[0];
         const text = e.target.text.value;
 
         // 画像が選択されてない時は追加しない
         if (image) {
-            tweetData.append("image", image);
+            replyData.append("image", image);
         }
-        tweetData.append("text", text);
+        replyData.append("text", text);
 
-        postTweet(setApiUrl(), tweetData).then(() => setIsclicking(false));
+        postTweet(replyData).then(() => setIsclicking(false));
     };
 
     return (
@@ -105,10 +82,9 @@ export const TweetAction = (props) => {
                             className="p-2 w-100"
                             name="text"
                             required
-                            defaultValue={isEditPage ? defaultText : ""}
+                            defaultValue={defaultText}
                             cols="30"
                             rows="5"
-                            placeholder={isEditPage ? "" : "今日を呟こう"}
                         ></textarea>
                         <div>
                             <p className="api__error__message">
@@ -139,12 +115,11 @@ export const TweetAction = (props) => {
                                 </p>
                             </div>
                             <button
-                                className={`btn ${
-                                    isEditPage ? "btn-success" : "btn-primary"
-                                } ${isClicking ? "btn-clicking" : ""}`}
+                                className={`btn "btn-success"
+                                ${isClicking ? "btn-clicking" : ""}`}
                                 type="submit"
                             >
-                                {isEditPage ? "ツイートを更新" : "ツイート"}
+                                {"リプライを更新"}
                             </button>
                         </div>
                     </form>

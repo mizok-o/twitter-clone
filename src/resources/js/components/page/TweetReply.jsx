@@ -39,7 +39,6 @@ export const TweetReply = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsclicking(true);
-        // postするツイート作成
         let tweetData = new FormData();
         const image = e.target.image.files[0];
         const text = e.target.text.value;
@@ -78,6 +77,7 @@ export const TweetReply = (props) => {
                     ></div>
                     <textarea
                         id="replyTextarea"
+                        name="text"
                         className="reply__textarea"
                     ></textarea>
                 </div>

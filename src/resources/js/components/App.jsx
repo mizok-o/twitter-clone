@@ -17,6 +17,7 @@ import { UserFollowsList } from "./page/UserFollowsList";
 import { Loading } from "./parts/Loading";
 import { TweetListOnlyFollows } from "./page/TweetListOnlyFollows";
 import { NotFound } from "./page/NotFound";
+import { ReplyAction } from "./page/ReplyAction";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});
@@ -73,7 +74,13 @@ export const App = () => {
                 />
                 <Route
                     path="/home/tweet/:id"
-                    element={isLoading ? <Loading /> : <TweetDetail />}
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <TweetDetail authUserId={authUser.id} />
+                        )
+                    }
                 />
                 <Route
                     path="/home/tweet/new"
@@ -92,6 +99,16 @@ export const App = () => {
                             <Loading />
                         ) : (
                             <TweetReply authUser={authUser} />
+                        )
+                    }
+                />
+                <Route
+                    path="/home/reply/edit/:id"
+                    element={
+                        isLoading ? (
+                            <Loading />
+                        ) : (
+                            <ReplyAction authUser={authUser} />
                         )
                     }
                 />

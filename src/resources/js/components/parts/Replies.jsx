@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
+import { EditButtns } from "./EditButtns";
 
 export const Replies = (props) => {
-    const { tweetId } = props;
+    const { tweetId, authUserId } = props;
+
+    const [currentPage, setCurrentPage] = useState(1);
     const [users, setUsers] = useState([]);
     const [replies, setReplies] = useState([]);
 
@@ -42,31 +45,46 @@ export const Replies = (props) => {
                                     : "default-user-icon.png"
                             }
                         />
-                        <div className="ms-2 non__omit">
-                            <UserName
-                                isUserProfile={true}
-                                nameData={{
-                                    screen_name: user.screen_name,
-                                    user_name: user.user_name,
-                                }}
-                            />
+                        <div className="flex-grow-1 w-100">
+                            <div className="d-flex justify-content-between">
+                                <div className="ms-2">
+                                    <UserName
+                                        isUserProfile={true}
+                                        nameData={{
+                                            screen_name: user.screen_name,
+                                            user_name: user.user_name,
+                                        }}
+                                    />
+                                </div>
+                                {authUserId === reply.user_id ? (
+                                    <EditButtns
+                                        currentText={reply.text}
+                                        contentId={reply.id}
+                                        setCurrentPage={setCurrentPage}
+                                        authUserId={authUserId}
+                                        isReply={true}
+                                    />
+                                ) : (
+                                    ""
+                                )}
+                            </div>
                         </div>
                     </div>
 
                     <div className="mt-3 w-100 new__line">
                         <p>{reply.text}</p>
-                        {/* {reply.image ? (
+                        {reply.image ? (
                             <div className="reply__image w-100 mt-1 border rounded">
                                 <img
                                     className="w-100 reply__images"
-                                    src={`/storage/reply/${tweet.image}`}
-                                    alt="ツイート 画像"
+                                    src={`/storage/reply/${reply.image}`}
+                                    alt="リプライ 画像"
                                 />
                             </div>
                         ) : (
                             ""
-                        )} */}
-                        {/* <p className="pt-2">投稿日: {tweet.created_at}</p> */}
+                        )}
+                        <p className="pt-2">投稿日: {reply.created_at}</p>
                     </div>
                 </div>
             </li>

@@ -2,7 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const EditButtns = (props) => {
-    const { tweetId, currentText, setCurrentPage, authUserId } = props;
+    const { contentId, currentText, setCurrentPage, authUserId, isReply } =
+        props;
 
     const navigate = useNavigate();
 
@@ -13,23 +14,33 @@ export const EditButtns = (props) => {
 
     const moveEditPage = (e) => {
         e.preventDefault();
-        navigate(`/home/tweet/edit/${tweetId}`, {
-            state: { defaultText: currentText },
-        });
+
+        navigate(
+            isReply
+                ? `/home/reply/edit/${contentId}`
+                : `/home/tweet/edit/${contentId}`,
+            {
+                state: { defaultText: currentText },
+            }
+        );
     };
 
     const deleteTweet = async (e) => {
         e.preventDefault();
 
-        const checkDelete = confirm("ツイート削除しますか？");
+        const checkDelete = confirm(
+            `${isReply ? "リプライ" : "ツイート"}を削除しますか？`
+        );
         if (checkDelete) {
-            const res = await fetch(`/destroy-tweet/${tweetId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrf_token,
-                },
-            });
+            const res = await fetch(
+                isReply ? `/reply/${contentId}` : `/tweet/${contentId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": csrf_token,
+                    },
+                }
+            );
             if (res.status === 200) {
                 setCurrentPage(1);
                 navigate(`/home/profile/${authUserId}`);

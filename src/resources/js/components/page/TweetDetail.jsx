@@ -6,7 +6,8 @@ import { UserIcon } from "../parts/UserIcon";
 import { UserName } from "../parts/UserName";
 import { TweetReply } from "./TweetReply";
 
-export const TweetDetail = () => {
+export const TweetDetail = (props) => {
+    const { authUserId } = props;
     const [tweet, setTweet] = useState({});
     const [user, setUser] = useState({});
 
@@ -47,7 +48,7 @@ export const TweetDetail = () => {
     }, []);
 
     return (
-        <div className="container-lg mt-5 main__container">
+        <div className="mt-5 main__container">
             <div className="border">
                 <div className="d-flex align-items-center">
                     <Link to="/home/timeline">
@@ -106,7 +107,7 @@ export const TweetDetail = () => {
                         )}
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
-                    <Replies tweetId={id} />
+                    <Replies tweetId={id} authUserId={authUserId} />
                     <div>
                         <TweetReply tweetId={id} />
                         {/* <Link to={"/home/reply/new"}>

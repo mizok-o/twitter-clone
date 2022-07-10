@@ -66,9 +66,10 @@ export const TweetList = (props) => {
                                     {authUserId === tweet.user_id ? (
                                         <EditButtns
                                             currentText={tweet.text}
-                                            tweetId={tweet.id}
+                                            contentId={tweet.id}
                                             setCurrentPage={setCurrentPage}
                                             authUserId={authUserId}
+                                            isReply={false}
                                         />
                                     ) : (
                                         ""

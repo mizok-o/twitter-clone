@@ -8,6 +8,7 @@ use App\Models\Follow;
 use App\Models\Reply;
 use App\Models\Tweet;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
@@ -40,5 +41,41 @@ class ReplyController extends Controller
         }
 
         return $reply->postReply($tweetId, $request);
+    }
+
+    /**
+     * リプ更新
+     *
+     * @param  PostRequest $request
+     * @param  Reply $reply
+     * @param  int $replyId
+     * @param  User $user
+     */
+    public function update(PostRequest $request, int $replyId, Reply $reply, User $user): bool
+    {
+        $isAuthUser = $user->checkIsAuth($request->user(), 'store-tweet', $reply);
+        if (!$isAuthUser) {
+            abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
+        }
+
+        return $reply->updateReply($replyId, $request);
+    }
+
+    /**
+     * リプ更新
+     *
+     * @param  Request $request
+     * @param  Reply $reply
+     * @param  int $replyId
+     * @param  User $user
+     */
+    public function destroy(Request $request, int $replyId, Reply $reply, User $user): bool
+    {
+        $isAuthUser = $user->checkIsAuth($request->user(), 'destroy-tweet', $reply);
+        if (!$isAuthUser) {
+            abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
+        }
+
+        return $reply->destroyReply($replyId, $request);
     }
 }
