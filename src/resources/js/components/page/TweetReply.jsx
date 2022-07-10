@@ -18,7 +18,7 @@ export const TweetReply = (props) => {
 
     // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
     const postReply = async (tweetData) => {
-        const res = await fetch(`/replys/${tweetId}`, {
+        const res = await fetch(`/reply/${tweetId}`, {
             method: "POST",
             headers: {
                 "X-CSRF-TOKEN": csrf_token,
