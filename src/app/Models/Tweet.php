@@ -61,14 +61,13 @@ class Tweet extends Model
     public function countTweetsInfo(object $tweets, object $countedItems): array
     {
         $tweetIds = $tweets->pluck('id');
-        $replyNum = array();
+        $contedNums = array();
 
         foreach ($tweetIds as $tweetId) {
-            $replyNum = $countedItems->where('tweet_id', $tweetId)->count();
-            $repliesNum[] = $replyNum;
+            $contedNum = $countedItems->where('tweet_id', $tweetId)->count();
+            $contedNums[] = $contedNum;
         }
-        // dd($repliesNum);
-        return $repliesNum;
+        return $contedNums;
     }
 
     /**

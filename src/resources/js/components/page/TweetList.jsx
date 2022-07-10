@@ -14,7 +14,8 @@ export const TweetList = (props) => {
     const [numTweets, setNumTweets] = useState(0);
     const [tweets, setTweets] = useState([]);
     const [nofollows, setNoFollows] = useState(false);
-    const [repliesNum, setRepliesNum] = useState([]);
+    const [repliesNum, setRepliesNum] = useState(0);
+    const [favsNum, setFavsNum] = useState(0);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
@@ -30,6 +31,7 @@ export const TweetList = (props) => {
             setNumTweets(tweetsData.tweets.total);
             setTweets(tweetsData.tweets.data);
             setRepliesNum(tweetsData.repliesNum);
+            setFavsNum(tweetsData.favsNum);
         }
     };
 
@@ -89,7 +91,12 @@ export const TweetList = (props) => {
                                         ""
                                     )}
                                 </div>
-                                <p>リプ: {repliesNum[i]}</p>
+                                <div className="d-flex">
+                                    <p className="me-2">
+                                        リプ: {repliesNum[i]}
+                                    </p>
+                                    <p>いいね: {favsNum[i]}</p>
+                                </div>
                             </div>
                         </div>
                     </Link>

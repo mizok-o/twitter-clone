@@ -8741,10 +8741,15 @@ var TweetList = function TweetList(props) {
       nofollows = _useState10[0],
       setNoFollows = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
       repliesNum = _useState12[0],
-      setRepliesNum = _useState12[1]; // １ページ目のツイートを取得
+      setRepliesNum = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState14 = _slicedToArray(_useState13, 2),
+      favsNum = _useState14[0],
+      setFavsNum = _useState14[1]; // １ページ目のツイートを取得
 
 
   var getTweets = /*#__PURE__*/function () {
@@ -8761,7 +8766,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 14;
+                _context.next = 15;
                 break;
               }
 
@@ -8784,8 +8789,9 @@ var TweetList = function TweetList(props) {
               setNumTweets(tweetsData.tweets.total);
               setTweets(tweetsData.tweets.data);
               setRepliesNum(tweetsData.repliesNum);
+              setFavsNum(tweetsData.favsNum);
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
@@ -8844,8 +8850,14 @@ var TweetList = function TweetList(props) {
                     alt: "\u30C4\u30A4\u30FC\u30C8 \u753B\u50CF"
                   })
                 }) : ""]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
-                children: ["\u30EA\u30D7: ", repliesNum[i]]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "d-flex",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+                  className: "me-2",
+                  children: ["\u30EA\u30D7: ", repliesNum[i]]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+                  children: ["\u3044\u3044\u306D: ", favsNum[i]]
+                })]
               })]
             })]
           })
