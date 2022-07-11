@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const TweetStatus = (props) => {
     const {
@@ -73,9 +74,13 @@ export const TweetStatus = (props) => {
                         </svg>
                     </div>
                 </div>
-                <div>
+                {item.i === 1 ? (
+                    <Link to={`/home/tweet/${tweetId}/favs`}>
+                        <span>{item.num}</span>
+                    </Link>
+                ) : (
                     <span>{item.num}</span>
-                </div>
+                )}
             </li>
         );
     });

@@ -177,7 +177,6 @@ textarea {
 .status__item__icon {
   width: 24px;
   height: 24px;
-  border: 1px solid #111;
 }
 
 .status__item__icon svg {

@@ -30,18 +30,6 @@ export const TweetDetail = (props) => {
     };
 
     // 指定のツイートのいいねを取得
-    const getFavs = async () => {
-        const res = await fetch(`/favs/${id}`);
-        if (res.status === 200) {
-            const favsData = await res.json();
-            if (!favsData) {
-                return;
-            }
-            setFavs(favsData);
-        }
-    };
-
-    // 指定のツイートのいいねを取得
     const getReplies = async () => {
         const res = await fetch(`/replys/${id}`);
         if (res.status === 200) {
@@ -77,6 +65,19 @@ export const TweetDetail = (props) => {
         });
         getReplies();
     }, []);
+
+    // 指定のツイートのいいねを取得
+    const getFavs = async () => {
+        const res = await fetch(`/favs/${id}`);
+        if (res.status === 200) {
+            const favsData = await res.json();
+            if (!favsData) {
+                return;
+            }
+            console.log(favsData);
+            setFavs(favsData);
+        }
+    };
 
     useEffect(() => {
         getFavs();

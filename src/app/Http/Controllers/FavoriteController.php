@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Favorite;
+use App\Models\Reply;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 class FavoriteController extends Controller
 {
     /**
-     * いいねごとのリプライを配列で取得
+     * ツイートごとのいいねを配列で取得
      *
      * @param int $tweetId
      * @param Tweet $tweet
@@ -24,33 +25,7 @@ class FavoriteController extends Controller
     }
 
     /**
-     * いいねごとのリプライを配列で取得
-     *
-     * @param int $tweetId
-     * @param Tweet $tweet
-     * @return object
-     */
-    public function showReplyFav(int $tweetId, Favorite $favorite): object
-    {
-        $favorites = $favorite->getFavsById($tweetId, "tweet_id");
-        return $favorites;
-    }
-
-    /**
-     *  ツイートIDからいいねを取得
-     *
-     * @param int $tweetId
-     * @param Tweet $tweet
-     * @return object
-     */
-    // public function getFavsByTweetId(int $tweetId, Favorite $favorite): object
-    // {
-    //     $favorites = $favorite->getFavsById($tweetId, "tweet_id");
-    //     return $favorites;
-    // }
-
-    /**
-     * リプ投稿
+     * いいね実行
      *
      * @param  Reply $reply
      * @param  int $tweetId
@@ -66,7 +41,7 @@ class FavoriteController extends Controller
         return $favorite->actionFav($tweetId);
     }
     /**
-     * リプ更新
+     * いいね削除
      *
      * @param  Request $request
      * @param  Reply $reply

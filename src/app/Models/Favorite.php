@@ -9,6 +9,7 @@ class Favorite extends Model
 {
     /**
      * 全ユーザーのいいねを取得
+     * リプライのいいねも対応
      *
      * @param  int $contentId
      * @param  string $idName

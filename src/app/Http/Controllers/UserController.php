@@ -10,7 +10,7 @@ use App\Models\Follow;
 class UserController extends Controller
 {
     /**
-     * 認証ユーザーを除いたusersテーブル一覧を取得
+     * usersテーブル一覧を取得
      *
      * @param  User $user
      * @return object

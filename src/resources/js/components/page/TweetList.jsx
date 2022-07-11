@@ -33,7 +33,6 @@ export const TweetList = (props) => {
             setTweets(tweetsData.tweets.data);
             setRepliesNum(tweetsData.repliesNum);
             setFavsNum(tweetsData.favsNum);
-            console.log(tweetsData.repliesNum, tweetsData.favsNum);
         }
     };
 
