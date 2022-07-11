@@ -33,6 +33,7 @@ export const TweetList = (props) => {
             setTweets(tweetsData.tweets.data);
             setRepliesNum(tweetsData.repliesNum);
             setFavsNum(tweetsData.favsNum);
+            console.log(tweetsData.repliesNum, tweetsData.favsNum);
         }
     };
 
@@ -43,7 +44,8 @@ export const TweetList = (props) => {
     const tweetItem = tweets.map((tweet, i) => {
         // ツイートユーザーの情報を取得
         const userData = users.find((data) => data.id === tweet.user_id);
-        // const replyNum = repliesNum[tweet.id];
+        const replyNum = repliesNum[i];
+        const favNum = favsNum[i];
 
         return (
             <li key={tweet.id}>
@@ -91,6 +93,16 @@ export const TweetList = (props) => {
                                     ) : (
                                         ""
                                     )}
+                                </div>
+                                <div>
+                                    <TweetStatus
+                                        // setReplies={setReplies}
+                                        replies={replyNum}
+                                        favs={favNum}
+                                        tweetId={tweet.id}
+                                        authUserId={authUserId}
+                                        isEditable={false}
+                                    />
                                 </div>
                             </div>
                         </div>

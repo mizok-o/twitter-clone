@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const TweetReply = (props) => {
-    const { tweetId } = props;
+    const { tweetId, replyArea } = props;
 
-    const location = useLocation();
     const navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -77,9 +77,10 @@ export const TweetReply = (props) => {
                     ></div>
                     <textarea
                         id="replyTextarea"
+                        className="reply__textarea"
                         name="text"
                         placeholder="返信する"
-                        className="reply__textarea"
+                        ref={replyArea}
                     ></textarea>
                 </div>
 

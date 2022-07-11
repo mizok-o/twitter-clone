@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Replies } from "../parts/Replies";
@@ -13,9 +13,12 @@ export const TweetDetail = (props) => {
     const [user, setUser] = useState({});
     const [favs, setFavs] = useState([]);
     const [replies, setReplies] = useState([]);
+    const [isFav, setIsFav] = useState(false);
 
     // urlからツイートIDの取得
     const { id } = useParams();
+    // リプライ投稿テキストエリアを取得
+    const replyArea = useRef(null);
 
     // 指定のツイートを取得
     const getTweet = async () => {
@@ -42,11 +45,11 @@ export const TweetDetail = (props) => {
     const getReplies = async () => {
         const res = await fetch(`/replys/${id}`);
         if (res.status === 200) {
-            const replieData = await res.json();
-            if (!replieData) {
+            const repliesData = await res.json();
+            if (!repliesData) {
                 return;
             }
-            setReplies(replieData);
+            setReplies(repliesData);
         }
     };
 
@@ -73,8 +76,11 @@ export const TweetDetail = (props) => {
             getUserData(tweetData.user_id);
         });
         getReplies();
-        getFavs();
     }, []);
+
+    useEffect(() => {
+        getFavs();
+    }, [isFav]);
 
     return (
         <div className="mt-5 main__container">
@@ -135,17 +141,20 @@ export const TweetDetail = (props) => {
                             ""
                         )}
                         <TweetStatus
-                            setFavs={setFavs}
-                            setReplies={setReplies}
+                            setIsFav={setIsFav}
+                            isFav={isFav}
                             replies={replies}
                             favs={favs}
                             tweetId={id}
+                            authUserId={authUserId}
+                            isEditable={true}
+                            replyArea={replyArea}
                         />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
                     <Replies tweetId={id} authUserId={authUserId} />
                     <div>
-                        <TweetReply tweetId={id} />
+                        <TweetReply tweetId={id} replyArea={replyArea} />
                         {/* <Link to={"/home/reply/new"}>
                             <button className="btn">返信する</button>
                         </Link> */}
