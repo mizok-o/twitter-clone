@@ -12,8 +12,10 @@ export const TweetDetail = (props) => {
     const [tweet, setTweet] = useState({});
     const [user, setUser] = useState({});
     const [favs, setFavs] = useState([]);
-    const [replies, setReplies] = useState([]);
     const [isFav, setIsFav] = useState(false);
+    const [retweets, setRetweets] = useState([]);
+    const [isRetweet, setIsRetweet] = useState(false);
+    const [replies, setReplies] = useState([]);
 
     // urlからツイートIDの取得
     const { id } = useParams();
@@ -60,7 +62,6 @@ export const TweetDetail = (props) => {
         getTweet().then((tweetData) => {
             tweetData.created_at = editPostedDate(tweetData.created_at);
             setTweet(tweetData);
-
             getUserData(tweetData.user_id);
         });
         getReplies();
@@ -74,7 +75,6 @@ export const TweetDetail = (props) => {
             if (!favsData) {
                 return;
             }
-            console.log(favsData);
             setFavs(favsData);
         }
     };
@@ -82,6 +82,22 @@ export const TweetDetail = (props) => {
     useEffect(() => {
         getFavs();
     }, [isFav]);
+
+    // 指定のツイートのいいねを取得
+    const getRetweets = async () => {
+        const res = await fetch(`/retweets/${id}`);
+        if (res.status === 200) {
+            const retweetsData = await res.json();
+            if (!retweetsData) {
+                return;
+            }
+            setRetweets(retweetsData);
+        }
+    };
+
+    useEffect(() => {
+        getRetweets();
+    }, [isRetweet]);
 
     return (
         <div className="mt-5 main__container">
@@ -144,12 +160,15 @@ export const TweetDetail = (props) => {
                         <TweetStatus
                             setIsFav={setIsFav}
                             isFav={isFav}
-                            replies={replies}
                             favs={favs}
+                            setIsRetweet={setIsRetweet}
+                            isRetweet={isRetweet}
+                            retweets={retweets}
+                            replies={replies}
+                            replyArea={replyArea}
                             tweetId={id}
                             authUserId={authUserId}
                             isEditable={true}
-                            replyArea={replyArea}
                         />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>

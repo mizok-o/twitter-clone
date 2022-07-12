@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\RetweetController;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/favs/{tweetId}', [FavoriteController::class, 'showTweetFav']);
     Route::post('/fav/{tweetId}', [FavoriteController::class, 'store']);
     Route::delete('/fav/{favId}', [FavoriteController::class, 'destroy']);
+
+    /*
+    リツイート
+    */
+    Route::get('/retweets/{tweetId}', [RetweetController::class, 'showRetweet']);
+    Route::post('/retweet/{tweetId}', [RetweetController::class, 'store']);
+    Route::delete('/retweet/{retweetId}', [RetweetController::class, 'destroy']);
 });
 
 Route::get('/', function () {

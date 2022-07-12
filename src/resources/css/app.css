@@ -173,16 +173,19 @@ textarea {
   cursor: pointer;
 }
 
-
 .status__item__icon {
   width: 24px;
   height: 24px;
 }
 
-.status__item__icon svg {
+.status__item__icon__image {
   display: block;
   padding: 2px;
   fill: #111;
+}
+
+.statusActive {
+  fill: red;
 }
 
 /* ツイートボタン */

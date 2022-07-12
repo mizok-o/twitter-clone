@@ -20,8 +20,7 @@ class FavoriteController extends Controller
      */
     public function showTweetFav(int $tweetId, Favorite $favorite): object
     {
-        $favorites = $favorite->getFavsById($tweetId, "tweet_id");
-        return $favorites;
+        return $favorite->getFavsById($tweetId, "tweet_id");
     }
 
     /**
