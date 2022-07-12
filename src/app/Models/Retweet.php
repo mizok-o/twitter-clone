@@ -19,6 +19,18 @@ class Retweet extends Model
     }
 
     /**
+     * 全ユーザーのリツイートを取得
+     * リプライのリツイートも対応予定
+     *
+     * @param  array $followIds
+     * @return array
+     */
+    public function getRetweetsTweetIds(array $followIds): array
+    {
+        return $this->whereIn('user_id', $followIds)->pluck('tweet_id')->toArray();
+    }
+
+    /**
      * リツイートとリツイート解除
      *
      * @param  int $tweetId

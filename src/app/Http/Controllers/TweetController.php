@@ -30,7 +30,17 @@ class TweetController extends Controller
 
         $followIds[] = $userId;
 
-        $tweets = $tweet->getPaginatedFollowsTweets($followIds);
+        $tweets = $tweet->getFollowsTweets($followIds);
+        // $timelineContent = $tweet->sortAndPaginatedContent($tweets);
+
+        // リツイート
+        // リツイートテーブルからツイートIDを抽出
+        // $retweetIds = $retweet->getRetweetsTweetIds($followIds);
+        // ツイートIDからリツイートコンテンツを取得
+        // $retweets = $tweet->getFollowsReTweets($retweetIds);
+        // dd($retweets);
+        // dd($tweets->count(), $retweets->count());
+
 
         $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
         $favsNum = $tweet->countTweetsInfo($tweets, $favs);

@@ -8667,7 +8667,6 @@ var TweetDetail = function TweetDetail(props) {
       getUserData(tweetData.user_id);
     });
     getReplies();
-    getFavs();
   }, []); // 指定のツイートのいいねを取得
 
   var getFavs = /*#__PURE__*/function () {

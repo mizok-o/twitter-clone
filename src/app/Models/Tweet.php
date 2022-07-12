@@ -25,10 +25,33 @@ class Tweet extends Model
      * @param  array $followIds
      * @return object
      */
-    public function getPaginatedFollowsTweets(array $followIds): object
+    public function getFollowsTweets(array $followIds): object
     {
         return $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
+
+    /**
+     * フォローしているユーザーのツイートを取得
+     *
+     * @param  array $followIds
+     * @return object
+     */
+    // public function getFollowsReTweets(array $retweetIds): object
+    // {
+    //     $reTweetList = $this->whereIn('id', $retweetIds)->get();
+    //     // dd($reTweetList);
+    //     // return ;
+    // }
+
+    /**
+     *
+     * @param  array $followIds
+     * @return object
+     */
+    // public function sortAndPaginatedContent(object $tweets): object
+    // {
+    //     return $tweets->sortByDesc('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+    // }
 
     /**
      * ID指定してツイート取得

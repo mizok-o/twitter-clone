@@ -65,7 +65,6 @@ export const TweetDetail = (props) => {
             getUserData(tweetData.user_id);
         });
         getReplies();
-        getFavs();
     }, []);
 
     // 指定のツイートのいいねを取得
