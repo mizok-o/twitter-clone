@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Favorite extends Model
 {
@@ -31,11 +30,13 @@ class Favorite extends Model
         $isLiked = $this->where('tweet_id', $tweetId)->where('user_id', $authUserId);
 
         if ($isLiked->exists()) {
-            return $isLiked->delete();
+            $isLiked->delete();
+            return "delete";
         }
 
         $this->tweet_id = $tweetId;
         $this->user_id = $authUserId;
-        return $this->save();
+        $this->save();
+        return "create";
     }
 }

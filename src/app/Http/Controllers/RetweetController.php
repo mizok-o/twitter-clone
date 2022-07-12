@@ -8,19 +8,19 @@ use App\Models\Retweet;
 class RetweetController extends Controller
 {
     /**
-     * ツイートごとのリツイートライを配列で取得
+     * ツイートごとのリツイートを配列で取得
      *
      * @param int $tweetId
      * @param Retweet $retweet
      * @return object
      */
-    public function showRetweet(int $tweetId, Retweet $retweet): object
+    public function show(int $tweetId, Retweet $retweet): object
     {
         return $retweet->getRetweetById($tweetId);
     }
 
     /**
-     * リツイート投稿
+     * リツイート投稿と削除
      *
      * @param  int $tweetId
      * @param  Retweet $retweet

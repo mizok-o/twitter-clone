@@ -8667,6 +8667,7 @@ var TweetDetail = function TweetDetail(props) {
       getUserData(tweetData.user_id);
     });
     getReplies();
+    getFavs();
   }, []); // 指定のツイートのいいねを取得
 
   var getFavs = /*#__PURE__*/function () {
@@ -8718,7 +8719,7 @@ var TweetDetail = function TweetDetail(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getFavs();
-  }, [isFav]); // 指定のツイートのいいねを取得
+  }, [isFav]); // 指定のツイートのリツイートリストを取得
 
   var getRetweets = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
@@ -8944,7 +8945,12 @@ var TweetList = function TweetList(props) {
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState14 = _slicedToArray(_useState13, 2),
       favsNum = _useState14[0],
-      setFavsNum = _useState14[1]; // １ページ目のツイートを取得
+      setFavsNum = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      retweetsNum = _useState16[0],
+      setRetweetsNum = _useState16[1]; // １ページ目のツイートを取得
 
 
   var getTweets = /*#__PURE__*/function () {
@@ -8961,7 +8967,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 15;
+                _context.next = 16;
                 break;
               }
 
@@ -8985,8 +8991,9 @@ var TweetList = function TweetList(props) {
               setTweets(tweetsData.tweets.data);
               setRepliesNum(tweetsData.repliesNum);
               setFavsNum(tweetsData.favsNum);
+              setRetweetsNum(tweetsData.retweetsNum);
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -9009,6 +9016,7 @@ var TweetList = function TweetList(props) {
     });
     var replyNum = repliesNum[i];
     var favNum = favsNum[i];
+    var retweetNum = retweetsNum[i];
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "user__item-container",
@@ -9047,10 +9055,10 @@ var TweetList = function TweetList(props) {
                   })
                 }) : ""]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus // setReplies={setReplies}
-                , {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus, {
                   replies: replyNum,
                   favs: favNum,
+                  retweets: retweetNum,
                   tweetId: tweet.id,
                   authUserId: authUserId,
                   isEditable: false
@@ -11172,6 +11180,7 @@ var TweetStatus = function TweetStatus(props) {
       isRetweet = props.isRetweet,
       retweets = props.retweets,
       tweetId = props.tweetId,
+      authUserId = props.authUserId,
       isEditable = props.isEditable;
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
@@ -11181,7 +11190,7 @@ var TweetStatus = function TweetStatus(props) {
 
   var actionFav = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, favStatus;
+      var res;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -11197,19 +11206,11 @@ var TweetStatus = function TweetStatus(props) {
             case 2:
               res = _context.sent;
 
-              if (!(res.status === 200)) {
-                _context.next = 8;
-                break;
+              if (res.status === 200) {
+                setIsFav(!isFav);
               }
 
-              _context.next = 6;
-              return res.json();
-
-            case 6:
-              favStatus = _context.sent;
-              setIsFav(favStatus);
-
-            case 8:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -11224,7 +11225,7 @@ var TweetStatus = function TweetStatus(props) {
 
   var actionRetweet = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var res, retweetStatus;
+      var res;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -11242,19 +11243,11 @@ var TweetStatus = function TweetStatus(props) {
             case 2:
               res = _context2.sent;
 
-              if (!(res.status === 200)) {
-                _context2.next = 8;
-                break;
+              if (res.status === 200) {
+                setIsRetweet(!isRetweet);
               }
 
-              _context2.next = 6;
-              return res.json();
-
-            case 6:
-              retweetStatus = _context2.sent;
-              setIsRetweet(retweetStatus);
-
-            case 8:
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -11277,14 +11270,17 @@ var TweetStatus = function TweetStatus(props) {
     name: "fav",
     num: isEditable ? favs.length : favs,
     path: "M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z",
-    isDone: isFav,
+    isDone: favs && isEditable ? favs.find(function (fav) {
+      return fav.user_id === authUserId;
+    }) : false,
     "function": actionFav
   }, {
     name: "retweet",
     num: isEditable ? retweets.length : retweets,
-    // num: retweets.length,
     path: "M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z",
-    isDone: isRetweet,
+    isDone: retweets && isEditable ? retweets.find(function (retweet) {
+      return retweet.user_id === authUserId;
+    }) : false,
     "function": actionRetweet
   }];
   var displayStatusItems = statusItems.map(function (item, i) {
@@ -11297,7 +11293,7 @@ var TweetStatus = function TweetStatus(props) {
           className: "status__item__icon",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
             viewBox: "0 0 22 22",
-            className: "status__item__icon__image ".concat(item.isDone === 1 ? "statusActive" : ""),
+            className: "status__item__icon__image ".concat(item.isDone ? "statusActive" : ""),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
               d: item.path
             })

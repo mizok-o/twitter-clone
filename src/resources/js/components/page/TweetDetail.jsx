@@ -65,6 +65,7 @@ export const TweetDetail = (props) => {
             getUserData(tweetData.user_id);
         });
         getReplies();
+        getFavs();
     }, []);
 
     // 指定のツイートのいいねを取得
@@ -83,7 +84,7 @@ export const TweetDetail = (props) => {
         getFavs();
     }, [isFav]);
 
-    // 指定のツイートのいいねを取得
+    // 指定のツイートのリツイートリストを取得
     const getRetweets = async () => {
         const res = await fetch(`/retweets/${id}`);
         if (res.status === 200) {

@@ -7,6 +7,7 @@ use App\Http\Requests\Tweet\PostRequest;
 use App\Models\Favorite;
 use App\Models\Follow;
 use App\Models\Reply;
+use App\Models\Retweet;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TweetController extends Controller
      * @param Tweet $tweet
      * @return array<object, object>
      */
-    public function index(Follow $follow, Tweet $tweet, Reply $reply, Favorite $favs): array
+    public function index(Follow $follow, Tweet $tweet, Reply $reply, Favorite $favs, Retweet $retweet): array
     {
         $users = User::all();
 
@@ -33,11 +34,13 @@ class TweetController extends Controller
 
         $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
         $favsNum = $tweet->countTweetsInfo($tweets, $favs);
+        $retweetsNum = $tweet->countTweetsInfo($tweets, $retweet);
         return [
             "users" => $users,
             "tweets" => $tweets,
             "repliesNum" => $repliesNum,
             "favsNum" => $favsNum,
+            "retweetsNum" => $retweetsNum,
         ];
     }
 

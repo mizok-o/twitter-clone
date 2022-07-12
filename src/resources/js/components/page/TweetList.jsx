@@ -17,6 +17,7 @@ export const TweetList = (props) => {
     const [nofollows, setNoFollows] = useState(false);
     const [repliesNum, setRepliesNum] = useState(0);
     const [favsNum, setFavsNum] = useState(0);
+    const [retweetsNum, setRetweetsNum] = useState(0);
 
     // １ページ目のツイートを取得
     const getTweets = async () => {
@@ -33,6 +34,7 @@ export const TweetList = (props) => {
             setTweets(tweetsData.tweets.data);
             setRepliesNum(tweetsData.repliesNum);
             setFavsNum(tweetsData.favsNum);
+            setRetweetsNum(tweetsData.retweetsNum);
         }
     };
 
@@ -45,6 +47,7 @@ export const TweetList = (props) => {
         const userData = users.find((data) => data.id === tweet.user_id);
         const replyNum = repliesNum[i];
         const favNum = favsNum[i];
+        const retweetNum = retweetsNum[i];
 
         return (
             <li key={tweet.id}>
@@ -95,9 +98,9 @@ export const TweetList = (props) => {
                                 </div>
                                 <div>
                                     <TweetStatus
-                                        // setReplies={setReplies}
                                         replies={replyNum}
                                         favs={favNum}
+                                        retweets={retweetNum}
                                         tweetId={tweet.id}
                                         authUserId={authUserId}
                                         isEditable={false}
