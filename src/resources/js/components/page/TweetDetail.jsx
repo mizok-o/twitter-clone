@@ -100,8 +100,8 @@ export const TweetDetail = (props) => {
     }, [isRetweet]);
 
     return (
-        <div className="mt-5 main__container">
-            <div className="border">
+        <div className="mt-4 main__container">
+            <div className="border border-dark">
                 <div className="d-flex align-items-center">
                     <Link to="/home/timeline">
                         <button className="btn">
@@ -121,7 +121,7 @@ export const TweetDetail = (props) => {
                         <h2>ツイート</h2>
                     </div>
                 </div>
-                <div className="py-1 px-2">
+                <div className="py-1 px-3">
                     <Link
                         to={`/home/profile/${user.id}`}
                         className="d-flex align-items-center"
@@ -144,7 +144,7 @@ export const TweetDetail = (props) => {
                             />
                         </div>
                     </Link>
-                    <div className="mt-3 w-100 new__line">
+                    <div className="my-3 w-100 new__line">
                         <p>{tweet.text}</p>
                         {tweet.image ? (
                             <div className="tweet__image w-100 mt-1 border rounded">
@@ -172,12 +172,13 @@ export const TweetDetail = (props) => {
                         />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
-                    <Replies tweetId={id} authUserId={authUserId} />
+                    <Replies
+                        tweetId={id}
+                        authUserId={authUserId}
+                        userName={user.user_name}
+                    />
                     <div>
                         <TweetReply tweetId={id} replyArea={replyArea} />
-                        {/* <Link to={"/home/reply/new"}>
-                            <button className="btn">返信する</button>
-                        </Link> */}
                     </div>
                 </div>
             </div>

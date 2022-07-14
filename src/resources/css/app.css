@@ -74,6 +74,7 @@ textarea {
 }
 
 .user__item-container {
+  display: block;
   transition: .2s;
 }
 
@@ -109,6 +110,11 @@ textarea {
 }
 
 /* tweet */
+
+.tweet__status__container {
+  margin-left: 64px;
+  margin-top: 4px
+}
 .tweet__retweet {
   background-color: #ddd;
 }
@@ -188,8 +194,12 @@ textarea {
   fill: #111;
 }
 
-.statusActive {
-  fill: red;
+.retweet__active {
+  fill: #00BA7C;
+}
+
+.fav__active {
+  fill: #F91880;
 }
 
 /* ツイートボタン */

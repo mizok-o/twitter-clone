@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        <main class="py-4">
+        <main class="py-3 mb-5">
             <div id="example" class="container-sm position-relative"></div>
         </main>
     </div>

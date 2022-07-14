@@ -51,13 +51,12 @@ export const TweetList = (props) => {
 
         return (
             <li key={tweet.id}>
-                <div
-                    className={`user__item-container ${
-                        tweet.is_retweet ? "tweet__retweet" : ""
-                    }`}
-                >
-                    <Link to={`/home/tweet/${tweet.id}`}>
-                        <div className="d-flex px-2 py-4 w-100">
+                <div className={`${tweet.is_retweet ? "tweet__retweet" : ""}`}>
+                    <Link
+                        className="user__item-container"
+                        to={`/home/tweet/${tweet.id}`}
+                    >
+                        <div className="d-flex px-2 pt-4 w-100">
                             <UserIcon
                                 iconData={
                                     userData.profile_image_path !== null
@@ -100,19 +99,17 @@ export const TweetList = (props) => {
                                         ""
                                     )}
                                 </div>
-                                <div>
-                                    <TweetStatus
-                                        replies={replyNum}
-                                        favs={favNum}
-                                        retweets={retweetNum}
-                                        tweetId={tweet.id}
-                                        authUserId={authUserId}
-                                        isEditable={false}
-                                    />
-                                </div>
                             </div>
                         </div>
                     </Link>
+                    <TweetStatus
+                        replies={replyNum}
+                        favs={favNum}
+                        retweets={retweetNum}
+                        tweetId={tweet.id}
+                        authUserId={authUserId}
+                        isEditable={false}
+                    />
                 </div>
             </li>
         );

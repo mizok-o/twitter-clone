@@ -91,7 +91,7 @@ export const TweetStatus = (props) => {
                         <svg
                             viewBox="0 0 22 22"
                             className={`status__item__icon__image ${
-                                item.isDone ? "statusActive" : ""
+                                item.isDone ? `${item.name}__active` : ""
                             }`}
                         >
                             <path d={item.path}></path>
@@ -110,7 +110,11 @@ export const TweetStatus = (props) => {
     });
 
     return (
-        <div className={`py-2 ${isEditable ? "" : "pe-none"}`}>
+        <div
+            className={`tweet__status__container py-1 ${
+                isEditable ? "mx-0" : "pe-none"
+            }`}
+        >
             <ul className="d-flex">{displayStatusItems}</ul>
         </div>
     );

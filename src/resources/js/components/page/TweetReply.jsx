@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const TweetReply = (props) => {
@@ -64,11 +63,10 @@ export const TweetReply = (props) => {
         .forEach(replyTextarea);
 
     return (
-        <div className="my-3 main__container">
+        <div className="my-3 border rounded p-3 main__container">
             <form
                 encType="multipart/form-data"
                 onSubmit={(e) => handleSubmit(e)}
-                className="ms-2"
             >
                 <div className="reply__textarea__container">
                     <div
@@ -83,7 +81,6 @@ export const TweetReply = (props) => {
                         ref={replyArea}
                     ></textarea>
                 </div>
-
                 <div>
                     <p className="api__error__message">{errorMessage}</p>
                 </div>
@@ -107,7 +104,9 @@ export const TweetReply = (props) => {
                         </p>
                     </div>
                     <button
-                        className={`btn ${isClicking ? "btn-clicking" : ""}`}
+                        className={`btn btn-primary ${
+                            isClicking ? "btn-clicking" : ""
+                        }`}
                         type="submit"
                     >
                         返信する
