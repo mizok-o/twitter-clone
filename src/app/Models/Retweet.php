@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Retweet extends Model
 {
     /**
-     * 全ユーザーのリツイートを取得
-     * リプライのリツイートも対応予定
+     * ツイートのリツイートを取得
      *
      * @param  int $contentId
      * @return object
@@ -19,15 +18,24 @@ class Retweet extends Model
     }
 
     /**
-     * 全ユーザーのリツイートを取得
-     * リプライのリツイートも対応予定
+     * フォローしている人のリツイートレコードを取得
      *
      * @param  array $followIds
      * @return array
      */
-    public function getRetweetsTweetIds(array $followIds): array
+    public function getTweetIds(array $followIds): array
     {
         return $this->whereIn('user_id', $followIds)->pluck('tweet_id')->toArray();
+    }
+    /**
+     * フォローしているユーザーのツイートを取得
+     *
+     * @param  array $tweetIds
+     * @return object
+     */
+    public function getRetweetBytweetIds(array $tweetIds): object
+    {
+        return Tweet::whereIn('id', $tweetIds)->orderBy('created_at', 'desc')->get();
     }
 
     /**

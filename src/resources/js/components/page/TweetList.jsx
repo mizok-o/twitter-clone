@@ -51,7 +51,11 @@ export const TweetList = (props) => {
 
         return (
             <li key={tweet.id}>
-                <div className="user__item-container">
+                <div
+                    className={`user__item-container ${
+                        tweet.is_retweet ? "tweet__retweet" : ""
+                    }`}
+                >
                     <Link to={`/home/tweet/${tweet.id}`}>
                         <div className="d-flex px-2 py-4 w-100">
                             <UserIcon

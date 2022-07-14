@@ -18,6 +18,7 @@ import { Loading } from "./parts/Loading";
 import { TweetListOnlyFollows } from "./page/TweetListOnlyFollows";
 import { NotFound } from "./page/NotFound";
 import { ReplyAction } from "./page/ReplyAction";
+import { ReTweetList } from "./page/ReTweetList";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});

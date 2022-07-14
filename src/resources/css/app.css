@@ -109,6 +109,10 @@ textarea {
 }
 
 /* tweet */
+.tweet__retweet {
+  background-color: #ddd;
+}
+
 .tweet-form-file {
   width: 24px;
   height: 24px;
