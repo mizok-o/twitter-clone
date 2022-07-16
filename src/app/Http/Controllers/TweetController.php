@@ -7,7 +7,6 @@ use App\Http\Requests\Tweet\PostRequest;
 use App\Models\Favorite;
 use App\Models\Follow;
 use App\Models\Reply;
-use App\Models\Retweet;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +20,7 @@ class TweetController extends Controller
      * @param Tweet $tweet
      * @return array<object, object>
      */
-    public function index(Follow $follow, Tweet $tweet, Reply $reply, Favorite $favs, Retweet $retweet): array
+    public function index(Follow $follow, Tweet $tweet, Reply $reply, Favorite $favs): array
     {
         $users = User::all();
 
@@ -30,19 +29,15 @@ class TweetController extends Controller
         $followIds[] = $userId;
         $tweets = $tweet->getFollowsTweets($followIds);
 
-        // $retweetIds = $retweet->getTweetIds($followIds);
-        // $retweets = $retweet->getRetweetBytweetIds($retweetIds);
-
-        // mix RT & Tweet
-        // $timelineContent = $tweet->testShowRetweets($tweets, $retweets);
-
         $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
         $favsNum = $tweet->countTweetsInfo($tweets, $favs);
-        $retweetsNum = $tweet->countTweetsInfo($tweets, $retweet);
+
+        $retweetsNum = $tweet->countRetweets($tweets);
+        // dd($retweets);
+        // $retweetsNum = $tweet->countTweetsInfo($tweets);
         return [
             "users" => $users,
             "tweets" => $tweets,
-            // "retweets" => $retweets,
             "repliesNum" => $repliesNum,
             "favsNum" => $favsNum,
             "retweetsNum" => $retweetsNum,
@@ -138,6 +133,21 @@ class TweetController extends Controller
         if (!$isAuthUser) {
             abort(Response()->json(['text' => '認証されていないユーザーです。'], 401));
         }
+
+        return $tweet->destroyTweet($tweetId);
+    }
+
+     /**
+     * リツイート実行
+     *
+     * @param  Request $request
+     * @param  int $tweetId
+     * @param  Tweet $tweet
+     * @param  User $user
+     */
+    public function retweetAction(Request $request, int $tweetId, Tweet $tweet, User $user): bool
+    {
+        $isRetweeted = $tweet->checkIsRetweeted($tweetId);
 
         return $tweet->destroyTweet($tweetId);
     }

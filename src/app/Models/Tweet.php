@@ -16,15 +16,9 @@ class Tweet extends Model
      */
     public function testShowRetweets($tweets, $retweets): object
     {
-        // $retweets->update(['is_retweet' => true]);
-        // dd($retweets);
         $showContents = $tweets->concat($retweets);
         $sorAndPaginate = $showContents->sortByDesc('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
-
-
-
-
 
     /**
      * 全ユーザーのツイートを取得
@@ -89,6 +83,24 @@ class Tweet extends Model
     }
 
     /**
+     * リツイート数を配列で返す
+     *
+     * @param  array $followIds
+     * @return array
+     */
+    public function countRetweets(object $tweets): array
+    {
+        $tweetIds = $tweets->pluck('id');
+        $contedNums = array();
+
+        foreach ($tweetIds as $tweetId) {
+            $contedNum = $this->where('tweet_id', $tweetId)->count();
+            $contedNums[] = $contedNum;
+        }
+        return $contedNums;
+    }
+
+    /**
      * ツイート投稿
      *
      * @param  int $user_id
@@ -137,5 +149,36 @@ class Tweet extends Model
         $tweetImage = $this->where("id", $tweetId)->value('image');
         Storage::disk('public')->delete('/tweet/' . $tweetImage);
         return $this->where("id", $tweetId)->delete();
+    }
+
+    /**
+     * リツイートしているかチェック
+     *
+     * @param  int $tweetId
+     */
+    public function checkIsRetweeted(int $tweetId): bool
+    {
+        return $this->where("tweet_id", $tweetId)->exists();
+    }
+
+    /**
+     * リツイートと解除
+     *
+     * @param  int $tweetId
+     */
+    public function actionFav(int $tweetId): bool
+    {
+        $authUserId = auth()->id();
+        $isLiked = $this->where('tweet_id', $tweetId)->where('user_id', $authUserId);
+
+        if ($isLiked->exists()) {
+            $isLiked->delete();
+            return "delete";
+        }
+
+        $this->tweet_id = $tweetId;
+        $this->user_id = $authUserId;
+        $this->save();
+        return "create";
     }
 }

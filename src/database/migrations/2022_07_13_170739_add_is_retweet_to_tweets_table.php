@@ -14,7 +14,7 @@ class AddIsRetweetToTweetsTable extends Migration
     public function up()
     {
         Schema::table('tweets', function (Blueprint $table) {
-            $table->boolean('is_retweet');
+            $table->unsignedInteger('tweet_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddIsRetweetToTweetsTable extends Migration
     public function down()
     {
         Schema::table('tweets', function (Blueprint $table) {
-            $table->dropColumn('is_retweet');
+            $table->dropColumn('tweet_id');
         });
     }
 }

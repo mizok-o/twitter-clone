@@ -72,8 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     リツイート
     */
     Route::get('/retweets/{tweetId}', [RetweetController::class, 'show']);
-    Route::post('/retweet/{tweetId}', [RetweetController::class, 'store']);
-    // Route::delete('/retweet/{retweetId}', [RetweetController::class, 'destroy']);
+    Route::post('/retweet/{tweetId}', [RetweetController::class, 'retweetAction']);
 });
 
 Route::get('/', function () {

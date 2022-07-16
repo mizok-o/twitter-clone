@@ -9229,7 +9229,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 13;
+                _context2.next = 12;
                 break;
               }
 
@@ -9238,21 +9238,20 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
 
             case 6:
               tweetsData = _context2.sent;
-              console.log(tweetsData);
 
               if (tweetsData.total) {
-                _context2.next = 11;
+                _context2.next = 10;
                 break;
               }
 
               setNoFollows(true);
               return _context2.abrupt("return");
 
-            case 11:
+            case 10:
               setNumTweets(tweetsData.total);
               setTweets(tweetsData.data);
 
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
