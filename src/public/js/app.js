@@ -8485,7 +8485,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TweetDetail = function TweetDetail(props) {
-  var authUserId = props.authUserId;
+  var authUserId = props.authUserId,
+      isRetweet = props.isRetweet,
+      retweetedId = props.retweetedId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -8514,8 +8516,8 @@ var TweetDetail = function TweetDetail(props) {
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      isRetweet = _useState12[0],
-      setIsRetweet = _useState12[1];
+      isRetweeted = _useState12[0],
+      setIsRetweeted = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
@@ -8524,8 +8526,9 @@ var TweetDetail = function TweetDetail(props) {
 
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
-      id = _useParams.id; // リプライ投稿テキストエリアを取得
+      id = _useParams.id;
 
+  var tweetId = isRetweet ? retweetedId : id; // リプライ投稿テキストエリアを取得
 
   var replyArea = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null); // 指定のツイートを取得
 
@@ -8543,7 +8546,7 @@ var TweetDetail = function TweetDetail(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 9;
                 break;
               }
 
@@ -8552,9 +8555,10 @@ var TweetDetail = function TweetDetail(props) {
 
             case 6:
               tweetData = _context.sent;
+              console.log(tweetData);
               return _context.abrupt("return", tweetData);
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -8677,7 +8681,7 @@ var TweetDetail = function TweetDetail(props) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return fetch("/favs/".concat(id));
+              return fetch("/favs/".concat(tweetId));
 
             case 2:
               res = _context4.sent;
@@ -8728,7 +8732,7 @@ var TweetDetail = function TweetDetail(props) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return fetch("/retweets/".concat(id));
+              return fetch("/retweets/".concat(tweetId));
 
             case 2:
               res = _context5.sent;
@@ -8831,12 +8835,12 @@ var TweetDetail = function TweetDetail(props) {
             setIsFav: setIsFav,
             isFav: isFav,
             favs: favs,
-            setIsRetweet: setIsRetweet,
-            isRetweet: isRetweet,
+            setIsRetweeted: setIsRetweeted,
+            isRetweeted: isRetweeted,
             retweets: retweets,
             replies: replies,
             replyArea: replyArea,
-            tweetId: id,
+            tweetId: tweetId,
             authUserId: authUserId,
             isEditable: true
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
@@ -8844,12 +8848,12 @@ var TweetDetail = function TweetDetail(props) {
             children: ["\u6295\u7A3F\u65E5: ", tweet.created_at]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_Replies__WEBPACK_IMPORTED_MODULE_1__.Replies, {
-          tweetId: id,
+          tweetId: tweetId,
           authUserId: authUserId,
           userName: user.user_name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TweetReply__WEBPACK_IMPORTED_MODULE_5__.TweetReply, {
-            tweetId: id,
+            tweetId: tweetId,
             replyArea: replyArea
           })
         })]
@@ -9034,9 +9038,10 @@ var TweetList = function TweetList(props) {
     var retweetNum = retweetsNum[i];
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "tweetlist__whole__container",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
           className: "user__item-container",
-          to: "/home/tweet/".concat(isRetweet ? retweetData.id : userData.id),
+          to: "/home/tweet/".concat(isRetweet ? tweet.tweet_id : tweet.id),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "pt-4 px-2",
             children: tweet.tweet_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
@@ -9078,7 +9083,7 @@ var TweetList = function TweetList(props) {
               })]
             })]
           })]
-        }), isRetweet ? "" : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus, {
           replies: replyNum,
           favs: favNum,
           retweets: retweetNum,
@@ -11199,8 +11204,8 @@ var TweetStatus = function TweetStatus(props) {
       favs = props.favs,
       setIsFav = props.setIsFav,
       isFav = props.isFav,
-      setIsRetweet = props.setIsRetweet,
-      isRetweet = props.isRetweet,
+      setIsRetweeted = props.setIsRetweeted,
+      isRetweeted = props.isRetweeted,
       retweets = props.retweets,
       tweetId = props.tweetId,
       authUserId = props.authUserId,
@@ -11267,7 +11272,7 @@ var TweetStatus = function TweetStatus(props) {
               res = _context2.sent;
 
               if (res.status === 200) {
-                setIsRetweet(!isRetweet);
+                setIsRetweeted(!isRetweeted);
               }
 
             case 4:
@@ -16752,7 +16757,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.main__container {\n  max-width: 516px;\n  margin: 0 auto;\n}\n\n.user__item-container {\n  display: block;\n  transition: .2s;\n}\n\n.user__item-container:hover {\n  background-color: #E9EBED;\n}\n\n/* ３点リーダー */\n.omit__text__container {\n  overflow: hidden;\n  max-width: calc(100% - 120px);\n  width: 100%;\n}\n\n.omit__text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 160px;\n  white-space: nowrap;\n}\n\n.non__omit .omit__text__container {\n  max-width: none;\n  overflow: auto;\n}\n\n.non__omit .omit__text {\n  white-space: inherit;\n}\n\n.btn__size {\n  height: 48px;\n}\n\n/* tweet */\n.tweet__status__container {\n  margin-left: 64px;\n  margin-top: 4px\n}\n.tweet__retweet {\n  background-color: #ddd;\n}\n\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.tweet__images {\n  max-height: 240px;\n}\n\n.retweet__text {\n  opacity: .5;\n  font-size: 12px;\n}\n\n.btn-clicking {\n  pointer-events: none;\n}\n\n/* リプライ */\n\n.reply__textarea__container {\n  position: relative;\n  font-size: 1rem;\n  line-height: 1.8;\n}\n\n.reply__textarea__dummy {\n  overflow: hidden;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  min-height: 32px;\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  overflow-wrap: break-word;\n  border: 1px solid;\n}\n\n.reply__textarea {\n  position: absolute;\n  top: 0;\n  left: 0;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  border: 1px solid #b6c3c6;\n  border-radius: 4px;\n  color: inherit;\n  font: inherit;\n  letter-spacing: inherit;\n  resize: none;\n}\n\n.reply__textarea:focus {\n  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);\n  outline: 0;\n}\n\n.status__item__icon__container{\n  cursor: pointer;\n}\n\n.tweet__status--fav {\n  cursor: pointer;\n}\n\n.status__item__icon {\n  width: 24px;\n  height: 24px;\n}\n\n.status__item__icon__image {\n  display: block;\n  padding: 2px;\n  fill: #111;\n}\n\n.retweet__active {\n  fill: #00BA7C;\n}\n\n.fav__active {\n  fill: #F91880;\n}\n\n/* ツイートボタン */\n.header__tweetBtn {\n  position: fixed;\n  bottom: 64px;\n  right: 64px;\n  width: 64px;\n  height: 64px;\n}\n\n.background-twitter {\n  background-color: #00A770;\n}\n\n.header__tweetBtn--icon {\n  margin: 22px;\n}\n\n.new__line {\n  white-space: pre-wrap;\n}\n\n/* ローディング画面 */\n.is__loading {\n  position: relative;\n  pointer-events: none;\n}\n\n.looping-spinner-container {\n  margin-top: 120px;\n}\n\n.looping-rhombuses-spinner, .looping-rhombuses-spinner * {\n  box-sizing: border-box;\n}\n\n.looping-rhombuses-spinner {\n  width: calc(15px * 4);\n  height: 15px;\n  position: relative;\n}\n\n.looping-rhombuses-spinner .rhombus {\n  height: 15px;\n  width: 15px;\n  background-color: #00A770;\n  left: calc(15px * 4);\n  position: absolute;\n  margin: 0 auto;\n  border-radius: 2px;\n  transform: translateY(0) rotate(45deg) scale(0);\n  -webkit-animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n          animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(1) {\n  -webkit-animation-delay: calc(2500ms * 1 / -1.5);\n          animation-delay: calc(2500ms * 1 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(2) {\n  -webkit-animation-delay: calc(2500ms * 2 / -1.5);\n          animation-delay: calc(2500ms * 2 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(3) {\n  -webkit-animation-delay: calc(2500ms * 3 / -1.5);\n          animation-delay: calc(2500ms * 3 / -1.5);\n}\n\n@-webkit-keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@media screen and (max-width: 750px) {\n\t/* .omit__text__container{\n\t\tmax-width: 160px;\n\t} */\n\n  .header__tweetBtn {\n    bottom: 32px;\n    right: 32px;\n    width: 48px;\n    height: 48px;\n  }\n\n  .header__tweetBtn--icon {\n    margin: 13px;\n  }\n\n  /* 画像アップロードボタン */\n  .select__image__area {\n    display: block !important;\n    max-width: 152px;\n  }\n  .select__image__area p {\n    margin: 0 !important;\n  }\n\n  .omit__text__container {\n    max-width: 120px;\n  }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.main__container {\n  max-width: 516px;\n  margin: 0 auto;\n}\n\n.user__item-container {\n  display: block;\n  transition: .2s;\n}\n\n.user__item-container:hover  {\n  background-color: #E9EBED;\n}\n\n/* ３点リーダー */\n.omit__text__container {\n  overflow: hidden;\n  max-width: calc(100% - 120px);\n  width: 100%;\n}\n\n.omit__text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 160px;\n  white-space: nowrap;\n}\n\n.non__omit .omit__text__container {\n  max-width: none;\n  overflow: auto;\n}\n\n.non__omit .omit__text {\n  white-space: inherit;\n}\n\n.btn__size {\n  height: 48px;\n}\n\n/* tweet */\n.tweet__status__container {\n  margin-left: 64px;\n  margin-top: 4px\n}\n.tweet__retweet {\n  background-color: #ddd;\n}\n\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.tweet__images {\n  max-height: 240px;\n}\n\n.retweet__text {\n  opacity: .5;\n  font-size: 12px;\n}\n\n.btn-clicking {\n  pointer-events: none;\n}\n\n/* リプライ */\n\n.reply__textarea__container {\n  position: relative;\n  font-size: 1rem;\n  line-height: 1.8;\n}\n\n.reply__textarea__dummy {\n  overflow: hidden;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  min-height: 32px;\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  overflow-wrap: break-word;\n  border: 1px solid;\n}\n\n.reply__textarea {\n  position: absolute;\n  top: 0;\n  left: 0;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  border: 1px solid #b6c3c6;\n  border-radius: 4px;\n  color: inherit;\n  font: inherit;\n  letter-spacing: inherit;\n  resize: none;\n}\n\n.reply__textarea:focus {\n  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);\n  outline: 0;\n}\n\n.status__item__icon__container{\n  cursor: pointer;\n}\n\n.tweet__status--fav {\n  cursor: pointer;\n}\n\n.status__item__icon {\n  width: 24px;\n  height: 24px;\n}\n\n.status__item__icon__image {\n  display: block;\n  padding: 2px;\n  fill: #111;\n}\n\n.retweet__active {\n  fill: #00BA7C;\n}\n\n.fav__active {\n  fill: #F91880;\n}\n\n/* ツイートボタン */\n.header__tweetBtn {\n  position: fixed;\n  bottom: 64px;\n  right: 64px;\n  width: 64px;\n  height: 64px;\n}\n\n.background-twitter {\n  background-color: #00A770;\n}\n\n.header__tweetBtn--icon {\n  margin: 22px;\n}\n\n.new__line {\n  white-space: pre-wrap;\n}\n\n/* ローディング画面 */\n.is__loading {\n  position: relative;\n  pointer-events: none;\n}\n\n.looping-spinner-container {\n  margin-top: 120px;\n}\n\n.looping-rhombuses-spinner, .looping-rhombuses-spinner * {\n  box-sizing: border-box;\n}\n\n.looping-rhombuses-spinner {\n  width: calc(15px * 4);\n  height: 15px;\n  position: relative;\n}\n\n.looping-rhombuses-spinner .rhombus {\n  height: 15px;\n  width: 15px;\n  background-color: #00A770;\n  left: calc(15px * 4);\n  position: absolute;\n  margin: 0 auto;\n  border-radius: 2px;\n  transform: translateY(0) rotate(45deg) scale(0);\n  -webkit-animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n          animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(1) {\n  -webkit-animation-delay: calc(2500ms * 1 / -1.5);\n          animation-delay: calc(2500ms * 1 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(2) {\n  -webkit-animation-delay: calc(2500ms * 2 / -1.5);\n          animation-delay: calc(2500ms * 2 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(3) {\n  -webkit-animation-delay: calc(2500ms * 3 / -1.5);\n          animation-delay: calc(2500ms * 3 / -1.5);\n}\n\n@-webkit-keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@media screen and (max-width: 750px) {\n\t/* .omit__text__container{\n\t\tmax-width: 160px;\n\t} */\n\n  .header__tweetBtn {\n    bottom: 32px;\n    right: 32px;\n    width: 48px;\n    height: 48px;\n  }\n\n  .header__tweetBtn--icon {\n    margin: 13px;\n  }\n\n  /* 画像アップロードボタン */\n  .select__image__area {\n    display: block !important;\n    max-width: 152px;\n  }\n  .select__image__area p {\n    margin: 0 !important;\n  }\n\n  .omit__text__container {\n    max-width: 120px;\n  }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

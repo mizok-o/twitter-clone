@@ -8,8 +8,8 @@ export const TweetStatus = (props) => {
         favs,
         setIsFav,
         isFav,
-        setIsRetweet,
-        isRetweet,
+        setIsRetweeted,
+        isRetweeted,
         retweets,
         tweetId,
         authUserId,
@@ -46,7 +46,7 @@ export const TweetStatus = (props) => {
             body: JSON.stringify("tweet"),
         });
         if (res.status === 200) {
-            setIsRetweet(!isRetweet);
+            setIsRetweeted(!isRetweeted);
         }
     };
 

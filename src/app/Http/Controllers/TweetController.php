@@ -49,7 +49,7 @@ class TweetController extends Controller
      * @param  int  $tweetId
      * @param  Tweet $tweet
      */
-    public function show(int $tweetId, Tweet $tweet)
+    public function show(int $tweetId, Tweet $tweet): object
     {
         return $tweet->getTweetByUserId($tweetId);
     }

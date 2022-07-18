@@ -64,13 +64,11 @@ export const TweetList = (props) => {
 
         return (
             <li key={tweet.id}>
-                <div
-                // className={`${tweet.tweet_id ? "tweet__retweet" : ""}`}
-                >
+                <div className="tweetlist__whole__container">
                     <Link
                         className="user__item-container"
                         to={`/home/tweet/${
-                            isRetweet ? retweetData.id : userData.id
+                            isRetweet ? tweet.tweet_id : tweet.id
                         }`}
                     >
                         <div className="pt-4 px-2">
@@ -130,18 +128,14 @@ export const TweetList = (props) => {
                             </div>
                         </div>
                     </Link>
-                    {isRetweet ? (
-                        ""
-                    ) : (
-                        <TweetStatus
-                            replies={replyNum}
-                            favs={favNum}
-                            retweets={retweetNum}
-                            tweetId={tweet.id}
-                            authUserId={authUserId}
-                            isEditable={false}
-                        />
-                    )}
+                    <TweetStatus
+                        replies={replyNum}
+                        favs={favNum}
+                        retweets={retweetNum}
+                        tweetId={tweet.id}
+                        authUserId={authUserId}
+                        isEditable={false}
+                    />
                 </div>
             </li>
         );

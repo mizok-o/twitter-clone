@@ -8,17 +8,18 @@ import { UserName } from "../parts/UserName";
 import { TweetReply } from "./TweetReply";
 
 export const TweetDetail = (props) => {
-    const { authUserId } = props;
+    const { authUserId, isRetweet, retweetedId } = props;
     const [tweet, setTweet] = useState({});
     const [user, setUser] = useState({});
     const [favs, setFavs] = useState([]);
     const [isFav, setIsFav] = useState(false);
     const [retweets, setRetweets] = useState([]);
-    const [isRetweet, setIsRetweet] = useState(false);
+    const [isRetweeted, setIsRetweeted] = useState(false);
     const [replies, setReplies] = useState([]);
 
     // urlからツイートIDの取得
     const { id } = useParams();
+    const tweetId = isRetweet ? retweetedId : id;
     // リプライ投稿テキストエリアを取得
     const replyArea = useRef(null);
 
@@ -27,6 +28,7 @@ export const TweetDetail = (props) => {
         const res = await fetch(`/tweets/${id}`);
         if (res.status === 200) {
             const tweetData = await res.json();
+            console.log(tweetData);
             return tweetData;
         }
     };
@@ -69,7 +71,7 @@ export const TweetDetail = (props) => {
 
     // 指定のツイートのいいねを取得
     const getFavs = async () => {
-        const res = await fetch(`/favs/${id}`);
+        const res = await fetch(`/favs/${tweetId}`);
         if (res.status === 200) {
             const favsData = await res.json();
             if (!favsData) {
@@ -85,7 +87,7 @@ export const TweetDetail = (props) => {
 
     // 指定のツイートのリツイートリストを取得
     const getRetweets = async () => {
-        const res = await fetch(`/retweets/${id}`);
+        const res = await fetch(`/retweets/${tweetId}`);
         if (res.status === 200) {
             const retweetsData = await res.json();
             if (!retweetsData) {
@@ -161,24 +163,24 @@ export const TweetDetail = (props) => {
                             setIsFav={setIsFav}
                             isFav={isFav}
                             favs={favs}
-                            setIsRetweet={setIsRetweet}
-                            isRetweet={isRetweet}
+                            setIsRetweeted={setIsRetweeted}
+                            isRetweeted={isRetweeted}
                             retweets={retweets}
                             replies={replies}
                             replyArea={replyArea}
-                            tweetId={id}
+                            tweetId={tweetId}
                             authUserId={authUserId}
                             isEditable={true}
                         />
                         <p className="pt-2">投稿日: {tweet.created_at}</p>
                     </div>
                     <Replies
-                        tweetId={id}
+                        tweetId={tweetId}
                         authUserId={authUserId}
                         userName={user.user_name}
                     />
                     <div>
-                        <TweetReply tweetId={id} replyArea={replyArea} />
+                        <TweetReply tweetId={tweetId} replyArea={replyArea} />
                     </div>
                 </div>
             </div>

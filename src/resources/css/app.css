@@ -78,7 +78,7 @@ textarea {
   transition: .2s;
 }
 
-.user__item-container:hover {
+.user__item-container:hover  {
   background-color: #E9EBED;
 }
 
