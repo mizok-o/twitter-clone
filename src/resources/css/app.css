@@ -110,7 +110,6 @@ textarea {
 }
 
 /* tweet */
-
 .tweet__status__container {
   margin-left: 64px;
   margin-top: 4px
@@ -132,9 +131,17 @@ textarea {
   max-height: 240px;
 }
 
+.retweet__text {
+  opacity: .5;
+  font-size: 12px;
+}
+
 .btn-clicking {
   pointer-events: none;
 }
+
+/* リプライ */
+
 .reply__textarea__container {
   position: relative;
   font-size: 1rem;

@@ -44,19 +44,46 @@ export const TweetList = (props) => {
 
     const tweetItem = tweets.map((tweet, i) => {
         // ツイートユーザーの情報を取得
-        const userData = users.find((data) => data.id === tweet.user_id);
+        const getRetweetedUserId = () => {
+            const setRetweetedUserId = tweets.find(
+                (item) => item.id === tweet.tweet_id
+            );
+            return setRetweetedUserId.user_id;
+        };
+        // リツイートの場合、ユーザー情報を検索する
+        const userData = tweet.tweet_id
+            ? users.find((data) => data.id === getRetweetedUserId())
+            : users.find((data) => data.id === tweet.user_id);
+        // リツイートの場合のみ使用する
+        const retweetData = users.find((data) => data.id === tweet.user_id);
+        const isRetweet = tweet.tweet_id > 0;
+
         const replyNum = repliesNum[i];
         const favNum = favsNum[i];
         const retweetNum = retweetsNum[i];
 
         return (
             <li key={tweet.id}>
-                <div className={`${tweet.is_retweet ? "tweet__retweet" : ""}`}>
+                <div
+                // className={`${tweet.tweet_id ? "tweet__retweet" : ""}`}
+                >
                     <Link
                         className="user__item-container"
-                        to={`/home/tweet/${tweet.id}`}
+                        to={`/home/tweet/${
+                            isRetweet ? retweetData.id : userData.id
+                        }`}
                     >
-                        <div className="d-flex px-2 pt-4 w-100">
+                        <div className="pt-4 px-2">
+                            {tweet.tweet_id ? (
+                                <p className="retweet__text">
+                                    {`${retweetData.screen_name}
+                                さんがリツイートしました。`}
+                                </p>
+                            ) : (
+                                ""
+                            )}
+                        </div>
+                        <div className="d-flex px-2 pt-2 w-100">
                             <UserIcon
                                 iconData={
                                     userData.profile_image_path !== null
@@ -73,7 +100,8 @@ export const TweetList = (props) => {
                                         }}
                                     />
                                     {/* 認証ユーザーの時のみ表示 */}
-                                    {authUserId === tweet.user_id ? (
+                                    {authUserId === tweet.user_id &&
+                                    !isRetweet ? (
                                         <EditButtns
                                             currentText={tweet.text}
                                             contentId={tweet.id}
@@ -102,14 +130,18 @@ export const TweetList = (props) => {
                             </div>
                         </div>
                     </Link>
-                    <TweetStatus
-                        replies={replyNum}
-                        favs={favNum}
-                        retweets={retweetNum}
-                        tweetId={tweet.id}
-                        authUserId={authUserId}
-                        isEditable={false}
-                    />
+                    {isRetweet ? (
+                        ""
+                    ) : (
+                        <TweetStatus
+                            replies={replyNum}
+                            favs={favNum}
+                            retweets={retweetNum}
+                            tweetId={tweet.id}
+                            authUserId={authUserId}
+                            isEditable={false}
+                        />
+                    )}
                 </div>
             </li>
         );

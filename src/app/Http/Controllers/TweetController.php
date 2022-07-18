@@ -27,6 +27,7 @@ class TweetController extends Controller
         $userId = auth()->id();
         $followIds = $follow->getFollowIds($userId);
         $followIds[] = $userId;
+
         $tweets = $tweet->getFollowsTweets($followIds);
 
         $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
@@ -62,7 +63,7 @@ class TweetController extends Controller
      */
     public function getUserTweets(int $userId, Tweet $tweet): object
     {
-        return $tweet->getTweetsByUserId($userId);
+        return $tweet->getProfileTweetsByUserId($userId);
     }
 
     /**

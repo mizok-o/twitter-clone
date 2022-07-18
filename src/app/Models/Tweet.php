@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Storage;
 class Tweet extends Model
 {
     /**
-     * 全ユーザーのツイートを取得
+     * リレーション紐付け
      *
      * @param  array $followIds
      * @return object
      */
-    public function testShowRetweets($tweets, $retweets): object
+    public function retweets(): object
     {
-        $showContents = $tweets->concat($retweets);
-        $sorAndPaginate = $showContents->sortByDesc('created_at')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        // dd("aa", $this->hasMany(Tweet::class, 'tweet_id', 'id')->get());
+        return $this->belongsTo(Tweet::class);
     }
 
     /**
@@ -32,14 +32,24 @@ class Tweet extends Model
     }
 
     /**
-     * フォローしているユーザーのツイートを取得
+     * フォローしているユーザーのツイート・リツイートを取得
      *
      * @param  array $followIds
      * @return object
      */
     public function getFollowsTweets(array $followIds): object
     {
-        return $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        $tweets = $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+
+        foreach ($tweets as $retweet) {
+            if ($retweet->tweet_id == 0) {
+                break;
+            }
+            $retweetData = $this->where('id', $retweet->tweet_id);
+            $retweet->text = $retweetData->value('text');
+            $retweet->image = $retweetData->value('image');
+        }
+        return $tweets;
     }
 
     /**
@@ -59,7 +69,7 @@ class Tweet extends Model
      * @param int $userId
      * @return　object
      */
-    public function getTweetsByUserId(int $userId): object
+    public function getProfileTweetsByUserId(int $userId): object
     {
         return $this->where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
@@ -90,7 +100,6 @@ class Tweet extends Model
      */
     public function countRetweets(object $tweets): array
     {
-
         $tweetIds = $tweets->pluck('id');
         $contedNums = array();
 
@@ -153,7 +162,7 @@ class Tweet extends Model
     }
 
     /**
-     * リツイートと解除
+     * リツイート取得
      *
      * @param  int $tweetId
      */
