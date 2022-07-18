@@ -33,8 +33,6 @@ class TweetController extends Controller
         $favsNum = $tweet->countTweetsInfo($tweets, $favs);
 
         $retweetsNum = $tweet->countRetweets($tweets);
-        // dd($retweets);
-        // $retweetsNum = $tweet->countTweetsInfo($tweets);
         return [
             "users" => $users,
             "tweets" => $tweets,
@@ -137,7 +135,20 @@ class TweetController extends Controller
         return $tweet->destroyTweet($tweetId);
     }
 
-     /**
+    /**
+     * リツイート取得
+     *
+     * @param  Request $request
+     * @param  int $tweetId
+     * @param  Tweet $tweet
+     * @param  User $user
+     */
+    public function getRetweets(int $tweetId, Tweet $tweet, User $user): object
+    {
+        return $tweet->getRetweetsByTweetId($tweetId);
+    }
+
+    /**
      * リツイート実行
      *
      * @param  Request $request
@@ -145,10 +156,8 @@ class TweetController extends Controller
      * @param  Tweet $tweet
      * @param  User $user
      */
-    public function retweetAction(Request $request, int $tweetId, Tweet $tweet, User $user): bool
+    public function actionRetweet(Request $request, int $tweetId, Tweet $tweet, User $user): bool
     {
-        $isRetweeted = $tweet->checkIsRetweeted($tweetId);
-
-        return $tweet->destroyTweet($tweetId);
+        return $tweet->executeRetweet($tweetId);
     }
 }

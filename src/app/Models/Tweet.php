@@ -90,6 +90,7 @@ class Tweet extends Model
      */
     public function countRetweets(object $tweets): array
     {
+
         $tweetIds = $tweets->pluck('id');
         $contedNums = array();
 
@@ -152,13 +153,18 @@ class Tweet extends Model
     }
 
     /**
-     * リツイートしているかチェック
+     * リツイートと解除
      *
      * @param  int $tweetId
      */
-    public function checkIsRetweeted(int $tweetId): bool
+    public function getRetweetsByTweetId(int $tweetId): object
     {
-        return $this->where("tweet_id", $tweetId)->exists();
+        $hasRetweets = $this->where('tweet_id', $tweetId);
+
+        return $hasRetweets->get();
+        if ($hasRetweets->exists()) {
+        }
+        // return 0;
     }
 
     /**
@@ -166,19 +172,20 @@ class Tweet extends Model
      *
      * @param  int $tweetId
      */
-    public function actionFav(int $tweetId): bool
+    public function executeRetweet(int $tweetId): bool
     {
         $authUserId = auth()->id();
-        $isLiked = $this->where('tweet_id', $tweetId)->where('user_id', $authUserId);
+        $isLiked = $this->where('user_id', $authUserId)->where('tweet_id', $tweetId);
 
         if ($isLiked->exists()) {
             $isLiked->delete();
-            return "delete";
+            return true;
         }
 
         $this->tweet_id = $tweetId;
         $this->user_id = $authUserId;
-        $this->save();
-        return "create";
+        $this->text = " ";
+        $this->image = " ";
+        return $this->save();
     }
 }

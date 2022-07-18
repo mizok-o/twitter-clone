@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReplyController;
-use App\Http\Controllers\RetweetController;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -71,8 +70,8 @@ Route::group(['middleware' => 'auth'], function () {
     /*
     リツイート
     */
-    Route::get('/retweets/{tweetId}', [RetweetController::class, 'show']);
-    Route::post('/retweet/{tweetId}', [RetweetController::class, 'retweetAction']);
+    Route::get('/retweets/{tweetId}', [TweetController::class, 'getRetweets']);
+    Route::post('/retweet/{tweetId}', [TweetController::class, 'actionRetweet']);
 });
 
 Route::get('/', function () {
