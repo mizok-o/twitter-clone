@@ -99,7 +99,7 @@ export const TweetDetail = (props) => {
 
     useEffect(() => {
         getRetweets();
-    }, [isRetweet]);
+    }, [isRetweeted]);
 
     return (
         <div className="mt-4 main__container">

@@ -5,9 +5,9 @@ export const TweetStatus = (props) => {
     const {
         replies,
         replyArea,
-        favs,
         setIsFav,
         isFav,
+        favs,
         setIsRetweeted,
         isRetweeted,
         retweets,

@@ -8773,7 +8773,7 @@ var TweetDetail = function TweetDetail(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getRetweets();
-  }, [isRetweet]);
+  }, [isRetweeted]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "mt-4 main__container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -11201,9 +11201,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var TweetStatus = function TweetStatus(props) {
   var replies = props.replies,
       replyArea = props.replyArea,
-      favs = props.favs,
       setIsFav = props.setIsFav,
       isFav = props.isFav,
+      favs = props.favs,
       setIsRetweeted = props.setIsRetweeted,
       isRetweeted = props.isRetweeted,
       retweets = props.retweets,
