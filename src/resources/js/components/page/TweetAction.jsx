@@ -11,7 +11,6 @@ import { UserIcon } from "../parts/UserIcon";
 export const TweetAction = (props) => {
     const { isEditPage, authUser } = props;
 
-    // ツイート「更新」ページで使用
     const { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -23,12 +22,10 @@ export const TweetAction = (props) => {
     const [imageIsSelected, setImageIsSelected] = useState(false);
     const [isClicking, setIsclicking] = useState(false);
 
-    // csrf対策のため、トークンを取得
     const csrf_token = document.querySelector(
         'meta[name="csrf-token"]'
     ).content;
 
-    // ツイート投稿もしくは更新を行う。成功の場合ツイート一覧へ遷移。エラーの場合はエラーテキストを表示。
     const postTweet = async (url, tweetData) => {
         const res = await fetch(url, {
             method: "POST",
@@ -53,7 +50,6 @@ export const TweetAction = (props) => {
         }
     };
 
-    // ページによってurlを変更
     const setApiUrl = () => {
         if (isEditPage) {
             return `/tweet/${id}`;
@@ -65,12 +61,10 @@ export const TweetAction = (props) => {
         e.preventDefault();
         setIsclicking(true);
         console.log("clicked");
-        // postするツイート作成
         let tweetData = new FormData();
         const image = e.target.image.files[0];
         const text = e.target.text.value;
 
-        // 画像が選択されてない時は追加しない
         if (image) {
             tweetData.append("image", image);
         }
