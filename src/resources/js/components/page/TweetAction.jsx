@@ -6,10 +6,6 @@ import { UserIcon } from "../parts/UserIcon";
 
 /*
     TweetActionファイルでツイート更新、投稿の両方のページを表示。
-
-    props:isEditPageは、ツイート更新ページのみ「true」がセットされる。
-    isEditPageが「false」 → ツイート「投稿」ページ
-    isEditPageが「true」 → ツイート「更新」ページ
 */
 
 export const TweetAction = (props) => {
