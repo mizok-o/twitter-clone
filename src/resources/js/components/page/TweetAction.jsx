@@ -4,14 +4,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { PageBackButton } from "../parts/PageBackButton";
 import { UserIcon } from "../parts/UserIcon";
 
-/*
-    TweetActionファイルでツイート更新、投稿の両方のページを表示。
-
-    props:isEditPageは、ツイート更新ページのみ「true」がセットされる。
-    isEditPageが「false」 → ツイート「投稿」ページ
-    isEditPageが「true」 → ツイート「更新」ページ
-*/
-
 export const TweetAction = (props) => {
     const { isEditPage, authUser } = props;
 
@@ -38,12 +30,12 @@ export const TweetAction = (props) => {
             method: "POST",
             headers: isEditPage
                 ? {
-                      "X-HTTP-Method-Override": "PUT",
-                      "X-CSRF-TOKEN": csrf_token,
-                  }
+                    "X-HTTP-Method-Override": "PUT",
+                    "X-CSRF-TOKEN": csrf_token,
+                }
                 : {
-                      "X-CSRF-TOKEN": csrf_token,
-                  },
+                    "X-CSRF-TOKEN": csrf_token,
+                },
             body: tweetData,
         });
         if (res.status === 200) {
