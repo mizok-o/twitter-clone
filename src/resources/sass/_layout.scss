@@ -1,0 +1,21 @@
+// Header コンポーネント
+.header__right--container {
+	width: 320px;
+}
+
+.header__text {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-bottom: 2px solid #111;
+	transition: .2s ease-in;
+	&:hover {
+		opacity: .5;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.header__right--container{
+		width: 252px;
+	}
+}

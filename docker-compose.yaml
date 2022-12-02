@@ -1,0 +1,33 @@
+version: "2.6"
+services:
+  app:
+    build: ./infra/php
+    volumes:
+      - ./src:/data
+
+  web:
+    image: nginx:1.20-alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./src:/data
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /data
+
+  db:
+    platform: linux/amd64
+    image: mysql:8.0
+    container_name: twitter-clone
+    environment:
+      MYSQL_ROOT_PASSWORD: mizoguchi
+      MYSQL_DATABASE: twitter-clone
+      MYSQL_USER: mizo
+      MYSQL_PASSWORD: mizomizo1
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3336:3306

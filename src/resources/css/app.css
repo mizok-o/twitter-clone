@@ -1,0 +1,293 @@
+@charset "UTF-8";
+
+/* ********************************************
+// --- リセット ---
+// ※ブラウザのデフォルトCSSをリセット
+// ***************************************** */
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-size: 16px;
+}
+body {
+  font-family: Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+header, footer, nav, menu, article, aside, section, details, figcaption, figure{
+  display: block;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+}
+img {
+  vertical-align: bottom;
+}
+a img {
+  border: none;
+}
+a {
+  color: #111111;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #111111;
+}
+
+strong {
+  font-weight: normal;
+}
+i{
+  font-style: normal;
+}
+p {
+  font-size: 14px;
+  margin: 0;
+}
+button {
+  border: none;
+  background-color: var(--bs-gray-100);
+}
+
+textarea {
+  resize: none;
+  width: 320px;
+  height: 200px;
+}
+
+.main__container {
+  max-width: 516px;
+  margin: 0 auto;
+}
+
+.user__item-container {
+  transition: .2s;
+}
+
+.user__item-container:hover {
+  background-color: #E9EBED;
+}
+
+/* ３点リーダー */
+.omit__text__container {
+  overflow: hidden;
+  max-width: calc(100% - 120px);
+  width: 100%;
+}
+
+.omit__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  white-space: nowrap;
+}
+
+.non__omit .omit__text__container {
+  max-width: none;
+  overflow: auto;
+}
+
+.non__omit .omit__text {
+  white-space: inherit;
+}
+
+.btn__size {
+  height: 48px;
+}
+
+/* tweet */
+.tweet-form-file {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url('/images/upload-icon.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.tweet__images {
+  max-height: 240px;
+}
+
+.btn-clicking {
+  pointer-events: none;
+}
+.reply__textarea__container {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.reply__textarea__dummy {
+  overflow: hidden;
+  visibility: hidden;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  min-height: 32px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  border: 1px solid;
+}
+
+.reply__textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 5px 15px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 1px solid #b6c3c6;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  resize: none;
+}
+
+.reply__textarea:focus {
+  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);
+  outline: 0;
+}
+
+.status__item__icon__container{
+  cursor: pointer;
+}
+
+.tweet__status--fav {
+  cursor: pointer;
+}
+
+
+.status__item__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.status__item__icon svg {
+  display: block;
+  padding: 2px;
+  fill: #111;
+}
+
+/* ツイートボタン */
+.header__tweetBtn {
+  position: fixed;
+  bottom: 64px;
+  right: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+.background-twitter {
+  background-color: #00A770;
+}
+
+.header__tweetBtn--icon {
+  margin: 22px;
+}
+
+.new__line {
+  white-space: pre-wrap;
+}
+
+/* ローディング画面 */
+.is__loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.looping-spinner-container {
+  margin-top: 120px;
+}
+
+.looping-rhombuses-spinner, .looping-rhombuses-spinner * {
+  box-sizing: border-box;
+}
+
+.looping-rhombuses-spinner {
+  width: calc(15px * 4);
+  height: 15px;
+  position: relative;
+}
+
+.looping-rhombuses-spinner .rhombus {
+  height: 15px;
+  width: 15px;
+  background-color: #00A770;
+  left: calc(15px * 4);
+  position: absolute;
+  margin: 0 auto;
+  border-radius: 2px;
+  transform: translateY(0) rotate(45deg) scale(0);
+  animation: looping-rhombuses-spinner-animation 2500ms linear infinite;
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(1) {
+  animation-delay: calc(2500ms * 1 / -1.5);
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(2) {
+  animation-delay: calc(2500ms * 2 / -1.5);
+}
+
+.looping-rhombuses-spinner .rhombus:nth-child(3) {
+  animation-delay: calc(2500ms * 3 / -1.5);
+}
+
+@keyframes looping-rhombuses-spinner-animation {
+  0% {
+    transform: translateX(0) rotate(45deg) scale(0);
+  }
+  50% {
+    transform: translateX(-233%) rotate(45deg) scale(1);
+  }
+  100% {
+    transform: translateX(-466%) rotate(45deg) scale(0);
+  }
+}
+
+@media screen and (max-width: 750px) {
+	/* .omit__text__container{
+		max-width: 160px;
+	} */
+
+  .header__tweetBtn {
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .header__tweetBtn--icon {
+    margin: 13px;
+  }
+
+  /* 画像アップロードボタン */
+  .select__image__area {
+    display: block !important;
+    max-width: 152px;
+  }
+  .select__image__area p {
+    margin: 0 !important;
+  }
+
+  .omit__text__container {
+    max-width: 120px;
+  }
+}
