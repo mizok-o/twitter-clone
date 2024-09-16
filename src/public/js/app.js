@@ -7581,12 +7581,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_UserList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/UserList */ "./resources/js/components/page/UserList.jsx");
 /* harmony import */ var _page_UserProfile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/UserProfile */ "./resources/js/components/page/UserProfile.jsx");
 /* harmony import */ var _page_UserProfileEdit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/UserProfileEdit */ "./resources/js/components/page/UserProfileEdit.jsx");
-/* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
-/* harmony import */ var _page_UserFollowsList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./page/UserFollowsList */ "./resources/js/components/page/UserFollowsList.jsx");
-/* harmony import */ var _parts_Loading__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./parts/Loading */ "./resources/js/components/parts/Loading.jsx");
-/* harmony import */ var _page_TweetListOnlyFollows__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./page/TweetListOnlyFollows */ "./resources/js/components/page/TweetListOnlyFollows.jsx");
-/* harmony import */ var _page_NotFound__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./page/NotFound */ "./resources/js/components/page/NotFound.jsx");
-/* harmony import */ var _page_ReplyAction__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./page/ReplyAction */ "./resources/js/components/page/ReplyAction.jsx");
+/* harmony import */ var _page_UserFollowsList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/UserFollowsList */ "./resources/js/components/page/UserFollowsList.jsx");
+/* harmony import */ var _parts_Loading__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./parts/Loading */ "./resources/js/components/parts/Loading.jsx");
+/* harmony import */ var _page_TweetListOnlyFollows__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./page/TweetListOnlyFollows */ "./resources/js/components/page/TweetListOnlyFollows.jsx");
+/* harmony import */ var _page_NotFound__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./page/NotFound */ "./resources/js/components/page/NotFound.jsx");
+/* harmony import */ var _page_ReplyAction__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./page/ReplyAction */ "./resources/js/components/page/ReplyAction.jsx");
+/* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -7733,73 +7733,73 @@ var App = function App() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/follows-timeline",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetListOnlyFollows__WEBPACK_IMPORTED_MODULE_13__.TweetListOnlyFollows, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetListOnlyFollows__WEBPACK_IMPORTED_MODULE_12__.TweetListOnlyFollows, {
           authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/timeline",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetList__WEBPACK_IMPORTED_MODULE_3__.TweetList, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetList__WEBPACK_IMPORTED_MODULE_3__.TweetList, {
           authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/tweet/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetDetail__WEBPACK_IMPORTED_MODULE_4__.TweetDetail, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetDetail__WEBPACK_IMPORTED_MODULE_4__.TweetDetail, {
           authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/tweet/new",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetAction__WEBPACK_IMPORTED_MODULE_6__.TweetAction, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetAction__WEBPACK_IMPORTED_MODULE_6__.TweetAction, {
           authUser: authUser
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/reply/new",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetReply__WEBPACK_IMPORTED_MODULE_5__.TweetReply, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetReply__WEBPACK_IMPORTED_MODULE_5__.TweetReply, {
           authUser: authUser
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/reply/edit/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_ReplyAction__WEBPACK_IMPORTED_MODULE_15__.ReplyAction, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_ReplyAction__WEBPACK_IMPORTED_MODULE_14__.ReplyAction, {
           authUser: authUser
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/tweet/edit/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetAction__WEBPACK_IMPORTED_MODULE_6__.TweetAction, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_TweetAction__WEBPACK_IMPORTED_MODULE_6__.TweetAction, {
           isEditPage: true,
           authUser: authUser
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/userList",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserList__WEBPACK_IMPORTED_MODULE_7__.UserList, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserList__WEBPACK_IMPORTED_MODULE_7__.UserList, {
           authUserFollows: authUserFollows
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/followList/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_11__.UserFollowsList, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_10__.UserFollowsList, {
           isFollowList: true,
           authUserFollows: authUserFollows,
           authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/followerList/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_11__.UserFollowsList, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserFollowsList__WEBPACK_IMPORTED_MODULE_10__.UserFollowsList, {
           isFollowList: false,
           authUserFollows: authUserFollows,
           authUserId: authUser.id
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/profile/:id",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserProfile__WEBPACK_IMPORTED_MODULE_8__.UserProfile, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserProfile__WEBPACK_IMPORTED_MODULE_8__.UserProfile, {
           authUserId: authUser.id,
           authUserFollows: authUserFollows
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "/home/profile-edit",
-        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_12__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserProfileEdit__WEBPACK_IMPORTED_MODULE_9__.UserProfileEdit, {
+        element: isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_parts_Loading__WEBPACK_IMPORTED_MODULE_11__.Loading, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_UserProfileEdit__WEBPACK_IMPORTED_MODULE_9__.UserProfileEdit, {
           authUser: authUser
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
         path: "*",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_NotFound__WEBPACK_IMPORTED_MODULE_14__.NotFound, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_16__.jsx)(_page_NotFound__WEBPACK_IMPORTED_MODULE_13__.NotFound, {})
       })]
     })]
   });
@@ -8485,7 +8485,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TweetDetail = function TweetDetail(props) {
-  var authUserId = props.authUserId;
+  var authUserId = props.authUserId,
+      isRetweet = props.isRetweet,
+      retweetedId = props.retweetedId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -8502,20 +8504,31 @@ var TweetDetail = function TweetDetail(props) {
       favs = _useState6[0],
       setFavs = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      replies = _useState8[0],
-      setReplies = _useState8[1];
+      isFav = _useState8[0],
+      setIsFav = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      isFav = _useState10[0],
-      setIsFav = _useState10[1]; // urlからツイートIDの取得
+      retweets = _useState10[0],
+      setRetweets = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isRetweeted = _useState12[0],
+      setIsRetweeted = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      replies = _useState14[0],
+      setReplies = _useState14[1]; // urlからツイートIDの取得
 
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useParams)(),
-      id = _useParams.id; // リプライ投稿テキストエリアを取得
+      id = _useParams.id;
 
+  var tweetId = isRetweet ? retweetedId : id; // リプライ投稿テキストエリアを取得
 
   var replyArea = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null); // 指定のツイートを取得
 
@@ -8533,7 +8546,7 @@ var TweetDetail = function TweetDetail(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 9;
                 break;
               }
 
@@ -8542,9 +8555,10 @@ var TweetDetail = function TweetDetail(props) {
 
             case 6:
               tweetData = _context.sent;
+              console.log(tweetData);
               return _context.abrupt("return", tweetData);
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -8667,13 +8681,13 @@ var TweetDetail = function TweetDetail(props) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return fetch("/favs/".concat(id));
+              return fetch("/favs/".concat(tweetId));
 
             case 2:
               res = _context4.sent;
 
               if (!(res.status === 200)) {
-                _context4.next = 11;
+                _context4.next = 10;
                 break;
               }
 
@@ -8691,10 +8705,9 @@ var TweetDetail = function TweetDetail(props) {
               return _context4.abrupt("return");
 
             case 9:
-              console.log(favsData);
               setFavs(favsData);
 
-            case 11:
+            case 10:
             case "end":
               return _context4.stop();
           }
@@ -8709,11 +8722,62 @@ var TweetDetail = function TweetDetail(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getFavs();
-  }, [isFav]);
+  }, [isFav]); // 指定のツイートのリツイートリストを取得
+
+  var getRetweets = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var res, retweetsData;
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return fetch("/retweets/".concat(tweetId));
+
+            case 2:
+              res = _context5.sent;
+
+              if (!(res.status === 200)) {
+                _context5.next = 10;
+                break;
+              }
+
+              _context5.next = 6;
+              return res.json();
+
+            case 6:
+              retweetsData = _context5.sent;
+
+              if (retweetsData) {
+                _context5.next = 9;
+                break;
+              }
+
+              return _context5.abrupt("return");
+
+            case 9:
+              setRetweets(retweetsData);
+
+            case 10:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function getRetweets() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getRetweets();
+  }, [isRetweeted]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-    className: "mt-5 main__container",
+    className: "mt-4 main__container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "border",
+      className: "border border-dark",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "d-flex align-items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
@@ -8739,7 +8803,7 @@ var TweetDetail = function TweetDetail(props) {
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-        className: "py-1 px-2",
+        className: "py-1 px-3",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
           to: "/home/profile/".concat(user.id),
           className: "d-flex align-items-center",
@@ -8757,7 +8821,7 @@ var TweetDetail = function TweetDetail(props) {
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "mt-3 w-100 new__line",
+          className: "my-3 w-100 new__line",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
             children: tweet.text
           }), tweet.image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
@@ -8770,22 +8834,26 @@ var TweetDetail = function TweetDetail(props) {
           }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_2__.TweetStatus, {
             setIsFav: setIsFav,
             isFav: isFav,
-            replies: replies,
             favs: favs,
-            tweetId: id,
+            setIsRetweeted: setIsRetweeted,
+            isRetweeted: isRetweeted,
+            retweets: retweets,
+            replies: replies,
+            replyArea: replyArea,
+            tweetId: tweetId,
             authUserId: authUserId,
-            isEditable: true,
-            replyArea: replyArea
+            isEditable: true
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
             className: "pt-2",
             children: ["\u6295\u7A3F\u65E5: ", tweet.created_at]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_Replies__WEBPACK_IMPORTED_MODULE_1__.Replies, {
-          tweetId: id,
-          authUserId: authUserId
+          tweetId: tweetId,
+          authUserId: authUserId,
+          userName: user.user_name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TweetReply__WEBPACK_IMPORTED_MODULE_5__.TweetReply, {
-            tweetId: id,
+            tweetId: tweetId,
             replyArea: replyArea
           })
         })]
@@ -8881,7 +8949,12 @@ var TweetList = function TweetList(props) {
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState14 = _slicedToArray(_useState13, 2),
       favsNum = _useState14[0],
-      setFavsNum = _useState14[1]; // １ページ目のツイートを取得
+      setFavsNum = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      retweetsNum = _useState16[0],
+      setRetweetsNum = _useState16[1]; // １ページ目のツイートを取得
 
 
   var getTweets = /*#__PURE__*/function () {
@@ -8898,7 +8971,7 @@ var TweetList = function TweetList(props) {
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 15;
+                _context.next = 16;
                 break;
               }
 
@@ -8922,8 +8995,9 @@ var TweetList = function TweetList(props) {
               setTweets(tweetsData.tweets.data);
               setRepliesNum(tweetsData.repliesNum);
               setFavsNum(tweetsData.favsNum);
+              setRetweetsNum(tweetsData.retweetsNum);
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -8941,18 +9015,41 @@ var TweetList = function TweetList(props) {
   }, [currentPage]);
   var tweetItem = tweets.map(function (tweet, i) {
     // ツイートユーザーの情報を取得
-    var userData = users.find(function (data) {
+    var getRetweetedUserId = function getRetweetedUserId() {
+      var setRetweetedUserId = tweets.find(function (item) {
+        return item.id === tweet.tweet_id;
+      });
+      return setRetweetedUserId.user_id;
+    }; // リツイートの場合、ユーザー情報を検索する
+
+
+    var userData = tweet.tweet_id ? users.find(function (data) {
+      return data.id === getRetweetedUserId();
+    }) : users.find(function (data) {
+      return data.id === tweet.user_id;
+    }); // リツイートの場合のみ使用する
+
+    var retweetData = users.find(function (data) {
       return data.id === tweet.user_id;
     });
+    var isRetweet = tweet.tweet_id > 0;
     var replyNum = repliesNum[i];
     var favNum = favsNum[i];
+    var retweetNum = retweetsNum[i];
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("li", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "user__item-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-          to: "/home/tweet/".concat(tweet.id),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "d-flex px-2 py-4 w-100",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "tweetlist__whole__container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+          className: "user__item-container",
+          to: "/home/tweet/".concat(isRetweet ? tweet.tweet_id : tweet.id),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "pt-4 px-2",
+            children: tweet.tweet_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+              className: "retweet__text",
+              children: "".concat(retweetData.screen_name, "\n                                \u3055\u3093\u304C\u30EA\u30C4\u30A4\u30FC\u30C8\u3057\u307E\u3057\u305F\u3002")
+            }) : ""
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            className: "d-flex px-2 pt-2 w-100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
               iconData: userData.profile_image_path !== null ? userData.profile_image_path : "default-user-icon.png"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -8964,7 +9061,7 @@ var TweetList = function TweetList(props) {
                     screen_name: userData.screen_name,
                     user_name: userData.user_name
                   }
-                }), authUserId === tweet.user_id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
+                }), authUserId === tweet.user_id && !isRetweet ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_EditButtns__WEBPACK_IMPORTED_MODULE_4__.EditButtns, {
                   currentText: tweet.text,
                   contentId: tweet.id,
                   setCurrentPage: setCurrentPage,
@@ -8983,19 +9080,17 @@ var TweetList = function TweetList(props) {
                     alt: "\u30C4\u30A4\u30FC\u30C8 \u753B\u50CF"
                   })
                 }) : ""]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus // setReplies={setReplies}
-                , {
-                  replies: replyNum,
-                  favs: favNum,
-                  tweetId: tweet.id,
-                  authUserId: authUserId,
-                  isEditable: false
-                })
               })]
             })]
-          })
-        })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_TweetStatus__WEBPACK_IMPORTED_MODULE_5__.TweetStatus, {
+          replies: replyNum,
+          favs: favNum,
+          retweets: retweetNum,
+          tweetId: tweet.id,
+          authUserId: authUserId,
+          isEditable: false
+        })]
       })
     }, tweet.id);
   }); // １ページごとのコンテンツ数
@@ -9159,7 +9254,7 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
               res = _context2.sent;
 
               if (!(res.status === 200)) {
-                _context2.next = 13;
+                _context2.next = 12;
                 break;
               }
 
@@ -9168,21 +9263,20 @@ var TweetListOnlyFollows = function TweetListOnlyFollows(props) {
 
             case 6:
               tweetsData = _context2.sent;
-              console.log(tweetsData);
 
               if (tweetsData.total) {
-                _context2.next = 11;
+                _context2.next = 10;
                 break;
               }
 
               setNoFollows(true);
               return _context2.abrupt("return");
 
-            case 11:
+            case 10:
               setNumTweets(tweetsData.total);
               setTweets(tweetsData.data);
 
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -9316,7 +9410,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var TweetReply = function TweetReply(props) {
   var tweetId = props.tweetId,
       replyArea = props.replyArea;
@@ -9431,13 +9524,12 @@ var TweetReply = function TweetReply(props) {
 
   document.querySelectorAll(".reply__textarea__container").forEach(replyTextarea);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "my-3 main__container",
+    className: "my-3 border rounded p-3 main__container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       encType: "multipart/form-data",
       onSubmit: function onSubmit(e) {
         return handleSubmit(e);
       },
-      className: "ms-2",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "reply__textarea__container",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -9477,7 +9569,7 @@ var TweetReply = function TweetReply(props) {
             children: imageIsSelected ? "画像を選択中" : "画像を選択"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-          className: "btn ".concat(isClicking ? "btn-clicking" : ""),
+          className: "btn btn-primary ".concat(isClicking ? "btn-clicking" : ""),
           type: "submit",
           children: "\u8FD4\u4FE1\u3059\u308B"
         })]
@@ -10899,8 +10991,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Replies": () => (/* binding */ Replies)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../parts/UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
-/* harmony import */ var _parts_UserName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/UserName */ "./resources/js/components/parts/UserName.jsx");
+/* harmony import */ var _UserIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserIcon */ "./resources/js/components/parts/UserIcon.jsx");
+/* harmony import */ var _UserName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserName */ "./resources/js/components/parts/UserName.jsx");
 /* harmony import */ var _EditButtns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditButtns */ "./resources/js/components/parts/EditButtns.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -10931,7 +11023,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Replies = function Replies(props) {
   var tweetId = props.tweetId,
-      authUserId = props.authUserId;
+      authUserId = props.authUserId,
+      userName = props.userName;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10946,7 +11039,12 @@ var Replies = function Replies(props) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
       replies = _useState6[0],
-      setReplies = _useState6[1];
+      setReplies = _useState6[1]; // 日付データをyy/mm/ddに加工
+
+
+  var editPostedDate = function editPostedDate(dateData) {
+    return dateData.split("T")[0].replace(/-/g, "/");
+  };
 
   var getReplyAndUsers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -11012,14 +11110,15 @@ var Replies = function Replies(props) {
     var user = users.find(function (e) {
       return e.id === reply.user_id;
     });
+    var replyDate = editPostedDate(reply.created_at);
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "border p-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-          children: "\u3053\u308C\u306F\u30EA\u30D7\u30E9\u30A4"
+        className: "mb-4",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+          children: ["\u8FD4\u4FE1\u5148: @", userName]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "d-flex",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UserIcon__WEBPACK_IMPORTED_MODULE_1__.UserIcon, {
             userList: false,
             iconData: user.profile_image_path !== null ? user.profile_image_path : "default-user-icon.png"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -11028,7 +11127,7 @@ var Replies = function Replies(props) {
               className: "d-flex justify-content-between",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "ms-2",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_parts_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UserName__WEBPACK_IMPORTED_MODULE_2__.UserName, {
                   isUserProfile: true,
                   nameData: {
                     screen_name: user.screen_name,
@@ -11056,8 +11155,8 @@ var Replies = function Replies(props) {
               alt: "\u30EA\u30D7\u30E9\u30A4 \u753B\u50CF"
             })
           }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-            className: "pt-2",
-            children: ["\u6295\u7A3F\u65E5: ", reply.created_at]
+            className: "pt-1 fs-6",
+            children: ["\u6295\u7A3F\u65E5: ", replyDate]
           })]
         })]
       })
@@ -11101,13 +11200,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var TweetStatus = function TweetStatus(props) {
   var replies = props.replies,
-      favs = props.favs,
-      tweetId = props.tweetId,
-      authUserId = props.authUserId,
+      replyArea = props.replyArea,
       setIsFav = props.setIsFav,
       isFav = props.isFav,
-      isEditable = props.isEditable,
-      replyArea = props.replyArea;
+      favs = props.favs,
+      setIsRetweeted = props.setIsRetweeted,
+      isRetweeted = props.isRetweeted,
+      retweets = props.retweets,
+      tweetId = props.tweetId,
+      authUserId = props.authUserId,
+      isEditable = props.isEditable;
   var csrf_token = document.querySelector('meta[name="csrf-token"]').content;
 
   var actionReply = function actionReply() {
@@ -11116,7 +11218,7 @@ var TweetStatus = function TweetStatus(props) {
 
   var actionFav = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var res, favStatus;
+      var res;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -11133,8 +11235,7 @@ var TweetStatus = function TweetStatus(props) {
               res = _context.sent;
 
               if (res.status === 200) {
-                favStatus = res.json();
-                setIsFav(favStatus);
+                setIsFav(!isFav);
               }
 
             case 4:
@@ -11150,6 +11251,43 @@ var TweetStatus = function TweetStatus(props) {
     };
   }();
 
+  var actionRetweet = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return fetch("/retweet/".concat(tweetId), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRF-TOKEN": csrf_token
+                },
+                body: JSON.stringify("tweet")
+              });
+
+            case 2:
+              res = _context2.sent;
+
+              if (res.status === 200) {
+                setIsRetweeted(!isRetweeted);
+              }
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function actionRetweet() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   var statusItems = [{
     name: "reply",
     num: isEditable ? replies.length : replies,
@@ -11160,16 +11298,19 @@ var TweetStatus = function TweetStatus(props) {
     name: "fav",
     num: isEditable ? favs.length : favs,
     path: "M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z",
-    isDone: isFav,
+    isDone: favs && isEditable ? favs.find(function (fav) {
+      return fav.user_id === authUserId;
+    }) : false,
     "function": actionFav
-  } // {
-  //     name: "retweet",
-  //     num: isEditable ? 0 : 0,
-  //     // num: retweets.length,
-  //     path: "M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z",
-  //     isDone: isFav,
-  // },
-  ];
+  }, {
+    name: "retweet",
+    num: isEditable ? retweets.length : retweets,
+    path: "M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z",
+    isDone: retweets && isEditable ? retweets.find(function (retweet) {
+      return retweet.user_id === authUserId;
+    }) : false,
+    "function": actionRetweet
+  }];
   var displayStatusItems = statusItems.map(function (item, i) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
       className: "d-flex align-items-center me-2",
@@ -11180,7 +11321,7 @@ var TweetStatus = function TweetStatus(props) {
           className: "status__item__icon",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
             viewBox: "0 0 22 22",
-            className: "".concat(item.isDone ? "statusActive" : ""),
+            className: "status__item__icon__image ".concat(item.isDone ? "".concat(item.name, "__active") : ""),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
               d: item.path
             })
@@ -11197,7 +11338,7 @@ var TweetStatus = function TweetStatus(props) {
     }, i);
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "py-2 ".concat(isEditable ? "" : "pe-none"),
+    className: "tweet__status__container py-1 ".concat(isEditable ? "mx-0" : "pe-none"),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
       className: "d-flex",
       children: displayStatusItems
@@ -16616,7 +16757,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.main__container {\n  max-width: 516px;\n  margin: 0 auto;\n}\n\n.user__item-container {\n  transition: .2s;\n}\n\n.user__item-container:hover {\n  background-color: #E9EBED;\n}\n\n/* ３点リーダー */\n.omit__text__container {\n  overflow: hidden;\n  max-width: calc(100% - 120px);\n  width: 100%;\n}\n\n.omit__text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 160px;\n  white-space: nowrap;\n}\n\n.non__omit .omit__text__container {\n  max-width: none;\n  overflow: auto;\n}\n\n.non__omit .omit__text {\n  white-space: inherit;\n}\n\n.btn__size {\n  height: 48px;\n}\n\n/* tweet */\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.tweet__images {\n  max-height: 240px;\n}\n\n.btn-clicking {\n  pointer-events: none;\n}\n.reply__textarea__container {\n  position: relative;\n  font-size: 1rem;\n  line-height: 1.8;\n}\n\n.reply__textarea__dummy {\n  overflow: hidden;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  min-height: 32px;\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  overflow-wrap: break-word;\n  border: 1px solid;\n}\n\n.reply__textarea {\n  position: absolute;\n  top: 0;\n  left: 0;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  border: 1px solid #b6c3c6;\n  border-radius: 4px;\n  color: inherit;\n  font: inherit;\n  letter-spacing: inherit;\n  resize: none;\n}\n\n.reply__textarea:focus {\n  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);\n  outline: 0;\n}\n\n.status__item__icon__container{\n  cursor: pointer;\n}\n\n.tweet__status--fav {\n  cursor: pointer;\n}\n\n\n.status__item__icon {\n  width: 24px;\n  height: 24px;\n}\n\n.status__item__icon svg {\n  display: block;\n  padding: 2px;\n  fill: #111;\n}\n\n/* ツイートボタン */\n.header__tweetBtn {\n  position: fixed;\n  bottom: 64px;\n  right: 64px;\n  width: 64px;\n  height: 64px;\n}\n\n.background-twitter {\n  background-color: #00A770;\n}\n\n.header__tweetBtn--icon {\n  margin: 22px;\n}\n\n.new__line {\n  white-space: pre-wrap;\n}\n\n/* ローディング画面 */\n.is__loading {\n  position: relative;\n  pointer-events: none;\n}\n\n.looping-spinner-container {\n  margin-top: 120px;\n}\n\n.looping-rhombuses-spinner, .looping-rhombuses-spinner * {\n  box-sizing: border-box;\n}\n\n.looping-rhombuses-spinner {\n  width: calc(15px * 4);\n  height: 15px;\n  position: relative;\n}\n\n.looping-rhombuses-spinner .rhombus {\n  height: 15px;\n  width: 15px;\n  background-color: #00A770;\n  left: calc(15px * 4);\n  position: absolute;\n  margin: 0 auto;\n  border-radius: 2px;\n  transform: translateY(0) rotate(45deg) scale(0);\n  -webkit-animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n          animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(1) {\n  -webkit-animation-delay: calc(2500ms * 1 / -1.5);\n          animation-delay: calc(2500ms * 1 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(2) {\n  -webkit-animation-delay: calc(2500ms * 2 / -1.5);\n          animation-delay: calc(2500ms * 2 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(3) {\n  -webkit-animation-delay: calc(2500ms * 3 / -1.5);\n          animation-delay: calc(2500ms * 3 / -1.5);\n}\n\n@-webkit-keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@media screen and (max-width: 750px) {\n\t/* .omit__text__container{\n\t\tmax-width: 160px;\n\t} */\n\n  .header__tweetBtn {\n    bottom: 32px;\n    right: 32px;\n    width: 48px;\n    height: 48px;\n  }\n\n  .header__tweetBtn--icon {\n    margin: 13px;\n  }\n\n  /* 画像アップロードボタン */\n  .select__image__area {\n    display: block !important;\n    max-width: 152px;\n  }\n  .select__image__area p {\n    margin: 0 !important;\n  }\n\n  .omit__text__container {\n    max-width: 120px;\n  }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n\n/* ********************************************\n// --- リセット ---\n// ※ブラウザのデフォルトCSSをリセット\n// ***************************************** */\n\n*{\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\nhtml{\n  font-size: 16px;\n}\nbody {\n  font-family: Verdana, \"ヒラギノ角ゴ ProN W3\", \"Hiragino Kaku Gothic ProN\", \"メイリオ\", Meiryo, sans-serif;\n}\nheader, footer, nav, menu, article, aside, section, details, figcaption, figure{\n  display: block;\n}\n\nh1, h2, h3, h4, h5 {\n  margin: 0;\n}\n\nul, ol {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\ntable {\n  border-collapse: collapse;\n}\nimg {\n  vertical-align: bottom;\n}\na img {\n  border: none;\n}\na {\n  color: #111111;\n  text-decoration: none;\n}\n\na:hover {\n  color: #111111;\n}\n\nstrong {\n  font-weight: normal;\n}\ni{\n  font-style: normal;\n}\np {\n  font-size: 14px;\n  margin: 0;\n}\nbutton {\n  border: none;\n  background-color: var(--bs-gray-100);\n}\n\ntextarea {\n  resize: none;\n  width: 320px;\n  height: 200px;\n}\n\n.main__container {\n  max-width: 516px;\n  margin: 0 auto;\n}\n\n.user__item-container {\n  display: block;\n  transition: .2s;\n}\n\n.user__item-container:hover  {\n  background-color: #E9EBED;\n}\n\n/* ３点リーダー */\n.omit__text__container {\n  overflow: hidden;\n  max-width: calc(100% - 120px);\n  width: 100%;\n}\n\n.omit__text {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 160px;\n  white-space: nowrap;\n}\n\n.non__omit .omit__text__container {\n  max-width: none;\n  overflow: auto;\n}\n\n.non__omit .omit__text {\n  white-space: inherit;\n}\n\n.btn__size {\n  height: 48px;\n}\n\n/* tweet */\n.tweet__status__container {\n  margin-left: 64px;\n  margin-top: 4px\n}\n.tweet__retweet {\n  background-color: #ddd;\n}\n\n.tweet-form-file {\n  width: 24px;\n  height: 24px;\n  cursor: pointer;\n  background-image: url('/images/upload-icon.png');\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.tweet__images {\n  max-height: 240px;\n}\n\n.retweet__text {\n  opacity: .5;\n  font-size: 12px;\n}\n\n.btn-clicking {\n  pointer-events: none;\n}\n\n/* リプライ */\n\n.reply__textarea__container {\n  position: relative;\n  font-size: 1rem;\n  line-height: 1.8;\n}\n\n.reply__textarea__dummy {\n  overflow: hidden;\n  visibility: hidden;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  min-height: 32px;\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  overflow-wrap: break-word;\n  border: 1px solid;\n}\n\n.reply__textarea {\n  position: absolute;\n  top: 0;\n  left: 0;\n  box-sizing: border-box;\n  padding: 5px 15px;\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  border: 1px solid #b6c3c6;\n  border-radius: 4px;\n  color: inherit;\n  font: inherit;\n  letter-spacing: inherit;\n  resize: none;\n}\n\n.reply__textarea:focus {\n  box-shadow: 0 0 0 4px rgba(35, 167, 195, 0.3);\n  outline: 0;\n}\n\n.status__item__icon__container{\n  cursor: pointer;\n}\n\n.tweet__status--fav {\n  cursor: pointer;\n}\n\n.status__item__icon {\n  width: 24px;\n  height: 24px;\n}\n\n.status__item__icon__image {\n  display: block;\n  padding: 2px;\n  fill: #111;\n}\n\n.retweet__active {\n  fill: #00BA7C;\n}\n\n.fav__active {\n  fill: #F91880;\n}\n\n/* ツイートボタン */\n.header__tweetBtn {\n  position: fixed;\n  bottom: 64px;\n  right: 64px;\n  width: 64px;\n  height: 64px;\n}\n\n.background-twitter {\n  background-color: #00A770;\n}\n\n.header__tweetBtn--icon {\n  margin: 22px;\n}\n\n.new__line {\n  white-space: pre-wrap;\n}\n\n/* ローディング画面 */\n.is__loading {\n  position: relative;\n  pointer-events: none;\n}\n\n.looping-spinner-container {\n  margin-top: 120px;\n}\n\n.looping-rhombuses-spinner, .looping-rhombuses-spinner * {\n  box-sizing: border-box;\n}\n\n.looping-rhombuses-spinner {\n  width: calc(15px * 4);\n  height: 15px;\n  position: relative;\n}\n\n.looping-rhombuses-spinner .rhombus {\n  height: 15px;\n  width: 15px;\n  background-color: #00A770;\n  left: calc(15px * 4);\n  position: absolute;\n  margin: 0 auto;\n  border-radius: 2px;\n  transform: translateY(0) rotate(45deg) scale(0);\n  -webkit-animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n          animation: looping-rhombuses-spinner-animation 2500ms linear infinite;\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(1) {\n  -webkit-animation-delay: calc(2500ms * 1 / -1.5);\n          animation-delay: calc(2500ms * 1 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(2) {\n  -webkit-animation-delay: calc(2500ms * 2 / -1.5);\n          animation-delay: calc(2500ms * 2 / -1.5);\n}\n\n.looping-rhombuses-spinner .rhombus:nth-child(3) {\n  -webkit-animation-delay: calc(2500ms * 3 / -1.5);\n          animation-delay: calc(2500ms * 3 / -1.5);\n}\n\n@-webkit-keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@keyframes looping-rhombuses-spinner-animation {\n  0% {\n    transform: translateX(0) rotate(45deg) scale(0);\n  }\n  50% {\n    transform: translateX(-233%) rotate(45deg) scale(1);\n  }\n  100% {\n    transform: translateX(-466%) rotate(45deg) scale(0);\n  }\n}\n\n@media screen and (max-width: 750px) {\n\t/* .omit__text__container{\n\t\tmax-width: 160px;\n\t} */\n\n  .header__tweetBtn {\n    bottom: 32px;\n    right: 32px;\n    width: 48px;\n    height: 48px;\n  }\n\n  .header__tweetBtn--icon {\n    margin: 13px;\n  }\n\n  /* 画像アップロードボタン */\n  .select__image__area {\n    display: block !important;\n    max-width: 152px;\n  }\n  .select__image__area p {\n    margin: 0 !important;\n  }\n\n  .omit__text__container {\n    max-width: 120px;\n  }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

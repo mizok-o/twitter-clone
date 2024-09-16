@@ -26,18 +26,20 @@ class TweetController extends Controller
 
         $userId = auth()->id();
         $followIds = $follow->getFollowIds($userId);
-
         $followIds[] = $userId;
 
-        $tweets = $tweet->getPaginatedFollowsTweets($followIds);
+        $tweets = $tweet->getFollowsTweets($followIds);
 
         $repliesNum = $tweet->countTweetsInfo($tweets, $reply);
         $favsNum = $tweet->countTweetsInfo($tweets, $favs);
+
+        $retweetsNum = $tweet->countRetweets($tweets);
         return [
             "users" => $users,
             "tweets" => $tweets,
             "repliesNum" => $repliesNum,
             "favsNum" => $favsNum,
+            "retweetsNum" => $retweetsNum,
         ];
     }
 
@@ -47,7 +49,7 @@ class TweetController extends Controller
      * @param  int  $tweetId
      * @param  Tweet $tweet
      */
-    public function show(int $tweetId, Tweet $tweet)
+    public function show(int $tweetId, Tweet $tweet): object
     {
         return $tweet->getTweetByUserId($tweetId);
     }
@@ -61,7 +63,7 @@ class TweetController extends Controller
      */
     public function getUserTweets(int $userId, Tweet $tweet): object
     {
-        return $tweet->getTweetsByUserId($userId);
+        return $tweet->getProfileTweetsByUserId($userId);
     }
 
     /**
@@ -132,5 +134,31 @@ class TweetController extends Controller
         }
 
         return $tweet->destroyTweet($tweetId);
+    }
+
+    /**
+     * リツイート取得
+     *
+     * @param  Request $request
+     * @param  int $tweetId
+     * @param  Tweet $tweet
+     * @param  User $user
+     */
+    public function getRetweets(int $tweetId, Tweet $tweet, User $user): object
+    {
+        return $tweet->getRetweetsByTweetId($tweetId);
+    }
+
+    /**
+     * リツイート実行
+     *
+     * @param  Request $request
+     * @param  int $tweetId
+     * @param  Tweet $tweet
+     * @param  User $user
+     */
+    public function actionRetweet(Request $request, int $tweetId, Tweet $tweet, User $user): bool
+    {
+        return $tweet->executeRetweet($tweetId);
     }
 }

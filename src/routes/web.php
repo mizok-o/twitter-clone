@@ -66,6 +66,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/favs/{tweetId}', [FavoriteController::class, 'showTweetFav']);
     Route::post('/fav/{tweetId}', [FavoriteController::class, 'store']);
     Route::delete('/fav/{favId}', [FavoriteController::class, 'destroy']);
+
+    /*
+    リツイート
+    */
+    Route::get('/retweets/{tweetId}', [TweetController::class, 'getRetweets']);
+    Route::post('/retweet/{tweetId}', [TweetController::class, 'actionRetweet']);
 });
 
 Route::get('/', function () {

@@ -74,10 +74,11 @@ textarea {
 }
 
 .user__item-container {
+  display: block;
   transition: .2s;
 }
 
-.user__item-container:hover {
+.user__item-container:hover  {
   background-color: #E9EBED;
 }
 
@@ -109,6 +110,14 @@ textarea {
 }
 
 /* tweet */
+.tweet__status__container {
+  margin-left: 64px;
+  margin-top: 4px
+}
+.tweet__retweet {
+  background-color: #ddd;
+}
+
 .tweet-form-file {
   width: 24px;
   height: 24px;
@@ -122,9 +131,17 @@ textarea {
   max-height: 240px;
 }
 
+.retweet__text {
+  opacity: .5;
+  font-size: 12px;
+}
+
 .btn-clicking {
   pointer-events: none;
 }
+
+/* リプライ */
+
 .reply__textarea__container {
   position: relative;
   font-size: 1rem;
@@ -173,16 +190,23 @@ textarea {
   cursor: pointer;
 }
 
-
 .status__item__icon {
   width: 24px;
   height: 24px;
 }
 
-.status__item__icon svg {
+.status__item__icon__image {
   display: block;
   padding: 2px;
   fill: #111;
+}
+
+.retweet__active {
+  fill: #00BA7C;
+}
+
+.fav__active {
+  fill: #F91880;
 }
 
 /* ツイートボタン */

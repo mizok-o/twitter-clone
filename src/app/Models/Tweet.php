@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Storage;
 class Tweet extends Model
 {
     /**
+     * リレーション紐付け
+     *
+     * @param  array $followIds
+     * @return object
+     */
+    public function retweets(): object
+    {
+        // dd("aa", $this->hasMany(Tweet::class, 'tweet_id', 'id')->get());
+        return $this->belongsTo(Tweet::class);
+    }
+
+    /**
      * 全ユーザーのツイートを取得
      *
      * @param  array $followIds
@@ -20,14 +32,24 @@ class Tweet extends Model
     }
 
     /**
-     * フォローしているユーザーのツイートを取得
+     * フォローしているユーザーのツイート・リツイートを取得
      *
      * @param  array $followIds
      * @return object
      */
-    public function getPaginatedFollowsTweets(array $followIds): object
+    public function getFollowsTweets(array $followIds): object
     {
-        return $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+        $tweets = $this->whereIn('user_id', $followIds)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
+
+        foreach ($tweets as $retweet) {
+            if ($retweet->tweet_id == 0) {
+                break;
+            }
+            $retweetData = $this->where('id', $retweet->tweet_id);
+            $retweet->text = $retweetData->value('text');
+            $retweet->image = $retweetData->value('image');
+        }
+        return $tweets;
     }
 
     /**
@@ -47,7 +69,7 @@ class Tweet extends Model
      * @param int $userId
      * @return　object
      */
-    public function getTweetsByUserId(int $userId): object
+    public function getProfileTweetsByUserId(int $userId): object
     {
         return $this->where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(Paginate::NUM_TWEET_PER_PAGE);
     }
@@ -65,6 +87,24 @@ class Tweet extends Model
 
         foreach ($tweetIds as $tweetId) {
             $contedNum = $countedItems->where('tweet_id', $tweetId)->count();
+            $contedNums[] = $contedNum;
+        }
+        return $contedNums;
+    }
+
+    /**
+     * リツイート数を配列で返す
+     *
+     * @param  array $followIds
+     * @return array
+     */
+    public function countRetweets(object $tweets): array
+    {
+        $tweetIds = $tweets->pluck('id');
+        $contedNums = array();
+
+        foreach ($tweetIds as $tweetId) {
+            $contedNum = $this->where('tweet_id', $tweetId)->count();
             $contedNums[] = $contedNum;
         }
         return $contedNums;
@@ -119,5 +159,42 @@ class Tweet extends Model
         $tweetImage = $this->where("id", $tweetId)->value('image');
         Storage::disk('public')->delete('/tweet/' . $tweetImage);
         return $this->where("id", $tweetId)->delete();
+    }
+
+    /**
+     * リツイート取得
+     *
+     * @param  int $tweetId
+     */
+    public function getRetweetsByTweetId(int $tweetId): object
+    {
+        $hasRetweets = $this->where('tweet_id', $tweetId);
+
+        return $hasRetweets->get();
+        if ($hasRetweets->exists()) {
+        }
+        // return 0;
+    }
+
+    /**
+     * リツイートと解除
+     *
+     * @param  int $tweetId
+     */
+    public function executeRetweet(int $tweetId): bool
+    {
+        $authUserId = auth()->id();
+        $isLiked = $this->where('user_id', $authUserId)->where('tweet_id', $tweetId);
+
+        if ($isLiked->exists()) {
+            $isLiked->delete();
+            return true;
+        }
+
+        $this->tweet_id = $tweetId;
+        $this->user_id = $authUserId;
+        $this->text = " ";
+        $this->image = " ";
+        return $this->save();
     }
 }

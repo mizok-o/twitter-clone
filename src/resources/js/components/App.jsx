@@ -11,13 +11,13 @@ import { TweetAction } from "./page/TweetAction";
 import { UserList } from "./page/UserList";
 import { UserProfile } from "./page/UserProfile";
 import { UserProfileEdit } from "./page/UserProfileEdit";
-
-import "../../css/app.css";
 import { UserFollowsList } from "./page/UserFollowsList";
 import { Loading } from "./parts/Loading";
 import { TweetListOnlyFollows } from "./page/TweetListOnlyFollows";
 import { NotFound } from "./page/NotFound";
 import { ReplyAction } from "./page/ReplyAction";
+
+import "../../css/app.css";
 
 export const App = () => {
     const [authUser, setAuthUser] = useState({});

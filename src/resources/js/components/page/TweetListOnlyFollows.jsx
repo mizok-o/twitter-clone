@@ -32,7 +32,6 @@ export const TweetListOnlyFollows = (props) => {
         const res = await fetch(`/tweets-only-follows?page=${currentPage}`);
         if (res.status === 200) {
             const tweetsData = await res.json();
-            console.log(tweetsData);
             if (!tweetsData.total) {
                 setNoFollows(true);
                 return;
